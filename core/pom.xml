@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.ranji.lemon</groupId>
+		<artifactId>lemcloud</artifactId>
+		<version>1.0</version>
+	</parent>
+	
+	<artifactId>core</artifactId>
+	
+	<dependencies>
+		<!-- Spring Boot FrameWork -->
+		<dependency>
+	    	<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-test</artifactId>
+		</dependency>  
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- MyBatis -->
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+		<!-- MySQL Driver -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- Druid DataSource -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		</dependency>
+		
+		<!-- Apache Commons -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-text</artifactId>
+		</dependency>
+		
+		<!-- 验证码框架 -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>2.3.2</version>
+			<!-- 排除自带的servlet api -->
+			<exclusions> 
+			  <exclusion> 
+			   <artifactId>javax.servlet-api</artifactId> 
+			   <groupId>javax.servlet</groupId> 
+			  </exclusion> 
+			 </exclusions>
+		</dependency>
+		
+		<!-- Shiro安全框架 -->
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-core</artifactId>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-web</artifactId>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-spring</artifactId>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-ehcache</artifactId>  
+		</dependency>  
+		
+		<!-- Thymeleaf模板引擎，替换JSP -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

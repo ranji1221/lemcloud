@@ -1,0 +1,16 @@
+# eclipse
+.settings
+.project
+.classpath
+.mymetadata
+
+# java
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# maven
+target/

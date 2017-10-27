@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.jersey.model.oauth2.AccessTokenCode">
+
+	<insert id="save" parameterType="AccessTokenCode" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_oauth2_access_token_code (guid,createTime,updateTime,code,username,clientId) 
+		values (#{guid},#{createTime},#{updateTime},#{code},#{username},#{clientId})
+	</insert>
+	
+	<!-- 删除某条记录 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_jersey_oauth2_access_token_code where id = #{id}
+	</delete>
+	
+	<!-- 查询根据id -->
+	<select id="find" parameterType="int" resultType="AccessTokenCode">
+		select * from lemon_jersey_oauth2_access_token_code where id = #{id}
+	</select>
+	
+	<!-- 查询全部AccessTokenCode -->
+	<select id="findAll" resultType="AccessTokenCode" parameterType="Map">
+		select * from lemon_jersey_oauth2_access_token_code
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询AccessTokenCode -->
+	<select id="findPaginated" resultType="AccessTokenCode" parameterType="Map">
+		select * from lemon_jersey_oauth2_access_token_code
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="AccessTokenCode">
+		select count(*) from lemon_jersey_oauth2_access_token_code
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 修改个某条AccessToken -->
+	<update id="update" parameterType="AccessTokenCode">
+		update lemon_jersey_oauth2_access_token_code
+		<set>
+			<if test="code != null and code != ''">code = #{code},</if>
+			<if test="username != null and username != ''">username = #{username},</if>
+			<if test="clientId != null and clientId != ''">clientId = #{clientId},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" code != null and code != '' ">
+				and code = #{code}
+			</if>
+			<if test="codeLike != null and codeLike != '' ">
+				and code like concat(concat('%', #{codeLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" username != null and username != '' ">
+				and username = #{username}
+			</if>
+			<if test="usernameLike != null and usernameLike != '' ">
+				and username like concat(concat('%', #{usernameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" clientId != null and clientId != '' ">
+				and clientId = #{clientId}
+			</if>
+			<if test="clientIdLike != null and clientIdLike != '' ">
+				and clientId like concat(concat('%', #{clientIdLike, jdbcType=VARCHAR}),'%')
+			</if>
+	
+		</where>
+	</sql>
+	
+</mapper>

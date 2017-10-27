@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.jersey.model.auth.Role">
+  <insert id="save" parameterType="JerseyRole" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_auth_role (guid,createTime,updateTime,roleName, description) 
+		values (#{guid},#{createTime},#{updateTime},#{roleName}, #{description})
+	</insert>
+	
+	<!-- 存储某个角色和许可的对应关系 -->
+	<insert id="saveRoleAndPermissionRelation" parameterType="Map" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_auth_role_permission (roleId, permission) values (#{roleId}, #{permission})
+	</insert>
+	
+	<!-- 删除角色和操作的对应关系 -->
+	<delete id="deleteRoleAndPermissionRelation" parameterType="Map">
+		delete from lemon_jersey_auth_role_permission where roleId = #{roleId} and permission = #{permission}
+	</delete>
+	
+	<!-- 根据角色id删除角色和操作的对应关系 -->
+	<delete id="deleteRoleAndPermissionRelationByRoleId" parameterType="int">
+		delete from lemon_jersey_auth_role_permission where roleId = #{roleId}
+	</delete>
+	
+	<!-- 删除某条记录 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_jersey_auth_role where id = #{id}
+	</delete>
+	
+	<!-- 根据角色id查询角色和操作的对应关系 -->
+	<select id="findRoleAndPermissionRelationByRoleId" parameterType="int" resultType="String">
+		select permission from lemon_jersey_auth_role_permission where roleId = #{roleId}
+	</select>
+	
+	<!-- 查询根据id -->
+	<select id="find" parameterType="int" resultType="JerseyRole">
+		select * from lemon_jersey_auth_role where id = #{id}
+	</select>
+	
+	<!-- 查询全部role -->
+	<select id="findAll" resultType="JerseyRole" parameterType="Map">
+		select * from lemon_jersey_auth_role
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询role -->
+	<select id="findPaginated" resultType="JerseyRole" parameterType="Map">
+		select * from lemon_jersey_auth_role
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="JerseyRole">
+		select count(*) from lemon_jersey_auth_role
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 修改个某条role信息 -->
+	<update id="update" parameterType="JerseyRole">
+		update lemon_jersey_auth_role
+		<set>
+			<if test="roleName != null and roleName != ''">roleName = #{roleName},</if>
+			<if test="description != null and description != ''">description = #{description},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" roleName != null and roleName != '' ">
+				and roleName = #{roleName}
+			</if>
+			<if test="roleNameLike != null and roleNameLike != '' ">
+				and roleName like concat(concat('%', #{roleNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" description != null and description != '' ">
+				and password = #{password}
+			</if>
+			<if test="descriptionLike != null and descriptionLike != '' ">
+				and description like concat(concat('%', #{descriptionLike, jdbcType=VARCHAR}),'%')
+			</if>
+	
+		</where>
+	</sql>
+</mapper>

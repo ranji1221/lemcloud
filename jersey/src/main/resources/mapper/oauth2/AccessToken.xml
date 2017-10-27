@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.jersey.model.oauth2.AccessToken">
+
+	<insert id="save" parameterType="AccessToken" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_oauth2_access_token (guid,createTime,updateTime,token,tokenExpiredSeconds,username,clientId,tokenType,refreshToken,refreshTokenExpiredSeconds) 
+		values (#{guid},#{createTime},#{updateTime},#{token}, #{tokenExpiredSeconds},#{username},#{clientId},#{tokenType},#{refreshToken},#{refreshTokenExpiredSeconds})
+	</insert>
+	
+	<!-- 删除某条记录 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_jersey_oauth2_access_token where id = #{id}
+	</delete>
+	
+	<!-- 查询根据id -->
+	<select id="find" parameterType="int" resultType="AccessToken">
+		select * from lemon_jersey_oauth2_access_token where id = #{id}
+	</select>
+	
+	<!-- 查询全部AccessToken -->
+	<select id="findAll" resultType="AccessToken" parameterType="Map">
+		select * from lemon_jersey_oauth2_access_token
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询AccessToken -->
+	<select id="findPaginated" resultType="AccessToken" parameterType="Map">
+		select * from lemon_jersey_oauth2_access_token
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="AccessToken">
+		select count(*) from lemon_jersey_oauth2_access_token
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 修改个某条AccessToken -->
+	<update id="update" parameterType="AccessToken">
+		update lemon_jersey_oauth2_access_token
+		<set>
+			<if test="token != null and token != ''">token = #{token},</if>
+			<if test="tokenExpiredSeconds != null and tokenExpiredSeconds != ''">tokenExpiredSeconds = #{tokenExpiredSeconds},</if>
+			<if test="username != null and username != ''">username = #{username},</if>
+			<if test="clientId != null and clientId != ''">clientId = #{clientId},</if>
+			<if test="tokenType != null and tokenType != ''">tokenType = #{tokenType},</if>
+			<if test="refreshToken != null and refreshToken != ''">refreshToken = #{refreshToken},</if>
+			<if test="refreshTokenExpiredSeconds != null and refreshTokenExpiredSeconds != ''">refreshTokenExpiredSeconds = #{refreshTokenExpiredSeconds},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" token != null and token != '' ">
+				and token = #{token}
+			</if>
+			<if test="tokenLike != null and tokenLike != '' ">
+				and token like concat(concat('%', #{tokenLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" tokenExpiredSeconds != null and tokenExpiredSeconds != '' ">
+				and tokenExpiredSeconds = #{tokenExpiredSeconds}
+			</if>
+			<if test="tokenExpiredSecondsLike != null and tokenExpiredSecondsLike != '' ">
+				and tokenExpiredSeconds like concat(concat('%', #{tokenExpiredSecondsLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" username != null and username != '' ">
+				and username = #{username}
+			</if>
+			<if test="usernameLike != null and usernameLike != '' ">
+				and username like concat(concat('%', #{usernameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" clientId != null and clientId != '' ">
+				and clientId = #{clientId}
+			</if>
+			<if test="clientIdLike != null and clientIdLike != '' ">
+				and clientId like concat(concat('%', #{clientIdLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test="tokenType != null and tokenType != '' ">
+				and tokenType = #{tokenType}
+			</if>
+			<if test="tokenTypeLike != null and tokenTypeLike != '' ">
+				and tokenType like concat(concat('%', #{tokenTypeLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" refreshToken != null and refreshToken != '' ">
+				and refreshToken = #{refreshToken}
+			</if>
+			<if test="refreshTokenLike != null and refreshTokenLike != '' ">
+				and refreshToken like concat(concat('%', #{refreshTokenLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" refreshTokenExpiredSeconds != null and refreshTokenExpiredSeconds != '' ">
+				and refreshTokenExpiredSeconds = #{refreshTokenExpiredSeconds}
+			</if>
+			<if test="refreshTokenExpiredSecondsLike != null and refreshTokenExpiredSecondsLike != '' ">
+				and refreshTokenExpiredSeconds like concat(concat('%', #{refreshTokenExpiredSecondsLike, jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>

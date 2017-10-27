@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.jersey.model.auth.User">
+  <insert id="save" parameterType="JerseyUser" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_auth_user (guid,createTime,updateTime,username, password) 
+		values (#{guid},#{createTime},#{updateTime},#{username}, #{password})
+	</insert>
+	
+	<!-- 存储某个用户和角色的对应关系 -->
+	<insert id="saveUserAndRoleRelation" parameterType="Map" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_auth_user_role (userId, roleId) values (#{userId}, #{roleId})
+	</insert>
+	
+	<!-- 删除用户和角色的对应关系 -->
+	<delete id="deleteUserAndRoleRelation" parameterType="Map">
+		delete from lemon_jersey_auth_user_role where userId = #{userId} and roleId = #{roleId}
+	</delete>
+	
+	<!-- 删除某条记录 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_jersey_auth_user where id = #{id}
+	</delete>
+	
+	<!-- 根据用户id删除用户和角色的对应关系 -->
+	<delete id="deleteUserAndRolesRelationByUserId" parameterType="int">
+		delete from lemon_jersey_auth_user_role where userId = #{userId}
+	</delete>
+	
+	<!-- 查询根据id -->
+	<select id="find" parameterType="int" resultType="JerseyUser">
+		select * from lemon_jersey_auth_user where id = #{id}
+	</select>
+	
+	<!-- 根据用户id查询用户和角色的对应关系 -->
+	<select id="findUserRolesRelationByUserId" parameterType="int" resultType="Integer">
+		select roleId from lemon_jersey_auth_user_role where userId = #{userId}
+	</select>
+	
+	<!-- 根据id查找角色 -->
+	<select id="findRoleByUserId" parameterType="Integer" resultType ="JerseyRole">
+		SELECT
+			r.*
+		FROM
+			lemon_jersey_auth_role r
+		LEFT JOIN lemon_jersey_auth_user_role u_r ON r.id = u_r.roleId
+		LEFT JOIN lemon_jersey_auth_user u ON u.id = u_r.userId
+		WHERE
+			u.id = #{id}
+	</select>
+	
+	<!-- 查询全部user -->
+	<select id="findAll" resultType="JerseyUser" parameterType="Map">
+		select * from lemon_jersey_auth_user
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询user -->
+	<select id="findPaginated" resultType="JerseyUser" parameterType="Map">
+		select * from lemon_jersey_auth_user
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="JerseyUser">
+		select count(*) from lemon_jersey_auth_user
+		<include refid="paramsSQL"/>
+	</select>
+	
+	
+	
+	
+	<!-- 修改个某条user信息 -->
+	<update id="update" parameterType="JerseyUser">
+		update lemon_jersey_auth_user
+		<set>
+			<if test="username != null and username != ''">username = #{username},</if>
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" username != null and username != '' ">
+				and username = #{username}
+			</if>
+			<if test="usernameLike != null and usernameLike != '' ">
+				and username like concat(concat('%', #{usernameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" password != null and password != '' ">
+				and password = #{password}
+			</if>
+			<if test="passwordLike != null and passwordLike != '' ">
+				and password like concat(concat('%', #{passwordLike, jdbcType=VARCHAR}),'%')
+			</if>
+	
+		</where>
+	</sql>
+</mapper>

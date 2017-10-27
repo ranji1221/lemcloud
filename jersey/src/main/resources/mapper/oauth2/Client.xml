@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.jersey.model.oauth2.Client">
+
+	<insert id="save" parameterType="Client" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_jersey_oauth2_client (guid,createTime,updateTime,clientName, clientId,clientSecret,clientUri,clientIconUri,scope,grantType,redirectUri,description) 
+		values (#{guid},#{createTime},#{updateTime},#{clientName}, #{clientId},#{clientSecret},#{clientUri},#{clientIconUri},#{scope},#{grantType},#{redirectUri},#{description})
+	</insert>
+	
+	<!-- 删除某条记录 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_jersey_oauth2_client where id = #{id}
+	</delete>
+	
+	<!-- 查询根据id -->
+	<select id="find" parameterType="int" resultType="Client">
+		select * from lemon_jersey_oauth2_client where id = #{id}
+	</select>
+	
+	<!--根据客服端Id查询 -->
+	<select id="findByClientId" parameterType="String" resultType="Client">
+		select * from lemon_jersey_oauth2_client where clientId = #{clientId}
+	</select>
+	
+	<!-- 根据客户端安全key查询 -->
+	<select id="findByClientSecret" parameterType="String" resultType="Client">
+		select * from lemon_jersey_oauth2_client where clientSecret = #{clientSecret}
+	</select>
+	
+	<!-- 查询全部client -->
+	<select id="findAll" resultType="Client" parameterType="Map">
+		select * from lemon_jersey_oauth2_client
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询client -->
+	<select id="findPaginated" resultType="Client" parameterType="Map">
+		select * from lemon_jersey_oauth2_client
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="int">
+		select count(*) from lemon_jersey_oauth2_client
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 修个某条client -->
+	<update id="update" parameterType="Client">
+		update lemon_jersey_oauth2_client
+		<set>
+			<if test="clientName != null and clientName != ''">clientName = #{clientName},</if>
+			<if test="clientId != null and clientId != ''">clientId = #{clientId},</if>
+			<if test="clientSecret != null and clientSecret != ''">clientSecret = #{clientSecret},</if>
+			<if test="clientUri != null and clientUri != ''">clientUri = #{clientUri},</if>
+			<if test="clientIconUri != null and clientIconUri != ''">clientIconUri = #{clientIconUri},</if>
+			<if test="scope != null and scope != ''">scope = #{scope},</if>
+			<if test="grantType != null and grantType != ''">grantType = #{grantType},</if>
+			<if test="redirectUri != null and redirectUri != ''">redirectUri = #{redirectUri},</if>
+			<if test="description != null and description != ''">description = #{description},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+		</set>
+		<!-- where logId = #{logId} -->
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" clientName != null and clientName != '' ">
+				and clientName = #{clientName}
+			</if>
+			<if test="clientNameLike != null and clientNameLike != '' ">
+				and clientName like concat(concat('%', #{clientNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" clientId != null and clientId != '' ">
+				and clientId = #{clientId}
+			</if>
+			<if test="clientIdLike != null and clientIdLike != '' ">
+				and clientId like concat(concat('%', #{clientIdLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" clientSecret != null and clientSecret != '' ">
+				and clientSecret = #{clientSecret}
+			</if>
+			<if test="clientSecretLike != null and clientSecretLike != '' ">
+				and clientSecret like concat(concat('%', #{clientSecretLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" clientUri != null and clientUri != '' ">
+				and clientUri = #{clientUri}
+			</if>
+			<if test="clientUriLike != null and clientUriLike != '' ">
+				and clientUri like concat(concat('%', #{clientUriLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" scope != null and scope != '' ">
+				and scope = #{scope}
+			</if>
+			<if test="scopeLike != null and scopeLike != '' ">
+				and scope like concat(concat('%', #{scopeLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" grantType != null and grantType != '' ">
+				and grantType = #{grantType}
+			</if>
+			<if test="grantTypeLike != null and grantTypeLike != '' ">
+				and grantType like concat(concat('%', #{grantTypeLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" redirectUri != null and redirectUri != '' ">
+				and grantType = #{grantType}
+			</if>
+			<if test="redirectUriLike != null and redirectUriLike != '' ">
+				and redirectUri like concat(concat('%', #{redirectUriLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" description != null and description != '' ">
+				and description = #{description}
+			</if>
+			<if test="descriptionLike != null and descriptionLike != '' ">
+				and description like concat(concat('%', #{descriptionLike, jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>
