@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script type="text/javascript" th:src="@{/js/test.js}"></script>
+		<script type="text/javascript">
+			//test();
+		</script>
+	</head>
+	<span th:text="${key}"></span>
+	<div th:include="footer :: copyright"></div>
+</html>

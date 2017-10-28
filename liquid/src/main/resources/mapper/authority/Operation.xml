@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.liquid.model.authority.Operation">
+	
+	<!-- 增加操作 -->
+	<insert id="save" parameterType="Operation" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_auth_operation (operationName, displayName,operationURL,resourceId,operationPId) values 
+		(#{operationName},#{displayName},#{operationURL},#{resourceId},#{operationPId})
+	</insert>
+	
+	<!-- 更新操作 -->
+	<update id="update" parameterType="Operation">
+		update lemon_liquid_auth_operation
+		<set>
+			<if test="operationName != null and operationName != ''">operationName = #{operationName},</if>
+			<if test="displayName != null and displayName != ''">displayName = #{displayName},</if>
+			<if test="operationURL != null and operationURL != ''">operationURL = #{operationURL},</if>
+			<if test="resourceId != null and resourceId != ''">resourceId = #{resourceId},</if>
+			<if test="operationPId != null and operationPId != ''">operationPId = #{operationPId},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除操作 -->
+	<delete id="delete" parameterType="int">
+		delete from lemon_liquid_auth_operation where id = #{id}
+	</delete>
+	
+	<!-- 删除全部操作  -->
+	<delete id="deleteAll">
+		delete from lemon_liquid_auth_operation
+	</delete>
+	
+	<!-- 删除全部操作根据资源id  -->
+	<delete id="deleteAllByResourceId"  parameterType="int">
+		delete from lemon_liquid_auth_operation where resourceId = #{resourceId}
+	</delete>
+	
+	<!-- 删除操作集 -->
+	<delete id="deleteByIDs" parameterType="List">
+		delete from lemon_liquid_auth_operation where id in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 查找操作 -->
+	<select id="find" resultType="Operation" parameterType="int">
+		select * from lemon_liquid_auth_operation
+		where id=#{id}
+	</select>
+	
+	<!-- 查找全部操作 -->
+	<select id="findAll" resultType="Operation" parameterType="Map">
+		select * from lemon_liquid_auth_operation
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查找 -->
+	<select id="findPaginated" parameterType="Map" resultType="Operation">
+		select * from lemon_liquid_auth_operation 
+		<include refid="paramsSQL" />
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 查找总数 -->
+	<select id="getTotalOfItems" parameterType="Map" resultType="int">
+		select count(*) from lemon_liquid_auth_operation 
+		<include refid="paramsSQL" />
+	</select>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test="operationName != null and operationName != ''">
+				and operationName = #{operationName, jdbcType=VARCHAR}
+			</if>
+			<if test=" operationNameLike != null and operationNameLike != '' ">
+				and operationName like concat(concat('%', #{operationNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			<if test="displayName != null and displayName != ''">
+				and displayName = #{displayName, jdbcType=VARCHAR}
+			</if>
+			<if test=" displayNameLike != null and displayNameLike != '' ">
+				and displayName like concat(concat('%', #{displayNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			<if test="operationURL != null and operationURL != ''">
+				and operationURL = #{operationName, jdbcType=VARCHAR}
+			</if>
+			<if test=" operationURLLike != null and operationURLLike != '' ">
+				and operationURL like concat(concat('%', #{operationURLLike, jdbcType=VARCHAR}),'%')
+			</if>
+			<if test=" resourceId != null and resourceId != '' ">
+				and resourceId = #{resourceId, jdbcType=INTEGER}
+			</if>
+			<if test=" resourceIdLike != null and resourceIdLike != '' ">
+				and resourceId like concat(concat('%', #{resourceIdLike, jdbcType=INTEGER}),'%')
+			</if>
+			<if test=" operationPId != null and operationPId != '' ">
+				and operationPId #{operationPId, jdbcType=INTEGER}
+			</if>
+			<if test=" operationPIdLike != null and operationPIdLike != '' ">
+				and operationPId like concat(concat('%', #{operationPIdLike, jdbcType=INTEGER}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>

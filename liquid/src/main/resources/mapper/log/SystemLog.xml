@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.liquid.model.log.SystemLog">
+
+	<insert id="save" parameterType="SystemLog" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_log_systemLog (logType, logTitle,remoteAddr,requestUri,method,params,exception,authStatus,operateDate,timeout,userName) 
+		values (#{logType}, #{logTitle},#{remoteAddr},#{requestUri},#{method},#{params},#{exception},#{authStatus},#{operateDate},#{timeout},#{userName})
+	</insert>
+	
+	<!-- 删除某条日志 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_liquid_log_systemLog where id = #{id}
+	</delete>
+	
+	<!-- 查询某条日志 -->
+	<select id="find" parameterType="int" resultType="User">
+		select * from lemon_liquid_log_systemLog where id = #{id}
+	</select>
+	
+	<!-- 查询全部日志 -->
+	<select id="findAll" resultType="SystemLog" parameterType="Map">
+		select * from lemon_liquid_log_systemLog
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询用户 -->
+	<select id="findPaginated" resultType="SystemLog" parameterType="Map">
+		select * from lemon_liquid_log_systemLog
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="int">
+		select count(*) from lemon_liquid_log_systemLog
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 修个某条日志 -->
+	<update id="update" parameterType="SystemLog">
+		update lemon_liquid_log_systemLog
+		<set>
+			<if test="logType != null and logType != ''">logType = #{logType},</if>
+			<if test="logTitle != null and logTitle != ''">logTitle = #{logTitle},</if>
+			<if test="remoteAddr != null and remoteAddr != ''">remoteAddr = #{remoteAddr},</if>
+			<if test="requestUri != null and requestUri != ''">requestUri = #{requestUri},</if>
+			<if test="method != null and method != ''">method = #{method},</if>
+			<if test="params != null and params != ''">params = #{params},</if>
+			<if test="exception != null and exception != ''">exception = #{exception},</if>
+			<if test="authStatus != null and authStatus != ''">authStatus = #{authStatus},</if>
+			<if test="operateDate != null and operateDate != ''">operateDate = #{operateDate},</if>
+			<if test="timeout != null and timeout != ''">timeout = #{timeout},</if>
+			<if test="userName != null and userName != ''">userName = #{userName},</if>
+		</set>
+		<!-- where logId = #{logId} -->
+		where id = #{id}
+	</update>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" logType != null and logType != '' ">
+				and logType = #{logType}
+			</if>
+			<if test="logTypeLike != null and logTypeLike != '' ">
+				and logType like concat(concat('%', #{logTypeLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" logTitle != null and logTitle != '' ">
+				and logTitle = #{logTitle}
+			</if>
+			<if test="logTitleLike != null and logTitleLike != '' ">
+				and logType like concat(concat('%', #{logTitleLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" remoteAddr != null and remoteAddr != '' ">
+				and remoteAddr = #{remoteAddr}
+			</if>
+			<if test="remoteAddrLike != null and remoteAddrLike != '' ">
+				and remoteAddr like concat(concat('%', #{remoteAddrLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" requestUri != null and requestUri != '' ">
+				and requestUri = #{requestUri}
+			</if>
+			<if test="requestUriLike != null and requestUriLike != '' ">
+				and requestUri like concat(concat('%', #{requestUriLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" method != null and method != '' ">
+				and method = #{method}
+			</if>
+			<if test="methodLike != null and methodLike != '' ">
+				and method like concat(concat('%', #{methodLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" params != null and params != '' ">
+				and params = #{params}
+			</if>
+			<if test="paramsLike != null and paramsLike != '' ">
+				and params like concat(concat('%', #{paramsLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" exception != null and exception != '' ">
+				and exception = #{exception}
+			</if>
+			<if test="exceptionLike != null and exceptionLike != '' ">
+				and exception like concat(concat('%', #{exceptionLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" authStatus != null and authStatus != '' ">
+				and authStatus = #{authStatus}
+			</if>
+			<if test="authStatusLike != null and authStatusLike != '' ">
+				and authStatus like concat(concat('%', #{authStatusLike, jdbcType=INTEGER}),'%')
+			</if>
+			<if test=" operateDate != null and operateDate != '' ">
+				and operateDate = #{operateDate}
+			</if>
+			<if test="operateDateLike != null and operateDateLike != '' ">
+				and operateDate like concat(concat('%', #{operateDate, jdbcType=DATE}),'%')
+			</if>
+			<if test=" timeout != null and timeout != '' ">
+				and timeout = #{timeout}
+			</if>
+			<if test="timeoutLike != null and timeoutLike != '' ">
+				and timeout like concat(concat('%', #{timeout, jdbcType=VARCHAR}),'%')
+			</if>
+			<if test=" userName != null and userName != '' ">
+				and userName = #{userName}
+			</if>
+			<if test="userNameLike != null and userNameLike != '' ">
+				and userName like concat(concat('%', #{userName, jdbcType=INTEGER}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>

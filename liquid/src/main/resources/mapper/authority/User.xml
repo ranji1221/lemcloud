@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.liquid.model.authority.User">
+
+	<insert id="save" parameterType="User" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_auth_user (userName, userPass,phone,email,createTime) values (#{userName}, #{userPass},#{phone},#{email},now())
+	</insert>
+	
+	<!-- 存储某个用户和角色的对应关系 -->
+	<insert id="saveUserAndRoleRelation" parameterType="Map" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_auth_user_role (userId, roleId) values (#{userId}, #{roleId})
+	</insert>
+	
+	<!-- 删除某个用户 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_liquid_auth_user where id = #{id}
+	</delete>
+	
+	<!-- 删除用户和角色的对应关系 -->
+	<delete id="deleteUserAndRoleRelation" parameterType="Map">
+		delete from lemon_liquid_auth_user_role where userId = #{userId} and roleId = #{roleId}
+	</delete>
+	
+	<!-- 根据用户id删除用户和角色的对应关系 -->
+	<delete id="deleteUserAndRolesRelationByUserId" parameterType="int">
+		delete from lemon_liquid_auth_user_role where userId = #{userId}
+	</delete>
+	
+	<!-- 删除用户集 -->
+	<delete id="deleteByIDs" parameterType="List">
+		delete from lemon_liquid_auth_user where id in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 查询某个用户 -->
+	<select id="find" parameterType="int" resultType="User">
+		select * from lemon_liquid_auth_user where id = #{id}
+	</select>
+	
+	<!-- 查询全部用户 -->
+	<select id="findAll" resultType="User" parameterType="Map">
+		select * from lemon_liquid_auth_user
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 分页查询用户 -->
+	<select id="findPaginated" resultType="User" parameterType="Map">
+		select * from lemon_liquid_auth_user
+		<include refid="paramsSQL"/>
+		 limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getTotalOfItems" parameterType="Map" resultType="int">
+		select count(*) from lemon_liquid_auth_user
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 根据用户id查询用户和角色的对应关系 -->
+	<select id="findUserRolesRelationByUserId" parameterType="int" resultType="Integer">
+		select roleId from lemon_liquid_auth_user_role where userId = #{userId}
+	</select>
+	
+
+	<!-- 根据用户名字查找用户 -->
+	<select id="findUserByUserName" parameterType="String" resultType="User">
+		select * from lemon_liquid_auth_user where userName = #{userName}
+	</select> 
+	
+	<!-- 修个某个用户 -->
+	<update id="update" parameterType="User">
+		update lemon_liquid_auth_user
+		<set>
+			<if test="userName != null and userName != ''">userName = #{userName},</if>
+			<if test="userPass != null and userPass != ''">userPass = #{userPass},</if>
+			<if test="phone != null and phone != ''">phone = #{phone},</if>
+			<if test="email != null and email != ''">email = #{email},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据id查找角色 -->
+	<select id="findRoleByUserId" parameterType="Integer" resultType ="Role">
+		SELECT
+			r.*
+		FROM
+			lemon_liquid_auth_role r
+		LEFT JOIN lemon_liquid_auth_user_role u_r ON r.id = u_r.roleId
+		LEFT JOIN lemon_liquid_auth_user u ON u.id = u_r.userId
+		WHERE
+			u.id = #{id}
+	</select>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" userName != null and userName != '' ">
+				and userName = #{userName}
+			</if>
+			<if test=" userNameLike != null and userNameLike != '' ">
+				and userName like concat(concat('%', #{userNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" userPass != null and userPass != '' ">
+				and userPass = #{userPass}
+			</if>
+			<if test=" userPassLike != null and userPassLike != '' ">
+				and userPass like concat(concat('%', #{userPassLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" phone != null and phone != '' ">
+				and phone = #{phone}
+			</if>
+			<if test=" phoneLike != null and phoneLike != '' ">
+				and phone like concat(concat('%', #{phoneLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" email != null and email != '' ">
+				and email = #{email}
+			</if>
+			<if test=" emailLike != null and emailLike != '' ">
+				and email like concat(concat('%', #{emailLike, jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>

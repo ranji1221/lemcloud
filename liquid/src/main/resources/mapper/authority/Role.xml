@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ranji.lemon.liquid.model.authority.Role">
+	<!-- 存储某个角色 -->
+	<insert id="save" parameterType="Role" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_auth_role (roleName, displayName,roleExtendPId,roleRelyId,roleMaxNum,remarks) values (#{roleName},#{displayName}, #{roleExtendPId}, #{roleRelyId},#{roleMaxNum},#{remarks})
+	</insert>
+	
+	<!-- 存储某个角色和操作的对应关系 -->
+	<insert id="saveRoleAndOperationRelation" parameterType="Map" keyProperty="id" useGeneratedKeys="true">
+		insert into lemon_liquid_auth_role_operation (roleId, operationId) values (#{roleId}, #{operationId})
+	</insert>
+	
+	<!-- 删除某个角色 -->
+	<delete id="delete" parameterType="int" >
+		delete from lemon_liquid_auth_role where id = #{id}
+	</delete>
+	
+	<!-- 删除角色和操作的对应关系 -->
+	<delete id="deleteRoleAndOperationRelation" parameterType="Map">
+		delete from lemon_liquid_auth_role_operation where roleId = #{roleId} and operationId = #{operationId}
+	</delete>
+	
+	<!-- 删除角色集 -->
+	<delete id="deleteByIDs" parameterType="List">
+		delete from lemon_liquid_auth_role where id in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 根据角色id删除角色和操作的对应关系 -->
+	<delete id="deleteRoleAndOperationsRelationByRoleId" parameterType="int">
+		delete from lemon_liquid_auth_role_operation where roleId = #{roleId}
+	</delete>
+	
+	<!-- 查询某个角色 -->
+	<select id="find" parameterType="int" resultType="Role">
+		SELECT
+			r.*,pr.roleName rolePName,rr.roleName roleRelyName
+		FROM
+			lemon_liquid_auth_role r
+		LEFT JOIN lemon_liquid_auth_role pr ON r.roleExtendPId = pr.id
+		LEFT JOIN lemon_liquid_auth_role rr ON r.roleRelyId = rr.id 
+		where r.id = #{id}
+	</select>
+	
+	<!-- 查询全部角色 -->
+	<select id="findAll" resultType="Role" parameterType="Map">
+		select * from lemon_liquid_auth_role
+		<include refid="paramsSQL"/>
+	</select>
+	
+	<!-- 根据角色id查询角色和操作的对应关系 -->
+	<select id="findRoleAndOperationsRelationByRoleId" parameterType="int" resultType="Integer">
+		select operationId from lemon_liquid_auth_role_operation where roleId = #{roleId}
+	</select>
+	
+	<!-- 根据角色id查询角色和操作的对应关系 -->
+	<select id="findOperationByRoleId" parameterType="int" resultType="Operation">
+		SELECT
+			o.*
+		FROM
+			lemon_liquid_auth_operation o
+		LEFT JOIN lemon_liquid_auth_role_operation r_o ON o.id = r_o.operationId
+		LEFT JOIN lemon_liquid_auth_role r ON r.id = r_o.roleId
+		WHERE
+			r.id = #{roleId}
+	</select>
+	
+	<!-- 修个某个角色 -->
+	<update id="update" parameterType="Role">
+		update lemon_liquid_auth_role
+		<set>
+			<if test="roleName != null and roleName != ''">roleName = #{roleName},</if>
+			<if test="displayName != null and displayName != ''">displayName = #{displayName},</if>
+			<if test="roleExtendPId != null and roleExtendPId != ''">roleExtendPId = #{roleExtendPId},</if>
+			<if test="roleRelyId != null and roleRelyId != ''">roleRelyId = #{roleRelyId},</if>
+			<if test="roleMaxNum != null and roleMaxNum != ''">roleMaxNum = #{roleMaxNum},</if>
+			<if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查找角色分页查询 -->
+	<select id="findPaginated" parameterType="Map" resultType="Role">
+		SELECT
+			r.*,pr.roleName rolePName,rr.roleName roleRelyName
+		FROM
+			lemon_liquid_auth_role r
+		LEFT JOIN lemon_liquid_auth_role pr ON r.roleExtendPId = pr.id
+		LEFT JOIN lemon_liquid_auth_role rr ON r.roleRelyId = rr.id
+		<include refid="paramsSQL" />
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 查找角色总数 -->
+	<select id="getTotalOfItems" parameterType="Map" resultType="int">
+		select count(*) from lemon_liquid_auth_role r
+		<include refid="paramsSQL" />
+	</select>
+	
+	<!-- 通用的设置条件的查询SQL语句 -->
+	<sql id="paramsSQL">
+		<where>
+			<if test=" roleName != null and roleName != '' ">
+				and roleName = #{roleName}
+			</if>
+			<if test=" roleNameLike != null and roleNameLike != '' ">
+				and roleName like concat(concat('%', #{roleNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" rNameLike != null and rNameLike != '' ">
+				and r.roleName like concat(concat('%', #{rNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" displayName != null and displayName != '' ">
+				and displayName = #{displayName}
+			</if>
+			<if test=" displayNameLike != null and displayNameLike != '' ">
+				and displayName like concat(concat('%', #{displayNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			<if test=" dNameLike != null and dNameLike != '' ">
+				and r.displayName like concat(concat('%', #{dNameLike, jdbcType=VARCHAR}),'%')
+			</if>
+			
+			<if test=" roleExtendPId != null and roleExtendPId != '' ">
+				and roleExtendPId = #{roleExtendPId}
+			</if>
+			<if test=" roleExtendPIdLike != null and roleExtendPIdLike != '' ">
+				and roleExtendPId like concat(concat('%', #{roleExtendPIdLike, jdbcType=INTEGER}),'%')
+			</if>
+			
+			<if test=" roleRelyId != null and roleRelyId != '' ">
+				and roleRelyId = #{roleRelyId}
+			</if>
+			<if test=" roleRelyIdLike != null and roleRelyIdLike != '' ">
+				and roleRelyId like concat(concat('%', #{roleRelyIdLike, jdbcType=INTEGER}),'%')
+			</if>
+			
+			<if test=" roleMaxNum != null and roleMaxNum != '' ">
+				and roleMaxNum = #{roleMaxNum}
+			</if>
+			<if test=" roleMaxNumLike != null and roleMaxNumLike != '' ">
+				and roleMaxNum like concat(concat('%', #{roleMaxNumLike, jdbcType=INTEGER}),'%')
+			</if>
+		</where>
+	</sql>
+	
+</mapper>
