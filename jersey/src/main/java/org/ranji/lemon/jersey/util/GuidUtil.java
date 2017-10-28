@@ -40,7 +40,4 @@ public abstract class GuidUtil {
 		return new RandomStringGenerator.Builder().withinRange('0', 'z').build().generate(20);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(GuidUtil.generate());
-	}
 }
