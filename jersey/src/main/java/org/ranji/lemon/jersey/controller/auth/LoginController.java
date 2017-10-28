@@ -23,7 +23,7 @@ public class LoginController {
 	public ModelAndView loginPage(){
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("key", "hello world");
-		mv.setViewName("/index");
+		mv.setViewName("index");
 		return mv;
 	}
 	
