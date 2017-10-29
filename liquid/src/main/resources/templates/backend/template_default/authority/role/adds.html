@@ -1,0 +1,62 @@
+<div class="bulkaddroles">
+	<ol class="breadcrumb">
+	    <li>
+	    	<i class="glyphicon glyphicon-home"></i>
+	    	<a href="#" data="2" url="home">首页</a>
+	    </li>
+	    <li>
+	    	<a href="#">角色管理</a>
+	    </li>
+	    <li class="active">批量添加角色</li>
+	    <div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+			        <input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+			        <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+			    </div>
+			</form>
+		</div>
+	</ol>
+	<div class="titlezl">
+		<p>批量添加角色</p>
+		<div class="btns">
+			<!-- <a href="javascript:;" class="maxrole" data-dismiss="modal">
+				<img src="./img/sys/modal3.png" alt=""/>
+			</a> -->
+			<a href="javascript:;" class="zclose" data-dismiss="modal">
+				<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}"/>
+			</a>
+		</div>
+	</div>
+	<div class="upload">
+		<div class="title">
+			<img src="static/template_default/image/authority/adds/addrolees4.png" alt="" th:src="@{/template_default/image/authority/adds/addrolees4.png}"/>
+		</div>
+		<form action="">
+			<div class="uploadinput">
+				
+			</div>
+			<div class="uploadhelp">
+				<p>
+					<i></i>
+					<b>温馨小提示：</b>
+					*仅支持excel文件格式导入；*文件&lt;50KB
+				</p>
+			</div>
+			<div class="uploadbtns">
+				<div class="uploadbtn">
+					浏览...
+					<input type="file" />
+				</div>
+				<button type='button'>
+					数据导入...
+				</button>
+			</div>
+		</form>
+		<a href="javascript:;" class="link">下载excel模版</a>
+	</div>
+</div>

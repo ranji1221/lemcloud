@@ -1,0 +1,265 @@
+@import url(../common/error_font.css);
+@import url(../common/hearder_icon.css);
+.container-fluid {
+  padding: 0 0.44rem; }
+  .container-fluid .row {
+    margin-left: 0; }
+  .container-fluid .role_hearder {
+    width: 100%;
+    height: 0.8rem;
+    border-bottom: 1px solid #f3f3f3; }
+    .container-fluid .role_hearder .role_hearde_font {
+      border-left: 3px solid #378ef8;
+      padding-left: 5px;
+      height: 0.23rem;
+      margin-top: 0.27rem;
+      line-height: 0.23rem; }
+      .container-fluid .role_hearder .role_hearde_font span {
+        font-size: 0.24rem; }
+  .container-fluid .role_content {
+    padding: 0.9rem 0.7rem 0 1.14rem !important; }
+    .container-fluid .role_content .role_form {
+      margin-bottom: 0.1rem; }
+      .container-fluid .role_content .role_form .form-horizontal .form-group .form_clire {
+        width: 10px;
+        padding:0;
+        height: 10px;
+        line-height: 0.5rem; }
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_clire span {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #378ef8;
+          padding-left: 0; }
+      .container-fluid .role_content .role_form .form-horizontal .form-group label {
+        text-align: left;
+        font-size: 0.18rem;
+        font-weight: normal;
+        line-height: 0.5rem;
+        padding-top: 0;
+        padding-right: 0; }
+      .container-fluid .role_content .role_form .form-horizontal .form-group .form_input {
+        height: 0.52rem;
+        background-color: #f4f4f4;
+        border: 1px solid #bfbfbf;
+        border-radius: 10px;
+        min-width: 245px; }
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input.active {
+          border-color: #f5523a; }
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input .form-control {
+          height: 100%;
+          color: #999999;
+          font-size: 0.1rem;
+          background-color: transparent;
+          width: 81%;
+          font-size: 0.18rem;
+          display: inline-block;
+          border: 0;
+          box-shadow: none; }
+          .container-fluid .role_content .role_form .form-horizontal .form-group .form_input .form-control:focus {
+            box-shadow: none; }
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input span {
+          font-size: 0.18rem;
+          line-height: 0.52rem;
+          float: right; }
+          .container-fluid .role_content .role_form .form-horizontal .form-group .form_input span.active {
+            color: #f5523a; }
+      @media (max-width: 1790px) {
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input {
+          /*max-width: 440px;*/ } }
+      @media (max-width: 1190px) {
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input {
+          max-width: 317px; } }
+      @media (max-width: 982px) {
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input {
+          max-width: 187px; } }
+      @media (max-width: 881px) {
+        .container-fluid .role_content .role_form .form-horizontal .form-group .form_input {
+          max-width: 180px; } }
+    .container-fluid .role_content .role_content_error_xian {
+      margin-bottom: 0.1rem; }
+      .container-fluid .role_content .role_content_error_xian .error_xian .error_box {
+        background-color: #cccccc;
+        border-radius: 20px;
+        height: 0.11rem;
+        margin-left:0; }
+      @media (max-width: 1179px) {
+        .container-fluid .role_content .role_content_error_xian .error_xian .error_box {
+          margin-left: 9%; } }
+      @media (max-width: 978px) {
+        .container-fluid .role_content .role_content_error_xian .error_xian .error_box {
+          margin-left: 12%; } }
+      .container-fluid .role_content .role_content_error_xian .error_xian .ui-slider-range {
+        height: 0.11rem; }
+      .container-fluid .role_content .role_content_error_xian .error_xian .ui-widget-header {
+        background-color: #378ef8; }
+      .container-fluid .role_content .role_content_error_xian .error_xian span {
+        text-align: center;
+        line-height: 0.17rem;
+        width: 0.23rem;
+        height: 0.23rem;
+        top: -0.5em;
+        background-color: white;
+        border-color: #378ef8; }
+        .container-fluid .role_content .role_content_error_xian .error_xian span.ui-state-active,
+        .container-fluid .role_content .role_content_error_xian .error_xian span .ui-widget-content .ui-state-active {
+          background-color: white; }
+        .container-fluid .role_content .role_content_error_xian .error_xian span.ui-state-hover {
+          background-color: white; }
+        .container-fluid .role_content .role_content_error_xian .error_xian span.ui-state-focus {
+          border-color: #378ef8; }
+        .container-fluid .role_content .role_content_error_xian .error_xian span:after {
+          content: "|||";
+          text-align: center;
+          font-size: 0.12rem;
+          color: #378ef8; }
+    .container-fluid .role_content .role_fath {
+      margin-bottom: 0.2rem; }
+      .container-fluid .role_content .role_fath .fath_select{
+      padding:0;}
+      .container-fluid .role_content .role_fath .fath_select .form_clire {
+        width: 10px;
+        height: 10px;
+        line-height: 0.51rem;
+        padding: 0; }
+        .container-fluid .role_content .role_fath .fath_select .form_clire span {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #378ef8;
+          padding: 0; }
+      .container-fluid .role_content .role_fath .fath_select .fath_select_font {
+        font-size: 0.18rem;
+        line-height: 0.51rem; }
+      .container-fluid .role_content .role_fath .fath_select .form_input {
+        margin-left: 4%;
+        padding: 0; }
+        .container-fluid .role_content .role_fath .fath_select .form_input .select {
+          min-width: 0;
+          margin-top:0.13rem;
+          border:1px solid #ccc;
+          height:34px;
+          width: 100%;
+          min-width: 121px; }
+          .container-fluid .role_content .role_fath .fath_select .form_input .select .select2-choice {
+            background-color: transparent !important;
+            width: 100%; }
+            .container-fluid .role_content .role_fath .fath_select .form_input .select .select2-choice .select2-chosen {
+              color: #666666;
+              font-size: 0.16rem; }
+            .container-fluid .role_content .role_fath .fath_select .form_input .select .select2-choice .select2-arrow {
+              border-top-color: black; }
+    .container-fluid .role_content .role_max_number {
+      margin-bottom: 0.4rem; }
+      .container-fluid .role_content .role_max_number .form_clire {
+        width: 10px;
+        height: 10px;
+        padding:0;
+        line-height: 0.42rem; }
+        .container-fluid .role_content .role_max_number .form_clire span {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #378ef8;
+          padding: 0; }
+      .container-fluid .role_content .role_max_number label {
+        line-height: 0.48rem;
+        padding-right: 0;
+        font-size: 0.18rem; }
+      .container-fluid .role_content .role_max_number .max_number_add {
+        padding: 0;
+        padding-top: 0.13rem;
+        line-height: 0.2rem; }
+        .container-fluid .role_content .role_max_number .max_number_add .reduce {
+          padding: 0;
+          text-align: center;
+          height: 0.23rem;
+          background-color: #b7b7b7; }
+          .container-fluid .role_content .role_max_number .max_number_add .reduce.active {
+            background-color: #378ef8; }
+          .container-fluid .role_content .role_max_number .max_number_add .reduce a {
+            font-size: 0.24rem;
+            color: white; }
+        .container-fluid .role_content .role_max_number .max_number_add .input {
+          width: 0.39rem;
+          height: 0.23rem;
+          padding: 0;
+          margin: 0 5px; }
+          .container-fluid .role_content .role_max_number .max_number_add .input input {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            text-align: center; }
+        .container-fluid .role_content .role_max_number .max_number_add .add {
+          padding: 0;
+          height: 0.23rem;
+          text-align: center;
+          line-height: 0.23rem;
+          background-color: #b7b7b7; }
+          .container-fluid .role_content .role_max_number .max_number_add .add.active {
+            background-color: #378ef8; }
+          .container-fluid .role_content .role_max_number .max_number_add .add a {
+            color: white;
+            font-size: 0.20rem; }
+    .container-fluid .role_content .role_remarks {
+      margin-top: 0.2rem; }
+      .container-fluid .role_content .role_remarks .form_clire {
+        width: 10px;
+        height: 10px;
+        padding:0;
+        line-height: 0.42rem; }
+        .container-fluid .role_content .role_remarks .form_clire span {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #378ef8;
+          padding: 0; }
+      .container-fluid .role_content .role_remarks label {
+        font-size: 0.18rem;
+        line-height: 0.48rem;
+        padding-right: 0; }
+      .container-fluid .role_content .role_remarks .role_write {
+        border: 1px solid #bfbfbf;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        padding: 0;
+        height: 1.35rem; }
+        .container-fluid .role_content .role_remarks .role_write textarea {
+          padding: 0.1rem 0 0 0.2rem;
+          color: #999999;
+          font-size: 0.18rem;
+          resize: none;
+          background-color: transparent;
+          width: 100%;
+          height: 100%;
+          border: none; }
+          .container-fluid .role_content .role_remarks .role_write textarea:focus {
+            outline: none;
+            border: none;
+            box-shadow: none; }
+
+.select2-arrow {
+  right: 0; }
+
+.select2-drop {
+  min-width: 0 !important;
+  background-color: white !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.21) !important; }
+  .select2-drop .select2-result-with-children > .select2-result-label {
+    color: #378ef8 !important;
+    font-size: 0.16rem; }
+  .select2-drop .select2-results {
+    max-width: 100%; }
+    .select2-drop .select2-results .select2-results-dept-0 .select2-result-label {
+      font-size: 0.16rem; }
+    .select2-drop .select2-results .select2-results-dept-0 .select2-result-sub .select2-highlighted .select2-result-label {
+      background-color: #e6e6e6;
+      color: #666666; }
+
+.error_font {
+  line-height: 0.61rem; }

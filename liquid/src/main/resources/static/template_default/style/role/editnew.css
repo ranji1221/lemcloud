@@ -1,0 +1,383 @@
+
+.editpage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,1);
+    z-index: 12;
+    border-radius:0;
+    bottom:0;
+    padding: 0 0.45rem;
+}
+.editpage .breadcrumb form{
+	padding:0;
+}
+.editpage .title{
+	height: 0.6rem;
+	line-height: 0.6rem;
+	/*padding:0 0.25rem;*/
+	background-color: rgba(55, 142, 248, 0);
+	color:rgb(51,51,51);
+	position:relative;
+	/*border-bottom:1px solid rgba(213,213,213,1);*/
+}
+/*Ò³ÃæÌáÊ¾¿ò*/
+.editpage .alert-danger{
+	padding-left:0.32rem;
+	height:0.65rem;
+	margin-bottom:0;
+	margin-top:0.2rem;
+	margin-bottom:0.1rem;
+	font-size:0.14rem;
+	color:black;
+}
+.editpage  .alert-danger{
+padding-left:0.32rem;
+height:0.65rem;
+	margin-bottom:0;
+	margin-top:0.2rem;
+	margin-bottom:0.1rem;
+	font-size:0.14rem;
+	color:black;
+}
+.editpage  .alert-danger i{
+	font-size:0.24rem;
+	color:black;
+	    vertical-align: text-bottom;
+	    margin-right:0.1rem;
+}
+.editpage  .alert-danger button{
+	opacity: 1;
+}
+.editpage .alert-danger button span{
+	font-size:0.3rem;
+	color:black;
+}
+
+.editpage .title:before{
+	position:absolute;
+	content:'';
+	width:0.04rem;
+	height:0.24rem;
+	background:rgb(55,142,248);
+	left:0rem;
+	top:0.18rem;
+}
+.editpage .title p{
+	font-size:0.24rem;
+	padding-left:0.1rem;
+	float:left;
+	line-height: 0.6rem;
+}
+.editpage .title div.btns{
+	float:right;
+	height:0.6rem;
+	/*margin-top:0.1rem;*/
+}
+.editpage .title div.btns a{
+	float:left;
+	width:0.3rem;
+	height:0.6rem;
+	margin-left:0.1rem;
+}
+.editpage .title div.btns a img{
+	width:100%;
+	height:100%;
+	vertical-align: top;
+}
+form.newform{
+	padding:0;
+	background:rgb(251,251,251);
+	border-bottom:1px solid rgb(221,221,221);
+}
+form.newform .formhead{
+	border-top:1px solid rgb(221, 221, 221);
+	border-left:1px solid rgb(221, 221, 221);
+	border-right:1px solid rgb(221, 221, 221);
+	height:0.6rem;
+	line-height: 0.6rem;
+	color:rgb(0,0,0);
+	font-size:0.24rem;
+	background-color: rgba(242, 242, 242, 1);
+	padding-left:0.4rem;
+}
+form.newform .form-group{
+	margin:0;
+	height:0.6rem;
+	width:100%;
+	line-height: 0.6rem;
+	border-top:1px dashed rgb(221, 221, 221);
+}
+form.newform .textarea{
+	height:1.8rem;
+}
+form.newform .tree{
+	height:4rem;
+}
+form.newform .form-group >label{
+	padding-left:0.7rem;
+	margin:0;
+	font-size:0.18rem;
+	color:rgb(51,51,51);
+	position:relative;
+	line-height: 0.6rem;
+	width:2.5rem;
+	float:left;
+	height:100%;
+	border-left:1px solid rgb(221, 221, 221);
+}
+form.newform .form-group >label:before{
+	position:absolute;
+	content:'';
+	top:0.3rem;
+	left:0.4rem;
+	width:0.06rem;
+	height:0.06rem;
+	margin-top:-0.03rem;
+	border-radius:50%;
+	background:rgba(55, 142, 248, 1);
+}
+
+form.newform .form-group input[type=text]{
+	padding:0 0.24rem;
+	font-size:0.16rem;
+	color:rgb(51,51,51);
+	height: 0.4rem;
+	line-height: 0.4rem;
+	outline:none;
+	box-shadow: none;
+	background:rgb(255,255,255);
+	border-radius:0.06rem;
+	border:1px solid rgb(191,191,191);
+}
+form.newform .form-group textarea{
+	padding:0.1rem 0.24rem;
+	font-size:0.16rem;
+	color:rgb(51,51,51);
+	height: 1.6rem;
+	line-height: 0.25rem;
+	outline:none;
+	box-shadow: none;
+	background:rgb(255,255,255);
+	border-radius:0.06rem;
+	width:100%;
+	border:1px solid rgb(191,191,191);
+}
+form.newform .form-group select{
+	font-size:0.16rem;
+	color:rgb(102,102,102);
+	height: 100%;
+	line-height: 0.4rem;
+	outline:none;
+	box-shadow: none;
+	background:rgb(255,255,255);
+	border-radius:0.06rem;
+	width:100%;
+	padding:0.1rem;
+	border:1px solid rgb(191,191,191);
+	padding:0 0.24rem;
+	margin:0;
+}
+form.newform .form-group select option{
+
+}
+form.newform .form-group input:focus,
+form.newform .form-group select:focus,
+form.newform .form-group textarea:focus{
+	background:rgb(255,255,255);
+	box-shadow: none;
+	border:1px solid #66afe9;
+}
+form.newform .number .add,
+form.newform .number .reduce{
+	line-height: 0.24rem;
+	color:white;
+	font-size: 12px;
+	width:0.2rem;
+	height:0.24rem;
+	box-sizing: border-box;
+	background-color:#b7b7b7;
+	float:left;
+	text-align: center;
+	cursor: pointer;
+}
+form.newform .number .add.active{
+	background-color:#2576d8;
+}
+form.newform .number .reduce.active{
+	background-color:#2576d8;
+}
+form.newform .number .active{
+	background-color:#b7b7b7;
+	cursor: default;
+}
+form.newform .number .input input{
+	text-align: center;
+	width:0.4rem;
+	height:0.24rem;
+	line-height: 0.24rem;
+	box-sizing: border-box;
+	background-color:white;
+	border:1px solid #d5d5d5;
+	margin:0 0.06rem;
+	float:left;
+	color:rgb(51,51,51);
+	font-size:12px;
+	padding:0;
+	border-radius:0;
+}
+form.newform .inputwrapper{
+	border-left:1px dashed rgb(221, 221, 221);
+	border-right:1px solid rgb(221, 221, 221);
+	background:rgb(255,255,255);
+	position:relative;
+	overflow: hidden;
+	height:100%;
+	padding:0.1rem 0.5rem;
+}
+@media (max-width:992px){
+	form.newform .tree .inputwrapper{
+		padding-bottom:0.54rem;
+	}
+}
+form.newform .inputwrapper .inputwrappermax{
+	position: relative;
+	height:100%;
+	line-height: 0.4rem;
+}
+form.newform .input .inputwrapper{
+	padding-right:2.5rem;
+}
+form.newform .input .inputwrapper .inputwrappermax,form.newform .email .inputwrapper .inputwrappermax,form.newform .phone .inputwrapper .inputwrappermax{
+	max-width:7rem;
+}
+form.newform .select .inputwrapper .inputwrappermax{
+	width:1.8rem;
+}
+form.newform .number .inputwrapper .inputwrappermax{
+	width:1.8rem;
+	padding:0.08rem 0;
+}
+form.newform .tree .inputwrapper .inputwrappermax{
+	border-radius: 0.06rem;
+	border: solid 1px rgba(191, 191, 191, 1);
+	background-color: rgba(255, 255, 255, 1);
+}
+form.newform .tree header{
+	height: 0.52rem;
+	line-height: 0.52rem;
+	background-color: rgba(222, 233, 247, 1);
+	border-radius: 0.06rem 0.06rem 0 0;
+
+}
+form.newform .tree header .icheckbox_flat-blue{
+	/*border:1px solid rgb(191,191,191);*/
+	margin-top:-3px;
+	background-color:white;
+	border-radius: 6px;
+	transform: scale(0.75);
+}
+form.newform .tree header label{
+	line-height: 0.52rem;
+	float:left;
+	padding-left:0.3rem;
+	font-size:0.14rem;
+	margin-bottom:0;
+}
+form.newform .tree header label.prompt{
+	float:right;
+	padding-right:0.1rem;
+}
+form.newform .tree .treezl{
+	position:absolute;
+	top:0.54rem;
+	left:0;
+	right:0;
+	bottom:0.54rem;
+	overflow:auto; 
+}
+form.newform .tree .inputwrapper .inputwrappermax >label.prompt{
+	position: absolute;
+	top:100%;
+	line-height: 0.52rem;
+	padding-left:0.3rem;
+	font-size:0.14rem;
+}
+form.newform .form-control-feedback{
+	right:-0.55rem;
+}
+form.newform .inputwrapper span.errormessage {
+    color: rgb(245,82,58);
+    font-size: 0.16rem;
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    line-height: 0.4rem;
+    margin-top: -0.2rem;
+    margin-left: 0.45rem;
+    right: -17em;
+}
+form.newform .inputwrapper span.limitlength{
+	position:absolute;
+	font-size: 0.16rem;
+	right:0.3rem;
+	top:50%;
+	margin-top:-0.2rem;
+	/*width:;*/
+	line-height:0.4rem;
+	color:rgb(153,153,153);
+}
+.icon-exclamation-sign{
+	color:rgb(245,82,58);
+}
+.icon-ok-sign{
+	display: none;
+	color:rgb(91,222,147);
+}
+
+/*@media (max-width:992px){
+	.editpage .inputwrapper{
+		padding:0;
+	}
+}*/
+
+
+form.newform .btnbox{
+	padding:0.66rem 0 0.56rem;
+	border-top:1px dashed rgb(221, 221, 221);
+	text-align: center;
+	border-left:1px solid rgb(221,221,221);
+	border-right:1px solid rgb(221,221,221);
+	background-color:white;
+}
+form.newform .btnbox button.btn:active:focus{
+	outline: none;
+}
+
+form.newform .btnbox button.btn{
+	font-size:0.22rem;
+	color:rgb(255,255,255);
+	/*width: 1.3rem;
+	height: 0.5rem;*/
+	padding:0.15rem 0.45rem;
+	line-height: 0.22rem;
+	/*background-color: rgba(171, 186, 195, 1);*/
+	background-color: rgba(111, 179, 224, 1);
+	border-radius: 0.05rem 0.05rem 0.05rem 0.05rem;
+	border:1px solid rgba(111, 179, 224, 1);
+	outline: none;
+}
+form.newform .btnbox button:last-child{
+	color:rgba(111, 179, 224, 1);
+	background:rgb(255,255,255);
+	margin-left:0.47rem;
+	/*margin-right:0.3rem;*/
+}
+/*form.newform button:hover{
+	background-color: rgba(55, 142, 248, 1);
+}*/
+form.newform button.success{
+	background-color: rgba(55, 142, 248, 1);
+}

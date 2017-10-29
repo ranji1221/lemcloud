@@ -1,11 +1,553 @@
 <!DOCTYPE html>
+<!--1、指定语言基础-->
 <html xmlns:th="http://www.thymeleaf.org">
+
 	<head>
-		<script type="text/javascript" th:src="@{/js/test.js}"></script>
-		<script type="text/javascript">
-			//test();
-		</script>
+		<meta charset="UTF-8"/>
+		<!--flatui css库-->
+		<link href="https://cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css" rel="stylesheet"/>
+
+		<!--指定视口信息-viewport-->
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<!--指定 跨IE 浏览器的兼容性-->
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<title></title>
+		<!--引入 bootstrap.css 主css文件-->
+		<link rel="stylesheet" href="public/common/bootstrap/css/bootstrap.css"  th:href="@{/common/bootstrap/css/bootstrap.css}"/>
+		<!--公共的初始化样式 -->
+		<link rel="stylesheet" href="static/template_default/style/common/common.css"  th:href="@{/template_default/style/common/common.css}" />
+		<!-- 侧导航样式 -->
+		<link rel="stylesheet" href="static/template_default/style/common/slidenavREM.css" th:href="@{/template_default/style/common/slidenavREM.css}"/>
+		<link rel="stylesheet" href="public/common/fonts/iconfont.css" th:href="@{/common/fonts/iconfont.css}"/>
+		<!--bootstrap图标库-->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css"/>
+		<!--头部引入-->
+		<link rel="stylesheet" href="static/template_default/style/index/index.css"  th:href="@{/template_default/style/index/index.css}" />
+		
+		<link rel="stylesheet" th:href="@{/common/icheck/skins/all.css}"/>
+		<link rel="stylesheet" th:href="@{/common/vakata-jstree/dist/themes/default/style.min.css}"/>
+		<link rel="stylesheet" th:href="@{/common/pagination/simplePagination.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/listREM.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/authmodal.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/addsREM.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/role.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/view.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/role/editnew.css}"/>
+		<link rel="stylesheet" th:href="@{/common/bootstrapvalidator/css/bootstrapValidator.css}"/>
+		<link rel="stylesheet" th:href="@{/template_default/style/editModal/editModal.css}"/>
 	</head>
-	<span th:text="${key}"></span>
-	<div th:include="footer :: copyright"></div>
+
+	<body>
+		<div id="bodyModalArea"></div>
+		<!--删除模态框-->
+		<div id="removeModal">
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="pull-right">
+								<a href="javascript:;" class="remove" data-dismiss="modal">
+									<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}"/>
+								</a>
+							</div>
+							<div class="modal-title">
+								<h4><span>|</span>提示信息</h4>
+							</div>
+						</div>
+						<div class="modal-body">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 进度展示模态框 -->
+		<div class="modal fade" id="leading-progress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="progressbox">
+						<h3>正在导入...</h3>
+						<div class="progress progress-striped active">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+								<span class="pro-text">0%</span>
+							</div>
+						</div>
+						<p>*请勿进行其他操作！您的任何操作都可能导致此次导入失败！</p>
+					</div>
+					<div class="leading-res-success">
+						<div class="titlezl">
+							<p>提示信息</p>
+							<div class="btns">
+								<a href="javascript:;" class="zclose" data-dismiss="modal">
+									<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}"/>
+								</a>
+							</div>
+						</div>
+						<div class="res-success">
+							<img src="static/template_default/image/common/leads.png" alt="" th:src="@{/template_default/image/common/leads.png}"/>
+							<h3>导入成功！</h3>
+							<p>您已成功恢复数据库！</p>
+						</div>
+					</div>
+					<div class="leading-res-error">
+						<div class="titlezl">
+							<p>提示信息</p>
+							<div class="btns">
+								<a href="javascript:;" class="zclose" data-dismiss="modal">
+									<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}"/>
+								</a>
+							</div>
+						</div>
+						<div class="res-error">
+							<img src="static/template_default/image/common/leade.png" alt="" th:src="@{/template_default/image/common/leade.png}"/>
+							<h3>导入失败！</h3>
+							<p>您未能成功恢复数据库！</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 备注信息展示模态框 -->
+		<div class="modal fade" id="database-remarks" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="titlezl">
+						<p>查看数据库备注信息</p>
+						<div class="btns">
+							<a href="javascript:;" class="zclose" data-dismiss="modal">
+								<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}" />
+							</a>
+						</div>
+					</div>
+					<div class="database-remark">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--没有权限模态框-->
+		<div id="powerModal">
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-keyboard='false'>
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="pull-right">
+								<a href="javascript:;" class="remove" data-dismiss="modal">
+									<img src="static/template_default/image/common/modal1.png" alt="" th:src="@{/template_default/image/common/modal1.png}"/>
+								</a>
+							</div>
+							<div class="modal-title">
+								<h4><span>|</span>查看XXX</h4>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-xs-4">
+									<div class="trashImg text-right">
+										<img src="static/template_default/image/common/powerModal.png" alt="" th:src="@{/template_default/image/common/powerModal.png}"/>
+
+									</div>
+								</div>
+								<div class="col-xs-8 info">
+									<h3>您没有访问权限</h3>
+									<p>
+										很抱歉，系统君拒绝了你的请求！
+									</p>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-xs-8 col-xs-offset-4">
+									<button type="button" class="btn modalBtn delBtn" data-dismiss="modal">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 引入公共的头 -->
+		<div th:replace="header :: header_fragment"></div>
+		<!-- 主体 -->
+		<div class="main-container">
+			<!-- 引入公共的导航栏 -->
+			<div th:replace="navigation_bar :: navigation_bar"></div>
+			<!-- 左侧面滑动导航菜单结束 -->
+			<!-- 右侧主容器 -->
+			<div class="right-container">
+				<div class="loading_ajax_dom">
+					<img src="static/template_default/image/common/loading5.gif" alt="" style='width:400px;margin-top:1.2rem;' th:src="@{/template_default/image/common/loading5.gif}"/>
+				</div>
+				<div class="ajax_dom"></div>
+				<!-- 此处添加导航右侧内容 -->
+				<div class="container content-wrap">
+					<div id="funcNav" class="row">
+						<div class="col-lg-3 col-sm-6 func-item">
+							<div class="panel statistical">
+								<div class="panel-body">
+									<div class="funcImg text-right">
+										<img src="static/template_default/image/index/analysis.png" class="signImg" alt="" th:src="@{/template_default/image/index/analysis.png}"/>
+									</div>
+									<div class="title">
+										<h3 class="cn h3">统计分析</h3>
+										<h4 class="en h4">Statistical analysis</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6 func-item">
+							<div class="panel authority">
+								<div class="panel-body">
+									<div class="funcImg text-right">
+										<img src="static/template_default/image/index/Authority.png" class="signImg" alt="" th:src="@{/template_default/image/index/Authority.png}"/>
+									</div>
+									<div class="title">
+										<h3 class="cn h3">
+                                    权力管理
+                                </h3>
+										<h4 class="en h4">
+                                    SAuthority management
+                                </h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6 func-item">
+							<div class="panel human">
+								<div class="panel-body">
+									<div class="funcImg text-right">
+										<img src="static/template_default/image/index/human.png" class="signImg" alt="" th:src="@{/template_default/image/index/human.png}"/>
+									</div>
+									<div class="title">
+										<h3 class="cn h3">
+                                人力行政
+                            </h3>
+										<h4 class="en h4">
+                                Human resources administration
+                            </h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6 func-item">
+							<div class="panel system">
+								<div class="panel-body">
+									<div class="funcImg text-right">
+										<img src="static/template_default/image/index/Settings.png" class="signImg" alt="" th:src="@{/template_default/image/index/Settings.png}"/>
+									</div>
+									<div class="title">
+										<h3 class="cn">
+                            行政管理
+                            </h3>
+										<h4 class="en">
+                            System management
+                            </h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="showList">
+						<div class="row">
+							<!--今日任务-->
+							<div class="col-lg-4 m-con">
+								<div class="panel missionToday">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                    今日任务
+                            <span class="pull-right ctrTool">
+                                <i class="icon-move "></i>
+                                <i class="icon-refresh"></i>
+                                <i class="icon-chevron-up"></i>
+                                <i class="icon-remove"></i>
+                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<div class="well well-sm">
+											<div class="row">
+												<div class="col-xs-8">
+													<input type="text" class="form-control" placeholder="临时添加任务"/>
+												</div>
+												<div class="col-xs-4 text-right">
+													<button type="button" class="btn"> 发布</button>
+												</div>
+											</div>
+										</div>
+										<ul class="list-unstyled">
+											<li>
+												<a href="">首页管社保局看来你了吗看局看来你了</a>
+											</li>
+											<li>
+												<a href="">首页管社保局看来你了吗看局看来你了</a>
+											</li>
+											<li>
+												<a href="">首页管社保局看来你了吗看局看来你了</a>
+											</li>
+											<li>
+												<a href="">首页管社保局看来你了吗看局看来你了</a>
+											</li>
+
+										</ul>
+									</div>
+									<div class="panel-footer text-right">
+										<a href="" class="more">更多</a>
+									</div>
+								</div>
+							</div>
+							<!--活动-->
+							<div class="col-lg-4 m-con">
+								<div class="panel gameBox">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                    活动
+		                            <span class="pull-right ctrTool">
+		                                <i class="icon-move"></i>
+		                                <i class="icon-refresh"></i>
+		                                <i class="icon-chevron-up"></i>
+		                                <i class="icon-remove"></i>
+		                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<h4>最新发布</h4>
+										<div class="row newtitle">
+											<div class="col-xs-7">下午2：52 08月28日</div>
+											<div class="col-xs-5 ">
+												<a href="">世界你好</a>
+											</div>
+										</div>
+										<div class="row-content">
+											<div class="col-img">
+												<img src="static/template_default/image/index/newIssue.jpg" alt="" th:src="@{/template_default/image/index/newIssue.jpg}"/>
+											</div>
+											<div class="col-text text-justify">
+												<p>小米商城直营小米公司旗下所有产品，囊括小米手机系列小米6、小米5X、小米MIX，红米手机系列红米4X、红米Note 5A，智能硬件，配件及小小米商城直营小米公司旗下所有产品，囊括小米手机系列小米6、小，红米手机系列红米4X、红米Note 5A，智能硬件，配件及小....
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--天气-->
+							<div class="col-lg-4 m-con">
+								<div class="panel skyBox">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                    天气小贴士
+                                    <span class="pull-right ctrTool">
+                                <i class="icon-move"></i>
+                                <i class="icon-refresh"></i>
+                                <i class="icon-chevron-up"></i>
+                                <i class="icon-remove"></i>
+                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="moreSky text-right">
+												<a href="" class="moresky">更多天气</a>
+											</div>
+											<div class="col-xs-4 con r">
+												<div class="pie text-center">
+													<div class="pieChart text-center" data-percent="76%">
+													</div>
+													<!--<div class="per">76%</div>-->
+													<label for="" class="per">76%</label>
+												</div>
+												<div class="skyInfo text-center">空气湿度</div>
+
+											</div>
+											<div class="col-xs-8 con">
+												<div class="row skyDetail">
+													<div class="col-xs-6">
+														<ul class="list-unstyled">
+															<li class="text-center">太原</li>
+															<li class="text-center">多云 星期四</li>
+															<li class="text-center">17℃~20℃</li>
+														</ul>
+													</div>
+													<div class="cloud col-xs-6 text-center">
+														<img src="static/template_default/image/index/duoyun.jpg" class="img-responsive" alt="" th:src="@{/template_default/image/index/duoyun.jpg}"/>
+													</div>
+												</div>
+												<div class="date text-center">
+													<i class="icon-calendar"></i>
+													<span id="calendar"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--人力管理-->
+							<div class="col-lg-4 m-con">
+								<div class="panel humanInfo">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                    人力管理
+                                    <span class="pull-right ctrTool">
+                                <i class="icon-move"></i>
+                                <i class="icon-refresh"></i>
+                                <i class="icon-chevron-up"></i>
+                                <i class="icon-remove"></i>
+                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive table-condensed">
+											<table class="table userlist">
+												<thead>
+													<tr>
+														<th>编号</th>
+														<th>名称</th>
+														<th>父菜单</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>02</td>
+														<td class="manageName" title="首页信息管理">首页信息管理</td>
+														<td>首页</td>
+														<td>
+															<a href="" class="icon-eye-open lookRole" title="查看"></a>
+															<a href="" class="icon-pencil editUser" title="编辑"></a>
+															<a href="" class="icon-trash removeBtn" title="删除"></a>
+															<a href="" class="icon-key" title="授权"></a>
+														</td>
+													</tr>
+													<tr>
+														<td>02</td>
+														<td class="manageName">首页管理</td>
+														<td>首页</td>
+														<td>
+															<a href="" class="icon-eye-open lookRole" title="查看"></a>
+															<a href="" class="icon-pencil editUser" title="编辑"></a>
+															<a href="" class="icon-trash removeBtn" title="删除"></a>
+															<a href="" class="icon-key" title="授权"></a>
+														</td>
+													</tr>
+													<tr>
+														<td>02</td>
+														<td class="manageName">首页管理</td>
+														<td>首页</td>
+														<td>
+															<a href="" class="icon-eye-open lookRole" title="查看"></a>
+															<a href="" class="icon-pencil editUser" title="编辑"></a>
+															<a href="" class="icon-trash removeBtn" title="删除"></a>
+															<a href="" class="icon-key" title="授权"></a>
+														</td>
+													</tr>
+													<tr>
+														<td>02</td>
+														<td class="manageName">首页管理</td>
+														<td>首页</td>
+														<td>
+															<a href="" class="icon-eye-open lookRole" title="查看"></a>
+															<a href="" class="icon-pencil editUser" title="编辑"></a>
+															<a href="" class="icon-trash removeBtn" title="删除"></a>
+															<a href="" class="icon-key" title="授权"></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+									<div class="panel-footer text-right">
+										<a href="">更多</a>
+									</div>
+								</div>
+							</div>
+							<!--经济报表-->
+							<div class="col-lg-8 m-con reportBox">
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                    经营报表
+                                    <span class="pull-right ctrTool">
+                                <i class="icon-move"></i>
+                                <i class="icon-refresh"></i>
+                                <i class="icon-chevron-up"></i>
+                                <i class="icon-remove"></i>
+                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<div id="line">
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--快速草稿-->
+							<div class="col-lg-4 m-con">
+								<div class="panel drafts">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+                                    <i class="icon-circle"></i>
+                                   		 快速草稿
+                                    <span class="pull-right ctrTool">
+                                <i class="icon-move"></i>
+                                <i class="icon-refresh"></i>
+                                <i class="icon-chevron-up"></i>
+                                <i class="icon-remove"></i>
+                            </span>
+                                </h3>
+									</div>
+									<div class="panel-body">
+										<from>
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="标题"/>
+												<textarea name="" id="" class="form-control" placeholder="在想写什么？"></textarea>
+												<button type="button" class="btn btn-info pull-right getBtn">保存草稿</button>
+											</div>
+										</from>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- 添加导航右侧内容完毕 -->
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!--jquery引入-->
+		<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<!--侧导航的js-->
+		<script src="static/template_default/script/common/slidenav.js" th:src="@{/template_default/script/common/slidenav.js}"></script>
+		<!--flatui js库-->
+		<script src="https://cdn.bootcss.com/flat-ui/2.3.0/js/flat-ui.min.js"></script>
+		<!--生成其他页面样式操作-->
+		<!-- <script src="static/template_default/script/index/get.js" th:src="@{/template_default/script/index/get.js}"></script> -->
+		<script th:src="@{/common/icheck/custom.min.js}"></script>
+		<script th:src="@{/common/icheck/icheck.js}"></script>
+		<script th:src="@{/template_default/script/index/getDom.js}"></script>
+		<script th:src="@{/common/vakata-jstree/dist/jstree.min.js}"></script>
+		<script th:src="@{/common/pagination/jquery.simplePagination.js}"></script>
+		<script th:src="@{/common/icheck/custom.min.js}"></script>
+		<script th:src="@{/common/bootstrapvalidator/js/bootstrapValidator.js}"></script>
+		<!--引入检查文件-->
+		<script src="public/common/jquery-ui1.12.1/jquery-ui.js" th:src="@{/common/jquery-ui1.12.1/jquery-ui.js}"></script>
+		<script src="public/common/jquery.easypiechart/jquery.easypiechart.js" th:src="@{/common/jquery.easypiechart/jquery.easypiechart.js}"></script>
+		<script src="static/template_default/script/index/index.js" th:src="@{/template_default/script/index/index.js}"></script>
+		<script src="static/template_default/script/common/promptBox.js" th:src="@{/template_default/script/common/promptBox.js}"></script>
+		<!--时间插件-->
+		<script src="static/template_default/script/skycons/skycons.js" th:src="@{/template_default/script/skycons/skycons.js}"></script>
+		<!--天气插件-->
+		<script src="static/template_default/script/raphael/raphael.min.js" th:src="@{/template_default/script/raphael/raphael.min.js}"></script>
+		<script src="static/template_default/script/raphael/morris.js" th:src="@{/template_default/script/raphael/morris.js}"></script>
+	</body>
+
 </html>

@@ -1,0 +1,553 @@
+<script src="static/template_default/script/authority/user/skip.js" th:src="@{/template_default/script/authority/user/skip.js}"></script>
+<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
+<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
+<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
+<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
+<script>
+function userListInit(){
+	$("#userList").LemonGetList({
+	    requestListUrl : 'backend/template_default/authority/user/data',
+		useLocalStorage: true,
+		className_Page:"#page",
+		generateItemFun : function(index,value,data,extend){
+			var phone = value.phone == null ? '无':value.phone ;
+			var email = value.email == null ? '无':value.email ;
+			var createTime = value.createTime == null ? '无':value.createTime.substr(0,10);
+			tr_data = '<tr user_id='+ value.id +extend+'>'+
+				'<td class="checkboxtd">'+
+					'<label>'+
+						'<input  type="checkbox" name="layout"/>'+
+					'</label>'+
+				'</td>'+
+				'<td>'+
+					(index+1) +
+				'</td>'+
+				'<td title='+ value.userName +'>'+
+					value.userName +
+				'</td>'+
+				'<td title='+ phone +'>'+
+					phone +
+				'</td>'+
+				'<td title='+ email +'>'+
+					email +
+				'</td>'+
+				'<td title='+ createTime +'>'+
+					createTime +
+				'</td>'+
+				'<td>'+
+					'<span class="icon-eye-open iconact viewUser"></span>'+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-pencil iconact editUser"></span>'+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-trash iconact removeBtn"></span>'+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-key iconact userAuth"></span>'+
+				'</td>'+
+			'</tr>';
+	       	return tr_data; 
+	   	},   		
+	   	/* afterFun : function(){
+			$('.tablewrap input').iCheck({
+			    checkboxClass: 'icheckbox_flat-blue',
+			    radioClass: 'iradio_flat-blue',
+			    labelHover : true, 
+			  	cursor : false,
+			 });
+			$('#checkall').iCheck('uncheck')
+   		}, */
+	})
+}
+userListInit();
+//复选框
+/* $('.tablewrap input').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue',
+    labelHover : true, 
+  	cursor : false,
+ });
+$(document).on('ifChecked','#checkall', function(event){
+  	$('.tablewrap input').iCheck('check')
+});
+	$(document).on('ifUnchecked', '#checkall',function(event){
+  	$('.tablewrap input').iCheck('uncheck')
+});
+ */
+$('.user_removeAllBtn').bindDialogs({
+	content : '你确定删除这些用户吗？',
+	name_successBtn : 'deleteAllBtn',
+	name_cancelBtn : 'cancelAllBtn',
+	beforeFun:function(){
+		if($(".tablewrap input:checked").length){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	success:function(){
+		var str="";
+	  	$(".tablewrap input:checked").each(function(i,v){
+	  		if($(this).closest('tr').attr("user_id")){
+		  	str+=$(this).closest('tr').attr("user_id")+","
+	  		}
+	  		
+	  	})
+	  	str = str.substring(0,str.length-1)
+		$.post("backend/template_default/authority/user/deleteAll",{
+			user_ids:str,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				userListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+})
+
+$('.removeBtn').bindDialogs({
+	content : '你确定删除这个用户吗？',
+	success:function(handle){
+		var userId = $(handle).closest('tr').attr('user_id');
+		$.post("backend/template_default/authority/user/delete",{
+			id:userId,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				userListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+});
+//刷新页面
+$(document).on("click",".renovate",function(){
+	removeStorage();
+	userListInit();
+})
+</script>
+
+<div class="rolelist userlist">
+	<ol class="breadcrumb">
+		<li>
+			<i class="glyphicon glyphicon-home"></i>
+			<a href="#" data="2" url="home">首页</a>
+		</li>
+		<li>
+			<a href="#">用户管理</a>
+		</li>
+		<li class="active">用户列表</li>
+		<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+					<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/template_default/image/common/iconsearch.png" th:src="@{/template_default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+	</ol>
+	<div class="alertArea"></div>
+	<div class="alert alert-danger">
+		<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示用户列表，您可以对用户查看、编辑、删除、授权及批量删除和新建的操作。单击右方x号，可以关闭此条提示语！
+
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+	<div class="tablewrap">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th style="width:0.8rem" class='checkboxth'>
+						<label for="checkall">
+							<input  type="checkbox" name="layout" id="checkall"/>
+						</label>
+					</th>
+					<th style="width:12.5%;min-width:94px;">
+						编号
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<!-- <th style="width:25%"> -->
+					<th>
+						用户名
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th>
+						手机号码
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th>
+						邮箱
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th>
+						创建时间
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:0.6rem">查看</th>
+					<th style="width:0.6rem">编辑</th>
+					<th style="width:0.6rem">删除</th>
+					<th style="width:0.9rem;">授权</th>
+				</tr>
+			</thead>
+			 <tbody id="userList">
+            
+            </tbody>
+			<!-- <tbody>
+				<tr listid='01'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						李佳
+					</td>
+					<td>
+						超级管理员
+					</td>
+					<td>
+						16352663547
+					</td>
+					<td>
+						67382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact"></span>
+					</td>
+				</tr>
+				<tr listid='02'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						02
+					</td>
+					<td>
+						张价
+					</td>
+					<td>
+						管理员
+					</td>
+					<td>
+						13852663547
+					</td>
+					<td>
+						98382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact"></span>
+					</td>
+				</tr>
+				<tr listid='03'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						03
+					</td>
+					<td>
+						李佳
+					</td>
+					<td>
+						超级管理员
+					</td>
+					<td>
+						16352663547
+					</td>
+					<td>
+						67382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='04'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						04
+					</td>
+					<td>
+						张价
+					</td>
+					<td>
+						管理员
+					</td>
+					<td>
+						13852663547
+					</td>
+					<td>
+						98382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='05'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						05
+					</td>
+					<td>
+						李佳
+					</td>
+					<td>
+						超级管理员
+					</td>
+					<td>
+						16352663547
+					</td>
+					<td>
+						67382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='06'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						06
+					</td>
+					<td>
+						张价
+					</td>
+					<td>
+						管理员
+					</td>
+					<td>
+						13852663547
+					</td>
+					<td>
+						98382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='07'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						07
+					</td>
+					<td>
+						李佳
+					</td>
+					<td>
+						超级管理员
+					</td>
+					<td>
+						16352663547
+					</td>
+					<td>
+						67382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='08'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						08
+					</td>
+					<td>
+						张价
+					</td>
+					<td>
+						管理员
+					</td>
+					<td>
+						13852663547
+					</td>
+					<td>
+						98382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+				<tr listid='09'>
+					<td class='checkboxtd'>
+						<label>
+							<input  type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						09
+					</td>
+					<td>
+						李佳
+					</td>
+					<td>
+						超级管理员
+					</td>
+					<td>
+						16352663547
+					</td>
+					<td>
+						67382736666@qq.com
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewUser"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editUser"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+					<td>
+						<span class="icon-key iconact userAuth"></span>
+					</td>
+				</tr>
+			</tbody> -->
+		</table>
+		<div class="tfoot">
+			<div class="btns">
+				<span class="newPro" url="backend/template_default/authority/user/add">
+					<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+					新建
+				</span>
+				<span class="renovate">
+					<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+					刷新
+				</span>
+				<span class="user_removeAllBtn">
+					<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}" />
+					删除
+				</span>
+			</div>
+			<div id="page">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模板框引入 -->
+<div th:replace="/backend/template_default/authority/user/view :: viewUser"></div>
+<div th:replace="/backend/template_default/authority/user/edit :: editUser"></div>
+<div th:replace="/backend/template_default/authority/user/auth :: authUser"></div>

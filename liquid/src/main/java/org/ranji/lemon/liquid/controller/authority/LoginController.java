@@ -10,6 +10,7 @@ import org.apache.shiro.subject.Subject;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
 import org.ranji.lemon.liquid.model.authority.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,7 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping(value="backend")
+//@RequestMapping(value = "/backend")
 public class LoginController {
 	
 	/**
@@ -50,8 +51,13 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView loginPage(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/backend/login/login");
+		mv.setViewName("/backend/template_default/login/login");
 		return mv;
+	}
+	
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public String indexPage(){
+		return "index";
 	}
 	/**
 	 * 登录
@@ -72,7 +78,7 @@ public class LoginController {
 			mv.setViewName("redirect:/index.html");
 		} catch (AuthenticationException e){
 			mv.addObject("message", "login errors");
-			mv.setViewName("redirect:/backend/login");
+			mv.setViewName("redirect:/backend/template_default/login");
 		} 
 		return mv;
 	}

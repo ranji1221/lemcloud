@@ -1,0 +1,21 @@
+.error_font {
+    padding: 0;
+    line-height: 0.42rem;
+    display:none;
+    font-size: 0.15rem ; }
+.error_font .error_icon {
+    font-size: 0.20rem; }
+.error_font.active span {
+    color: #f5523a; }
+
+.succse_font {
+    padding: 0;
+    line-height: 0.42rem;
+    display:none;
+    font-size: 0.16rem; }
+.succse_font .succse_icon {
+    font-size: 0.20rem; }
+.succse_font.active {
+    }
+.succse_font.active span {
+    color: #5bde93; }

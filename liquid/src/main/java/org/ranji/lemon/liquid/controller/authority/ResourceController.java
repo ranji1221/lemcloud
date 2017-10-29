@@ -50,7 +50,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 @Controller
-@RequestMapping(value="/backend/authority/resource")
+@RequestMapping(value="/backend/template_default/authority/resources")
 public class ResourceController {
 	@Autowired
 	private IResourceService resourceService;
@@ -61,21 +61,21 @@ public class ResourceController {
 		
 //	@SystemControllerPermission("resource:list")
 	@RequestMapping(value = "/list")
-	@SystemControllerLog(description="权限管理-资源列表")
+	//@SystemControllerLog(description="权限管理-资源列表")
 	public String listResource() {
-		return "backend/authority/resources/list";
+		return "backend/template_default/authority/resources/list";
 	}
 
 //	@SystemControllerPermission("resource:add")
 	@RequestMapping(value = "/add")
-	@SystemControllerLog(description="权限管理-添加资源跳转")
+	//@SystemControllerLog(description="权限管理-添加资源跳转")
 	public String addResources() {
-		return "backend/authority/resources/add";
+		return "backend/template_default/authority/resources/add";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/save")
-	@SystemControllerLog(description="权限管理-添加资源")
+	//@SystemControllerLog(description="权限管理-添加资源")
 	public String saveResources(Resource resource, @RequestParam("operation") String operation) {
 		String[] array  = operation.split(",");
 		try {
@@ -91,7 +91,7 @@ public class ResourceController {
 	@ResponseBody
 //	@SystemControllerPermission("resource:looksource")
 	@RequestMapping(value = "/edit")
-	@SystemControllerLog(description="权限管理-编辑资源")
+	//@SystemControllerLog(description="权限管理-编辑资源")
 	public String editResource(Resource newResource, @RequestParam("operation") String operation) {
 		try {
 			String [] array = operation.split(",");
@@ -109,7 +109,7 @@ public class ResourceController {
 	}	
 	
 	//@SystemControllerPermission("resource:list")
-	@SystemControllerLog(description="权限管理-资源列表")
+	//@SystemControllerLog(description="权限管理-资源列表")
 	@RequestMapping(value = "/data")
 	@ResponseBody
 	public String data(String params,HttpSession session) {
@@ -166,7 +166,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/deleteAll")
-	@SystemControllerLog(description="权限管理-删除多个资源")
+	//@SystemControllerLog(description="权限管理-删除多个资源")
 	public String deteteAllResource(String resource_ids) {
 		try {
 			String[] array  = resource_ids.split(",");

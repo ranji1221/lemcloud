@@ -1,0 +1,136 @@
+<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
+<div class="modal-contentbox">
+	<ol class="breadcrumb breadcrumb_margin">
+		<li>
+			<i class="glyphicon glyphicon-home"></i>
+			<a href="#" data="2" url="home">首页</a>
+		</li>
+		<li>
+			<a href="#">角色管理</a>
+		</li>
+		<li class="active">添加角色</li>
+		<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+					<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+	</ol>
+	<div class="maxcontainer editpage modal-contentbox">
+		<ol class="breadcrumb">
+			<li>
+				<i class="glyphicon glyphicon-home"></i>
+				<a href="#" data="2" url="home">首页</a>
+			</li>
+			<li>
+				<a href="#">角色管理</a>
+			</li>
+			<li>
+				<a href="#" url="backend/template_default/authority/role/list">角色列表</a>
+			</li>
+			<li class="active">添加角色</li>
+			<div class="nav-search" id="nav-search">
+				<form class="form-search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+						<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+					</div>
+					<!-- /input-group -->
+				</form>
+			</div>
+		</ol>
+
+		<div class="title">
+			<p>添加角色</p>
+			<div class="btns">
+			</div>
+		</div>
+		<div class="form_content">
+			<form class="form-role-editlg newform">
+				<div class="formhead">青柠云后台管理系统</div>
+				<div class="form-group input">
+					<label for="">角色名称：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax form_input sliderInput">
+							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" name='username'/>
+							<span class="limitlength">15</span>
+							<span class="errormessage errormessage-role-edit-name">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group select">
+					<label for="">父级角色：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax">
+							<select name="fath" data-toggle="select" class="form-control select select-primary select-block mbl" id="edit_roleExtendPId">
+							</select>
+							<span class="errormessage errormessage-role-edit-fath">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group select">
+					<label for="">依赖角色：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax">
+							<select name="yilai" data-toggle="select" class="form-control select select-primary select-block mbl" id="edit_roleRelyId">
+							</select>
+							<span class="errormessage errormessage-role-edit-yilai">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group number">
+					<label for="">最大限制用户数：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax row-lg-h numCtr">
+							<a class=" reduce ">
+								-
+							</a>
+							<div class="input_num input">
+								<input type="text" id="edit_roleMaxNum" readonly="readonly" value='0' name="max_num"/>
+							</div>
+							<a class="add active">
+								+
+							</a>
+							<span class="errormessage errormessage-role-edit-num">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group textarea">
+					<label for="">备注：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax">
+							<textarea name="beizhu" id="" placeholder="请输入备注"></textarea>
+							<span class="errormessage errormessage-role-edit-num">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="btnbox">
+					<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled">确定</button>
+					<button type="button" class="btn btn-default">取消</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

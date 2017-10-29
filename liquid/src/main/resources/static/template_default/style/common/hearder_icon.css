@@ -1,0 +1,49 @@
+.role_hearde_icon {
+ 
+  font-size: 0.16rem; }
+
+.role_hearde_this_icon {
+  width: 0.3rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  cursor: pointer; }
+  .role_hearde_this_icon .small_icon {
+    font-weight: bolder;
+    display: inline-block;
+    line-height: 0.03rem;
+    font-size: 0.4rem; }
+  .role_hearde_this_icon img {
+    width: 100%; }
+  .role_hearde_this_icon span {
+    width: 0.22rem;
+    height: 0.22rem;
+    border-radius: 50%;
+    color: white;
+    border: 1px solid white;
+    top: 0px;
+    font-size: 0.12rem; }
+
+.role_button {
+  margin-top: 0.83rem !important; }
+  .role_button .role_succse {
+    text-align: right; }
+    .role_button .role_succse .btn {
+      font-size: 0.22rem;
+      background-color: #bdc3c7;
+      padding: 0.15rem 0.45rem;
+      color: white;
+      background-color: #6fb3e0; }
+      .role_button .role_succse .btn:focus {
+        outline: none; }
+  .role_button .role_remove .btn {
+    font-size: 0.22rem;
+    padding: 0.15rem 0.45rem;
+    color: #6FB3E0;
+    background-color: white;
+    border: 1px solid #6FB3E0; }
+    .role_button .role_remove .btn:focus {
+      outline: none; }
+    .role_button .role_remove .btn.active {
+      background-color: #6fb3e0; }

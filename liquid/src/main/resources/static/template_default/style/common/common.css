@@ -1,0 +1,42 @@
+@charset "UTF-8";
+body, ol, ul, li, dl, h1, h2, h3, h4, h5, h6, p, input, textarea, a ,img{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "微软雅黑";
+  text-decoration: none;
+  font-size: 0.14rem; }
+
+/*input {
+  border: none; }
+*/
+a:hover, a:focus,a:active, a:visited{
+	text-decoration: none;
+}
+img {
+  border: none;
+  }
+
+html {
+  /*overflow-y: scroll; */
+  min-height: 100%;
+}
+body{
+  min-height: 100%;
+}
+
+* {
+  box-sizing: border-box; 
+  /*font-size: 12px;*/
+}
+
+.oth{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+a {
+  color: inherit; }
+  label{
+  	font-weight:normal;
+  }

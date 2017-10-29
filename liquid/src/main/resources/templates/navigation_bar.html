@@ -1,0 +1,173 @@
+<aside class="left-menu" th:fragment="navigation_bar">
+	<div class="user">
+		<div class="photo">
+			<img src="static/template_default/image/common/per.png" alt="" th:src="@{/template_default/image/common/per.png}"/>
+		</div>
+		<div class="userinfo">
+			<h3>你好，<span>啊摇摇</span></h3>
+			<p>所属角色：<span>超级管理员</span></p>
+		</div>
+	</div>
+	<div class="slidenav">
+		<ul>
+			<li>
+				<div class="iconfont icon-quanxianguanli icon-slidenav"></div>
+				<p>权限管理</p>
+				<span class="iconfont icon-icon"></span>
+				<div class="rightborder"></div>
+				<div class="rightarrow"></div>
+			</li>
+			<ul>
+				<li>
+					<div class="iconfont icon-jiaoseguanli icon-slidenav"></div>
+					<p>角色管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+				<ul>
+					<li url="backend/template_default/authority/role/list">
+						<div class="iconfont icon-liebiao3 icon-slidenav"></div>
+						<p>角色列表</p>
+						<div class="hoverline"></div>
+					</li>
+					<li url="backend/template_default/authority/role/add">
+						<div class="iconfont icon-tianjia icon-slidenav"></div>
+						<p>添加角色</p>
+						<div class="hoverline"></div>
+					</li>
+					<li url="backend/template_default/authority/role/adds">
+						<div class="iconfont icon-piliangtianjia icon-slidenav"></div>
+						<p>批量添加角色</p>
+						<div class="hoverline"></div>
+					</li>
+				</ul>
+				<li>
+					<div class="iconfont icon-yonghuguanli icon-slidenav"></div>
+					<p>用户管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+				<ul>
+					<li url="backend/template_default/authority/user/list">
+						<div class="iconfont icon-yonghuliebiao icon-slidenav"></div>
+						<p>用户列表</p>
+						<div class="hoverline"></div>
+					</li>
+					<li url="backend/template_default/authority/user/add">
+						<div class="iconfont icon-tianjiaxinyonghu icon-slidenav"></div>
+						<p>添加用户</p>
+						<div class="hoverline"></div>
+					</li>
+					<li url="backend/template_default/authority/user/adds">
+						<div class="iconfont icon-tianjiaduoyonghu icon-slidenav"></div>
+						<p>批量添加用户</p>
+						<div class="hoverline"></div>
+					</li>
+				</ul>
+				<li>
+					<div class="iconfont icon-ziyuanguanli icon-slidenav"></div>
+					<p>资源管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+				<ul>
+					<li url='backend/template_default/authority/resources/list'>
+						<div class="iconfont icon-ziyuanguanli2 icon-slidenav"></div>
+						<p>资源列表</p>
+						<div class="hoverline"></div>
+					</li>
+					<li url="backend/template_default/authority/resources/add">
+						<div class="iconfont icon-tianjiaziyuan-q icon-slidenav"></div>
+						<p>添加资源</p>
+						<div class="hoverline"></div>
+					</li>
+				</ul>
+			</ul>
+			<li>
+				<div class="iconfont icon-shujukuguanli icon-slidenav"></div>
+				<p>数据库管理</p>
+				<span class="iconfont icon-icon"></span>
+				<div class="rightborder"></div>
+				<div class="rightarrow"></div>
+			</li>
+			<ul>
+				<li url='${pageContext.request.contextPath}/backend/database/backup/backupJump'>
+					<div class="iconfont icon-beifenshujuku icon-slidenav"></div>
+					<p>备份数据库</p>
+				</li>
+				<li url='${pageContext.request.contextPath}/backend/database/backup/recoverlist'>
+					<div class="iconfont icon-shuju-yihuifu icon-slidenav"></div>
+					<p>恢复数据库</p>
+				</li>
+			</ul>
+			<li>
+				<div class="iconfont icon-wodedenglu_shezhi icon-slidenav"></div>
+				<p>我的设置</p>
+				<span class="iconfont icon-icon"></span>
+				<div class="rightborder"></div>
+				<div class="rightarrow"></div>
+			</li>
+			<ul>
+				<li>
+					<div class="iconfont icon-jiaoseguanli icon-slidenav"></div>
+					<p>角色管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+				<ul>
+					<li>
+						<div class="iconfont icon-liebiao3 icon-slidenav"></div>
+						<p>角色列表</p>
+						<div class="hoverline"></div>
+					</li>
+					<li>
+						<div class="iconfont icon-tianjia icon-slidenav"></div>
+						<p>添加角色</p>
+						<div class="hoverline"></div>
+					</li>
+					<li>
+						<div class="iconfont icon-piliangtianjia icon-slidenav"></div>
+						<p>批量添加角色</p>
+						<div class="hoverline"></div>
+					</li>
+				</ul>
+				<li>
+					<div class="iconfont icon-yonghuguanli icon-slidenav"></div>
+					<p>用户管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+				<li>
+					<div class="iconfont icon-ziyuanguanli icon-slidenav"></div>
+					<p>资源管理</p>
+					<span class="iconfont icon-icon"></span>
+				</li>
+			</ul>
+			<li>
+				<div class="iconfont icon-shujukuguanli icon-slidenav"></div>
+				<p>数据库管理</p>
+				<span class="iconfont icon-icon"></span>
+				<div class="rightborder"></div>
+				<div class="rightarrow"></div>
+			</li>
+			<ul>
+				<li url='./pages/database/backup.html'>
+					<div class="iconfont icon-beifenshujuku icon-slidenav"></div>
+					<p>备份数据库</p>
+				</li>
+				<li url='./pages/database/recoverlist.html'>
+					<div class="iconfont icon-shuju-yihuifu icon-slidenav"></div>
+					<p>恢复数据库</p>
+				</li>
+				<li url='./pages/database/backupComplex.html'>
+					<div class="iconfont icon-Group icon-slidenav"></div>
+					<p>优化数据库</p>
+				</li>
+			</ul>
+		</ul>
+	</div>
+	<ul class="btns">
+		<li>
+			<div class="iconfont icon-bianji btn-edit"></div>
+		</li>
+		<li>
+			<div class="iconfont icon-shouhui btn-fold"></div>
+		</li>
+
+	</ul>
+</aside>

@@ -1,0 +1,175 @@
+/**
+ * BootstrapValidator (http://bootstrapvalidator.com)
+ *
+ * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
+ *
+ * @author      http://twitter.com/nghuuphuoc
+ * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
+ * @license     MIT
+ */
+
+.bv-form .help-block {
+    /*margin-bottom: 0;*/
+    margin:0;
+    height:100%;
+    line-height:inherit;
+    color:inherit;
+}
+.nav-tabs li.bv-tab-success > a {
+    color: #3c763d;
+}
+.nav-tabs li.bv-tab-error > a {
+    color: #a94442;
+}
+.form-horizontal .has-feedback .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+.form-control-feedback{
+	font-size:0.35rem;
+	/*line-height: 0.52rem;*/
+	line-height: inherit;
+}
+.has-error .form-control-feedback{
+	color:rgb(245,82,58);
+}
+.has-error .form-control{
+	border-color:rgb(245,82,58);
+}
+.has-error .form-control:focus{
+	border-color:rgb(245,82,58);
+}
+.has-success .form-control-feedback{
+	color:rgb(91,222,147);
+}
+.has-success .form-control{
+	border-color:rgb(91,222,147);
+}
+.has-success .form-control:focus{
+	border-color:rgb(91,222,147);
+}
+.has-success .control-label,
+.has-error .control-label{
+	color:inherit;
+}
+/*放大后的图标位置修正*/
+/*授权部分*/
+.user-authorizationlg .form-control-feedback,
+.role-authorizationlg .form-control-feedback{
+	right:-0.55rem;
+}
+.role-authorizationlg form .inputwrapper span.errormessage,
+.user-authorizationlg form .inputwrapper span.errormessage{
+	margin-top:-0.26rem;
+}
+.user-authorizationlg .inputwrappermax,
+.role-authorizationlg .inputwrappermax{
+	line-height: 0.52rem;
+}
+.inputwrapper span.rolenamelimit,
+.inputwrapper span.usernamelimit,
+.user-authorizationlg .inputwrapper span.usernamelimit,
+.role-authorizationlg .inputwrapper span.rolenamelimit{
+	color:rgb(51,51,51);
+}
+/*编辑的边框换色*/
+.container-fluid .role_content .role_remarks .role_write textarea,
+.container-fluid .role_content .role_remarks .role_write textarea:focus{
+	border-radius:4px;
+	border:1px solid #ccc;
+	background:rgb(244,244,244);
+}
+
+.container-fluid .resources_content .resources_form .form-horizontal .form-group .form_input,
+.container-fluid .user_content .user_emily .form_input,
+.container-fluid .user_content .user_phone .form_input,
+.container-fluid .user_content .user_form .form-horizontal .form-group .form_input,
+.container-fluid .role_content .role_form .form-horizontal .form-group .form_input{
+	border-radius:4px;
+	border:1px solid #bdc3c7;
+	border-color:#ccc;
+	line-height: 0.52rem;
+	background:rgb(244,244,244);
+}
+.container-fluid .role_content .role_form .form-horizontal .has-error .form_input,
+.container-fluid .user_content .user_form .form-horizontal .has-error .form_input,
+.container-fluid .resources_content .resources_form .form-horizontal .has-error .form_input,
+.container-fluid .user_content .user_emily .has-error  .form_input,
+.container-fluid .user_content .user_phone .has-error .form_input,
+.container-fluid .user_content .role_form .form-horizontal .has-error .sliderInput,
+.container-fluid .role_content .role_form .form-horizontal .has-error .sliderInput{
+	border-color:rgb(245,82,58);
+}
+.container-fluid .role_content .role_form .form-horizontal .has-success .form_input,
+.container-fluid .user_content .user_form .form-horizontal .has-success .form_input,
+.container-fluid .resources_content .resources_form .form-horizontal .has-success .form_input,
+.container-fluid .user_content .user_emily .has-success .form_input,
+.container-fluid .user_content .user_phone .has-success .form_input,
+.container-fluid .user_content .role_form .form-horizontal .has-success .sliderInput,
+.container-fluid .role_content .role_form .form-horizontal .has-success .sliderInput{
+	border-color:rgb(91,222,147);
+}
+.has-error .sliderInput{
+	border-color:rgb(245,82,58);
+}
+.has-success .sliderInput{
+	border-color:rgb(91,222,147);
+}
+.form-horizontal .has-feedback .form-control-feedback{
+	right:-0.1rem;
+}
+.ajax_dom .form-horizontal .has-feedback .form-control-feedback{
+	right:-0.55rem;
+}
+.modalCon .roleNameError{
+	padding-right:1.7rem;
+	margin-bottom:5px;
+	font-size:0.16rem;
+}
+#editUserModal .roleNameError{
+	padding-right:0.3rem;
+	margin-bottom:5px;
+	font-size:0.16rem;
+}
+.ajax_dom .roleNameError{
+	display: none;
+}
+.modal-contentbox .roleNameErrorlg{
+	display: none;
+}
+.ajax_dom .roleNameErrorlg{
+	padding-top:1px;
+	display: block;
+	color: rgb(245,82,58);
+    font-size: 0.16rem;
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-top: -0.27rem;
+    margin-left: 0.45rem;
+    right: -17em;
+}
+.ajax_dom .addrole .has-feedback{
+	line-height: 0.52rem;
+}
+.ajax_dom .addrole .roleNameErrorlg{
+	margin-top: -0.22rem;
+}
+/*编辑用户*/
+.form-user-edit .has-feedback .form-control-feedback{
+	right:0.2rem;
+}
+.modalCon .row-lg-h .wordNum{
+	right:0.75rem;
+}
+.ajax_dom .form-user-edit .has-feedback .form-control-feedback{
+	right:auto;
+	left:70%;
+}
+.ajax_dom .form-user-edit .roleNameErrorlg{
+    left: 70%;
+}
+.role_write{
+	border:none!important;
+}

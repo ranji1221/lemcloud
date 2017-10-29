@@ -1,0 +1,90 @@
+html,body,.container{
+	width:100%;
+	height:100%;
+}
+.container{
+	background:url(../../image/login/login.png) no-repeat center;
+	background-size:cover;
+	position: relative;
+}
+div.wrap{
+	width:3.3rem;
+	height:2.6rem;
+	position: absolute;
+	left:50%;
+	margin-left:-1.65rem;
+	top:50%;
+	margin-top:-0.65rem;
+}
+div.border{
+	width:100%;
+	height:0.48rem;
+	border:0.01rem solid rgb(55,142,248);
+	border-radius: 0.1rem;
+	float:left;
+	margin-bottom:0.14rem;
+	padding:0.03rem;
+}
+div.border:nth-child(3){
+	width:60%;
+	height:0.48rem;
+	border:0.01rem solid rgb(55,142,248);
+	border-radius: 0.1rem;
+	float:left;
+}
+div.border img{
+	width:0.56rem;
+	height:0.42rem;
+	float:left;
+}
+div.border input{
+	width:2.5rem;
+	height:0.42rem;
+	line-height: 0.42rem;
+	font-size:0.16rem;
+	color:rgb(153,153,153);
+	border:none;
+	outline:none;
+	float:left;
+	margin-left:0.1rem;
+}
+div.border:nth-child(3) input{
+	width:1.1rem;
+}
+div.code{
+	width:35%;
+	height:0.48rem;
+	border:0.01rem solid rgb(55,142,248);
+	border-radius: 0.1rem;
+	float:left;
+	background:rgb(55,142,248);
+	margin-left:5%;
+}
+div.clear{
+	clear:both;
+}
+button{
+	display: block;
+	width:1.5rem;
+	height:0.44rem;
+	border:0.03rem solid rgb(255,255,255);
+	background:rgb(55,142,248);
+	font-size: 0.18rem;
+	color:rgb(255,255,255);
+	text-align: center;
+	/*line-height: 0.38rem;*/
+	border-radius: 0.22rem;
+	font-weight: 700;
+	box-shadow: 0 0.18rem 0.35rem  rgba(7,55,114,0.2);
+	margin:0.16rem auto 0;
+	cursor: pointer;
+	outline: none;
+}
+button:hover{
+	background:rgb(35,122,228);
+}
+div.code img{
+	height:100%;
+	display: block;
+	margin:auto;
+}

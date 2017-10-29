@@ -42,7 +42,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @version 1.0
  */
 @Controller
-@RequestMapping(value = "/backend/authority/user")
+@RequestMapping(value = "/backend/template_default/authority/user")
 public class UserController {
 
 	@Autowired
@@ -53,13 +53,13 @@ public class UserController {
 	//@RequiresPermissions("user:add")
 	//@SystemControllerPermission("user:add")
 	@RequestMapping(value = "/add")
-	@SystemControllerLog(description="权限管理-添加用户跳转")
+	//@SystemControllerLog(description="权限管理-添加用户跳转")
 	public String addUser() {
-		return "backend/authority/user/add";
+		return "backend/template_default/authority/user/add";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/save")
-	@SystemControllerLog(description="权限管理-添加用户")
+	//@SystemControllerLog(description="权限管理-添加用户")
 	public String saveUser(User newUser) {
 		try {
 			userService.save(newUser);
@@ -72,22 +72,22 @@ public class UserController {
 	}
 //	@SystemControllerPermission("user:list")
 	@RequestMapping(value = "/list")
-	@SystemControllerLog(description="权限管理-用户列表")
+	//@SystemControllerLog(description="权限管理-用户列表")
 	public String listUser() {
-		return "backend/authority/user/list";
+		return "backend/template_default/authority/user/list";
 	}
 	
 //	@SystemControllerPermission("user:adds")
 	@RequestMapping(value = "/adds")
-	@SystemControllerLog(description="权限管理-批量添加用户")
+	//@SystemControllerLog(description="权限管理-批量添加用户")
 	public String AddsUser() {
-		return "backend/authority/user/adds";
+		return "backend/template_default/authority/user/adds";
 	}
 	
 	
 //	@SystemControllerPermission("user:edit")
 	@RequestMapping(value = "/edit")
-	@SystemControllerLog(description="权限管理-更新用户")
+	//@SystemControllerLog(description="权限管理-更新用户")
 	@ResponseBody
 	public String editUser(User newUser) {
 		try {
@@ -106,7 +106,7 @@ public class UserController {
 	
 //	@SystemControllerPermission("user:auth")
 	@RequestMapping(value = "/auth/{size}")
-	@SystemControllerLog(description="权限管理-给用户分配角色")
+	//@SystemControllerLog(description="权限管理-给用户分配角色")
 	public String authUser(@PathVariable String size) {
 		if("modal".equals(size)){
 			return "backend/authority/user/authmodal";
@@ -143,7 +143,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteAll")
-	@SystemControllerLog(description="权限管理-删除多个用户")
+	//@SystemControllerLog(description="权限管理-删除多个用户")
 	public String deteteAllUser(String user_ids) {
 		try {
 			String[] array  = user_ids.split(",");
@@ -174,7 +174,7 @@ public class UserController {
 	
 	//@SystemControllerPermission("user:list")
 	@ResponseBody
-	@SystemControllerLog(description="权限管理-用户列表")
+	//@SystemControllerLog(description="权限管理-用户列表")
 	@RequestMapping(value = "/data")
 	public String data(String params,HttpSession session) {
 		return authService.findAllUserInduleRoles(params);

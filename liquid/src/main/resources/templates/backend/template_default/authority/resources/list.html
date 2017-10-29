@@ -1,0 +1,438 @@
+﻿<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
+<script src="static/template_default/script/authority/resources/skip.js" th:src="@{/template_default/script/authority/resources/skip.js}"></script>
+<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
+﻿<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
+<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
+<script>
+function resourceListInit(){
+	$("#resourceList").LemonGetList({
+		useLocalStorage: true,
+		className_Page:"#page",
+	    requestListUrl : 'backend/template_default/authority/resources/data',
+	    generateItemFun : function(index,value,data,extend){
+	   		var thisType = '';
+	   		switch(value.resourceType){
+	   			case 1:
+	   				thisType = '菜单';
+	   				break;
+	   			case 2:
+	   				thisType = '文件';
+	   				break;
+	   			default:
+	   				thisType = '未知';
+	   				break;
+	   		}
+	   		if(!value.resourcePName) value.resourcePName = '无';
+	   		var tr_data = '<tr resource_id='+ value.id +extend+'>'+
+	   			'<td class="checkboxtd">'+
+	   				'<label>'+
+	   					'<input  type="checkbox" name="layout"/>'+
+	   				'</label>'+
+	   			'</td>'+
+	   			'<td>'+
+	   				(index+1) +
+	   			'</td>'+
+	   			'<td title='+ thisType +'>'+
+	   				thisType +
+	   			'</td>'+
+	   			'<td title='+ value.resourceName +'>'+
+	   				value.resourceName +
+	   			'</td>'+
+	   			'<td title='+ value.resourcePName +'>'+
+	   				value.resourcePName +
+	   			'</td>'+
+	   			'<td>'+
+	   				'<span class="icon-eye-open iconact viewResource"></span>'+
+	   			'</td>'+
+	   			'<td>'+
+	   				'<span class="icon-pencil iconact editResource"></span>'+
+	   			'</td>'+
+	   			'<td>'+
+	   				'<span class="icon-trash iconact removeBtn"></span>'+
+	   			'</td>'+
+	   		'</tr>';
+	       	return tr_data; 
+   		},
+   		/* afterFun : function(){
+			$('.tablewrap input').iCheck({
+			    checkboxClass: 'icheckbox_flat-blue',
+			    radioClass: 'iradio_flat-blue',
+			    labelHover : true, 
+			  	cursor : false,
+			 });
+			$('#checkall').iCheck('uncheck')
+   		} */
+	})
+}
+resourceListInit();
+//复选框
+/* $('.tablewrap input').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue',
+    labelHover : true, 
+  	cursor : false,
+ });
+$(document).on('ifChecked','#checkall', function(event){
+  	$('.tablewrap input').iCheck('check')
+});
+$(document).on('ifUnchecked', '#checkall',function(event){
+  	$('.tablewrap input').iCheck('uncheck')
+}); */
+
+$('.resource_removeAllBtn').bindDialogs({
+	content : '你确定删除这些资源吗？',
+	name_successBtn : 'deleteAllBtn',
+	name_cancelBtn : 'cancelAllBtn',
+	beforeFun:function(){
+		if($(".tablewrap input:checked").length){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	success:function(){
+		var str="";
+	  	$(".tablewrap input:checked").each(function(i,v){
+	  		if($(this).closest('tr').attr("resource_id")){
+		  	str+=$(this).closest('tr').attr("resource_id")+","
+	  		}
+	  		
+	  	})
+	  	str = str.substring(0,str.length-1)
+		$.post("backend/template_default/authority/resources/deleteAll",{
+			resource_ids:str,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				resourceListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+})
+$('.removeBtn').bindDialogs({
+	content : '你确定删除这个用户吗？',
+	success:function(handle){
+		var resourceId = $(handle).closest('tr').attr('resource_id');
+		$.post("backend/template_default/authority/resources/delete",{
+			id:resourceId,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				resourceListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+});
+
+//刷新页面
+$(document).on("click",".renovate",function(){
+	removeStorage();
+	resourceListInit();
+})
+</script>
+
+<div class="rolelist sourcelist">
+	<ol class="breadcrumb">
+		<li>
+			<i class="glyphicon glyphicon-home"></i>
+			<a href="#" data="2" url="home">首页</a>
+		</li>
+		<li>
+			<a href="#">资源管理</a>
+		</li>
+		<li class="active">资源列表</li>
+		<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+					<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+	</ol>
+	<div class="alertArea"></div>
+	<div class="alert alert-danger">
+		<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示资源列表，您可以对资源查看、编辑、删除、授权及批量删除和新建的操作。单击右方x号，可以关闭此条提示语！
+
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+	<div class="tablewrap">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th style="width:0.8rem     padding-left: 0.45rem; ">
+						<label for="checkall">
+							<input type="checkbox" name="layout" id="checkall"/>
+						</label>
+					</th>
+					<th style="width:12.5%;min-width:94px;">
+						编号
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<!-- <th style="width:25%"> -->
+					<th style="width:22%">
+						资源类型
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:22%">
+						资源名称
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:22%">
+						父级资源
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:1rem">查看</th>
+					<th style="width:1rem">编辑</th>
+					<th style="width:1rem">删除</th>
+				</tr>
+			</thead>
+			<!-- <tbody>
+				<tr listid='01'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='02'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='03'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='04'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='05'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='06'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+				<tr listid='07'>
+					<td>
+						<label>
+							<input type="checkbox" name="layout"/>
+						</label>
+					</td>
+					<td>
+						01
+					</td>
+					<td>
+						菜单
+					</td>
+					<td>
+						员工
+					</td>
+					<td>
+						权限管理
+					</td>
+					<td>
+						<span class="icon-eye-open iconact viewResource"></span>
+					</td>
+					<td>
+						<span class="icon-pencil iconact editResource"></span>
+					</td>
+					<td>
+						<span class="icon-trash iconact removeBtn"></span>
+					</td>
+				</tr>
+			</tbody> -->
+			 <tbody id="resourceList">
+            
+            </tbody>
+		</table>
+		<div class="tfoot">
+			<div class="btns">
+				<span class="newPro" url="backend/template_default/authority/resources/add">
+					<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+					新建
+				</span>
+				<span class="renovate">
+					<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+					刷新
+				</span>
+				<span class="resource_removeAllBtn">
+					<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}"/>
+					删除
+				</span>
+			</div>
+			<div id="page">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模板框引入 -->
+<div th:replace="/backend/template_default/authority/resources/view :: viewResource"></div>
+<div th:replace="/backend/template_default/authority/resources/edit :: editResource"></div>

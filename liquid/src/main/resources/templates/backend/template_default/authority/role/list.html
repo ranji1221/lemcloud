@@ -1,0 +1,660 @@
+<script src="static/template_default/script/authority/role/skip.js" th:src="@{/template_default/script/authority/role/skip.js}"></script>
+<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
+<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
+<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
+<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
+<script>
+function roleListInit(){
+	$("#rolesList").LemonGetList({
+		useLocalStorage : true,
+	    requestListUrl : 'backend/template_default/authority/role/data',
+	    className_Page : "#page",
+	    generateItemFun : function(index,value,data,extend){
+			var Pname = value.rolePName == null ? '无':value.rolePName ;
+			var tr_data = '<tr listid='+ value.id+extend +' role_id='+ value.id+extend +'>'+
+				'<td class="checkboxtd">'+
+					'<label>'+
+						'<input  type="checkbox" name="layout"/>'+
+					'</label>'+
+				'</td>'+
+				'<td>'+
+					(index+1) +
+				'</td>'+
+				'<td title='+ value.roleName +'>'+
+					value.roleName +//${role.roleName}
+				'</td>'+
+				'<td title='+ Pname +'>'+
+				     Pname +
+				'</td>'+
+				'<td>'+
+					'<span class="icon-eye-open iconact viewRole"></span> '+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-pencil iconact role_editRole"></span>'+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-trash iconact removeBtn"></span>'+
+				'</td>'+
+				'<td>'+
+					'<span class="icon-key iconact roleAuth"></span>'+
+				'</td>'+
+			'</tr>';
+	       	return tr_data; 
+   		},
+   		afterFun : function(){
+			$('.tablewrap input').iCheck({
+			    checkboxClass: 'icheckbox_flat-blue',
+			    radioClass: 'iradio_flat-blue',
+			    labelHover : true, 
+			  	cursor : false,
+			 });
+			$('#checkall').iCheck('uncheck')
+   		},
+   		initFun : function(){
+   			_this = this;
+   			$('.nav-search #list_search_btn').on('click',function(){
+   				//刷新当前对象
+   				_this.getData({
+   					'params':JSON.stringify({
+   						'rNameLike' : $('.nav-search #list_search_str').val()
+   					})
+   				},true);
+   			})
+   		}
+	})
+}
+roleListInit();
+//复选框
+$('.tablewrap input').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue',
+    labelHover : true, 
+  	cursor : false,
+ });
+$(document).on('ifChecked','#checkall', function(event){
+  	$('.tablewrap input').iCheck('check')
+});
+	$(document).on('ifUnchecked', '#checkall',function(event){
+  	$('.tablewrap input').iCheck('uncheck')
+});
+
+$('.role_removeAllBtn').bindDialogs({
+	content : '你确定删除这些角色吗？',
+	name_successBtn : 'deleteAllBtn',
+	name_cancelBtn : 'cancelAllBtn',
+	beforeFun:function(){
+		if($(".tablewrap input:checked").length){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	success:function(){
+		var str="";
+	  	$(".tablewrap input:checked").each(function(i,v){
+	  		if($(this).closest('tr').attr("role_id")){
+		  	str+=$(this).closest('tr').attr("role_id")+","
+	  		}
+	  	})
+	  	str = str.substring(0,str.length-1)
+		$.post("backend/template_default/authority/role/deleteAll",{
+			role_ids:str,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				roleListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+})
+
+$('.removeBtn').bindDialogs({
+	content : '你确定删除这个角色吗？',
+	success:function(handle){
+		var roleId = $(handle).closest('tr').attr('role_id');
+		$.post("backend/template_default/authority/role/delete",{
+			id:roleId,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				roleListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+});
+
+//刷新页面	
+$(document).on("click",".renovate",function(){
+	removeStorage();
+	roleListInit();
+});
+</script>
+<div class="rolelist roleslist">
+	<ol class="breadcrumb">
+		<li>
+			<i class="glyphicon glyphicon-home"></i>
+			<a href="#" data="2" url="home">首页</a>
+		</li>
+		<li>
+			<a href="#">角色管理</a>
+		</li>
+		<li class="active">角色列表</li>
+		<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="搜索你想找到的..." id="list_search_str"/>
+					<span class="input-group-btn">
+	        <button class="btn btn-default" type="button" id="list_search_btn">
+				<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+	        </button>
+	        </span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+	</ol>
+	<div class="alertArea"></div>
+	<div class="alert alert-danger">
+		<i class="glyphicon glyphicon-hand-right"></i>
+
+		<span class="alert_font">	温馨提示：此页面展示角色列表，您可以对角色查看、编辑、删除、授权及批量删除和新建的操作。单击右方x号，可以关闭此条提示语！</span>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+	<div class="tablewrap">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th style="width:0.8rem" class='checkboxth'>
+						<label for="checkall">
+							<input type="checkbox" name="layout" id="checkall"/>
+						</label>
+					</th>
+					<th style="min-width:94px;">
+						编号
+						<span class="sort">
+					<i class="glyphicon glyphicon-triangle-top"></i>
+					<i class="glyphicon glyphicon-triangle-bottom"></i>
+				</span>
+					</th>
+					<!-- <th style="width:25%"> -->
+					<th>
+						名称
+						<span class="sort">
+					<i class="glyphicon glyphicon-triangle-top"></i>
+					<i class="glyphicon glyphicon-triangle-bottom"></i>
+				</span>
+					</th>
+					<th>
+						父角色
+						<span class="sort">
+					<i class="glyphicon glyphicon-triangle-top"></i>
+					<i class="glyphicon glyphicon-triangle-bottom"></i>
+				</span>
+					</th>
+					<th style="width:0.6rem">查看</th>
+					<th style="width:0.6rem">编辑</th>
+					<th style="width:0.6rem">删除</th>
+					<th style="width:0.9rem;">授权</th>
+				</tr>
+			</thead>
+			 <tbody id="rolesList">
+            
+            </tbody>
+		<!-- <tbody>
+		<tr listid='01'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				01
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='02'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				02
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='03'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				03
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='04'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				04
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='05'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				05
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='06'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				06
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='07'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				07
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='08'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				08
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='09'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				09
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='10'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				10
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='11'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				11
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='12'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				12
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='13'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				13
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='14'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				14
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+		<tr listid='15'>
+			<td class='checkboxtd'>
+				<label>
+					<input  type="checkbox" name="layout"/>
+				</label>
+			</td>
+			<td>
+				15
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td title="首页">
+				首页
+			</td>
+			<td>
+				<span class="icon-eye-open iconact viewRole"></span>
+			</td>
+			<td>
+				<span class="icon-pencil iconact editRole"></span>
+			</td>
+			<td>
+				<span class="icon-trash iconact removeBtn"></span>
+			</td>
+			<td>
+				<span class="icon-key iconact"></span>
+			</td>
+		</tr>
+	</tbody> -->
+		</table>
+		<div class="tfoot">
+			<div class="btns">
+				<span class="newPro" url="backend/template_default/authority/role/add">
+			<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+			新建
+		</span>
+				<span class="renovate">
+			<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+			刷新
+		</span>
+				<span class="role_removeAllBtn">
+			<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}"/>
+			删除
+		</span>
+			</div>
+			<div id="page" >
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 最大化容器 -->
+<div class="maxcontainer">
+
+</div>
+<!-- 模板框引入 -->
+<div th:replace="/backend/template_default/authority/role/view :: viewRole"></div>
+<div th:replace="/backend/template_default/authority/role/edit :: editRole"></div>
+<div th:replace="/backend/template_default/authority/role/auth :: authRole"></div>

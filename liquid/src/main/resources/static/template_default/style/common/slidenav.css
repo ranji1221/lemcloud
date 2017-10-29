@@ -1,0 +1,968 @@
+/*侧面可滑动导航菜单*/
+/*1920屏幕*/
+@media screen and (min-width:1366px) {
+
+	aside.left-menu{
+		height:100%;
+		float:left;
+		position: relative;
+		z-index: 66;
+		width: 300px;
+		background-color: rgba(255, 255, 255, 1);
+		box-shadow: 3px 0.4px 11px 0px rgba(227, 227, 227, 0.75);
+		transition: width 0.4s;
+	}
+	aside.min{
+		width: 100px;
+	}
+	aside.left-menu >div.user{
+		width:100%;
+		height:140px;
+	}
+	aside.left-menu >div.user .photo{
+		/*width: 90px;
+		height: 90px;*/
+		width: 78px;
+		height: 78px;
+		background-color: rgba(228, 239, 252, 1);
+		box-shadow: 0px 8px 12px 0px rgba(156, 155, 155, 0.5);
+		border: solid 1px rgba(244, 244, 244, 1);
+		border-radius: 50%;
+		overflow: hidden;
+		/*margin-top:26px;
+		margin-left:23px;*/
+		margin-top:31px;
+		margin-left:11px;
+		float:left;
+	}
+	aside.left-menu >div.user .photo img{
+		width:100%;
+		height:100%;
+	}
+	aside.left-menu >div.user .message{
+		height:100%;
+		overflow: hidden;
+	}
+	aside.left-menu >div.user .message h3{
+		width: 100%;
+		/*height: 25px;
+		line-height: 15px;*/
+		font-size: 24px;
+		font-weight: normal;
+		color: #333333;
+		margin-top:40px;
+		padding-left:21px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	aside.left-menu >div.user .message p{
+		width: 100%;
+		font-size: 12px;
+		font-weight: normal;
+		color: rgb(51,51,51);
+		margin-top:17px;
+		padding-left:21px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	/*div.slidenav{
+		width:100%;
+		padding-left:10px;
+	}*/
+	/*另一种定位*/
+	div.slidenav{
+		position:absolute;
+		padding-left:10px;
+		top:140px;
+		left:0;
+		right:0;
+		bottom:210px;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	/*一层*/
+	div.slidenav >ul{
+		width:100%;
+		height:auto;
+		position: relative;
+	}
+	div.slidenav >ul:after{
+		content:'';
+		/*width:280px;*/
+		height:1px;
+		position: absolute;
+		/*bottom:-1px;*/
+		bottom:0px;
+		left:0px;
+		background:rgb(216,214,214);
+		right:10px;
+	}
+	div.slidenav >ul >li{
+		width:100%;
+		height:70px;
+		position: relative;
+		overflow: hidden;
+		cursor:pointer;
+		
+		/*border-top:1px solid rgb(216,214,214);*/
+	}
+	aside.min div.slidenav >ul >li{
+		overflow: hidden;
+	}
+	aside.show div.slidenav >ul >li{
+		overflow: visible;
+	}
+	div.slidenav >ul >li:before{
+		content:'';
+		/*width:280px;*/
+		height:1px;
+		position: absolute;
+		/*top:-1px;*/
+		right:10px;
+		top:0px;
+		left:0;
+		background:rgb(216,214,214);
+	}
+	/*div.slidenav >ul >li:first-of-type{
+		border-top:none;
+	}*/
+	/*div.slidenav >ul >li:first-of-child{
+		border-bottom:1px solid rgb(216,214,214);
+	}*/
+	div.slidenav >ul >li.active{
+		background:rgb(241,241,241);
+	}
+	div.slidenav >ul >li >.rightborder{
+		width:10px;
+		height:70px;
+		position: absolute;
+		top:0;
+		right:-10px;
+		background:rgb(241,241,241);
+		display: none;
+		box-shadow: 3px 0.4px 11px 0px rgba(227, 227, 227, 0.75);
+	}
+	div.slidenav >ul >li >.rightarrow{
+		width:0px;
+		height:0px;
+		position: absolute;
+		bottom:-10px;
+		right:-10px;
+		border-top:5px solid rgba(154,154,154,1);
+		border-right:5px solid rgba(154,154,154,0);
+		border-bottom:5px solid rgba(154,154,154,0);
+		border-left:5px solid rgba(154,154,154,1);
+		display: none;
+	}
+	div.slidenav >ul >li >.icon{
+		width:100px;
+		height:70px;
+		line-height: 70px;
+		text-align:center;
+		margin-left:-10px;
+		font-size: 26px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li >p{
+		width:138px;
+		height:70px;
+		line-height: 70px;
+		padding-left:4px;
+		font-size: 20px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li >span{
+		width:20px;
+		height:70px;
+		line-height: 70px;
+		font-size: 20px;
+		color:rgb(0,0,0);
+		float:left;
+		transform: rotate(180deg);
+		transition:transform 0.2s;
+	}
+	div.slidenav >ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li.active >p{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li.active >span{
+		transform: rotate(0deg);
+	}
+	div.slidenav >ul >li.active >.rightborder{
+		display: block;
+	}
+	div.slidenav >ul >li.active >.rightarrow{
+		display: block;
+	}
+	/*二层*/
+	div.slidenav >ul >li +ul{
+		width:100%;
+		height:auto;
+		display: none;
+	}
+	div.slidenav >ul >li.active +ul{
+		display: block;
+	}
+	div.slidenav >ul >li +ul >li{
+		width:100%;
+		height:70px;
+		overflow: hidden;
+		cursor:pointer;
+	}
+	div.slidenav >ul >li +ul >li >.icon{
+		width:100px;
+		height:70px;
+		line-height: 70px;
+		text-align:center;
+		/*margin-left:-10px;*/
+		font-size: 22px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li +ul >li >p{
+		width:120px;
+		height:70px;
+		line-height: 70px;
+		padding-left:4px;
+		font-size: 18px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li +ul >li >span{
+		width:16px;
+		height:70px;
+		line-height: 70px;
+		font-size: 16px;
+		color:rgb(0,0,0);
+		float:left;
+		transform: rotate(180deg);
+		transition:transform 0.2s;
+	}
+	div.slidenav >ul >li +ul >li.active{
+		background:rgb(245,245,245);
+	}
+	div.slidenav >ul >li +ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	/*div.slidenav >ul >li +ul >li.active >p{
+		color:rgb(55,142,248);
+	}*/
+	div.slidenav >ul >li +ul >li.active >span{
+		transform: rotate(0deg);
+	}
+	/*第三层*/
+	div.slidenav >ul >li +ul >li +ul{
+		width:100%;
+		height:auto;
+		display: none;
+	}
+	div.slidenav >ul >li.active +ul >li.active +ul{
+		display: block;
+	}
+	div.slidenav >ul >li +ul >li +ul >li{
+		width:100%;
+		height:60px;
+		position: relative;
+		margin:1px 0;
+		overflow: hidden;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >.icon{
+		width:100px;
+		height:60px;
+		line-height: 60px;
+		text-align:center;
+		margin-left:10px;
+		font-size: 20px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >p{
+		width:150px;
+		height:60px;
+		line-height: 60px;
+		padding-left:4px;
+		font-size: 16px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >div.hoverline{
+		width:4px;
+		height:60px;
+		position:absolute;
+		top:0;
+		left:0;
+		display: none;
+	}
+	div.slidenav >ul >li +ul >li +ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li +ul >li +ul >li >div.hoverline{
+		width:4px;
+		height:60px;
+		position:absolute;
+		top:0;
+		left:0;
+		display: none;
+		background:rgb(55,142,248);
+	}
+	/*div.slidenav >ul >li +ul >li +ul >li.active >div.hoverline{
+		display: block;
+	}*/
+	div.slidenav >ul >li +ul >li +ul >li:hover >div.hoverline{
+		display: block;
+	}
+	/*底下三个按钮*/
+	aside.left-menu >ul.btns{
+		/*width:100%;*/
+		width:90px;
+		height:210px;
+		/*margin-top:66px;*/
+		position: absolute;
+		right:0;
+		bottom:0;
+	}
+	aside.left-menu >ul.btns >li{
+		height:70px;
+		position: relative;
+		overflow: hidden;
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >li >div{
+		width:38px;
+		height:38px;
+		line-height: 38px;
+		text-align: center;
+		border-radius: 50%;
+		font-size: 16px;
+		position: absolute;
+		right:31px;
+		top:16px;
+		box-shadow: 0px 6px 10px 0px rgba(156, 155, 155, 0.59);
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >li >div.btn1{
+		border:1px solid rgb(243,141,141);
+	}
+	aside.left-menu >ul.btns >li >div.btn2{
+		border:1px solid rgb(55,142,248);
+		transition: transform 0.4s;
+		line-height: 36px;
+	}
+	aside.left-menu >ul.btns >li >div.min{
+		transform: rotate(180deg);
+	}
+	aside.left-menu >ul.btns >li >div.btn3{
+		border:1px solid rgb(252,223,58);
+	}
+	aside.left-menu >ul.btns >.accredit{
+		position: absolute;
+		/*right:-233px;*/
+		right:-215px;
+		bottom:12px;
+		width: 231px;
+		/*height: 249px;*/
+		height: auto;
+		background-color: rgba(255, 255, 255, 1);
+		box-shadow: 2.3px 2px 8px 0px rgba(58, 68, 70, 0.47);
+		border: solid 2px rgba(252, 223, 58, 0.78);
+		opacity: 0.92;
+		border-radius: 8px;
+		padding:5px 10px;
+		display: none;
+	}
+	aside.left-menu >ul.btns >.accredit:before{
+		content: '';
+		width:0;
+		height:0;
+		border-top:9px solid rgba(255,255,255,0);
+		border-right:9px solid rgba(252,223,58,0.78);
+		border-bottom:9px solid rgba(255,255,255,0);
+		border-left:9px solid rgba(255,255,255,0);
+		position: absolute;
+		left:-20px;
+		bottom:12px;
+	}
+	aside.left-menu >ul.btns >.accredit:after{
+		content: '';
+		width:0;
+		height:0;
+		border-top:7px solid rgba(255,255,255,0);
+		border-right:7px solid rgba(255,255,255,1);
+		border-bottom:7px solid rgba(255,255,255,0);
+		border-left:7px solid rgba(255,255,255,0);
+		position: absolute;
+		left:-14px;
+		bottom:14px;
+	}
+	aside.left-menu >ul.btns >.accredit >h3{
+		height:24px;
+		line-height: 24px;
+		font-size: 14px;
+		color:rgb(93,161,245);
+	}
+	aside.left-menu >ul.btns >.accredit >ol{
+		/*margin-top:10px;*/
+		/*height:197px;*/
+		height:auto;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li{
+		margin:2.5px 0;
+		height:34px;
+		border:1px solid rgb(255,255,255);
+		line-height: 34px;
+		color:rgb(51,51,51);
+		font-size: 14px;
+		text-align: center;
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li:hover{
+		border:1px solid rgb(141,189,249);
+		background:rgb(238, 244, 251);
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >.icon{
+		width:25px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		font-size:24px;
+		margin-left:5px;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >p{
+		width:130px;
+		margin-left:15px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >.del{
+		width:20px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		display: none;
+		color:rgb(244,118,117);
+		font-size: 24px;
+		margin-right:10px;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li:hover >.del{
+		display: block;
+	}
+	.icon-yaochi{
+		color:rgb(92,247,158);
+	}
+	.icon-chakan{
+		color:rgb(244,118,117);
+	}
+	.icon-bianji-copy{
+		color:rgb(92,162,247);
+	}
+	.icon-shanchu{
+		color:rgb(252,223,58);
+	}
+
+}
+/*1366*768屏幕*/
+@media screen and (max-width:1366px) {
+
+	aside.left-menu{
+		height:100%;
+		float:left;
+		position: relative;
+		z-index: 66;
+		width: 300px;
+		background-color: rgba(255, 255, 255, 1);
+		box-shadow: 3px 0.4px 11px 0px rgba(227, 227, 227, 0.75);
+		transition: width 0.4s;
+	}
+	aside.min{
+		width: 100px;
+	}
+	aside.left-menu >div.user{
+		width:100%;
+		height:100px;
+	}
+	aside.left-menu >div.user .photo{
+		/*width: 90px;
+		height: 90px;*/
+		width: 56px;
+		height: 56px;
+		background-color: rgba(228, 239, 252, 1);
+		box-shadow: 0px 8px 12px 0px rgba(156, 155, 155, 0.5);
+		border: solid 1px rgba(244, 244, 244, 1);
+		border-radius: 50%;
+		overflow: hidden;
+		/*margin-top:26px;
+		margin-left:23px;*/
+		margin-top:22px;
+		margin-left:11px;
+		margin-left:22px;
+		margin-right:22px;
+		float:left;
+	}
+	aside.left-menu >div.user .photo img{
+		width:100%;
+		height:100%;
+	}
+	aside.left-menu >div.user .message{
+		height:100%;
+		overflow: hidden;
+	}
+	aside.left-menu >div.user .message h3{
+		width: 100%;
+		/*height: 25px;
+		line-height: 15px;*/
+		font-size: 24px;
+		font-weight: normal;
+		color: #333333;
+		margin-top:28px;
+		padding-left:21px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	aside.left-menu >div.user .message p{
+		width: 100%;
+		font-size: 12px;
+		font-weight: normal;
+		color: rgb(51,51,51);
+		margin-top:12px;
+		padding-left:21px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	/*div.slidenav{
+		width:100%;
+		padding-left:10px;
+	}*/
+	/*另一种定位*/
+	div.slidenav{
+		position:absolute;
+		padding-left:10px;
+		top:100px;
+		left:0;
+		right:0;
+		bottom:150px;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	/*一层*/
+	div.slidenav >ul{
+		width:100%;
+		height:auto;
+		position: relative;
+	}
+	div.slidenav >ul:after{
+		content:'';
+		/*width:280px;*/
+		height:1px;
+		position: absolute;
+		/*bottom:-1px;*/
+		bottom:0px;
+		left:0px;
+		background:rgb(216,214,214);
+		right:10px;
+	}
+	div.slidenav >ul >li{
+		width:100%;
+		height:50px;
+		position: relative;
+		overflow: hidden;
+		cursor:pointer;
+		
+		/*border-top:1px solid rgb(216,214,214);*/
+	}
+	aside.min div.slidenav >ul >li{
+		overflow: hidden;
+	}
+	aside.show div.slidenav >ul >li{
+		overflow: visible;
+	}
+	div.slidenav >ul >li:before{
+		content:'';
+		/*width:280px;*/
+		height:1px;
+		position: absolute;
+		/*top:-1px;*/
+		right:10px;
+		top:0px;
+		left:0;
+		background:rgb(216,214,214);
+	}
+	/*div.slidenav >ul >li:first-of-type{
+		border-top:none;
+	}*/
+	/*div.slidenav >ul >li:first-of-child{
+		border-bottom:1px solid rgb(216,214,214);
+	}*/
+	div.slidenav >ul >li.active{
+		background:rgb(241,241,241);
+	}
+	div.slidenav >ul >li >.rightborder{
+		width:10px;
+		height:50px;
+		position: absolute;
+		top:0;
+		right:-10px;
+		background:rgb(241,241,241);
+		display: none;
+		box-shadow: 3px 0.4px 11px 0px rgba(227, 227, 227, 0.75);
+	}
+	div.slidenav >ul >li >.rightarrow{
+		width:0px;
+		height:0px;
+		position: absolute;
+		bottom:-10px;
+		right:-10px;
+		border-top:5px solid rgba(154,154,154,1);
+		border-right:5px solid rgba(154,154,154,0);
+		border-bottom:5px solid rgba(154,154,154,0);
+		border-left:5px solid rgba(154,154,154,1);
+		display: none;
+	}
+	div.slidenav >ul >li >.icon{
+		width:100px;
+		height:50px;
+		line-height: 50px;
+		text-align:center;
+		margin-left:-10px;
+		font-size: 26px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li >p{
+		width:138px;
+		height:50px;
+		line-height: 50px;
+		padding-left:4px;
+		font-size: 20px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li >span{
+		width:20px;
+		height:50px;
+		line-height: 50px;
+		font-size: 20px;
+		color:rgb(0,0,0);
+		float:left;
+		transform: rotate(180deg);
+		transition:transform 0.2s;
+	}
+	div.slidenav >ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li.active >p{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li.active >span{
+		transform: rotate(0deg);
+	}
+	div.slidenav >ul >li.active >.rightborder{
+		display: block;
+	}
+	div.slidenav >ul >li.active >.rightarrow{
+		display: block;
+	}
+	/*二层*/
+	div.slidenav >ul >li +ul{
+		width:100%;
+		height:auto;
+		display: none;
+	}
+	div.slidenav >ul >li.active +ul{
+		display: block;
+	}
+	div.slidenav >ul >li +ul >li{
+		width:100%;
+		height:50px;
+		overflow: hidden;
+		cursor:pointer;
+	}
+	div.slidenav >ul >li +ul >li >.icon{
+		width:100px;
+		height:50px;
+		line-height: 50px;
+		text-align:center;
+		/*margin-left:-10px;*/
+		font-size: 22px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li +ul >li >p{
+		width:120px;
+		height:50px;
+		line-height: 50px;
+		padding-left:4px;
+		font-size: 18px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li +ul >li >span{
+		width:16px;
+		height:50px;
+		line-height: 50px;
+		font-size: 16px;
+		color:rgb(0,0,0);
+		float:left;
+		transform: rotate(180deg);
+		transition:transform 0.2s;
+	}
+	div.slidenav >ul >li +ul >li.active{
+		background:rgb(245,245,245);
+	}
+	div.slidenav >ul >li +ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	/*div.slidenav >ul >li +ul >li.active >p{
+		color:rgb(55,142,248);
+	}*/
+	div.slidenav >ul >li +ul >li.active >span{
+		transform: rotate(0deg);
+	}
+	/*第三层*/
+	div.slidenav >ul >li +ul >li +ul{
+		width:100%;
+		height:auto;
+		display: none;
+	}
+	div.slidenav >ul >li.active +ul >li.active +ul{
+		display: block;
+	}
+	div.slidenav >ul >li +ul >li +ul >li{
+		width:100%;
+		height:42px;
+		position: relative;
+		margin:1px 0;
+		overflow: hidden;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >.icon{
+		width:100px;
+		height:42px;
+		line-height: 42px;
+		text-align:center;
+		margin-left:10px;
+		font-size: 20px;
+		color:rgb(102,102,102);
+		float:left;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >p{
+		width:150px;
+		height:42px;
+		line-height: 42px;
+		padding-left:4px;
+		font-size: 16px;
+		color:rgb(102,102,102);
+		float:left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	div.slidenav >ul >li +ul >li +ul >li >div.hoverline{
+		width:4px;
+		height:42px;
+		position:absolute;
+		top:0;
+		left:0;
+		display: none;
+	}
+	div.slidenav >ul >li +ul >li +ul >li.active >.icon{
+		color:rgb(55,142,248);
+	}
+	div.slidenav >ul >li +ul >li +ul >li >div.hoverline{
+		width:4px;
+		height:42px;
+		position:absolute;
+		top:0;
+		left:0;
+		display: none;
+		background:rgb(55,142,248);
+	}
+	/*div.slidenav >ul >li +ul >li +ul >li.active >div.hoverline{
+		display: block;
+	}*/
+	div.slidenav >ul >li +ul >li +ul >li:hover >div.hoverline{
+		display: block;
+	}
+	/*底下三个按钮*/
+	aside.left-menu >ul.btns{
+		/*width:100%;*/
+		width:90px;
+		height:150px;
+		/*margin-top:66px;*/
+		position: absolute;
+		right:0;
+		bottom:0;
+	}
+	aside.left-menu >ul.btns >li{
+		height:50px;
+		position: relative;
+		overflow: hidden;
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >li >div{
+		width:38px;
+		height:38px;
+		line-height: 38px;
+		text-align: center;
+		border-radius: 50%;
+		font-size: 16px;
+		position: absolute;
+		right:31px;
+		top:6px;
+		box-shadow: 0px 6px 10px 0px rgba(156, 155, 155, 0.59);
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >li >div.btn1{
+		border:1px solid rgb(243,141,141);
+	}
+	aside.left-menu >ul.btns >li >div.btn2{
+		border:1px solid rgb(55,142,248);
+		transition: transform 0.4s;
+		line-height: 36px;
+	}
+	aside.left-menu >ul.btns >li >div.min{
+		transform: rotate(180deg);
+	}
+	aside.left-menu >ul.btns >li >div.btn3{
+		border:1px solid rgb(252,223,58);
+	}
+	aside.left-menu >ul.btns >.accredit{
+		position: absolute;
+		/*right:-233px;*/
+		right:-215px;
+		bottom:12px;
+		width: 231px;
+		/*height: 249px;*/
+		height: auto;
+		background-color: rgba(255, 255, 255, 1);
+		box-shadow: 2.3px 2px 8px 0px rgba(58, 68, 70, 0.47);
+		border: solid 2px rgba(252, 223, 58, 0.78);
+		opacity: 0.92;
+		border-radius: 8px;
+		padding:5px 10px;
+		display: none;
+	}
+	aside.left-menu >ul.btns >.accredit:before{
+		content: '';
+		width:0;
+		height:0;
+		border-top:9px solid rgba(255,255,255,0);
+		border-right:9px solid rgba(252,223,58,0.78);
+		border-bottom:9px solid rgba(255,255,255,0);
+		border-left:9px solid rgba(255,255,255,0);
+		position: absolute;
+		left:-20px;
+		bottom:12px;
+	}
+	aside.left-menu >ul.btns >.accredit:after{
+		content: '';
+		width:0;
+		height:0;
+		border-top:7px solid rgba(255,255,255,0);
+		border-right:7px solid rgba(255,255,255,1);
+		border-bottom:7px solid rgba(255,255,255,0);
+		border-left:7px solid rgba(255,255,255,0);
+		position: absolute;
+		left:-14px;
+		bottom:14px;
+	}
+	aside.left-menu >ul.btns >.accredit >h3{
+		height:24px;
+		line-height: 24px;
+		font-size: 14px;
+		color:rgb(93,161,245);
+	}
+	aside.left-menu >ul.btns >.accredit >ol{
+		/*margin-top:10px;*/
+		/*height:197px;*/
+		height:auto;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li{
+		margin:2.5px 0;
+		height:34px;
+		border:1px solid rgb(255,255,255);
+		line-height: 34px;
+		color:rgb(51,51,51);
+		font-size: 14px;
+		text-align: center;
+		cursor:pointer;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li:hover{
+		border:1px solid rgb(141,189,249);
+		background:rgb(238, 244, 251);
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >.icon{
+		width:25px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		font-size:24px;
+		margin-left:5px;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >p{
+		width:130px;
+		margin-left:15px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li >.del{
+		width:20px;
+		height:32px;
+		float:left;
+		line-height: 32px;
+		text-align:center;
+		display: none;
+		color:rgb(244,118,117);
+		font-size: 24px;
+		margin-right:10px;
+	}
+	aside.left-menu >ul.btns >.accredit >ol >li:hover >.del{
+		display: block;
+	}
+	.icon-yaochi{
+		color:rgb(92,247,158);
+	}
+	.icon-chakan{
+		color:rgb(244,118,117);
+	}
+	.icon-bianji-copy{
+		color:rgb(92,162,247);
+	}
+	.icon-shanchu{
+		color:rgb(252,223,58);
+	}
+}
