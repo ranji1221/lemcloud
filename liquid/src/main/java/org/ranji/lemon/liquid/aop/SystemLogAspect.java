@@ -161,7 +161,7 @@ public class SystemLogAspect {
     @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")  
     public  void doAfterThrowing(JoinPoint joinPoint, Throwable e) {    	
         SystemLog log = logThreadLocal.get();
-//System.out.println(log.getId());
+        //System.out.println(log.getId());
         log.setLogType("error");
         log.setException(e.toString());
         logService.update(log);

@@ -1,11 +1,15 @@
 package org.ranji.lemon.liquid;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.ranji.lemon.core.CoreApplication;
+import org.ranji.lemon.liquid.filter.PagerFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 public class LiquidApplication extends CoreApplication{
@@ -22,4 +26,15 @@ public class LiquidApplication extends CoreApplication{
 	    factory.setSessionTimeout(60, TimeUnit.MINUTES);
 	    return factory;
 	}
+	//-- 分页过滤
+	 @Bean
+    public FilterRegistrationBean  filterRegistrationBean() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        PagerFilter pagerFilter = new PagerFilter();
+        registrationBean.setFilter(pagerFilter);
+        List<String> urlPatterns = new ArrayList<String>();
+        urlPatterns.add("/*");
+        registrationBean.setUrlPatterns(urlPatterns);
+        return registrationBean;
+    }
 }
