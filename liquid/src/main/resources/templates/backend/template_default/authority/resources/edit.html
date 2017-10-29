@@ -1,4 +1,4 @@
-<!--<script  src="${pageContext.request.contextPath}/js/validate/validate.js "></script>
+<script  src="static/template_default/script/validate/validate.js " th:src="@{/template_default/script/validate/validate.js}"></script>
 <script>
 function beforeMaxEditResourceModal(){
 	$(".relateCtl [type='checkbox']").iCheck({
@@ -19,7 +19,7 @@ function dealDataToModal(data){
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
 	$('.select_resourceList').LemonGetList({
-		requestListUrl:'${pageContext.request.contextPath}/backend/authority/resource/listAll',
+		requestListUrl:'backend/template_default/authority/resources/listAll',
 		beforeFun:function(data){
 			console.log(data)
 			return getListByTree(data);
@@ -27,7 +27,7 @@ function dealDataToModal(data){
 		generateItemFun:function(index,value){
 			console.log(value)
 			var itemHtml = '';
-			if(index == 0 ){ itemHtml += '<option value="0" '+'>选择资源</option>';}
+			if(index == 0 ){ itemHtml += '<option value="0">选择资源</option>';}
 			
 			var kongge_str = '';
 			for(var i=0;i<value.level;i++){
@@ -62,7 +62,7 @@ $(document).on("click","#submit_editResource",function(){
 			tem_str +=',' + $(this).val();
 		}
 	})
-	$.post("${pageContext.request.contextPath}/backend/authority/resource/edit",
+	$.post("backend/template_default/authority/resources/edit",
 		{
 			id:$("#edit_resourceId").val(),
 			resourceName:$("#edit_resourceName").val(),
@@ -81,7 +81,7 @@ $(document).on("click","#submit_editResource",function(){
 		}
 	,"json")
 }) 
-</script>-->
+</script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody editSour_modal" tabindex="-1" role="dialog" th:fragment="viewResource">
 	<div class="maxcontainer editpage modal-contentbox">
 				<ol class="breadcrumb">

@@ -1,5 +1,4 @@
 ﻿<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
-<script src="static/template_default/script/authority/resources/skip.js" th:src="@{/template_default/script/authority/resources/skip.js}"></script>
 <script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
 ﻿<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
 <script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
@@ -53,32 +52,11 @@ function resourceListInit(){
 	   		'</tr>';
 	       	return tr_data; 
    		},
-   		/* afterFun : function(){
-			$('.tablewrap input').iCheck({
-			    checkboxClass: 'icheckbox_flat-blue',
-			    radioClass: 'iradio_flat-blue',
-			    labelHover : true, 
-			  	cursor : false,
-			 });
-			$('#checkall').iCheck('uncheck')
-   		} */
+   		afterFun : function(){
+   		}
 	})
 }
 resourceListInit();
-//复选框
-/* $('.tablewrap input').iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue',
-    labelHover : true, 
-  	cursor : false,
- });
-$(document).on('ifChecked','#checkall', function(event){
-  	$('.tablewrap input').iCheck('check')
-});
-$(document).on('ifUnchecked', '#checkall',function(event){
-  	$('.tablewrap input').iCheck('uncheck')
-}); */
-
 $('.resource_removeAllBtn').bindDialogs({
 	content : '你确定删除这些资源吗？',
 	name_successBtn : 'deleteAllBtn',
@@ -135,6 +113,29 @@ $(document).on("click",".renovate",function(){
 	removeStorage();
 	resourceListInit();
 })
+//添加编辑事件
+$(document).on("click", ".editResource", function(e) {
+	e.preventDefault();
+	////获取到本地的某条数据
+	var storage_name = $(this).closest('tr').attr('storage_name');
+	var storage_id = $(this).closest('tr').attr('storage_id');
+	var data = getDataByStorage(storage_name,storage_id);
+	var class_name =  $("#editModal").find(".modal-contentbox").attr("maxClassName")
+	$("#editModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)
+	editSource(data);
+});
+//添加查看事件
+$(document).on("click", ".viewResource", function(e) {
+	e.preventDefault();
+	////获取到本地的某条数据
+	var storage_name = $(this).closest('tr').attr('storage_name');
+	var storage_id = $(this).closest('tr').attr('storage_id');
+	var data = getDataByStorage(storage_name,storage_id);
+	var class_name =  $("#viewModal").find(".modal-contentbox").attr("maxClassName")
+	$("#viewModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)
+	
+	viewSource(data);
+});
 </script>
 
 <div class="rolelist sourcelist">
