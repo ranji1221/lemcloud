@@ -72,9 +72,8 @@ $(function(){
 				
 				$.post(TableObj.requestListUrl,TableObj.data, function(data){  //get 请求数据 需要获取当前 总数 和 本次分页数据
 					if(TableObj.useLocalStorage){ setStorage(saveStorageName,data); }
-					
+					dealData(data,request_data);
 				},"json");
-				dealData(data,request_data);
 			}
 		};
 		//插件初始化工作
