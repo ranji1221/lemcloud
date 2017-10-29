@@ -8,7 +8,7 @@ $(function(){
 		var _this = this;
 		var lastClickElement = '';
 		var defaults = {
-			modalTypeImg: 'image/modal/trash.png',
+			modalTypeImg: document.getElementById("img").src,
 			content:'您确定执行本操作吗？',
 			prompt:'*此项操作不可逆！<br/>如果确认则点击“确定”，否则点“取消”',
 			name_successBtn : 'successBtn',

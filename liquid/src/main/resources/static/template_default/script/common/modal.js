@@ -75,7 +75,6 @@ function editRoleModal(data) {
 		var inputlimitNum = parseInt($(".numCtr input").val());
 		judge(inputlimitNum);
 	});
-	
 	dealDataToModal(data); 
 	limitChangeLength($(".sliderInput input[type='text']"),12)
 }

@@ -1,25 +1,4 @@
 <script  src="static/template_default/script/validate/validate.js" th:src="@{/template_default/script/validate/validate.js}"></script>
-<script>
-$(document).on("click","#submit_editUser",function(){
-	$.post("backend/template_default/authority/user/edits",
-		{
-			id:$("#edit_userId").val(),
-			userName:$("#edit_userName").val(),
-			phone:$("#edit_phone").val(),
-			email:$("#edit_email").val()
-		},function(data){
-			if(data.success){
-				removeStorage();
-				userListInit();
-				alert("成功啦");
-			}
-			else{
-				alert("失败啦")
-			}
-		}
-	,"json")
-}) 
-</script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody" tabindex="-1" role="dialog" th:fragment="editUser">
 	<div class="maxcontainer editpage modal-contentbox">
 		<ol class="breadcrumb">
