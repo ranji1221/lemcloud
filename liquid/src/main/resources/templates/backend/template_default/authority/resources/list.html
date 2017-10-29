@@ -124,6 +124,7 @@ $(document).on("click", ".editResource", function(e) {
 	var class_name =  $("#editModal").find(".modal-contentbox").attr("maxClassName")
 	$("#editModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)
 	editSource(data);
+	beforeMaxEditResourceModal()
 });
 //添加查看事件
 $(document).on("click", ".viewResource", function(e) {
@@ -150,7 +151,7 @@ function beforeMaxEditResourceModal(){
 		$(".in_input_num .limitlength").html(12-val)
 	})
 }
-beforeMaxEditResourceModal()
+
 
 function dealDataToModal(data){
 	$("#edit_resourceId").val(data.id)
