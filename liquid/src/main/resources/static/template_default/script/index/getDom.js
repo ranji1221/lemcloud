@@ -4,7 +4,7 @@
 		var sendurl;
 		var endurl;
 		$(document).on("click",".rolelist .tfoot .newPro,.slidenav li",function(){
-			var url = $(this).attr("url");
+			var url = $(this).attr("url")
 			if(url){
 				// 重新填装加载图片
 				var load_img=$('.right-container >.loading_ajax_dom >img').attr('src')
@@ -19,17 +19,21 @@
 						sendurl=url;
 					}
 				}).done(function(data){
-						//获取请求结束后的新地址
-						endurl=url;
-						// 多次高频点击链接请求产生队列排除掉与最后一次点击链接不符的返回结果
-						if(sendurl==endurl){
-							$(".right-container .ajax_dom").empty()
-							$(".right-container .ajax_dom").show(0);
-							$(data).appendTo($(".right-container .ajax_dom"))
-							$('.right-container >.loading_ajax_dom').hide(0);
-						}else{
-							
-						}
+					//获取请求结束后的新地址
+					endurl=url;
+					// 多次高频点击链接请求产生队列排除掉与最后一次点击链接不符的返回结果
+					if(sendurl==endurl){
+						$(".right-container .ajax_dom").empty()
+						$(".right-container .ajax_dom").show(0);
+						$('body #bodyModalArea').empty()
+						$($.parseHTML(data,document, true)).appendTo($(".right-container .ajax_dom"))
+						$('.right-container >.loading_ajax_dom').hide(0);
+						$(".right-container .ajax_dom").show()
+					}else{
+						
+					}
+					
+						
 				})
 			}
 		})

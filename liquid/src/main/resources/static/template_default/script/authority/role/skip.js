@@ -8,8 +8,8 @@ $(document).on("click", ".editRole", function(e) {
 	if($(this).attr('mintype')==1){
 		return
 	}else{
-		//var editRole_id=$(this).closest('tr').attr('listid');
-		//editRole(editRole_id);
+		var editRole_id=$(this).closest('tr').attr('listid');
+		editRole(editRole_id);
 	}
 	var class_name =  $("#editModal").find(".modal-contentbox").attr("maxClassName")
 	$("#editModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)

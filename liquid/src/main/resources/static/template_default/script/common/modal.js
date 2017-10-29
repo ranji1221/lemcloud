@@ -92,6 +92,7 @@ function editUserModal(data) {
 }
 /* 弹出查看框 */
 function viewRole(data) {
+	console.log(data)
 	//获取到本地的某条数据 示例代码
 	$("#view_roleName").html(data.displayName);
 	$("#view_roleMaxNum").html(data.roleMaxNum);
