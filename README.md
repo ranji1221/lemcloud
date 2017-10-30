@@ -27,8 +27,7 @@ Lemon Cloud PlatForm
 * .m2中的settings.xml文件中要配置jdk的版本
 	>方案：在settings.xml文件中的profiles配置项中增加如下的profile
 <pre><code>
-	<profiles>
-	........
+<profiles>........
 	<profile>
 		<id>jdk-1.8</id>
 		<activation>
@@ -42,5 +41,5 @@ Lemon Cloud PlatForm
 		</properties>
 	</profile>
 	................
-	<profiles>
+<profiles>
 </code></pre>
