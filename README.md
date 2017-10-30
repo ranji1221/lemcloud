@@ -38,7 +38,7 @@ Lemon Cloud PlatForm
         	<properties>
         	    <maven.compiler.source>1.8</maven.compiler.source>
         	    <maven.compiler.target>1.8</maven.compiler.target>
-            	<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        	    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         	</properties>
     	</profile>
         ..............其他配置
