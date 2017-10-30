@@ -41,7 +41,7 @@ public class UserServiceTest {
 	@Test
 	public void testAddUser(){
 		User u = new User();
-		u.setUsername("liuliuliu");
+		u.setUsername("haole");
 		u.setPassword("123456");
 		userService.save(u);
 		System.out.println(u.getId());	

@@ -32,7 +32,7 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView();
 		
 		String kaptchaExpected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		System.out.println(kaptchaExpected);
+System.out.println(kaptchaExpected);
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
 		try{
