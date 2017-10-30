@@ -3,7 +3,8 @@
 <mapper namespace="org.ranji.lemon.liquid.model.authority.User">
 
 	<insert id="save" parameterType="User" keyProperty="id" useGeneratedKeys="true">
-		insert into lemon_liquid_auth_user (userName, userPass,phone,email,createTime) values (#{userName}, #{userPass},#{phone},#{email},now())
+		insert into lemon_liquid_auth_user (guid, createTime,updateTime,userName, userPass,phone,email) 
+		values (#{guid}, #{createTime},#{updateTime},#{userName}, #{userPass},#{phone},#{email})
 	</insert>
 	
 	<!-- 存储某个用户和角色的对应关系 -->
@@ -76,6 +77,7 @@
 			<if test="userPass != null and userPass != ''">userPass = #{userPass},</if>
 			<if test="phone != null and phone != ''">phone = #{phone},</if>
 			<if test="email != null and email != ''">email = #{email},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
 	</update>

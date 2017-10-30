@@ -3,8 +3,8 @@
 <mapper namespace="org.ranji.lemon.liquid.model.log.SystemLog">
 
 	<insert id="save" parameterType="SystemLog" keyProperty="id" useGeneratedKeys="true">
-		insert into lemon_liquid_log_systemLog (logType, logTitle,remoteAddr,requestUri,method,params,exception,authStatus,operateDate,timeout,userName) 
-		values (#{logType}, #{logTitle},#{remoteAddr},#{requestUri},#{method},#{params},#{exception},#{authStatus},#{operateDate},#{timeout},#{userName})
+		insert into lemon_liquid_log_systemLog (gid,createTime,updateTime,logType, logTitle,remoteAddr,requestUri,method,params,exception,authStatus,operateDate,timeout,userName) 
+		values (#{gid},#{createTime},#{updateTime},#{logType}, #{logTitle},#{remoteAddr},#{requestUri},#{method},#{params},#{exception},#{authStatus},#{operateDate},#{timeout},#{userName})
 	</insert>
 	
 	<!-- 删除某条日志 -->
@@ -50,6 +50,7 @@
 			<if test="operateDate != null and operateDate != ''">operateDate = #{operateDate},</if>
 			<if test="timeout != null and timeout != ''">timeout = #{timeout},</if>
 			<if test="userName != null and userName != ''">userName = #{userName},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
 		</set>
 		<!-- where logId = #{logId} -->
 		where id = #{id}

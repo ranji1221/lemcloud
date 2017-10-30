@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ranji.lemon.core.model.AbstractModel;
 import org.ranji.lemon.core.util.JsonUtil;
 
 /**
@@ -29,7 +30,7 @@ import org.ranji.lemon.core.util.JsonUtil;
  * @since JDK1.7
  * @version 1.0
  */
-public class Resource implements Serializable{
+public class Resource extends AbstractModel{
 
 	private static final long serialVersionUID = -6121495662185377546L;
 	

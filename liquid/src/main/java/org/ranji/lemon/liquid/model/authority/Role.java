@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ranji.lemon.core.model.AbstractModel;
+import org.ranji.lemon.core.util.JsonUtil;
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -27,7 +30,7 @@ import java.util.List;
  * @since JDK1.7
  * @version 1.0
  */
-public class Role implements Serializable{
+public class Role extends AbstractModel{
 
 	private static final long serialVersionUID = -2561045793807899015L;
 	private int id;
@@ -146,4 +149,8 @@ public class Role implements Serializable{
             return false;  
         return true;  
     }  
+	@Override
+	public String toString() {
+		return JsonUtil.objectToJson(this);
+	}
 }

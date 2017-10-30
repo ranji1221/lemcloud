@@ -20,6 +20,9 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `lemon_liquid_auth_operation`;
 CREATE TABLE `lemon_liquid_auth_operation` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '操作ID',
+  `guid` varchar(255) collate utf8_bin NOT NULL,
+  `createTime` datetime default NULL COMMENT '创建时间',
+  `updateTime` datetime default NULL COMMENT '更新时间',
   `operationName` varchar(255) default NULL COMMENT '操作名',
   `displayName` varchar(255) default NULL COMMENT '操作中文名',
   `operationURL` varchar(255) default NULL COMMENT '操作链接',
@@ -36,6 +39,9 @@ CREATE TABLE `lemon_liquid_auth_operation` (
 DROP TABLE IF EXISTS `lemon_liquid_auth_resource`;
 CREATE TABLE `lemon_liquid_auth_resource` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT '资源ID',
+  `guid` varchar(255) collate utf8_bin NOT NULL,
+  `createTime` datetime default NULL COMMENT '创建时间',
+  `updateTime` datetime default NULL COMMENT '更新时间',
   `resourceName` varchar(255) default NULL COMMENT '资源名称',
   `resourceType` varchar(255) default NULL COMMENT '资源类型 1,菜单   2,文件',
   `resourceURL` varchar(255) default NULL COMMENT '资源链接',
@@ -50,6 +56,9 @@ CREATE TABLE `lemon_liquid_auth_resource` (
 DROP TABLE IF EXISTS `lemon_liquid_auth_role`;
 CREATE TABLE `lemon_liquid_auth_role` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '角色ID',
+  `guid` varchar(255) collate utf8_bin NOT NULL,
+  `createTime` datetime default NULL COMMENT '创建时间',
+  `updateTime` datetime default NULL COMMENT '更新时间',
   `roleName` varchar(255) default NULL COMMENT '角色名称',
   `displayName` varchar(255) default NULL COMMENT '角色中文名称',
   `roleExtendPId` int(11) default NULL COMMENT '角色父ID',
@@ -82,11 +91,13 @@ CREATE TABLE `lemon_liquid_auth_role_operation` (
 DROP TABLE IF EXISTS `lemon_liquid_auth_user`;
 CREATE TABLE `lemon_liquid_auth_user` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT '用户ID',
+  `guid` varchar(255) collate utf8_bin NOT NULL,
+  `createTime` datetime default NULL COMMENT '创建时间',
+  `updateTime` datetime default NULL COMMENT '更新时间',
   `userName` varchar(255) default NULL COMMENT '用户名称',
   `userPass` varchar(255) default NULL COMMENT '用户密码',
   `phone` varchar(255) default NULL COMMENT '用户手机号',
   `email` varchar(255) default NULL COMMENT '用户邮箱',
-  `createTime` varchar(255) default NULL COMMENT '创建时间',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `userName` (`userName`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -117,6 +128,9 @@ CREATE TABLE `lemon_liquid_auth_user_role` (
 DROP TABLE IF EXISTS `lemon_liquid_log_systemlog`;
 CREATE TABLE `lemon_liquid_log_systemlog` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT '日志ID',
+  `guid` varchar(255) collate utf8_bin NOT NULL,
+  `createTime` datetime default NULL COMMENT '创建时间',
+  `updateTime` datetime default NULL COMMENT '更新时间',
   `logType` varchar(255) collate utf8_bin default NULL COMMENT '日志类型  1,info  2,error',
   `logTitle` varchar(255) collate utf8_bin default NULL COMMENT '日志标题',
   `remoteAddr` varchar(255) collate utf8_bin default NULL COMMENT '请求地址',

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ranji.lemon.core.model.AbstractModel;
+import org.ranji.lemon.core.util.JsonUtil;
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -28,7 +31,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public class Operation implements Serializable{
+public class Operation extends AbstractModel{
 
 	private static final long serialVersionUID = -7110169615874248183L;
 	
@@ -123,5 +126,9 @@ public class Operation implements Serializable{
         } else if (id!=other.getId())   //如果id属性相等，则相等  
             return false;  
         return true;  
-    }  
+    }
+	@Override
+	public String toString() {
+		return JsonUtil.objectToJson(this);
+	}
 }

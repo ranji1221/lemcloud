@@ -55,7 +55,7 @@ public class ResourceController {
 	@Autowired
 	private IResourceService resourceService;
 	@Autowired
-	private IAuthorityService autoService;
+	private IAuthorityService authService;
 	@Autowired
 	private IOperationService operationService;
 		
@@ -79,7 +79,7 @@ public class ResourceController {
 	public String saveResources(Resource resource, @RequestParam("operation") String operation) {
 		String[] array  = operation.split(",");
 		try {
-			autoService.saveResourceAndOperation(resource, array);
+			authService.saveResourceAndOperation(resource, array);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -99,7 +99,7 @@ public class ResourceController {
 			resource.setResourceName(newResource.getResourceName());
 			resource.setResourceType(newResource.getResourceType());
 			resource.setResourcePId(newResource.getResourcePId());
-			autoService.updateResourceAndOperation(resource, array);
+			authService.updateResourceAndOperation(resource, array);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -113,24 +113,7 @@ public class ResourceController {
 	@RequestMapping(value = "/data")
 	@ResponseBody
 	public String data(String params,HttpSession session) {
-		try {
-			ObjectMapper om = new ObjectMapper();
-			Map<String, Object> map = new HashMap<String, Object>();
-			// 当前只查询管理员
-			if (!StringUtils.isEmpty(params)) {
-				// 参数处理
-				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
-			}
-			PagerModel<Resource	> pg = resourceService.findPaginated(map);
-			// 序列化查询结果为JSON
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("total", pg.getTotal());
-			result.put("rows", pg.getData());
-			return om.writeValueAsString(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "{ \"total\" : 0, \"rows\" : [] }";
-		}
+		return authService.findAllResourceInduleOperation(params);
 	}
 	
 	

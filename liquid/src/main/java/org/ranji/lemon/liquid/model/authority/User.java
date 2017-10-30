@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ranji.lemon.core.model.AbstractModel;
 import org.ranji.lemon.core.util.JsonUtil;
 
 /**
@@ -29,7 +30,7 @@ import org.ranji.lemon.core.util.JsonUtil;
  * @since JDK1.7
  * @version 1.0
  */
-public class User implements Serializable {
+public class User extends AbstractModel {
 
 	private static final long serialVersionUID = -7866077717886165234L;
 	private int id;
@@ -37,7 +38,6 @@ public class User implements Serializable {
 	private String userPass;  //密码
 	private String phone;  //电话
 	private String email;  //邮箱
-	private String createTime;  //创建时间
 	private List<Role> roleList = new ArrayList<Role>();  //页面显示字段（解决前台缓存列表页直接获取用户角色信息）
 	
 	
@@ -88,14 +88,6 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
 	}
 	@Override
 	public String toString() {

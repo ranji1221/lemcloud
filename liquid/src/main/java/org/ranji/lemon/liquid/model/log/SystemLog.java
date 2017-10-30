@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
+import org.ranji.lemon.core.model.AbstractModel;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -29,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since JDK1.7
  * @version 1.0
  */
-public class SystemLog implements Serializable{
+public class SystemLog extends AbstractModel {
 	private static final long serialVersionUID = -8290370426605089254L;
 	
 	private int id;

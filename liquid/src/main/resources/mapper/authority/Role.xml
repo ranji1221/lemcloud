@@ -3,7 +3,8 @@
 <mapper namespace="org.ranji.lemon.liquid.model.authority.Role">
 	<!-- 存储某个角色 -->
 	<insert id="save" parameterType="Role" keyProperty="id" useGeneratedKeys="true">
-		insert into lemon_liquid_auth_role (roleName, displayName,roleExtendPId,roleRelyId,roleMaxNum,remarks) values (#{roleName},#{displayName}, #{roleExtendPId}, #{roleRelyId},#{roleMaxNum},#{remarks})
+		insert into lemon_liquid_auth_role (guid, createTime,updateTime,roleName, displayName,roleExtendPId,roleRelyId,roleMaxNum,remarks) 
+		values (#{guid}, #{createTime},#{updateTime},#{roleName},#{displayName}, #{roleExtendPId}, #{roleRelyId},#{roleMaxNum},#{remarks})
 	</insert>
 	
 	<!-- 存储某个角色和操作的对应关系 -->
@@ -78,6 +79,7 @@
 			<if test="roleRelyId != null and roleRelyId != ''">roleRelyId = #{roleRelyId},</if>
 			<if test="roleMaxNum != null and roleMaxNum != ''">roleMaxNum = #{roleMaxNum},</if>
 			<if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
+			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
 	</update>
