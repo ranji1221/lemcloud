@@ -28,7 +28,6 @@ CREATE TABLE `lemon_liquid_auth_operation` (
   `operationURL` varchar(255) default NULL COMMENT '操作链接',
   `resourceId` int(11) default NULL COMMENT '资源ID',
   `operationPId` int(11) default NULL COMMENT '操作父ID',
-  `displayName` varchar(255) default NULL COMMENT '操作名 中文',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -65,7 +64,6 @@ CREATE TABLE `lemon_liquid_auth_role` (
   `roleRelyId` int(11) default NULL COMMENT '角色依赖ID',
   `roleMaxNum` int(11) default NULL COMMENT '最大限制用户数',
   `remarks` varchar(255) default NULL COMMENT '备注',
-  `displayName` varchar(255) default NULL COMMENT '角色名称  中文',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
@@ -105,7 +103,7 @@ CREATE TABLE `lemon_liquid_auth_user` (
 -- ----------------------------
 -- Records of lemon_liquid_auth_user
 -- ----------------------------
-INSERT INTO `lemon_liquid_auth_user` VALUES ('1', 'admin', 'admin', null, null, null);
+INSERT INTO `lemon_liquid_auth_user` VALUES ('1', 'admin', 'admin', null, null, null,null,null);
 
 -- ----------------------------
 -- Table structure for `lemon_liquid_auth_user_role`
