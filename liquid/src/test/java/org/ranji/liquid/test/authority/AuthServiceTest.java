@@ -81,5 +81,9 @@ public class AuthServiceTest {
 		List<Resource> resource = resService.findResourceTree();
 		System.out.println(JsonUtil.objectToJson(resource));
 	}
+	@Test
+	public void testFindResource(){
+		System.out.println( authService.findAllResourceInduleOperation(null));
+	}
 	
 }
