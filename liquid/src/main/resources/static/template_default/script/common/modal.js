@@ -112,7 +112,7 @@ function viewSource(data) {
 	$("#view_resourceName").html(data.resourceName);
 	$("#view_resourceType").html(data.resourceType);
 	$("#view_resourceURL").html(data.resourceURL);
-	//$("#view_operationName").html(data.operationName);
+	$("#view_operationName").html(data.operationName);
 
 }
 /**

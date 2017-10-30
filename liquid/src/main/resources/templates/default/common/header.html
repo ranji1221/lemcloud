@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	 <body>	
+		<!-- 头部 -->
+		<nav class="navbar navbar-default" th:fragment="header_fragment">
+			<div class="container-fluid row">
+				<div class="navbar-header col-xs-3 col-lg-2 col-md-3 col-sm-3">
+					<div class="navbar_header_logo">
+						<a href="#">
+							<img src="static/template_default/image/common/logo.png" alt="" th:src="@{/template_default/image/common/logo.png}"/>
+						</a>
+					</div>
+					<div class="navbar_header_logo_home">
+						<span class="icon-home"></span>
+					</div>
+					
+				</div>
+				<div class="navbar-left navbar_search row col-xs-4 col-lg-5 col-md-3 col-sm-3">
+					<h4 class="visible-lg-inline col-lg-5">青柠后台管理系统欢迎您</h4>
+					<form action="" class="form-group search_form col-lg-5 col-sm-12 col-xs-12">
+						<div class="search_form_box col-lg-12  col-md-offset-0 col-md-12 col-sm-12 col-xs-12">
+							<input type="text" class="col-lg-10 col-md-11 col-sm-10 col-xs-11 "/>
+							<span class="icon-search col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-1"></span>
+						</div>
+					</form>
+				</div>
+				<div class="pull-right col-lg-3 col-md-2 col-sm-3 col-xs-4">
+					<div class="pull_right_icon col-lg-2  col-md-2 text-center col-sm-2 col-xs-2">
+						<span class=" icon-lock "></span>
+					</div>
+					<div class="pull_right_icon col-lg-1  col-sm-1 text-center col-md-2  col-xs-2">
+						<span class="icon-bell "></span>
+						<span class="badge badge-important">4</span>
+					</div>
+					<div class="pull_right_icon col-lg-1  col-sm-1 text-center col-md-2  col-xs-2">
+						<span class="icon-envelope "></span>
+					</div>
+					<div class="pull_right_img col col-lg-1  col-md-1  col-xs-2" >
+						<div class="pull_right_img_hearder">
+							<h3>您好，GIGI</h3>
+							<p><span>所属角色:</span>超级管理员</p>
+							<img src="static/template_default/image/common/out.png" alt="" th:src="@{/template_default/image/common/out.png}"/>
+						</div>
+					</div>
+					<div class="pull_right_font col-xs-3 col-lg-3  visible-lg-inline-block " style="padding:0;">
+						<p>您好,GIGI</p>
+					</div>
+					<img src="static/template_default/image/common/out.png" class="setout visible-lg-inline-block" alt="" th:src="@{/template_default/image/common/out.png}" />
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	 </body>
+</html> 

@@ -10,10 +10,11 @@ import org.apache.shiro.subject.Subject;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
 import org.ranji.lemon.liquid.model.authority.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.code.kaptcha.Constants;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -69,7 +70,16 @@ public class LoginController {
 	 */
 	@SystemControllerLog(description="登录系统")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(User user, HttpSession session,HttpServletRequest request) throws Exception{
+	public ModelAndView login(User user, String verityCode, HttpSession session,HttpServletRequest request) throws Exception{
+		
+		//-- 验证码
+		String rightCode = (String)session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		System.out.println(rightCode);
+		//-- 输入的验证码
+		System.out.println(verityCode);
+		//-- 比较
+		System.out.println(rightCode.equals(verityCode));
+		
 		ModelAndView mv = new ModelAndView();
 		Subject currentUser = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getUserPass());

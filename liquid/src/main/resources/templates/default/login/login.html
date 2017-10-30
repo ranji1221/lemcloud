@@ -14,7 +14,7 @@
 <body>
 	<div class="container">
 		<div class="wrap">
-			<form action="${pageContext.request.contextPath}/backend/login" method="post">
+			<form action="login" method="post">
 				<div class="border">
 					<img src="../../../static/template_default/image/login/phone.png" alt="" th:src="@{/template_default/image/login/phone.png}"/>
 					<input type="text" name="userName" placeholder="请输入您的账号"/>
@@ -25,10 +25,10 @@
 				</div>
 				<div class="border">
 					<img src="../../../static/template_default/image/login/check.png" alt="" th:src="@{/template_default/image/login/check.png}"/>
-					<input type="text" name="" placeholder="请输入验证码"/>
+					<input type="text" name="verityCode" placeholder="请输入验证码"/>
 				</div>
 				<div class="code">
-					<img src="../../../static/template_default/image/test/code.png" alt="" th:src="@{/template_default/image/test/code.png}"/>
+					<img src="../../../static/template_default/image/test/code.png" alt="" th:src="@{captcha}" onclick="this.src='captcha?d='+new Date().getTime()"/>
 				</div>
 				<div class="clear"></div>
 				<button type="submit">立即登录</button>
