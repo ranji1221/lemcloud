@@ -26,15 +26,17 @@ Lemon Cloud PlatForm
 	>方案：Window/Prepferences/General/Content Types/Text/Java Properties File/下，更新ISO-8859-1为UTF-8编码
 * .m2中的settings.xml文件中要配置jdk的版本
 	>方案：在settings.xml文件中的profiles配置项中增加如下的profile
-<pre><code>```<profile>
-		<id>jdk-1.8</id>
-		<activation>
-			<activeByDefault>true</activeByDefault>
-			<jdk>1.8</jdk>
-		</activation>
-		<properties>
-			<maven.compiler.source>1.8</maven.compiler.source>
-			<maven.compiler.target>1.8</maven.compiler.target>
-			<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-		</properties>
-	</profile>```</code></pre>
+<pre><code>
+	<profile>
+	<id>jdk-1.8</id>
+	<activation>
+	<activeByDefault>true</activeByDefault>
+	<jdk>1.8</jdk>
+	</activation>
+	<properties>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+	<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+	</properties>
+	</profile>
+</code></pre>
