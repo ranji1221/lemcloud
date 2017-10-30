@@ -117,31 +117,7 @@ public class AuthorityServiceImpl implements IAuthorityService{
 			roleService.saveRoleAndOperationRelation(roleId, i); //保存角色操作关系
 		}
 	}
-	@Override
-	public String findAllUserInduleRoles(String params) {
-		try {
-			ObjectMapper om = new ObjectMapper();
-			Map<String, Object> map = new HashMap<String, Object>();
-			if (!StringUtils.isEmpty(params)) {
-				// 参数处理
-				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
-			}
-			PagerModel<User> pg = userService.findPaginated(map);
-			List<User> userList = pg.getData();
-			for(User u: userList){
-				List<Role> roles = userService.findRoleByUserId(u.getId());
-				u.setRoleList(roles);
-			}
-			//序列化查询结果为JSON
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("total", pg.getTotal());
-			result.put("rows", userList);
-			return om.writeValueAsString(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "{ \"total\" : 0, \"rows\" : [] }";
-		}
-	}
+	
 	//保存资源操作集
 	@Override
 	public void saveResourceAndOperation(Resource resource,String []array){
@@ -203,6 +179,61 @@ public class AuthorityServiceImpl implements IAuthorityService{
 		}
 		return operation;
 	}
+	//查询所有资源（包含操作信息）
+	@Override
+	public String findAllResourceInduleOperation(String params) {
+		try {
+			ObjectMapper om = new ObjectMapper();
+			Map<String, Object> map = new HashMap<String, Object>();
+			// 当前只查询管理员
+			if (!StringUtils.isEmpty(params)) {
+				// 参数处理
+				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
+			}
+			PagerModel<Resource	> pg = resourceService.findPaginated(map);
+			List<Resource> resourceList = pg.getData();
+			for(Resource r: resourceList){
+				Map<String,Object> ma = new HashMap<String,Object>();
+				ma.put("resourceId", r.getId());
+				List<Operation> oper = operationService.findAll(ma);
+				r.setOperationList(oper);
+			}
+			// 序列化查询结果为JSON
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("total", pg.getTotal());
+			result.put("rows", resourceList);
+			return om.writeValueAsString(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "{ \"total\" : 0, \"rows\" : [] }";
+		}
+	}
+	//查询所有用户（包含角色信息）
+		@Override
+		public String findAllUserInduleRoles(String params) {
+			try {
+				ObjectMapper om = new ObjectMapper();
+				Map<String, Object> map = new HashMap<String, Object>();
+				if (!StringUtils.isEmpty(params)) {
+					// 参数处理
+					map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
+				}
+				PagerModel<User> pg = userService.findPaginated(map);
+				List<User> userList = pg.getData();
+				for(User u: userList){
+					List<Role> roles = userService.findRoleByUserId(u.getId());
+					u.setRoleList(roles);
+				}
+				//序列化查询结果为JSON
+				Map<String, Object> result = new HashMap<String, Object>();
+				result.put("total", pg.getTotal());
+				result.put("rows", userList);
+				return om.writeValueAsString(result);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "{ \"total\" : 0, \"rows\" : [] }";
+			}
+		}
 	
 }
 

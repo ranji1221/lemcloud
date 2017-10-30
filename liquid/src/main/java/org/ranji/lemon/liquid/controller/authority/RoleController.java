@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
 import org.ranji.lemon.core.pagination.PagerModel;
+import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.service.authority.prototype.IAuthorityService;
@@ -94,7 +95,9 @@ public class RoleController {
 				// 参数处理
 				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
 			}
+			System.out.println(JsonUtil.objectToJson(params));
 			PagerModel<Role> pg = roleService.findPaginated(map);
+			
 			// 序列化查询结果为JSON
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("total", pg.getTotal());

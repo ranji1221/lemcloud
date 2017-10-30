@@ -85,4 +85,10 @@ public interface IAuthorityService {
 	 * 
 	 */
 	public void authRole(int roleId, List<Integer> list);
+	/**
+	 * 查询所有资源（包含操作信息）
+	 * @param params 分页或模糊查询参数
+	 * @return 资源对象集合json
+	 */
+	public String findAllResourceInduleOperation(String params);
 }
