@@ -38,9 +38,9 @@ public class BackupDatabaseServiceImpl extends GenericServiceImpl<BackupDatabase
 		//-u后面是用户名，-p是密码-p后面最好不要有空格，-family是数据库的名字
 		String cmd = "cmd /c mysqldump --single-transaction -h "+ hostIP +" -u "+ userName +" -p"+ password +" --set-charset=UTF8 "+dbName;
 		StringBuffer sbf = new StringBuffer();
-		/*for(String s : tables){//排除的表
+		for(String s : tables){//排除的表
 			sbf.append(" --ignore-table="+dbName+"."+s);
-		}*/
+		}
 		//sbf.append(" --ignore-table=lemon.lemon_liquid_log_systemlog");
 		System.out.println(cmd + sbf);
 		Process process = runtime.exec(cmd + sbf);
@@ -107,10 +107,9 @@ public class BackupDatabaseServiceImpl extends GenericServiceImpl<BackupDatabase
 	 * @throws IOException 
 	 */
 	private void removeTable()throws IOException{
-		//ResourceBundle resource = ResourceBundle.getBundle("config/database");
-		//dbName = resource.getString("database");
-		dbName = "lemon";
-		//String table = resource.getString("remove.table");
-		//tables = Arrays.asList(table.split(",")); 
+		ResourceBundle resource = ResourceBundle.getBundle("config/liquid");
+		dbName = resource.getString("liquid.backup.dbName");
+		String table = resource.getString("liquid.backup.excludeTable");
+		tables = Arrays.asList(table.split(",")); 
 	}
 }
