@@ -79,7 +79,7 @@
 			<if test="roleRelyId != null and roleRelyId != ''">roleRelyId = #{roleRelyId},</if>
 			<if test="roleMaxNum != null and roleMaxNum != ''">roleMaxNum = #{roleMaxNum},</if>
 			<if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
-			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+			<if test="updateTime != null">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
 	</update>
