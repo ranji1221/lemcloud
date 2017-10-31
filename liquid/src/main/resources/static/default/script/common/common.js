@@ -55,6 +55,7 @@
 	}
 	//树转数组
 	function treeToList(tree,listData,level){
+		if(!tree) return [];
 		for(var i=0; i<tree.length;i++){
 			var tem_childern_data = tree[i].list;
 			tem_tree = tree[i];

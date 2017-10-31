@@ -12,7 +12,7 @@ function userListInit(){
 		generateItemFun : function(index,value,data,extend){
 			var phone = value.phone == null ? '无':value.phone ;
 			var email = value.email == null ? '无':value.email ;
-			var createTime = value.createTime == null ? '无':value.createTime.substr(0,10);
+			var createTime = value.createTime == null ? '无':(''+value.createTime).substr(0,10);
 			tr_data = '<tr user_id='+ value.id +extend+'>'+
 				'<td class="checkboxtd">'+
 					'<label>'+
@@ -212,13 +212,12 @@ function createTreePlug(className,data){
 	
 	if(!is_first_into_page) {$(className).jstree("destroy");}
 	is_first_into_page = false;
-	
 	$(className).jstree({
 		'core' : {
 			'themes':{'icons':false,"responsive":false},
 	        'data' : function (obj, callback) {
 	        	var jstree_roleData = jsTree_dealRequestByRoleData(getRoleData());
-	        	
+	        	console.log(getRoleData())
 		        $.ajax({
 		            type: "POST",
 		            url:url,
