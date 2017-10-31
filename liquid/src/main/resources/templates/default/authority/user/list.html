@@ -6,7 +6,7 @@
 /*<![CDATA[*/
 function userListInit(){
 	$("#userList").LemonGetList({
-	    requestListUrl : 'default/authority/user/data',
+	    requestListUrl : 'user/data',
 		useLocalStorage: true,
 		className_Page:"#page",
 		generateItemFun : function(index,value,data,extend){
@@ -94,7 +94,7 @@ $('.user_removeAllBtn').bindDialogs({
 	  		
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("default/authority/user/deleteAll",{
+		$.post("user/deleteAll",{
 			user_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -112,7 +112,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个用户吗？',
 	success:function(handle){
 		var userId = $(handle).closest('tr').attr('user_id');
-		$.post("default/authority/user/delete",{
+		$.post("user/delete",{
 			id:userId,
 		},function(data){
 			if(data.success == true) {
@@ -164,7 +164,7 @@ $(document).on("click", ".userAuth", function(e) {
 	userAuth(data);
 });
 $(document).on("click","#submit_editUser",function(){
-	$.post("default/authority/user/edits",
+	$.post("user/edits",
 		{
 			id:$("#edit_userId").val(),
 			userName:$("#edit_userName").val(),
@@ -207,7 +207,7 @@ function userAuth(data) {
 
 //渲染树插件
 function createTreePlug(className,data){
-	var url = 'default/authority/user/getRole';
+	var url = 'user/getRole';
 	var request_data = {"userId":data.id};
 	
 	if(!is_first_into_page) {$(className).jstree("destroy");}
@@ -304,7 +304,7 @@ function getRoleData(){
 	}else{
         $.ajax({
             type: "POST",
-            url:"default/authority/role/listAll",
+            url:"role/listAll",
             dataType:"json",
             async: false,
             success:function(data) {
@@ -336,7 +336,7 @@ $('.user_auth_submit').on('click',function(){
 	var request_data = {};
 	request_data.userId = $("#auth_userName").attr('user_id');
 	request_data.roleIds = jsTree_getSelectedNodes('.user-authorizationtree');
-	var url = 'default/authority/user/auth';
+	var url = 'user/auth';
 	$.post(url,request_data,function(data){
 		if(data.success == true) {
 			$('.alertArea').showAlert({content:'授权成功'});
@@ -349,10 +349,6 @@ $('.user_auth_submit').on('click',function(){
 </script>
 
 <div class="rolelist userlist">
-	<!-- 删除模态框图标 -->
-	<div style="display: none;">
-		<img id="img" th:src="@{/default/image/modal/trash.png}"/>
-	</div>
 	<ol class="breadcrumb">
 		<li>
 			<i class="glyphicon glyphicon-home"></i>

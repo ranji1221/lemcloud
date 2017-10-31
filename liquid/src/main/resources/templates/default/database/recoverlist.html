@@ -1,0 +1,156 @@
+<script src="static/default/script/database/recoverlist.js" th:src="@{/default/script/database/recoverlist.js}"></script>
+<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
+<script src="public/common/pagination/jquery.simplePagination.js" th:src="@{/common/pagination/jquery.simplePagination.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+function recoverListInit(){
+$("#recoversList").LemonGetList({
+		useLocalStorage : true,
+	    requestListUrl : 'backup/data',
+	    className_Page : "#page",
+	    generateItemFun : function(index,value,data,extend){
+	    	var newDate = new Date()
+	    	newDate.setTime(value.createTime)
+	    	var createTime = newDate.format('yyyy-MM-dd hh:mm:ss'); 
+			var tr_data = '<tr listid='+ value.id+extend +' recover_id='+ value.id +'>' +
+					'<td title='+ value.infoName +'>' +
+						value.infoName +
+					'</td>' +
+					'<td title='+ value.createTime +'>' +
+						createTime +
+					'</td>' +
+					'<td title='+ value.fileSize +'>' +
+						value.fileSize +
+					'</td>' +
+					'<td title='+value.remark+' class="remarks">' +
+						value.remark +
+					'</td>' +
+					'<td>' +
+						'<span class="glyphicon glyphicon-log-in iconact leading"></span>' +
+					'</td>' + 
+					'<td>' +
+						'<span class="icon-trash iconact removeBtn redtrash"></span>' +
+					'</td> '+
+				'</tr>';
+	       	return tr_data; 
+   		},
+
+   		emptyDataFun:function(){
+   			return "<tr><td style='width:100%' colspan='6'><span class='center text-center' style='display:inline-block;width:100%;'>没有查找到数据!</span></td></tr>";
+   		},
+   	/* 	initFun : function(){
+   			_this = this;
+   			$('.nav-search #list_search_btn').on('click',function(){
+   				//刷新当前对象
+   				_this.getData({
+   					'params':JSON.stringify({
+   						'rNameLike' : $('.nav-search #list_search_str').val()
+   					})
+   				},true);
+   			})
+   		} */
+	})
+}
+recoverListInit();	
+//刷新页面	
+$(document).on("click",".renovate",function(){
+	removeStorage();
+	recoverListInit();
+});
+$('.removeBtn').bindDialogs({
+	content : '你确定删除这个数据库吗？',
+	success:function(handle){
+		var recoverId = $(handle).closest('tr').attr('recover_id');
+		$.post("backup/delete",{
+			id:recoverId,
+		},function(data){
+			if(data.success == true) {
+				$('.alertArea').showAlert({content:'删除成功'});
+				removeStorage();
+				recoverListInit();
+			}else{
+				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+			}
+		},'json');
+	}
+});
+/*]]>*/
+</script>
+<div class="rolelist recoverlist">
+	<ol class="breadcrumb">
+	    <li>
+	    	<i class="glyphicon glyphicon-home"></i>
+	    	<a href="#">首页</a>
+	    </li>
+	    <li>
+	    	<a href="#">数据库管理</a>
+	    </li>
+	    <li class="active">数据库列表</li>
+    	<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+			        <input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+			        <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<img src="static/default/image/common/iconsearch.png" th:src="@{/default/image/common/iconsearch.png}"/>
+			        </button>
+			        </span>
+			    </div>
+			</form>
+		</div>
+	</ol>
+	<div class="alert alert-danger">
+		<i class="glyphicon glyphicon-hand-right"></i>
+
+		温馨提示：本功能在恢复数据的同时，将全部覆盖原有数据！  单击右方x号，你可以关闭此条提示语！
+
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+	<div class="tablewrap">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th style="width:14%">
+						文件名
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:30%">
+						备份时间
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th style="width:11%">
+						大小
+						<span class="sort">
+							<i class="glyphicon glyphicon-triangle-top"></i>
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+						</span>
+					</th>
+					<th>
+						备注
+					</th>
+					<!-- <th style="width:0.6rem">查看</th> -->
+					<th style="width:0.6rem">导入</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody id = "recoversList">
+			</tbody>
+		</table>
+		<div class="tfoot">
+			<div class="btns">
+				<span class="renovate">
+					<img src="static/default/image/authority/list/icons1.png" alt="" th:src="@{/default/image/authority/list/icons1.png}"/>
+					刷新
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

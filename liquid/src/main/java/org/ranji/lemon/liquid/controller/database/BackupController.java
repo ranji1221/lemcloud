@@ -47,7 +47,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @version 1.0
  */
 @Controller
-@RequestMapping(value = "/backend/database/backup")
+@RequestMapping(value = "/backup")
 public class BackupController {
 	
 	@Autowired
@@ -55,19 +55,19 @@ public class BackupController {
 	
 	
 	@RequestMapping(value = "/backupJump")
-	@SystemControllerLog(description="数据库管理-备份数据库跳转")
+	//@SystemControllerLog(description="数据库管理-备份数据库跳转")
 	public String backupJump() {
-		return "backend/database/backup";
+		return "default/database/backup";
 	}
 	
 	@RequestMapping(value = "/recoverlist")
-	@SystemControllerLog(description="数据库管理-恢复数据库跳转")
+	//@SystemControllerLog(description="数据库管理-恢复数据库跳转")
 	public String recoverlist() {
-		return "backend/database/recoverlist";
+		return "default/database/recoverlist";
 	}
 	
 	@RequestMapping(value = "/backup")
-	@SystemControllerLog(description="数据库管理-备份数据库")
+	//@SystemControllerLog(description="数据库管理-备份数据库")
 	@ResponseBody
 	public String backup(BackupDatabaseInfo backup,HttpSession session) {
 		try {
@@ -89,7 +89,7 @@ public class BackupController {
 	}
 	
 	@RequestMapping(value = "/recover")
-	@SystemControllerLog(description="数据库管理-还原数据库")
+	//@SystemControllerLog(description="数据库管理-还原数据库")
 	@ResponseBody
 	public String recover(int id,HttpSession session) {
 		try {
@@ -125,7 +125,7 @@ public class BackupController {
 	}
 	
 	@RequestMapping(value = "/delete")
-	@SystemControllerLog(description="数据库管理-删除数据库")
+	//@SystemControllerLog(description="数据库管理-删除数据库")
 	@ResponseBody
 	public String delete(int id,HttpSession session) {
 		try {
@@ -150,14 +150,14 @@ public class BackupController {
 	}
 	
 	@RequestMapping(value = "/listAll")
-	@SystemControllerLog(description="数据库管理-查看备份数据列表")
+	//@SystemControllerLog(description="数据库管理-查看备份数据列表")
 	@ResponseBody
 	public List<BackupDatabaseInfo> listAllRole() {
 		List <BackupDatabaseInfo> backupList = backupService.findAll();
 		return backupList;
 	}
 	
-	@SystemControllerLog(description="数据库管理-角色列表")
+	//@SystemControllerLog(description="数据库管理-角色列表")
 	@RequestMapping(value = "/data")
 	@ResponseBody
 	public String data(String params) {

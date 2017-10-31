@@ -39,13 +39,13 @@ public class HandleException {
 	 * 全局异常处理
 	 * @return
 	 */
-	@ExceptionHandler(value = Exception.class)
+	/*@ExceptionHandler(value = Exception.class)
 	public ModelAndView exceptionHandler(){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/error");
 		return mv;
 	}
-	
+	*/
 	/**
 	 * 没有认证
 	 * @return

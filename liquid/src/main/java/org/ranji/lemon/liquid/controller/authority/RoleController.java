@@ -50,8 +50,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 @Controller
-@RequestMapping(value = "/default/authority/role")
+@RequestMapping(value = "/role")
 public class RoleController {
+	
 	
 	@Autowired
 	private IRoleService roleService;

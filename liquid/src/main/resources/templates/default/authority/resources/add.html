@@ -3,7 +3,7 @@
 <script  th:inline="javascript">
 /*<![CDATA[*/
 	$('#add_resourcePId').LemonGetList({
-		requestListUrl:'default/authority/resources/listAll',
+		requestListUrl:'resources/listAll',
 		beforeFun:function(data){
 			return getListByTree(data);
 		},
@@ -70,7 +70,7 @@
 				tem_str +=',' + $(this).val();			
 			}
 		})
-	 $.post("default/authority/resources/save",
+	 $.post("resources/save",
 		{
 			resourceName:$("#add_resourceName").val(),
 			resourceType:$("#add_resourceType option:selected").val(),
@@ -81,7 +81,7 @@
 				removeStorage();
 				
 				$.ajax({
-					url:"default/authority/resources/list"
+					url:"resources/list"
 				}).done(function(data){
 					$(".ajax_dom").empty()
 					$(data).appendTo($(".ajax_dom"))

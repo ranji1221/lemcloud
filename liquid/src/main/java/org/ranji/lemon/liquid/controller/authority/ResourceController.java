@@ -50,7 +50,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 @Controller
-@RequestMapping(value="/default/authority/resources")
+@RequestMapping(value="/resources")
 public class ResourceController {
 	@Autowired
 	private IResourceService resourceService;

@@ -8,7 +8,7 @@ function resourceListInit(){
 	$("#resourceList").LemonGetList({
 		useLocalStorage: true,
 		className_Page:"#page",
-	    requestListUrl : 'default/authority/resources/data',
+	    requestListUrl : 'resources/data',
 	    generateItemFun : function(index,value,data,extend){
 	   		var thisType = '';
 	   		switch(value.resourceType){
@@ -78,7 +78,7 @@ $('.resource_removeAllBtn').bindDialogs({
 	  		
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("default/authority/resources/deleteAll",{
+		$.post("resources/deleteAll",{
 			resource_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -95,7 +95,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个用户吗？',
 	success:function(handle){
 		var resourceId = $(handle).closest('tr').attr('resource_id');
-		$.post("default/authority/resources/delete",{
+		$.post("resources/delete",{
 			id:resourceId,
 		},function(data){
 			if(data.success == true) {
@@ -157,7 +157,7 @@ function dealDataToModal(data){
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
 	$('.select_resourceList').LemonGetList({
-		requestListUrl:'default/authority/resources/listAll',
+		requestListUrl:'resources/listAll',
 		beforeFun:function(data){
 			console.log(data)
 			return getListByTree(data);
@@ -200,7 +200,7 @@ $(document).on("click","#submit_editResource",function(){
 			tem_str +=',' + $(this).val();
 		}
 	})
-	$.post("default/authority/resources/edit",
+	$.post("resources/edit",
 		{
 			id:$("#edit_resourceId").val(),
 			resourceName:$("#edit_resourceName").val(),
@@ -223,10 +223,6 @@ $(document).on("click","#submit_editResource",function(){
 </script>
 
 <div class="rolelist sourcelist">
-	<!-- 删除模态框图标 -->
-	<div style="display: none;">
-		<img id="img" th:src="@{/default/image/modal/trash.png}"/>
-	</div>
 	<ol class="breadcrumb">
 		<li>
 			<i class="glyphicon glyphicon-home"></i>

@@ -7,7 +7,7 @@
 function roleListInit(){
 	$("#rolesList").LemonGetList({
 		useLocalStorage : true,
-	    requestListUrl : 'default/authority/role/data',
+	    requestListUrl : 'role/data',
 	    className_Page : "#page",
 	    generateItemFun : function(index,value,data,extend){
 			var Pname = value.rolePName == null ? '无':value.rolePName ;
@@ -97,7 +97,7 @@ $('.role_removeAllBtn').bindDialogs({
 	  		}
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("default/authority/role/deleteAll",{
+		$.post("role/deleteAll",{
 			role_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -115,7 +115,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个角色吗？',
 	success:function(handle){
 		var roleId = $(handle).closest('tr').attr('role_id');
-		$.post("default/authority/role/delete",{
+		$.post("role/delete",{
 			id:roleId,
 		},function(data){
 			if(data.success == true) {
@@ -182,7 +182,7 @@ window.dealDataToModal = function(data){
 	$("#edit_roleMaxNum").val(data.roleMaxNum);
 	$("#edit_remarks").val(data.remarks);
 	$('.select_roleList').LemonGetList({
-		requestListUrl:'default/authority/role/listAll',
+		requestListUrl:'role/listAll',
 		beforeFun:function(data){
 			return getListByTree(data);
 		},
@@ -243,7 +243,7 @@ function beforeMaxEditModal(){
 	});
 }
 $(document).on("click","#submit_editRole",function(){
-	$.post("default/authority/role/edit",
+	$.post("role/edit",
 		{
 			id:$("#edit_roleId").val(),
 			displayName:$("#edit_displayName").val(),
@@ -284,7 +284,7 @@ $(document).on("click","#submit_editRole",function(){
 	}
 	//渲染树插件
 	function createTreePlug(className,data){
-		var url = 'default/authority/role/getOperation';
+		var url = 'role/getOperation';
 		var request_data = {"roleId":data.id};
 		if(!is_first_into_page){ $(className).jstree("destroy"); }
 		is_first_into_page = false;
@@ -323,7 +323,7 @@ $(document).on("click","#submit_editRole",function(){
 		var request_data = {};
 		request_data.roleId = $("#auth_roleName").attr('role_id');
 		request_data.operationIds = jsTree_getSelectedOperationIds('.role-authorization');
-		var url = 'default/authority/role/auth';
+		var url = 'role/auth';
 		$.post(url,request_data,function(data){
 			if(data.success == true) {
 				$('.alertArea').showAlert({content:'授权成功'});
@@ -341,7 +341,7 @@ $(document).on("click","#submit_editRole",function(){
 		}else{
 	        $.ajax({
 	            type: "POST",
-	            url:"default/authority/resources/get/resourceAndOperation",
+	            url:"resources/get/resourceAndOperation",
 	            dataType:"json",
 	            async: false,
 	            success:function(data) {
@@ -400,10 +400,6 @@ $(document).on("click","#submit_editRole",function(){
 /*]]>*/
 </script>
 <div class="rolelist roleslist">
-<!-- 删除模态框图标 -->
-<div style="display: none;">
-	<img id="img" th:src="@{/default/image/modal/trash.png}"/>
-</div>
 	<ol class="breadcrumb">
 		<li>
 			<i class="glyphicon glyphicon-home"></i>
