@@ -50,7 +50,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 @Controller
-@RequestMapping(value="/backend/template_default/authority/resources")
+@RequestMapping(value="/default/authority/resources")
 public class ResourceController {
 	@Autowired
 	private IResourceService resourceService;
@@ -63,14 +63,14 @@ public class ResourceController {
 	@RequestMapping(value = "/list")
 	//@SystemControllerLog(description="权限管理-资源列表")
 	public String listResource() {
-		return "backend/template_default/authority/resources/list";
+		return "default/authority/resources/list";
 	}
 
 //	@SystemControllerPermission("resource:add")
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加资源跳转")
 	public String addResources() {
-		return "backend/template_default/authority/resources/add";
+		return "default/authority/resources/add";
 	}
 	
 	@ResponseBody

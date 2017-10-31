@@ -4,11 +4,11 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<link rel="stylesheet" href="../../../static/template_default/style/common/common.css" th:href="@{/template_default/style/common/common.css}" />
-	<link rel="stylesheet" href="../../../static/template_default/style/login/login.css" th:href="@{/template_default/style/login/login.css}"/>
-	<script src="../../../static/template_default/script/rem/rem.js" th:src="@{/template_default/script/rem/rem.js}"></script>
+	<link rel="stylesheet" href="../../../static/default/style/common/common.css" th:href="@{/default/style/common/common.css}" />
+	<link rel="stylesheet" href="../../../static/default/style/login/login.css" th:href="@{/default/style/login/login.css}"/>
+	<script src="../../../static/default/script/rem/rem.js" th:src="@{/default/script/rem/rem.js}"></script>
 	<script src="../../../public/common/jquery1.9.1/jquery1.9.1.min.js" th:src="@{/common/jquery1.9.1/jquery1.9.1.min.js}"></script>
-	<script src="../../../static/template_default/script/login/login.js" th:src="@{/template_default/script/login/login.js}"></script>
+	<script src="../../../static/default/script/login/login.js" th:src="@{/default/script/login/login.js}"></script>
 	<title>管理员登录</title>
 </head>
 <body>
@@ -16,19 +16,19 @@
 		<div class="wrap">
 			<form action="login" method="post">
 				<div class="border">
-					<img src="../../../static/template_default/image/login/phone.png" alt="" th:src="@{/template_default/image/login/phone.png}"/>
+					<img src="../../../static/default/image/login/phone.png" alt="" th:src="@{/default/image/login/phone.png}"/>
 					<input type="text" name="userName" placeholder="请输入您的账号"/>
 				</div>
 				<div class="border">
-					<img src="../../../static/template_default/image/login/lock.png" alt="" th:src="@{/template_default/image/login/lock.png}"/>
+					<img src="../../../static/default/image/login/lock.png" alt="" th:src="@{/default/image/login/lock.png}"/>
 					<input type="password" name="userPass" placeholder="请输入您的密码"/>
 				</div>
 				<div class="border">
-					<img src="../../../static/template_default/image/login/check.png" alt="" th:src="@{/template_default/image/login/check.png}"/>
+					<img src="../../../static/default/image/login/check.png" alt="" th:src="@{/default/image/login/check.png}"/>
 					<input type="text" name="verityCode" placeholder="请输入验证码"/>
 				</div>
 				<div class="code">
-					<img src="../../../static/template_default/image/test/code.png" alt="" th:src="@{captcha}" onclick="this.src='captcha?d='+new Date().getTime()"/>
+					<img src="../../../static/default/image/test/code.png" alt="" th:src="@{captcha}" onclick="this.src='captcha?d='+new Date().getTime()"/>
 				</div>
 				<div class="clear"></div>
 				<button type="submit">立即登录</button>

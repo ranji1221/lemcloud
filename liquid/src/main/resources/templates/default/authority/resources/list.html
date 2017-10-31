@@ -1,14 +1,14 @@
-﻿<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
-<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
-﻿<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
-<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
+﻿<script src="static/default/script/common/modal.js" th:src="@{/default/script/common/modal.js}"></script>
+<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+﻿<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
+<script src="static/default/script/pagination/jquery.simplePagination.js" th:src="@{/default/script/pagination/jquery.simplePagination.js}"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
 function resourceListInit(){
 	$("#resourceList").LemonGetList({
 		useLocalStorage: true,
 		className_Page:"#page",
-	    requestListUrl : 'backend/template_default/authority/resources/data',
+	    requestListUrl : 'default/authority/resources/data',
 	    generateItemFun : function(index,value,data,extend){
 	   		var thisType = '';
 	   		switch(value.resourceType){
@@ -78,7 +78,7 @@ $('.resource_removeAllBtn').bindDialogs({
 	  		
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("backend/template_default/authority/resources/deleteAll",{
+		$.post("default/authority/resources/deleteAll",{
 			resource_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -95,7 +95,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个用户吗？',
 	success:function(handle){
 		var resourceId = $(handle).closest('tr').attr('resource_id');
-		$.post("backend/template_default/authority/resources/delete",{
+		$.post("default/authority/resources/delete",{
 			id:resourceId,
 		},function(data){
 			if(data.success == true) {
@@ -157,7 +157,7 @@ function dealDataToModal(data){
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
 	$('.select_resourceList').LemonGetList({
-		requestListUrl:'backend/template_default/authority/resources/listAll',
+		requestListUrl:'default/authority/resources/listAll',
 		beforeFun:function(data){
 			console.log(data)
 			return getListByTree(data);
@@ -200,7 +200,7 @@ $(document).on("click","#submit_editResource",function(){
 			tem_str +=',' + $(this).val();
 		}
 	})
-	$.post("backend/template_default/authority/resources/edit",
+	$.post("default/authority/resources/edit",
 		{
 			id:$("#edit_resourceId").val(),
 			resourceName:$("#edit_resourceName").val(),
@@ -225,7 +225,7 @@ $(document).on("click","#submit_editResource",function(){
 <div class="rolelist sourcelist">
 	<!-- 删除模态框图标 -->
 	<div style="display: none;">
-		<img id="img" th:src="@{/template_default/image/modal/trash.png}"/>
+		<img id="img" th:src="@{/default/image/modal/trash.png}"/>
 	</div>
 	<ol class="breadcrumb">
 		<li>
@@ -242,7 +242,7 @@ $(document).on("click","#submit_editResource",function(){
 					<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
 					<span class="input-group-btn">
 			        <button class="btn btn-default" type="button">
-						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+						<img src="static/default/image/common/iconsearch.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
 			        </button>
 			        </span>
 				</div>
@@ -503,16 +503,16 @@ $(document).on("click","#submit_editResource",function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="backend/template_default/authority/resources/add">
-					<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+				<span class="newPro" url="default/authority/resources/add">
+					<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 					新建
 				</span>
 				<span class="renovate">
-					<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+					<img src="static/default/image/authority/list/icons1.png" alt="" th:src="@{/default/image/authority/list/icons1.png}"/>
 					刷新
 				</span>
 				<span class="resource_removeAllBtn">
-					<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}"/>
+					<img src="static/default/image/authority/list/icons2.png" alt="" th:src="@{/default/image/authority/list/icons2.png}"/>
 					删除
 				</span>
 			</div>
@@ -523,5 +523,5 @@ $(document).on("click","#submit_editResource",function(){
 	</div>
 </div>
 <!-- 模板框引入 -->
-<div th:replace="/backend/template_default/authority/resources/view :: viewResource"></div>
-<div th:replace="/backend/template_default/authority/resources/edit :: editResource"></div>
+<div th:replace="/default/authority/resources/view :: viewResource"></div>
+<div th:replace="/default/authority/resources/edit :: editResource"></div>

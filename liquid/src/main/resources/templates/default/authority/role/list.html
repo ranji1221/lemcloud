@@ -1,13 +1,13 @@
-<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
-<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
-<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
-<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
+<script src="static/default/script/common/modal.js" th:src="@{/default/script/common/modal.js}"></script>
+<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
+<script src="static/default/script/pagination/jquery.simplePagination.js" th:src="@{/default/script/pagination/jquery.simplePagination.js}"></script>
 <script  th:inline="javascript">
 /*<![CDATA[*/
 function roleListInit(){
 	$("#rolesList").LemonGetList({
 		useLocalStorage : true,
-	    requestListUrl : 'backend/template_default/authority/role/data',
+	    requestListUrl : 'default/authority/role/data',
 	    className_Page : "#page",
 	    generateItemFun : function(index,value,data,extend){
 			var Pname = value.rolePName == null ? '无':value.rolePName ;
@@ -97,7 +97,7 @@ $('.role_removeAllBtn').bindDialogs({
 	  		}
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("backend/template_default/authority/role/deleteAll",{
+		$.post("default/authority/role/deleteAll",{
 			role_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -115,7 +115,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个角色吗？',
 	success:function(handle){
 		var roleId = $(handle).closest('tr').attr('role_id');
-		$.post("backend/template_default/authority/role/delete",{
+		$.post("default/authority/role/delete",{
 			id:roleId,
 		},function(data){
 			if(data.success == true) {
@@ -182,7 +182,7 @@ window.dealDataToModal = function(data){
 	$("#edit_roleMaxNum").val(data.roleMaxNum);
 	$("#edit_remarks").val(data.remarks);
 	$('.select_roleList').LemonGetList({
-		requestListUrl:'backend/template_default/authority/role/listAll',
+		requestListUrl:'default/authority/role/listAll',
 		beforeFun:function(data){
 			return getListByTree(data);
 		},
@@ -243,7 +243,7 @@ function beforeMaxEditModal(){
 	});
 }
 $(document).on("click","#submit_editRole",function(){
-	$.post("backend/template_default/authority/role/edit",
+	$.post("default/authority/role/edit",
 		{
 			id:$("#edit_roleId").val(),
 			displayName:$("#edit_displayName").val(),
@@ -284,7 +284,7 @@ $(document).on("click","#submit_editRole",function(){
 	}
 	//渲染树插件
 	function createTreePlug(className,data){
-		var url = 'backend/template_default/authority/role/getOperation';
+		var url = 'default/authority/role/getOperation';
 		var request_data = {"roleId":data.id};
 		if(!is_first_into_page){ $(className).jstree("destroy"); }
 		is_first_into_page = false;
@@ -323,7 +323,7 @@ $(document).on("click","#submit_editRole",function(){
 		var request_data = {};
 		request_data.roleId = $("#auth_roleName").attr('role_id');
 		request_data.operationIds = jsTree_getSelectedOperationIds('.role-authorization');
-		var url = 'backend/template_default/authority/role/auth';
+		var url = 'default/authority/role/auth';
 		$.post(url,request_data,function(data){
 			if(data.success == true) {
 				$('.alertArea').showAlert({content:'授权成功'});
@@ -341,7 +341,7 @@ $(document).on("click","#submit_editRole",function(){
 		}else{
 	        $.ajax({
 	            type: "POST",
-	            url:"backend/template_default/authority/resources/get/resourceAndOperation",
+	            url:"default/authority/resources/get/resourceAndOperation",
 	            dataType:"json",
 	            async: false,
 	            success:function(data) {
@@ -402,7 +402,7 @@ $(document).on("click","#submit_editRole",function(){
 <div class="rolelist roleslist">
 <!-- 删除模态框图标 -->
 <div style="display: none;">
-	<img id="img" th:src="@{/template_default/image/modal/trash.png}"/>
+	<img id="img" th:src="@{/default/image/modal/trash.png}"/>
 </div>
 	<ol class="breadcrumb">
 		<li>
@@ -419,7 +419,7 @@ $(document).on("click","#submit_editRole",function(){
 					<input type="text" class="form-control" placeholder="搜索你想找到的..." id="list_search_str"/>
 					<span class="input-group-btn">
 	        <button class="btn btn-default" type="button" id="list_search_btn">
-				<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+				<img src="static/default/image/common/iconsearch.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
 	        </button>
 	        </span>
 				</div>
@@ -899,16 +899,16 @@ $(document).on("click","#submit_editRole",function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="backend/template_default/authority/role/add">
-			<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+				<span class="newPro" url="default/authority/role/add">
+			<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 			新建
 		</span>
 				<span class="renovate">
-			<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+			<img src="static/default/image/authority/list/icons1.png" alt="" th:src="@{/default/image/authority/list/icons1.png}"/>
 			刷新
 		</span>
 				<span class="role_removeAllBtn">
-			<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}"/>
+			<img src="static/default/image/authority/list/icons2.png" alt="" th:src="@{/default/image/authority/list/icons2.png}"/>
 			删除
 		</span>
 			</div>
@@ -923,6 +923,6 @@ $(document).on("click","#submit_editRole",function(){
 
 </div>
 <!-- 模板框引入 -->
-<div th:replace="/backend/template_default/authority/role/view :: viewRole"></div>
-<div th:replace="/backend/template_default/authority/role/edit :: editRole"></div>
-<div th:replace="/backend/template_default/authority/role/auth :: authRole"></div>
+<div th:replace="/default/authority/role/view :: viewRole"></div>
+<div th:replace="/default/authority/role/edit :: editRole"></div>
+<div th:replace="/default/authority/role/auth :: authRole"></div>

@@ -1,7 +1,7 @@
 <aside class="left-menu" th:fragment="navigation_bar">
 	<div class="user">
 		<div class="photo">
-			<img src="static/template_default/image/common/per.png" alt="" th:src="@{/template_default/image/common/per.png}"/>
+			<img src="static/default/image/common/per.png" alt="" th:src="@{/default/image/common/per.png}"/>
 		</div>
 		<div class="userinfo">
 			<h3>你好，<span>啊摇摇</span></h3>
@@ -24,17 +24,17 @@
 					<span class="iconfont icon-icon"></span>
 				</li>
 				<ul>
-					<li url="backend/template_default/authority/role/list">
+					<li url="default/authority/role/list">
 						<div class="iconfont icon-liebiao3 icon-slidenav"></div>
 						<p>角色列表</p>
 						<div class="hoverline"></div>
 					</li>
-					<li url="backend/template_default/authority/role/add">
+					<li url="default/authority/role/add">
 						<div class="iconfont icon-tianjia icon-slidenav"></div>
 						<p>添加角色</p>
 						<div class="hoverline"></div>
 					</li>
-					<li url="backend/template_default/authority/role/adds">
+					<li url="default/authority/role/adds">
 						<div class="iconfont icon-piliangtianjia icon-slidenav"></div>
 						<p>批量添加角色</p>
 						<div class="hoverline"></div>
@@ -46,17 +46,17 @@
 					<span class="iconfont icon-icon"></span>
 				</li>
 				<ul>
-					<li url="backend/template_default/authority/user/list">
+					<li url="default/authority/user/list">
 						<div class="iconfont icon-yonghuliebiao icon-slidenav"></div>
 						<p>用户列表</p>
 						<div class="hoverline"></div>
 					</li>
-					<li url="backend/template_default/authority/user/add">
+					<li url="default/authority/user/add">
 						<div class="iconfont icon-tianjiaxinyonghu icon-slidenav"></div>
 						<p>添加用户</p>
 						<div class="hoverline"></div>
 					</li>
-					<li url="backend/template_default/authority/user/adds">
+					<li url="default/authority/user/adds">
 						<div class="iconfont icon-tianjiaduoyonghu icon-slidenav"></div>
 						<p>批量添加用户</p>
 						<div class="hoverline"></div>
@@ -68,12 +68,12 @@
 					<span class="iconfont icon-icon"></span>
 				</li>
 				<ul>
-					<li url='backend/template_default/authority/resources/list'>
+					<li url='default/authority/resources/list'>
 						<div class="iconfont icon-ziyuanguanli2 icon-slidenav"></div>
 						<p>资源列表</p>
 						<div class="hoverline"></div>
 					</li>
-					<li url="backend/template_default/authority/resources/add">
+					<li url="default/authority/resources/add">
 						<div class="iconfont icon-tianjiaziyuan-q icon-slidenav"></div>
 						<p>添加资源</p>
 						<div class="hoverline"></div>
@@ -88,11 +88,11 @@
 				<div class="rightarrow"></div>
 			</li>
 			<ul>
-				<li url='${pageContext.request.contextPath}/backend/database/backup/backupJump'>
+				<li url='${pageContext.request.contextPath}/database/backup/backupJump'>
 					<div class="iconfont icon-beifenshujuku icon-slidenav"></div>
 					<p>备份数据库</p>
 				</li>
-				<li url='${pageContext.request.contextPath}/backend/database/backup/recoverlist'>
+				<li url='${pageContext.request.contextPath}/database/backup/recoverlist'>
 					<div class="iconfont icon-shuju-yihuifu icon-slidenav"></div>
 					<p>恢复数据库</p>
 				</li>

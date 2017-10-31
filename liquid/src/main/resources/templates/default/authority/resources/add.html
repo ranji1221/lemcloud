@@ -1,9 +1,9 @@
-﻿<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
-<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
+﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script  th:inline="javascript">
 /*<![CDATA[*/
 	$('#add_resourcePId').LemonGetList({
-		requestListUrl:'backend/template_default/authority/resources/listAll',
+		requestListUrl:'default/authority/resources/listAll',
 		beforeFun:function(data){
 			return getListByTree(data);
 		},
@@ -70,7 +70,7 @@
 				tem_str +=',' + $(this).val();			
 			}
 		})
-	 $.post("backend/template_default/authority/resources/save",
+	 $.post("default/authority/resources/save",
 		{
 			resourceName:$("#add_resourceName").val(),
 			resourceType:$("#add_resourceType option:selected").val(),
@@ -81,7 +81,7 @@
 				removeStorage();
 				
 				$.ajax({
-					url:"backend/template_default/authority/resources/list"
+					url:"default/authority/resources/list"
 				}).done(function(data){
 					$(".ajax_dom").empty()
 					$(data).appendTo($(".ajax_dom"))
@@ -100,10 +100,10 @@
 <ol class="breadcrumb breadcrumb_margin">
 	<li>
 		<i class="glyphicon glyphicon-home"></i>
-		<a href="#" data="2" url="home">首页</a>
+		<a href="#">首页</a>
 	</li>
 	<li>
-		<a href="#" url="${pageContext.request.contextPath}/backend/authority/resource/list">资源管理</a>
+		<a href="#">资源管理</a>
 	</li>
 	<li class="active">添加资源</li>
 	<div class="nav-search" id="nav-search">
@@ -112,7 +112,7 @@
 				<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
 				<span class="input-group-btn">
 			        <button class="btn btn-default" type="button">
-						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+						<img src="static/default/image/common/iconsearch.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
 			        </button>
 			        </span>
 			</div>
@@ -139,7 +139,7 @@
 			        <input type="text" class="form-control" placeholder="搜索你想找到的..."/>
 			        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button">
-						<img src="static/template_default/image/common/iconsearch.png" alt="" th:src="@{/template_default/image/common/iconsearch.png}"/>
+						<img src="static/default/image/common/iconsearch.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
 			        </button>
 			        </span>
 			    </div><!-- /input-group -->

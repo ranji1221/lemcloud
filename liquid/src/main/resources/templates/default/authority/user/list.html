@@ -1,12 +1,12 @@
-<script src="static/template_default/script/common/modal.js" th:src="@{/template_default/script/common/modal.js}"></script>
-<script src="static/template_default/script/common/common.js" th:src="@{/template_default/script/common/common.js}"></script>
-<script src="static/template_default/script/pagination/jquery.simplePagination.js" th:src="@{/template_default/script/pagination/jquery.simplePagination.js}"></script>
-<script src="static/template_default/script/common/LemonGetList.js" th:src="@{/template_default/script/common/LemonGetList.js}"></script>
+<script src="static/default/script/common/modal.js" th:src="@{/default/script/common/modal.js}"></script>
+<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+<script src="static/default/script/pagination/jquery.simplePagination.js" th:src="@{/default/script/pagination/jquery.simplePagination.js}"></script>
+<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
 function userListInit(){
 	$("#userList").LemonGetList({
-	    requestListUrl : 'backend/template_default/authority/user/data',
+	    requestListUrl : 'default/authority/user/data',
 		useLocalStorage: true,
 		className_Page:"#page",
 		generateItemFun : function(index,value,data,extend){
@@ -94,7 +94,7 @@ $('.user_removeAllBtn').bindDialogs({
 	  		
 	  	})
 	  	str = str.substring(0,str.length-1)
-		$.post("backend/template_default/authority/user/deleteAll",{
+		$.post("default/authority/user/deleteAll",{
 			user_ids:str,
 		},function(data){
 			if(data.success == true) {
@@ -112,7 +112,7 @@ $('.removeBtn').bindDialogs({
 	content : '你确定删除这个用户吗？',
 	success:function(handle){
 		var userId = $(handle).closest('tr').attr('user_id');
-		$.post("backend/template_default/authority/user/delete",{
+		$.post("default/authority/user/delete",{
 			id:userId,
 		},function(data){
 			if(data.success == true) {
@@ -164,7 +164,7 @@ $(document).on("click", ".userAuth", function(e) {
 	userAuth(data);
 });
 $(document).on("click","#submit_editUser",function(){
-	$.post("backend/template_default/authority/user/edits",
+	$.post("default/authority/user/edits",
 		{
 			id:$("#edit_userId").val(),
 			userName:$("#edit_userName").val(),
@@ -207,7 +207,7 @@ function userAuth(data) {
 
 //渲染树插件
 function createTreePlug(className,data){
-	var url = 'backend/template_default/authority/user/getRole';
+	var url = 'default/authority/user/getRole';
 	var request_data = {"userId":data.id};
 	
 	if(!is_first_into_page) {$(className).jstree("destroy");}
@@ -305,7 +305,7 @@ function getRoleData(){
 	}else{
         $.ajax({
             type: "POST",
-            url:"backend/template_default/authority/role/listAll",
+            url:"default/authority/role/listAll",
             dataType:"json",
             async: false,
             success:function(data) {
@@ -337,7 +337,7 @@ $('.user_auth_submit').on('click',function(){
 	var request_data = {};
 	request_data.userId = $("#auth_userName").attr('user_id');
 	request_data.roleIds = jsTree_getSelectedNodes('.user-authorizationtree');
-	var url = 'backend/template_default/authority/user/auth';
+	var url = 'default/authority/user/auth';
 	$.post(url,request_data,function(data){
 		if(data.success == true) {
 			$('.alertArea').showAlert({content:'授权成功'});
@@ -352,7 +352,7 @@ $('.user_auth_submit').on('click',function(){
 <div class="rolelist userlist">
 	<!-- 删除模态框图标 -->
 	<div style="display: none;">
-		<img id="img" th:src="@{/template_default/image/modal/trash.png}"/>
+		<img id="img" th:src="@{/default/image/modal/trash.png}"/>
 	</div>
 	<ol class="breadcrumb">
 		<li>
@@ -369,7 +369,7 @@ $('.user_auth_submit').on('click',function(){
 					<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
 					<span class="input-group-btn">
 			        <button class="btn btn-default" type="button">
-						<img src="static/template_default/image/common/iconsearch.png" th:src="@{/template_default/image/common/iconsearch.png}"/>
+						<img src="static/default/image/common/iconsearch.png" th:src="@{/default/image/common/iconsearch.png}"/>
 			        </button>
 			        </span>
 				</div>
@@ -748,16 +748,16 @@ $('.user_auth_submit').on('click',function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="backend/template_default/authority/user/add">
-					<img src="static/template_default/image/authority/list/icons4.png" alt="" th:src="@{/template_default/image/authority/list/icons4.png}"/>
+				<span class="newPro" url="default/authority/user/add">
+					<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 					新建
 				</span>
 				<span class="renovate">
-					<img src="static/template_default/image/authority/list/icons1.png" alt="" th:src="@{/template_default/image/authority/list/icons1.png}"/>
+					<img src="static/default/image/authority/list/icons1.png" alt="" th:src="@{/default/image/authority/list/icons1.png}"/>
 					刷新
 				</span>
 				<span class="user_removeAllBtn">
-					<img src="static/template_default/image/authority/list/icons2.png" alt="" th:src="@{/template_default/image/authority/list/icons2.png}" />
+					<img src="static/default/image/authority/list/icons2.png" alt="" th:src="@{/default/image/authority/list/icons2.png}" />
 					删除
 				</span>
 			</div>
@@ -768,6 +768,6 @@ $('.user_auth_submit').on('click',function(){
 	</div>
 </div>
 <!-- 模板框引入 -->
-<div th:replace="/backend/template_default/authority/user/view :: viewUser"></div>
-<div th:replace="/backend/template_default/authority/user/edit :: editUser"></div>
-<div th:replace="/backend/template_default/authority/user/auth :: authUser"></div>
+<div th:replace="/default/authority/user/view :: viewUser"></div>
+<div th:replace="/default/authority/user/edit :: editUser"></div>
+<div th:replace="/default/authority/user/auth :: authUser"></div>

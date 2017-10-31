@@ -50,7 +50,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 @Controller
-@RequestMapping(value = "/backend/template_default/authority/role")
+@RequestMapping(value = "/default/authority/role")
 public class RoleController {
 	
 	@Autowired
@@ -60,7 +60,7 @@ public class RoleController {
 		
 	@RequestMapping(value = "/list")
 	public String listRole() {
-		return "backend/template_default/authority/role/list";
+		return "default/authority/role/list";
 	}
 	
 	@RequestMapping(value = "/listAll")
@@ -113,7 +113,7 @@ public class RoleController {
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加角色跳转")
 	public String addRole() {
-		return "backend/template_default/authority/role/add";
+		return "default/authority/role/add";
 	}
 	
 	@ResponseBody
@@ -133,22 +133,17 @@ public class RoleController {
 	@RequestMapping(value = "/adds")
 	//@SystemControllerLog(description="权限管理-批量添加角色")
 	public String addsRoles() {
-		return "backend/template_default/authority/role/adds";
+		return "default/authority/role/adds";
 	}
 	
 	//@SystemControllerPermission("role:bulkadd")
-	@RequestMapping(value = "/view/{size}/{id}")
+	@RequestMapping(value = "/view/{id}")
 	//@SystemControllerLog(description="权限管理-查看角色")
-	public String viewRole(@PathVariable String size,@PathVariable int id, HttpSession session) {
+	public String viewRole(@PathVariable int id, HttpSession session) {
 		
 		Role role = roleService.find(id);
 		session.setAttribute("role", role);
-		if("modal".equals(size)){
-			return "backend/authority/role/viewmodal";
-		}else if("max".equals(size)){
-			return "backend/authority/role/view";
-		}
-		return null;
+		return "default/authority/role/view";
 		
 	}
 	

@@ -52,13 +52,13 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView loginPage(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/backend/template_default/login/login");
+		mv.setViewName("/default/login/login");
 		return mv;
 	}
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String indexPage(){
-		return "index";
+		return "/default/index";
 	}
 	/**
 	 * 登录

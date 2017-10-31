@@ -42,7 +42,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @version 1.0
  */
 @Controller
-@RequestMapping(value = "/backend/template_default/authority/user")
+@RequestMapping(value = "/default/authority/user")
 public class UserController {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class UserController {
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加用户跳转")
 	public String addUser() {
-		return "backend/template_default/authority/user/add";
+		return "default/authority/user/add";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/save")
@@ -74,14 +74,14 @@ public class UserController {
 	@RequestMapping(value = "/list")
 	//@SystemControllerLog(description="权限管理-用户列表")
 	public String listUser() {
-		return "backend/template_default/authority/user/list";
+		return "default/authority/user/list";
 	}
 	
 //	@SystemControllerPermission("user:adds")
 	@RequestMapping(value = "/adds")
 	//@SystemControllerLog(description="权限管理-批量添加用户")
 	public String AddsUser() {
-		return "backend/template_default/authority/user/adds";
+		return "default/authority/user/adds";
 	}
 	
 	
@@ -109,7 +109,7 @@ public class UserController {
 	//@SystemControllerLog(description="权限管理-给用户分配角色")
 	public String authUser(@PathVariable String size) {
 		if("modal".equals(size)){
-			return "backend/authority/user/authmodal";
+			return "authority/user/authmodal";
 		}else if("max".equals(size)){
 			return "backend/authority/user/auth";
 		}
