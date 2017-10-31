@@ -209,31 +209,31 @@ public class AuthorityServiceImpl implements IAuthorityService{
 		}
 	}
 	//查询所有用户（包含角色信息）
-		@Override
-		public String findAllUserInduleRoles(String params) {
-			try {
-				ObjectMapper om = new ObjectMapper();
-				Map<String, Object> map = new HashMap<String, Object>();
-				if (!StringUtils.isEmpty(params)) {
-					// 参数处理
-					map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
-				}
-				PagerModel<User> pg = userService.findPaginated(map);
-				List<User> userList = pg.getData();
-				for(User u: userList){
-					List<Role> roles = userService.findRoleByUserId(u.getId());
-					u.setRoleList(roles);
-				}
-				//序列化查询结果为JSON
-				Map<String, Object> result = new HashMap<String, Object>();
-				result.put("total", pg.getTotal());
-				result.put("rows", userList);
-				return om.writeValueAsString(result);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "{ \"total\" : 0, \"rows\" : [] }";
+	@Override
+	public String findAllUserInduleRoles(String params) {
+		try {
+			ObjectMapper om = new ObjectMapper();
+			Map<String, Object> map = new HashMap<String, Object>();
+			if (!StringUtils.isEmpty(params)) {
+				// 参数处理
+				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
 			}
+			PagerModel<User> pg = userService.findPaginated(map);
+			List<User> userList = pg.getData();
+			for(User u: userList){
+				List<Role> roles = userService.findRoleByUserId(u.getId());
+				u.setRoleList(roles);
+			}
+			//序列化查询结果为JSON
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("total", pg.getTotal());
+			result.put("rows", userList);
+			return om.writeValueAsString(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "{ \"total\" : 0, \"rows\" : [] }";
 		}
+	}
 	
 }
 
