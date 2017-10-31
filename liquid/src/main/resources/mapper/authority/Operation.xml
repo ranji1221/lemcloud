@@ -17,7 +17,7 @@
 			<if test="operationURL != null and operationURL != ''">operationURL = #{operationURL},</if>
 			<if test="resourceId != null and resourceId != ''">resourceId = #{resourceId},</if>
 			<if test="operationPId != null and operationPId != ''">operationPId = #{operationPId},</if>
-			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+			<if test="updateTime != null ">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
 	</update>
