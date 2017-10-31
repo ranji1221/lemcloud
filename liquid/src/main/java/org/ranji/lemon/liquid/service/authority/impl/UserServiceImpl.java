@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.ranji.lemon.core.service.impl.GenericServiceImpl;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.model.authority.User;
@@ -35,7 +36,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends GenericServiceImpl<User, Integer> implements IUserService {
-
+	
+	//-- 对用户密码进行加密后，再保存
+	@Override
+	public void save(User entity) {
+		entity.setUserPass(new DefaultPasswordService().encryptPassword(entity.getUserPass()));
+		super.save(entity);
+	}
+	
 	@Override
 	public User findByUserName(String userName) {
 		Map<String, Object> params = new HashMap<String, Object>();

@@ -51,16 +51,11 @@ public class SystemRealm extends AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authToken) throws AuthenticationException {
-		//--
+		//-- 1. 基于userName和password的令牌
 		UsernamePasswordToken token = (UsernamePasswordToken)authToken;
-		//-- 1. 根据验证单的填写的名字从后台查找用户
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("userName", token.getUsername());
-		List<User> users = userService.findAll(params);
-		User user = null;
-		if(users!=null && users.size()>0) user = users.get(0);
-//System.out.println(user.getUserName()+"======================");
-		//-- 2. 返回认证材料信息
+		//-- 2. 根据验证单的填写的名字从后台查找用户
+		User user = userService.findByUserName(token.getUsername());
+		//-- 3. 返回认证材料信息
 		AuthenticationInfo authenInfo = null;
 		if(user != null)
 			authenInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getUserPass(),getName());

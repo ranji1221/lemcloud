@@ -60,7 +60,7 @@ public class UserServiceTest {
 	@Test
 	public void testAddUser(){
 		User u = new User();
-		u.setUserName("lisi");
+		u.setUserName("jianbo");
 		u.setUserPass("123456");
 		userService.save(u);
 		System.out.println(u.getId());

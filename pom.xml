@@ -14,6 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+		<spring.boot.aop.version>1.5.8.RELEASE</spring.boot.aop.version>
 		<spring.boot.web.version>1.5.8.RELEASE</spring.boot.web.version>
 		<spring.boot.test.version>1.5.8.RELEASE</spring.boot.test.version>
 		<spring.boot.tomcat.version>1.5.8.RELEASE</spring.boot.tomcat.version>
@@ -22,6 +23,7 @@
 		<shiro.version>1.4.0</shiro.version>
 		<spring.boot.mysql.driver.version>5.1.44</spring.boot.mysql.driver.version>
 		<datasource.druid.version>1.1.4</datasource.druid.version>
+		<flowable.version>6.1.2</flowable.version>
 		<spring.boot.maven.plugin.version>1.5.8.RELEASE</spring.boot.maven.plugin.version>
 	</properties>
 	
@@ -71,6 +73,11 @@
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 			    <version>${spring.boot.thymeleaf.version}</version>
+			</dependency>
+			<dependency>  
+			    <groupId>org.springframework.boot</groupId>  
+			    <artifactId>spring-boot-starter-aop</artifactId>
+			    <version>${spring.boot.aop.version}</version>  
 			</dependency>
 			
 			<!--2. Spring Boot MyBatis -->
@@ -127,6 +134,18 @@
 			    <artifactId>shiro-ehcache</artifactId>  
 			    <version>${shiro.version}</version>  
 			</dependency>  
+			
+			<!--7. flowable框架 (工作流框架) -->
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-engine</artifactId>
+				<version>${flowable.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-spring</artifactId>
+				<version>${flowable.version}</version>
+			</dependency>
 			
 		</dependencies>
 	</dependencyManagement>

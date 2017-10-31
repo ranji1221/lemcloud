@@ -68,17 +68,16 @@ public class LoginController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@SystemControllerLog(description="登录系统")
+	//@SystemControllerLog(description="登录系统")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(User user, String verityCode, HttpSession session,HttpServletRequest request) throws Exception{
-		
+	public ModelAndView login(User user, String verityCode, HttpSession session,HttpServletRequest request) throws Exception{		
 		//-- 验证码
 		String rightCode = (String)session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		System.out.println(rightCode);
+System.out.println(rightCode);
 		//-- 输入的验证码
-		System.out.println(verityCode);
+//System.out.println(verityCode);
 		//-- 比较
-		System.out.println(rightCode.equals(verityCode));
+//System.out.println(rightCode.equals(verityCode));
 		
 		ModelAndView mv = new ModelAndView();
 		Subject currentUser = SecurityUtils.getSubject();
@@ -88,7 +87,7 @@ public class LoginController {
 			mv.setViewName("redirect:/index.html");
 		} catch (AuthenticationException e){
 			mv.addObject("message", "login errors");
-			mv.setViewName("redirect:/backend/template_default/login");
+			mv.setViewName("redirect:/login");
 		} 
 		return mv;
 	}
