@@ -16,7 +16,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
-import org.ranji.lemon.core.annotation.SystemControllerPermission;
 import org.ranji.lemon.core.system.SystemContext;
 import org.ranji.lemon.liquid.model.log.SystemLog;
 import org.ranji.lemon.liquid.service.log.prototype.ISystemLogService;
@@ -50,22 +49,16 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 
-
 @Component
 @Aspect
 public class SystemLogAspect {
 	private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);
-
     private static final ThreadLocal<Long> beginTimeThreadLocal = new NamedThreadLocal<Long>("ThreadLocal BeginTime");
     private static final ThreadLocal<SystemLog> logThreadLocal =  new NamedThreadLocal<SystemLog>("ThreadLocal Log");
-    
     
     @Autowired(required=false)
     private HttpServletRequest request;
 
-   // @Autowired
-   // private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    
     @Autowired
     private ISystemLogService logService;
     
@@ -93,17 +86,15 @@ public class SystemLogAspect {
      * 后置通知 用于拦截Controller层记录用户的操作
      * @param joinPoint 切点
      */
-    @SuppressWarnings("unchecked")
 	@After("controllerAspect()")
     public void doAfter(JoinPoint joinPoint) {
-        //System.out.println("doAfter"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(System.currentTimeMillis()));
         String title="";
-        String type="info";                       //日志类型(info:入库,error:错误)
+        String type="info";                       				//-- 日志类型(info:入库,error:错误)
       
-        String remoteAddr=request.getRemoteAddr();//请求的IP
-        String requestUri=request.getRequestURI();//请求的Uri
-        String method=request.getMethod();        //请求的方法类型(post/get)
-        Map<String,String[]> params=request.getParameterMap(); //请求提交的参数
+        String remoteAddr=request.getRemoteAddr();				//-- 请求的IP
+        String requestUri=request.getRequestURI();				//-- 请求的Uri
+        String method=request.getMethod();        				//-- 请求的方法类型(post/get)
+        Map<String,String[]> params=request.getParameterMap(); 	//-- 请求提交的参数
 
         try {
             title=getControllerMethodDescriptionInfo(joinPoint);
@@ -138,19 +129,9 @@ public class SystemLogAspect {
         log.setUserName(SecurityUtils.getSubject().getPrincipal()!=null ? (String)SecurityUtils.getSubject().getPrincipal(): "visitor" );
         log.setOperateDate(new Date(beginTimeThreadLocal.get()));
         log.setTimeout(new SimpleDateFormat("HH:mm:ss:SSS").format(new Date(endTime-beginTime-28800000))); //--减去8小时的东八区时间
-//System.out.println(log);   //-- 输出日志信息
-        //System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date(endTime))); //-- 输出结束时间
-        //1.直接执行保存操作
-        logService.save(log);
-//System.out.println(log.getId());
-		
-        //2.优化:异步保存日志
-        //new SaveLogThread(log, logService).start();
 
-        //3.再优化:通过线程池来执行日志保存  (暂时注释掉)
-        //threadPoolTaskExecutor.execute(new SaveLogThread(log, logService));
-       // System.out.println("thread1");
-       
+        //-- 保存日志信息
+        logService.save(log);
 		logThreadLocal.set(log);	
     }
     /**
@@ -159,14 +140,11 @@ public class SystemLogAspect {
      * @param e
      */
     @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")  
-    public  void doAfterThrowing(JoinPoint joinPoint, Throwable e) {    	
+    public  void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
         SystemLog log = logThreadLocal.get();
-        //System.out.println(log.getId());
         log.setLogType("error");
         log.setException(e.toString());
         logService.update(log);
-        //threadPoolTaskExecutor.execute(new UpdateLogThread(log, logService));
-        //System.out.println("thead2");
     }
 
     
@@ -186,58 +164,4 @@ public class SystemLogAspect {
         return discription;
     }
     
-    /**
-     * 获取SystemControllerPermission注解中的Value信息 用于Controller层注解
-     * 
-     * @param ProceedingJoinPoint 切点
-     * @return permissionInfo
-     */
-    public static String getControllerMethodPemissionInfo(JoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        SystemControllerPermission controllerPermission = method
-                .getAnnotation(SystemControllerPermission.class);
-        return controllerPermission != null ? controllerPermission.value():"";
-    }
-    
-    
-    /**
-     * 保存日志线程
-     */
-   /*
-    private static class SaveLogThread implements Runnable {
-        private SystemLog log;
-        private ISystemLogService logService;
-
-        public SaveLogThread(SystemLog log, ISystemLogService logService) {
-            this.log = log;
-            this.logService = logService;
-        }
-
-        @Override
-        public void run() {
-            logService.save(log);
-            System.out.println("thead3");
-        }
-    }*/
-
-    /**
-     * 日志更新线程
-     */
-    /*
-    private static class UpdateLogThread implements Runnable {
-        private SystemLog log;
-        private ISystemLogService logService;
-
-        public UpdateLogThread(SystemLog log, ISystemLogService logService) {
-            this.log = log;
-            this.logService = logService;
-        }
-
-        @Override
-        public void run() {
-            this.logService.update(log);
-            System.out.println("thread4");
-        }
-    }*/
 }

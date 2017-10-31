@@ -1,9 +1,7 @@
 package org.ranji.lemon.liquid.model.authority;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.ranji.lemon.core.model.AbstractModel;
 import org.ranji.lemon.core.util.JsonUtil;
 

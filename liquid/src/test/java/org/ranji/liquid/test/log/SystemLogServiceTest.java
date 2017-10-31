@@ -76,7 +76,7 @@ public class SystemLogServiceTest {
 		@Test
 		public void testUpdateSystemLog(){
 			SystemLog sl = new SystemLog();
-			sl.setId(3);
+			sl.setId(557);
 			sl.setLogType("警告1");
 			sl.setLogTitle("访问首页1");
 			sl.setRemoteAddr("192.168.1.17");
