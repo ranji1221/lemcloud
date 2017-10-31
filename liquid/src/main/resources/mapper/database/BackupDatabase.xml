@@ -50,7 +50,7 @@
 			<if test="infoName != null and infoName != ''">infoName = #{infoName},</if>
 			<if test="path != null and path != ''">path = #{path},</if>
 			<if test="remark != null and remark != ''">remark = #{remark},</if>
-			<if test="updateTime != null and updateTime != ''">updateTime = #{updateTime},</if>
+			<if test="updateTime != null">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
 	</update>
