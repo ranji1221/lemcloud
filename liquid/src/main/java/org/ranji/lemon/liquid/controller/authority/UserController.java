@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.ranji.lemon.core.annotation.SystemControllerLog;
+import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.model.authority.User;
 import org.ranji.lemon.liquid.service.authority.prototype.IAuthorityService;
 import org.ranji.lemon.liquid.service.authority.prototype.IUserService;
@@ -127,8 +128,13 @@ public class UserController {
 			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
 		}
 	}
-
-
+	
+	@SystemControllerLog(description="权限管理-获取用户角色")
+	@ResponseBody
+	@RequestMapping(value = "/getRole")
+	public List<Role> getUser(int id) {
+			return authService.findRolesByUserId(id);
+	}
 	@ResponseBody
 	@RequestMapping(value = "/delete")
 	public String deleteUser(int id) {
