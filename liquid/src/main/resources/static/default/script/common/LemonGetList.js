@@ -26,7 +26,6 @@ $(function(){
 			},
 			//渲染页面之前的操作
 			beforeFun : function(data){
-				console.log(data)
 				console.log('发送数据之前的操作 : beforeFun(data), 需要返回待处理数组');
 				return data.rows;
 			},
