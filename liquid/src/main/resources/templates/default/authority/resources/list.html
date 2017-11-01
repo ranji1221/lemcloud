@@ -159,7 +159,6 @@ function dealDataToModal(data){
 	$('.select_resourceList').LemonGetList({
 		requestListUrl:'resources/listAll',
 		beforeFun:function(data){
-			console.log(data)
 			return getListByTree(data);
 		},
 		generateItemFun:function(index,value){
