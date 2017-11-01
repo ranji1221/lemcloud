@@ -124,7 +124,6 @@ $(document).on("click", ".editResource", function(e) {
 	var class_name =  $("#editModal").find(".modal-contentbox").attr("maxClassName")
 	$("#editModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)
 	editSource(data);
-	beforeMaxEditResourceModal()
 });
 //添加查看事件
 $(document).on("click", ".viewResource", function(e) {
@@ -143,7 +142,7 @@ function beforeMaxEditResourceModal(){
 		checkboxClass: 'icheckbox_flat-blue',
 		increaseArea: '20%' // optional
 	});
-	
+	console.log($(".in_input_num input").val())
 	$(".in_input_num .limitlength").html(12-$(".in_input_num input").val().length)
 	$(".in_input_num input").on("keyup",function(){
 		var val = $(this).val().length
@@ -156,6 +155,7 @@ function dealDataToModal(data){
 	$("#edit_resourceId").val(data.id)
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
+	beforeMaxEditResourceModal()
 	$('.select_resourceList').LemonGetList({
 		requestListUrl:'resources/listAll',
 		beforeFun:function(data){

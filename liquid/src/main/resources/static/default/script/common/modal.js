@@ -82,7 +82,7 @@ function editSource(data) {
 	dealDataToModal(data);
 }
 //用户编辑框
-function editUserModal(data) {
+function editUser(data) {
 	$("#edit_userId").val(data.id);
 	$("#edit_userName").val(data.userName);
 	$("#edit_phone").val(data.phone);

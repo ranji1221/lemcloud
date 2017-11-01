@@ -8,12 +8,12 @@
 				<a href="#" data="2" url="home">首页</a>
 			</li>
 			<li>
-				<a href="#">角色管理</a>
+				<a href="#">用户管理</a>
 			</li>
 			<li>
-				<a href="#" url="">角色列表</a>
+				<a href="#" url="">用户列表</a>
 			</li>
-			<li class="active">角色授权</li>
+			<li class="active">用户授权</li>
 			<div class="nav-search" id="nav-search">
 				<form class="form-search">
 					<div class="input-group">
@@ -30,11 +30,11 @@
 		</ol>
 		<!--  页面中的红色提示框-->
 		<div class="alert alert-danger">
-			<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示角色授权操作。单击右方x号，可以关闭此条提示语！
+			<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示用户授权操作。单击右方x号，可以关闭此条提示语！
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 		<div class="title">
-			<p>角色授权</p>
+			<p>用户授权</p>
 			<div class="btns">
 				<a href="javascript:;" class="zclose" data-dismiss="modal">
 					<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/modal1.png}"/>
@@ -48,7 +48,7 @@
 					<label for="">用户名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax form_input sliderInput">
-							<input type="text" class="form-control rolenameinput" id="auth_roleName" placeholder="请输入角色名称" name='username' disabled="disabled"/>
+							<input type="text" class="form-control rolenameinput" id="auth_userName" placeholder="请输入角色名称" name='username' disabled="disabled"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-role-edit-name">
 			    		<!-- 您输入了特殊符号！ -->

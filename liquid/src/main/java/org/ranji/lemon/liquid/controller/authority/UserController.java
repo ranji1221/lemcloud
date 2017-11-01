@@ -134,8 +134,8 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/getRole")
 	public String getRoleByUser(Integer id) {
-			List<Role> roleList = authService.findRolesByUserId(id);
-			return JsonUtil.objectToJson(roleList);
+		List<Role> roleList = authService.findRolesByUserId(id);
+		return JsonUtil.objectToJson(roleList);
 	}
 	
 	@ResponseBody

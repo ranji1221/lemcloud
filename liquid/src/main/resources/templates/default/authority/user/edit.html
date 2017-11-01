@@ -1,6 +1,6 @@
 <script  src="static/default/script/validate/validate.js" th:src="@{/default/script/validate/validate.js}"></script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody" tabindex="-1" role="dialog" th:fragment="editUser">
-	<div class="maxcontainer editpage modal-contentbox">
+	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#editModal">
 		<ol class="breadcrumb">
 			<li>
 				<i class="glyphicon glyphicon-home"></i>
@@ -36,7 +36,7 @@
 			<p>编辑用户</p>
 			<div class="btns">
 
-				<a href="javascript:;" class="zclose closeAction" data-dismiss="modal">
+				<a href="javascript:;" class="closeAction" data-dismiss="modal">
 					<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/modal1.png}"/>
 				</a>
 			</div>
@@ -48,28 +48,9 @@
 					<label for="">用户名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入用户名称" name='username'/>
+							<input type="text" id="edit_userName" class="form-control rolenameinput" placeholder="请输入用户名称" name='username'/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-user-edit-name">
-			    		<!-- 您输入了特殊符号！ -->
-			    		</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group select">
-					<label for="">分配用户：</label>
-					<div class="inputwrapper">
-						<div class="inputwrappermax">
-							<select class="form-control select select-primary select-block mbl" data-toggle="select" name="fath">
-
-								<option value="0" disabled="disabled">选择分配用户</option>
-								<option value="1">用户列表</option>
-								<option value="2">首页</option>
-								<option value="3">用户列表</option>
-								<option value="4">用户列表</option>
-
-							</select>
-							<span class="errormessage errormessage-role-edit-fath">
 			    		<!-- 您输入了特殊符号！ -->
 			    		</span>
 						</div>
@@ -79,7 +60,7 @@
 					<label for="">联系电话：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入联系电话" name='phone'/>
+							<input type="text" class="form-control rolenameinput" placeholder="请输入联系电话" name='phone' id="edit_phone"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-user-edit-phone">
 			    		<!-- 您输入了特殊符号！ -->
@@ -91,7 +72,7 @@
 					<label for="">邮箱：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入邮箱" name='email'/>
+							<input type="text" class="form-control rolenameinput" placeholder="请输入邮箱" name='email' id="edit_email"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-user-edit-email">
 			    		<!-- 您输入了特殊符号！ -->

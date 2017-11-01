@@ -139,7 +139,7 @@ $(document).on("click", ".editUser", function(e) {
 	var data = getDataByStorage(storage_name,storage_id);
 	var class_name =  $("#editModal").find(".modal-contentbox").attr("maxClassName")
 	$("#editModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass("editrolelg modalCon active")
-	editUserModal(data);
+	editUser(data);
 });
 //添加查看事件
 $(document).on("click", ".viewUser", function(e) {
@@ -208,7 +208,7 @@ function userAuth(data) {
 //渲染树插件
 function createTreePlug(className,data){
 	var url = 'user/getRole';
-	var request_data = {"userId":data.id};
+	var request_data = {"id":data.id};
 	
 	if(!is_first_into_page) {$(className).jstree("destroy");}
 	is_first_into_page = false;

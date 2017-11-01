@@ -1,6 +1,6 @@
 <script  src="static/default/script/validate/validate.js " th:src="@{/default/script/validate/validate.js}"></script>
-<div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody editSour_modal" tabindex="-1" role="dialog" th:fragment="viewResource">
-	<div class="maxcontainer editpage modal-contentbox">
+<div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody editSour_modal" tabindex="-1" role="dialog" th:fragment="editResource">
+	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#editModal">
 				<ol class="breadcrumb">
 			<li>
 				<i class="glyphicon glyphicon-home"></i>
@@ -35,8 +35,9 @@
 		<div class="title">
 			<p>编辑资源</p>
 			<div class="btns">
-				<a href="javascript:;" class="zclose edit_external_link" data-dismiss="modal">
-					<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
+
+				<a href="javascript:;" class="closeAction" data-dismiss="modal">
+					<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/modal1.png}"/>
 				</a>
 			</div>
 		</div>
