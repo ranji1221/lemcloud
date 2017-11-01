@@ -38,7 +38,7 @@
 	<!-- 查询某个角色 -->
 	<select id="find" parameterType="int" resultType="Role">
 		SELECT
-			r.*,pr.roleName rolePName,rr.roleName roleRelyName
+			r.*,pr.displayName rolePName,rr.displayName roleRelyName
 		FROM
 			lemon_liquid_auth_role r
 		LEFT JOIN lemon_liquid_auth_role pr ON r.roleExtendPId = pr.id
