@@ -1,0 +1,255 @@
+/*进度提示框*/
+#leading-progress .modal-content{
+	background:none;
+	box-shadow: none;
+	border:none;
+}
+#leading-progress .modal-dialog{
+	width:6.66rem;
+	margin:2.5rem auto 0;
+}
+
+/*@media (max-width:768px){
+	#role-authorization .modal-dialog{
+		width:6rem;
+	}
+}*/
+#leading-progress .modal-content{
+	/*overflow:hidden;*/
+	width:100%;
+}
+/*@media (max-width:768px){
+	#leading-progress .modal-content{
+		width:6rem;
+	}
+}*/
+#leading-progress .modal-content .progressbox{
+	padding-top:0.5rem;
+}
+#leading-progress .modal-content .titlezl{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	margin:0 0.25rem;
+	/*background-color: rgba(55, 142, 248, 1);
+	color:rgb(255,255,255);*/
+	background-color: rgb(255,255,255);
+	color:rgba(51,51,51,1);
+	border-bottom:1px solid rgba(213, 213, 213, 1);
+	position:relative;
+	/*border-radius:0.1rem 0.1rem 0 0;*/
+}
+#leading-progress .modal-content .titlezl:before{
+	position:absolute;
+	content:'';
+	width:0.04rem;
+	height:0.2rem;
+	/*background:rgb(255,255,255);*/
+	background:rgba(55, 142, 248, 1);
+	/*left:0.25rem;*/
+	left:0rem;
+	top:0.3rem;
+}
+#leading-progress .modal-content .titlezl p{
+	font-size:0.18rem;
+	padding-left:0.08rem;
+	float:left;
+	line-height:0.8rem;
+}
+#leading-progress .modal-content .titlezl div.btns{
+	float:right;
+	height:0.6rem;
+}
+#leading-progress .modal-content .titlezl div.btns a{
+	float:left;
+	/*width:0.3rem;
+	height:0.6rem;*/
+	margin-left:0.1rem;
+}
+#leading-progress .modal-content .titlezl div.btns a img{
+	width:100%;
+	height:100%;
+}
+.leading-res-error,.leading-res-success{
+	width:6.66rem;
+	height:3.84rem;
+	border-radius:0.1rem;
+	background:rgb(255,255,255);
+	overflow:hidden;
+	display:none;
+	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+.res-error,.res-success{
+	width:3.26rem;
+	height:1rem;
+	margin:0.9rem auto 0;
+}
+.res-error img,.res-success img{
+	float:left;
+	height:1rem;
+	width:1rem;
+}
+.res-error h3,.res-success h3{
+	padding-left:0.1rem;
+	float:left;
+	height:0.5rem;
+	line-height: 0.5rem;
+	width:2.25rem;
+	color:rgb(0,0,0);
+	font-size:0.3rem;
+	font-weight:400;
+}
+.res-error p,.res-success p{
+	padding-left:0.1rem;
+	float:left;
+	height:0.5rem;
+	line-height: 0.5rem;
+	width:2.25rem;
+	color:rgb(153,153,153);
+	font-size:0.18rem;
+	font-weight:400;
+}
+/*进度条样式*/
+.progressbox >h3{
+	font-size:0.32rem;
+	color:rgb(255,255,255);
+	text-align: center;
+	font-weight:400;
+}
+.progressbox >p{
+	font-size:0.22rem;
+	color:rgb(255,255,255);
+	text-align: center;
+	font-weight:400;
+}
+.progressbox .progress{
+	height:0.34rem;
+	background:none;
+	border:1px solid rgba(255,255,255,0.8);
+	border-radius:0.17rem;
+	margin:1rem auto 0.5rem;
+	overflow:visible;
+}
+.progressbox .progress .progress-bar{
+	border-radius:0.17rem;
+	position:relative;
+	min-width:0.8rem;
+	background-color:rgb(49,126,221);/*蓝色*/
+}
+.progressbox .progress .progress-bar .pro-text{
+	/*display: none;*/
+	position:absolute;
+	right:0;
+	bottom:100%;
+	margin-bottom:0.1rem;
+	width: 0.8rem;
+	height: 0.4rem;
+	line-height:0.4rem;
+	font-size:0.24rem;
+	color:rgb(254,254,254);
+	border-radius:0.1rem;
+	/*绿色背景*/
+	/*background: -webkit-linear-gradient(rgba(116,194,116, 1), rgb(92,184,92)); 
+ 	background: -o-linear-gradient( rgba(116,194,116, 1),rgb(92,184,92)); 
+ 	background: -moz-linear-gradient(rgba(116,194,116, 1), rgb(92,184,92));
+	background: linear-gradient(rgba(116,194,116, 1),rgb(92,184,92) );*/ 
+	/*蓝色背景的*/
+	background: -webkit-linear-gradient(rgb(124,181,255), rgb(49,126,221)); /* Safari 5.1 - 6.0 */
+ 	background: -o-linear-gradient( rgb(124,181,255),rgb(49,126,221)); /* Opera 11.1 - 12.0 */
+ 	background: -moz-linear-gradient(rgb(124,181,255), rgb(49,126,221)); /* Firefox 3.6 - 15 */
+	background: linear-gradient(rgb(124,181,255),rgb(49,126,221) ); /* 标准的语法 */
+}
+.progressbox .progress .progress-bar .pro-text:after{
+	content:'';
+	position: absolute;
+	right:0.1rem;
+	top:100%;
+	height:0;
+	width:0;
+	border:0.06rem solid rgba(92,184,92, 0);
+	/*border-top:0.1rem solid rgba(92,184,92, 1);*/
+	/*蓝色*/
+	border-top:0.1rem solid rgb(49,126,221);
+}
+/*查看备注*/
+
+#database-remarks .modal-dialog{
+	width:6rem;
+	margin:2.5rem auto 0;
+}
+
+/*@media (max-width:768px){
+	#role-authorization .modal-dialog{
+		width:6rem;
+	}
+}*/
+#database-remarks .modal-content{
+	overflow:hidden;
+	width:100%;
+}
+/*@media (max-width:768px){
+	#database-remarks .modal-content{
+		width:6rem;
+	}
+}*/
+#database-remarks .modal-content .titlezl{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	margin:0 0.25rem;
+	/*background-color: rgba(55, 142, 248, 1);
+	color:rgb(255,255,255);*/
+	background-color: rgb(255,255,255);
+	color:rgba(51,51,51,1);
+	border-bottom:1px solid rgba(213, 213, 213, 1);
+	position:relative;
+	/*border-radius:0.1rem 0.1rem 0 0;*/
+}
+#database-remarks .modal-content .titlezl:before{
+	position:absolute;
+	content:'';
+	width:0.04rem;
+	height:0.2rem;
+	/*background:rgb(255,255,255);*/
+	background:rgba(55, 142, 248, 1);
+	/*left:0.25rem;*/
+	left:0rem;
+	top:0.3rem;
+}
+#database-remarks .modal-content .titlezl p{
+	font-size:0.18rem;
+	padding-left:0.08rem;
+	float:left;
+	line-height:0.8rem;
+}
+#database-remarks .modal-content .titlezl div.btns{
+	float:right;
+	height:0.6rem;
+}
+#database-remarks .modal-content .titlezl div.btns a{
+	float:left;
+	/*width:0.3rem;
+	height:0.6rem;*/
+	margin-left:0.1rem;
+}
+#database-remarks .modal-content .titlezl div.btns a img{
+	width:100%;
+	height:100%;
+}
+#database-remarks .modal-content .database-remark{
+	height:2.3rem;
+	padding-left:0.2rem;
+	padding-right:0.1rem;
+	border-radius: 0.06rem;
+	border: solid 1px rgba(221, 221, 221, 1);
+	margin:0.22rem 0.22rem 0.46rem;
+	color:rgb(102,102,102);
+	font-size:12px;
+	line-height:30px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+/*删除模态框样式控制*/
+#removeModal .modal-dialog{
+	width:6.66rem;
+	margin:2.5rem auto 0;
+}

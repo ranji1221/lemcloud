@@ -18,7 +18,7 @@ $(function(){
 	})
 	function doProgress(){
 		leading = setInterval(function(){
-		$.post("backend/database/backup/progressBar",{},function(data){
+		$.post("backup/progressBar",{},function(data){
 				if(data.success){
 					percentage = parseInt((data.info[0].progress / data.info[0].size) * 100);
 					progress_bar.width(percentage+'%');
@@ -35,7 +35,7 @@ $(function(){
 		})
 		var gid = $(this).closest("tr").attr("recover_id");
 		setTimeout(function(){
-			$.post("backend/database/backup/recover",{
+			$.post("backup/recover",{
 				id:gid,
 			},function(data){
 				if(data.success){

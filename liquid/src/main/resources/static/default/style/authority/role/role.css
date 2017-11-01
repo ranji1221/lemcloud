@@ -1,5 +1,5 @@
-@import url(../common/error_font.css);
-@import url(../common/hearder_icon.css);
+@import url(../../common/error_font.css);
+@import url(../../common/hearder_icon.css);
 .container-fluid {
   padding: 0 0.44rem; }
   .container-fluid .row {
