@@ -84,6 +84,7 @@ function editSource(data) {
 //用户编辑框
 function editUser(data) {
 	$("#edit_userId").val(data.id);
+	$("#edit_userPass").val(data.userPass);
 	$("#edit_userName").val(data.userName);
 	$("#edit_phone").val(data.phone);
 	$("#edit_email").val(data.email);
@@ -91,6 +92,7 @@ function editUser(data) {
 }
 /* 弹出查看框 */
 function viewRole(data) {
+	console.log(data)
 	//获取到本地的某条数据 示例代码
 	$("#view_roleName").html(data.displayName);
 	$("#view_roleMaxNum").html(data.roleMaxNum);
@@ -109,10 +111,16 @@ function viewUser(data) {
 }
 
 function viewSource(data) {
+	console.log(data)
 	$("#view_resourceName").html(data.resourceName);
 	$("#view_resourceType").html(data.resourceType);
 	$("#view_resourceURL").html(data.resourceURL);
-	$("#view_operationName").html(data.operationName);
+	var operationName = '';
+	$.each(data.operationList, function(i,v){
+		operationName += v.displayName + ",";
+	})
+	operationName = operationName.substr(0,operationName.length-1);
+	$("#view_operationName").html(operationName);
 
 }
 /**
@@ -122,10 +130,12 @@ function userAuth(data) {
 	$("#auth_userName").val(data.userName);
 }
 //关闭
-$(document).on("click",'.closeAction', function(e) {
+$(document).off("click.close","**")
+$(document).on("click.close",'.closeAction', function(e) {
 	$(this).closest('.modal-contentbox').remove();
 	var class_name = $(this).closest('.modal-contentbox').attr('narrowClassName')
 	$(this).closest('.modal-contentbox').appendTo(class_name);
+	$(".relateCtl [type='checkbox']").prop("checked",false)
 	if(!$('.ajax_dom').html()){
 		$('.ajax_dom').hide()
 	}

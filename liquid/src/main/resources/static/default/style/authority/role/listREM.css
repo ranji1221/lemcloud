@@ -339,7 +339,7 @@ div.tfoot .simple-pagination{
 	color:white;
 }
 .simple-pagination li:first-child {
-	background-image:url(../../image/authority/list/pagination-pre.png);
+	background-image:url(../../../image/authority/list/pagination-pre.png);
 	background-repeat:  no-repeat;
 	background-position:  center;
 	background-size:cover;
@@ -347,7 +347,7 @@ div.tfoot .simple-pagination{
 	
 }
 .simple-pagination li:last-child {
-	background-image:url(../../image/authority/list/pagination-next.png);
+	background-image:url(../../../image/authority/list/pagination-next.png);
 	background-repeat:  no-repeat;
 	background-position:  center;
 	background-size:cover;
@@ -401,7 +401,7 @@ div.tfoot .simple-pagination{
 	margin-left:-0.02rem;
 	margin-right:0.25rem;
 	background-color:rgb(55,141,248);
-	background-image:url(../../image/authority/list/pagination-next.png);
+	background-image:url(../../../image/authority/list/pagination-next.png);
 	background-repeat:  no-repeat;
 	background-position:  center;
 	background-size:cover;

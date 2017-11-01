@@ -60,8 +60,7 @@
 		});
 	}
 	limitChangeLength($(".form_input .resources_name"),parseInt($(".minlimitNum").html()))
-	
-	$(document).on("click","#submit_addResource",function(){
+	$("#submit_addResource").on("click.submit_add",function(){
 		var tem_str = '';
 		$("#add_operation input:checked").each(function(){
 			if(!tem_str) {

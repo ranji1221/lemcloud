@@ -102,7 +102,7 @@
 	font-size:0.16rem;
 
 }
-/*»¬¿é*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 #role-authorization .role-slider{
 	width:3.4rem;
 	height:0.1rem;
@@ -167,7 +167,7 @@
 	display: none;
 	color:rgb(91,222,147);
 }
-/*¶àÑ¡¿òÈÝÆ÷*/
+/*ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
 #role-authorization .wrapper{
 	width: 100%;
@@ -271,7 +271,7 @@ label{
 	display:none;
 }
 
-/*×î´ó»¯ÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 
 .role-authorizationlg {
     position: absolute;
@@ -427,7 +427,7 @@ label{
 	margin-left:0.45rem;
 	right:-17em;
 }
-/*»¬¿é*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 .role-authorizationlg .role-slider{
 	width:3.4rem;
 	height:0.1rem;
@@ -453,7 +453,7 @@ label{
 .role-authorizationlg .ui-slider-horizontal .ui-slider-handle{
 	top:-0.07rem;
 	text-align: center;
-	background-image:url('../../images/sys/slidericon.png');
+	background-image:url('../../../images/sys/slidericon.png');
 	background-repeat: no-repeat;
 	background-position:center;
 	background-size:0.22rem 0.24rem;
@@ -532,7 +532,7 @@ label{
 	display: none;
 	color:rgb(91,222,147);
 }
-/*¶àÑ¡¿òÈÝÆ÷*/
+/*ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
 .role-authorizationlg .wrapper{
 	width: auto;

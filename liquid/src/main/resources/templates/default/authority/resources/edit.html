@@ -48,7 +48,8 @@
 					<label for="">资源名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax in_input_num">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" name='username'/>
+							<input type="hidden" id="edit_resourceId"/>
+							<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" id="edit_resourceName"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-source-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -60,7 +61,7 @@
 					<label for="">资源类型：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<select class="form-control select select-primary select-block mbl" data-toggle="select" name="fath">
+							<select class="form-control select select-primary select-block mbl" data-toggle="select" name="fath" id="edit_resourceType">
 
 								<option value="0" disabled="disabled">请选择资源类型</option>
 								<option value="1">菜单</option>
@@ -79,7 +80,7 @@
 					<label for="">父级资源：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<select class="select_resourceList form-control select select-primary select-block mbl" data-toggle="select" name="fath">
+							<select class="select_resourceList form-control select select-primary select-block mbl" data-toggle="select" id="edit_resourcePId">
 
 								<option value="0" disabled="disabled">选择资源</option>
 								<option value="1"></option>
@@ -96,29 +97,29 @@
 				</div>
 				<div class="form-group phone">
 					<label for="">相关操作：</label>
-					<div class="inputwrapper">
+					<div class="inputwrapper" id="edit_operation">
 						<div class="inputwrappermax">
 							<div class="col-xs-3 relateCtl">
-								<input name="look" id="sourcecheck" type="checkbox" checked="checked"/>
+								<input name="add_operation" displayname="查看" id="sourcecheck" type="checkbox" checked="checked"/>
 								<label for="sourcecheck">查看</label>
 							</div>
 							<div class="col-xs-3 relateCtl">
-								<input name="change" id="sourceChange" type="checkbox"/>
-								<label for="sourceChange">更改</label>
+								<input name="add_operation" displayname="编辑" id="sourceChange" type="checkbox"/>
+								<label for="sourceChange">编辑</label>
 							</div>
 							<div class="col-xs-3 relateCtl">
-								<input name="add" id="sourceAdd" type="checkbox"/>
+								<input name="add_operation" displayname="增加" id="sourceAdd" type="checkbox"/>
 								<label for="sourceAdd">增加</label>
 							</div>
 							<div class="col-xs-3 relateCtl">
-								<input name="del" id="sourceDel" type="checkbox"/>
+								<input name="add_operation" displayname="删除" id="sourceDel" type="checkbox"/>
 								<label for="sourceDel">删除</label>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="btnbox">
-					<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled">确定</button>
+					<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_editResource">确定</button>
 					<button type="button" class="btn btn-default">取消</button>
 				</div>
 			</form>

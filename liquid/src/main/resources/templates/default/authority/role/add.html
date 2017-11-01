@@ -1,6 +1,47 @@
-<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
-<script>
+﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+﻿<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
+<script  th:inline="javascript">
 /*<![CDATA[*/
+	var add = $(".numCtr .add");
+	var sub = $(".numCtr .reduce ");
+	var grey = '#bdc3c7';
+	var blue = '#378ef8';
+	function judge(limitNum) {
+		if(limitNum>9){
+			$(sub).css("background", blue);
+			$(add).css("background", grey);
+		}else if(limitNum < 1) {
+			$(sub).css("background", grey);
+			$(add).css("background", blue);
+		} else {
+			$(add).css("background", blue);
+			$(sub).css("background", blue);
+		}
+	}
+	
+	$(sub).off("click")
+	$(add).off("click")
+	$(sub).click(function(e) {
+		e.preventDefault();
+		var numVal = parseInt($("#add_roleMaxNum").val());
+		if(numVal > 0) {
+			numVal--;
+			$("#add_roleMaxNum").val(numVal);
+		}
+		var inputlimitNum = parseInt($(".numCtr input").val());
+		judge(inputlimitNum);
+	});
+	$(add).click(function(e) {
+		e.preventDefault();
+		var numVal = parseInt($("#add_roleMaxNum").val());
+		if(numVal < 10) {
+			numVal++;
+			$("#add_roleMaxNum").val(numVal);
+		}
+		var inputlimitNum = parseInt($(".numCtr input").val());
+		judge(inputlimitNum);
+	});
+
 $('.select_roleList').LemonGetList({
 	requestListUrl:'role/listAll',
 	beforeFun:function(data){
@@ -8,20 +49,58 @@ $('.select_roleList').LemonGetList({
 	},
 	generateItemFun:function(index,value){
 		var itemHtml = '';
-		if(index == 0 ){ itemHtml += '<option value="0">选择角色</option>';}
-		
-		for(var i=0;i<value.level;i++){
+		if(index == 0 ){ itemHtml += '<option value="-1">选择角色</option>';}
 		var kongge_str = '';
+		for(var i=0;i<value.level;i++){
+		
 			kongge_str += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		}
 		kongge_str += '|-';
 		
-		itemHtml += '<option  value="'+value.id+'">'+kongge_str+value.roleName+'</option>';
-
+		itemHtml += '<option  value="'+value.id+'">'+kongge_str+value.displayName+'</option>';
+		
 		return itemHtml;
 	},
 	
 })
+$(document).off("click.submit_add","**")
+$(document).on("click.submit_add","#submit_addRole",function(){
+	$.post("role/save",
+		{
+		displayName:$("#add_displayName").val(),
+		roleMaxNum:$("#add_roleMaxNum").val(),
+		remarks:$("#add_remarks").val(),
+		roleExtendPId:$("#add_roleExtendPId option:selected").val()?$("#add_roleExtendPId option:selected").val():-1,
+		roleRelyId:$("#add_roleRelyId option:selected").val()?$("#add_roleRelyId option:selected").val():-1
+		},function(data){
+			if(data.success){
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url:"role/list"
+				}).done(function(data){
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '添加成功'
+					});
+				})
+			
+			}
+			else{
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url:"role/list"
+				}).done(function(data){
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '添加失败'
+					});
+				})
+			}
+		}
+	,"json")
+}) 
 /*]]>*/
 </script>
 <div class="modal-contentbox">
@@ -88,7 +167,7 @@ $('.select_roleList').LemonGetList({
 					<label for="">角色名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax form_input sliderInput">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" name='username'/>
+							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" name='username' id="add_displayName"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-role-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -100,7 +179,7 @@ $('.select_roleList').LemonGetList({
 					<label for="">父级角色：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<select name="fath" data-toggle="select" class="form-control select select-primary select-block mbl select_roleList" id="edit_roleExtendPId">
+							<select name="fath" data-toggle="select" class="form-control select select-primary select-block mbl select_roleList" id="add_roleExtendPId">
 							</select>
 							<span class="errormessage errormessage-role-edit-fath">
 			    		<!-- 您输入了特殊符号！ -->
@@ -112,7 +191,7 @@ $('.select_roleList').LemonGetList({
 					<label for="">依赖角色：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<select name="yilai" data-toggle="select" class="select_roleList form-control select select-primary select-block mbl" id="edit_roleRelyId">
+							<select name="yilai" data-toggle="select" class="select_roleList form-control select select-primary select-block mbl" id="add_roleRelyId">
 							</select>
 							<span class="errormessage errormessage-role-edit-yilai">
 			    		<!-- 您输入了特殊符号！ -->
@@ -128,7 +207,7 @@ $('.select_roleList').LemonGetList({
 								-
 							</a>
 							<div class="input_num input">
-								<input type="text" id="edit_roleMaxNum" readonly="readonly" value='0' name="max_num"/>
+								<input type="text" id="add_roleMaxNum" readonly="readonly" value='0' name="max_num"/>
 							</div>
 							<a class="add active">
 								+
@@ -143,7 +222,7 @@ $('.select_roleList').LemonGetList({
 					<label for="">备注：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<textarea name="beizhu" id="" placeholder="请输入备注"></textarea>
+							<textarea name="beizhu" id="add_remarks" placeholder="请输入备注"></textarea>
 							<span class="errormessage errormessage-role-edit-num">
 			    		<!-- 您输入了特殊符号！ -->
 			    		</span>
@@ -151,7 +230,7 @@ $('.select_roleList').LemonGetList({
 					</div>
 				</div>
 				<div class="btnbox">
-					<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled">确定</button>
+					<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_addRole">确定</button>
 					<button type="button" class="btn btn-default">取消</button>
 				</div>
 			</form>

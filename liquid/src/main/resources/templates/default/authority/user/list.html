@@ -3,7 +3,7 @@
 <script src="public/common/pagination/jquery.simplePagination.js" th:src="@{/common/pagination/jquery.simplePagination.js}"></script>
 <script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script th:inline="javascript">
-/*<![CDATA[*/
+/*<![CDATA[*/	 	
 function userListInit(){
 	$("#userList").LemonGetList({
 	    requestListUrl : 'user/data',
@@ -131,7 +131,7 @@ $(document).on("click",".renovate",function(){
 	userListInit();
 })
 //添加编辑事件
-$(document).on("click", ".editUser", function(e) {
+$("table").on("click",".editUser", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -142,7 +142,8 @@ $(document).on("click", ".editUser", function(e) {
 	editUser(data);
 });
 //添加查看事件
-$(document).on("click", ".viewUser", function(e) {
+
+$("table").on("click",".viewUser", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -153,7 +154,7 @@ $(document).on("click", ".viewUser", function(e) {
 	viewUser(data);
 });
 //添加查看用户授权事件
-$(document).on("click", ".userAuth", function(e) {
+$("table").on("click",".userAuth", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -163,31 +164,44 @@ $(document).on("click", ".userAuth", function(e) {
 	$("#user-authorization").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name).attr("id",class_name)
 	userAuth(data);
 });
-$(document).on("click","#submit_editUser",function(){
-	$.post("user/edits",
+$("table").on("click","#submit_editUser",function(){
+	$.post("user/edit",
 		{
 			id:$("#edit_userId").val(),
 			userName:$("#edit_userName").val(),
+			userPass:$("#edit_userPass").val(),
 			phone:$("#edit_phone").val(),
 			email:$("#edit_email").val()
 		},function(data){
 			if(data.success){
 				removeStorage();
-				userListInit();
-				alert("成功啦");
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "user/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改成功'
+					});
+				})
 			}
 			else{
-				alert("失败啦")
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "user/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改失败'
+					});
+				})
 			}
 		}
 	,"json")
 }) 
-
-//授权js
-//关闭按钮
-$(".zclose").on("click",function(){
-	$(this).closest(".modal-contentbox").appendTo("#user-authorization")
-})
 /**
 * 查看用户授权模态框
 */
@@ -743,7 +757,7 @@ $('.user_auth_submit').on('click',function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="default/authority/user/add">
+				<span class="newPro" url="user/add">
 					<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 					新建
 				</span>
