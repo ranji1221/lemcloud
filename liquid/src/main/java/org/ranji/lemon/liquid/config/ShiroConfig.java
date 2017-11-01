@@ -30,8 +30,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/captcha","anon");
         filterChainDefinitionMap.put("/common/**", "anon"); 
         filterChainDefinitionMap.put("/default/**","anon");
-       // filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
-        filterChainDefinitionMap.put("/**", "anon");
+        filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
+       // filterChainDefinitionMap.put("/**", "anon");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
