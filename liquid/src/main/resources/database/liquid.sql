@@ -26,8 +26,8 @@ CREATE TABLE `lemon_liquid_auth_operation` (
   `operationName` varchar(255) default NULL COMMENT '操作名',
   `displayName` varchar(255) default NULL COMMENT '操作中文名',
   `operationURL` varchar(255) default NULL COMMENT '操作链接',
-  `resourceId` int(11) default NULL COMMENT '资源ID',
-  `operationPId` int(11) default NULL COMMENT '操作父ID',
+  `resourceId` int(11) not NULL COMMENT '资源ID',
+  `operationPId` int(11) not null default -1 COMMENT '操作父ID',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -44,7 +44,7 @@ CREATE TABLE `lemon_liquid_auth_resource` (
   `resourceName` varchar(255) default NULL COMMENT '资源名称',
   `resourceType` varchar(255) default NULL COMMENT '资源类型 1,菜单   2,文件',
   `resourceURL` varchar(255) default NULL COMMENT '资源链接',
-  `resourcePId` int(11) NOT NULL default '0' COMMENT '资源父ID',
+  `resourcePId` int(11) NOT NULL default -1 COMMENT '资源父ID',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -60,12 +60,12 @@ CREATE TABLE `lemon_liquid_auth_role` (
   `updateTime` datetime default NULL COMMENT '更新时间',
   `roleName` varchar(255) default NULL COMMENT '角色名称',
   `displayName` varchar(255) default NULL COMMENT '角色中文名称',
-  `roleExtendPId` int(11) default NULL COMMENT '角色父ID',
-  `roleRelyId` int(11) default NULL COMMENT '角色依赖ID',
+  `roleExtendPId` int(11) not NULL default -1 COMMENT '角色父ID',
+  `roleRelyId` int(11) not NULL default -1 COMMENT '角色依赖ID',
   `roleMaxNum` int(11) default NULL COMMENT '最大限制用户数',
   `remarks` varchar(255) default NULL COMMENT '备注',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
