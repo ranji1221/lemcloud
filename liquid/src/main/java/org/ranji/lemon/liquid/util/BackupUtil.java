@@ -2,10 +2,8 @@ package org.ranji.lemon.liquid.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.text.RandomStringGenerator;
 
 /**
  * 备份文件工具类 backupUtil
@@ -21,7 +19,7 @@ public class BackupUtil {
 	 * @return 路径String
 	 */
 	public static String getAbsolutePath(String databaseName, HttpSession session) {
-		return session.getServletContext().getRealPath("/") + "backup/" + databaseName;
+		return System.getProperty("user.dir") + "/backup/" + databaseName;
 	}
 	
 	/**
@@ -41,8 +39,7 @@ public class BackupUtil {
 	 */
 	public static String rename(String type) {
 		// 获取4位随机数字符串
-		@SuppressWarnings("deprecation")
-		String ranStr = RandomStringUtils.random(4, false, true);
+		String ranStr = new RandomStringGenerator.Builder().withinRange('0', '9').build().generate(4);
 		// 当前时间字符串
 		String timeStr = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); 
 		return timeStr + ranStr + "." + type;
