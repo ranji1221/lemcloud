@@ -111,10 +111,20 @@ function viewUser(data) {
 }
 
 function viewSource(data) {
-	console.log(data)
 	$("#view_resourceName").html(data.resourceName);
-	$("#view_resourceType").html(data.resourceType);
-	$("#view_resourceURL").html(data.resourceURL);
+	if(data.resourceType == 1) {
+		$("#view_resourceType").html("菜单");
+	}
+	else if(data.resourceType == 2) {
+		$("#view_resourceType").html("元素");
+	}
+	else if(data.resourceType == 3) {
+		$("#view_resourceType").html("文件");
+	}
+	else if(data.resourceType == 4) {
+		$("#view_resourceType").html("操作");
+	}
+	$('#view_resourcePName').html(data.resourcePName);
 	var operationName = '';
 	$.each(data.operationList, function(i,v){
 		operationName += v.displayName + ",";
