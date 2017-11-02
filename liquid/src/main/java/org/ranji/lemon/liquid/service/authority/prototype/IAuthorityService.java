@@ -91,4 +91,10 @@ public interface IAuthorityService {
 	 * @return 资源对象集合json
 	 */
 	public String findAllResourceInduleOperation(String params);
+	
+	/**
+	 * 删除资源（包含资源相关操作）
+	 * @param id 资源id
+	 */
+	public void deleteResource(int id);
 }

@@ -234,6 +234,12 @@ public class AuthorityServiceImpl implements IAuthorityService{
 			return "{ \"total\" : 0, \"rows\" : [] }";
 		}
 	}
+
+	@Override
+	public void deleteResource(int id) {
+		resourceService.delete(id);
+		operationService.deleteAllByResourceId(id);
+	}
 	
 }
 

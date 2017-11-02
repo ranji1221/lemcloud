@@ -139,7 +139,7 @@ public class ResourceController {
 	@RequestMapping(value = "/delete")
 	public String deleteResource(int id) {
 		try {
-			resourceService.delete(id);
+			authService.deleteResource(id);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			e.printStackTrace();
