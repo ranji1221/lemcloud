@@ -65,7 +65,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@SystemControllerLog(description="登录系统")
+	//@SystemControllerLog(description="登录系统")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView login(User user, String verityCode, HttpSession session,HttpServletRequest request) throws Exception{		
 		//-- 产生的验证码获取的方法，若需要认证则自己写验证的逻辑, verityCode为用户输入的验证码，嘿嘿，简单吧
