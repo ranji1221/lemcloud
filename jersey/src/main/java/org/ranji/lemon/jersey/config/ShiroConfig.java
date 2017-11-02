@@ -30,6 +30,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/common/**", "anon"); 
         filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/druid/**","anon");
         filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
