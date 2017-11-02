@@ -95,6 +95,7 @@ public class UserController {
 		try {
 			User user = userService.find(newUser.getId());
 			user.setUserName(newUser.getUserName());
+			user.setUserPass(newUser.getUserPass());
 			user.setPhone(newUser.getPhone());
 			user.setEmail(newUser.getEmail());
 			userService.update(user);

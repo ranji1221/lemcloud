@@ -60,8 +60,7 @@
 		});
 	}
 	limitChangeLength($(".form_input .resources_name"),parseInt($(".minlimitNum").html()))
-	
-	$(document).on("click","#submit_addResource",function(){
+	$("#submit_addResource").on("click.submit_add",function(){
 		var tem_str = '';
 		$("#add_operation input:checked").each(function(){
 			if(!tem_str) {
@@ -89,7 +88,14 @@
 				$('.alertArea').showAlert({content:'添加成功'});
 			}
 			else{
-				alert("失败啦")
+
+				$.ajax({
+					url:"resources/list"
+				}).done(function(data){
+					$(".ajax_dom").empty()
+					$(data).appendTo($(".ajax_dom"))
+				})
+				$('.alertArea').showAlert({content:'添加失败'});
 			}
 		}
 	,"json")

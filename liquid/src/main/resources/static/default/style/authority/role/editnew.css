@@ -22,7 +22,7 @@
 	position:relative;
 	/*border-bottom:1px solid rgba(213,213,213,1);*/
 }
-/*Ò³ÃæÌáÊ¾¿ò*/
+/*Ò³ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½*/
 .editpage .alert-danger{
 	padding-left:0.32rem;
 	height:0.65rem;
@@ -139,7 +139,7 @@ form.newform .form-group >label:before{
 	background:rgba(55, 142, 248, 1);
 }
 
-form.newform .form-group input[type=text]{
+form.newform .form-group input[type=text],form.newform .form-group input[type=password]{
 	padding:0 0.24rem;
 	font-size:0.16rem;
 	color:rgb(51,51,51);

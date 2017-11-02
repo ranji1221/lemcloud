@@ -115,7 +115,7 @@ $(document).on("click",".renovate",function(){
 	resourceListInit();
 })
 //添加编辑事件
-$(document).on("click", ".editResource", function(e) {
+$("table").on("click",".editResource", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -126,7 +126,7 @@ $(document).on("click", ".editResource", function(e) {
 	editSource(data);
 });
 //添加查看事件
-$(document).on("click", ".viewResource", function(e) {
+$("table").on("click",".viewResource", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -135,34 +135,47 @@ $(document).on("click", ".viewResource", function(e) {
 	var class_name =  $("#viewModal").find(".modal-contentbox").attr("maxClassName")
 	$("#viewModal").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name)
 	viewSource(data);
+	
 });
 //编辑js
-function beforeMaxEditResourceModal(){
-	$(".relateCtl [type='checkbox']").iCheck({
-		checkboxClass: 'icheckbox_flat-blue',
-		increaseArea: '20%' // optional
-	});
-	console.log($(".in_input_num input").val())
-	$(".in_input_num .limitlength").html(12-$(".in_input_num input").val().length)
-	$(".in_input_num input").on("keyup",function(){
-		var val = $(this).val().length
-		$(".in_input_num .limitlength").html(12-val)
-	})
+function beforeMaxEditResourceModal(){	
+			if($(".relateCtl .icheckbox_flat-blue").length){
+				$(".relateCtl [type='checkbox']").iCheck("check")
+			}else{
+				$(".relateCtl [type='checkbox']").iCheck({
+					checkboxClass: 'icheckbox_flat-blue',
+					increaseArea: '20%' // optional
+				});
+			}
+			
+			
+			$(".in_input_num .limitlength").html(12-$(".in_input_num input").val().length)
+			$(".in_input_num input").on("keyup",function(){
+				var val = $(this).val().length
+				$(".in_input_num .limitlength").html(12-val)
+			})	
 }
 
 
 function dealDataToModal(data){
+	
 	$("#edit_resourceId").val(data.id)
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
+	
+	$.each(data.operationList, function(i,v){	
+			
+		$("input[displayname = "+v.displayName+"]").prop("checked",true)
+	})
 	beforeMaxEditResourceModal()
+	//$("#edit_operation").val(operationName)
+	
 	$('.select_resourceList').LemonGetList({
 		requestListUrl:'resources/listAll',
 		beforeFun:function(data){
 			return getListByTree(data);
 		},
 		generateItemFun:function(index,value){
-			console.log(value)
 			var itemHtml = '';
 			if(index == 0 ){ itemHtml += '<option value="0">选择资源</option>';}
 			
@@ -190,7 +203,7 @@ function dealDataToModal(data){
 		}
 	})
 }
-$(document).on("click","#submit_editResource",function(){
+$("table").on("click","#submit_editResource",function(){
 	var tem_str = '';
 	$("#edit_operation input:checked").each(function(){
 		if(!tem_str) {
@@ -498,7 +511,7 @@ $(document).on("click","#submit_editResource",function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="default/authority/resources/add">
+				<span class="newPro" url="resources/add">
 					<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 					新建
 				</span>

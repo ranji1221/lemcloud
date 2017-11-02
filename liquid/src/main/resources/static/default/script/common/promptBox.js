@@ -3,8 +3,6 @@ $(function(){
 	//确认信息框
 	$.fn.bindDialogs = function(params){
 		$(document).off("click.remove_click","**")
-		$('#removeModal').off("click.success_del","**")
-		$('#removeModal').off("click.cancel_clo",'**')
 		var _this = this;
 		var lastClickElement = '';
 		var defaults = {
@@ -21,6 +19,8 @@ $(function(){
 			
 		};
 		var this_obj = $.extend(defaults,params);
+		$('#removeModal').off("click."+this_obj.name_successBtn,'.'+this_obj.name_successBtn)
+		$('#removeModal').off("click."+this_obj.name_cancelBtn,'.'+this_obj.name_successBtn)
 		$(document).on("click",".viewRole,.role_editRole,.removeBtn,.roleAuth",function(){
 			$(".remove_alert").detach()
 })
@@ -54,11 +54,11 @@ $(function(){
 			
 			
 		});
-		$('#removeModal').on("click.success_del",'.'+this_obj.name_successBtn, function(e) {
+		$('#removeModal').on("click."+this_obj.name_successBtn,'.'+this_obj.name_successBtn, function(e) {
 			this_obj.success(lastClickElement);
 			hiddenModal();
 		});
-		$('#removeModal').on("click.cancel_clo",'.'+this_obj.name_cancelBtn, function(e) {
+		$('#removeModal').on("click."+this_obj.name_cancelBtn,'.'+this_obj.name_cancelBtn, function(e) {
 			this_obj.cancel(lastClickElement);
 			hiddenModal();
 		});

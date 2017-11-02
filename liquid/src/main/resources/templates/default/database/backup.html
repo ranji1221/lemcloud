@@ -9,12 +9,12 @@ $("#btn").click(function(){
 		if(data.success){
 			removeStorage();
 			$(".ajax_dom").empty()
-			/* $.ajax({
-				url:"${pageContext.request.contextPath}/backend/database/backup/backupJump"
+			 $.ajax({
+				url:"backup/backupJump"
 			}).done(function(data){
 				$(data).appendTo($(".ajax_dom"))
 				$('.alertArea').showAlert({content:'备份成功'});
-			}) */
+			})
 			alert("备份成功")
 		
 		}

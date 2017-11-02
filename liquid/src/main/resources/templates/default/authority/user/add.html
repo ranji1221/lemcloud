@@ -1,4 +1,7 @@
-<!--<script>
+﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
+﻿<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
 	//滑块限制字符
 	$(".sliderInput").css("width", "0");
 	var minlimitNum = 5;
@@ -32,10 +35,11 @@
 	limitChangeLength($(".form_input .role"), parseInt($(".minlimitNum").html()));
 	limitChangeLength($(".form_input .phone"), 11)
 	limitChangeLength($(".form_input .emlia"), 15)
-
-	$(document).on("click", "#submit_addUser", function() {
-		$.post("${pageContext.request.contextPath}/backend/authority/user/save", {
+	
+	$("table").on("click", "#submit_addUser", function() {
+		$.post("user/save", {
 			userName: $("#add_userName").val(),
+			userPass:$("#add_userPass").val,
 			phone: $("#add_phone").val(),
 			email: $("#add_email").val()
 		}, function(data) {
@@ -43,7 +47,7 @@
 				removeStorage();
 				$(".ajax_dom").empty()
 				$.ajax({
-					url: "${pageContext.request.contextPath}/backend/authority/user/list"
+					url: "user/list"
 				}).done(function(data) {
 					$(data).appendTo($(".ajax_dom"))
 					$('.alertArea').showAlert({
@@ -52,11 +56,21 @@
 				})
 
 			} else {
-				alert("失败啦")
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "user/list"
+				}).done(function(data) {
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '添加失败'
+					});
+				})
 			}
 		}, "json")
 	})
-</script>-->
+	/*]]>*/
+</script>
 <ol class="breadcrumb breadcrumb_margin">
 	<li>
 		<i class="glyphicon glyphicon-home"></i>
@@ -120,7 +134,19 @@
 				<label for="">用户名称：</label>
 				<div class="inputwrapper">
 					<div class="inputwrappermax">
-						<input type="text" class="form-control rolenameinput" placeholder="请输入用户名称" name='username'/>
+						<input type="text" class="form-control rolenameinput" placeholder="请输入用户名称" id="add_userName"/>
+						<span class="limitlength">15</span>
+						<span class="errormessage errormessage-user-edit-name">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group input">
+				<label for="">用户密码：</label>
+				<div class="inputwrapper">
+					<div class="inputwrappermax">
+						<input type="password" class="form-control rolenameinput" placeholder="请输入用户密码" id="add_userPass"/>
 						<span class="limitlength">15</span>
 						<span class="errormessage errormessage-user-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -132,7 +158,7 @@
 				<label for="">联系电话：</label>
 				<div class="inputwrapper">
 					<div class="inputwrappermax">
-						<input type="text" class="form-control rolenameinput" placeholder="请输入联系电话" name='phone'/>
+						<input type="text" class="form-control rolenameinput" placeholder="请输入联系电话" id="add_phone"/>
 						<span class="limitlength">15</span>
 						<span class="errormessage errormessage-user-edit-phone">
 			    		<!-- 您输入了特殊符号！ -->
@@ -144,7 +170,7 @@
 				<label for="">邮箱：</label>
 				<div class="inputwrapper">
 					<div class="inputwrappermax">
-						<input type="text" class="form-control rolenameinput" placeholder="请输入邮箱" name='email'/>
+						<input type="text" class="form-control rolenameinput" placeholder="请输入邮箱" id="add_email"/>
 						<span class="limitlength">15</span>
 						<span class="errormessage errormessage-user-edit-email">
 			    		<!-- 您输入了特殊符号！ -->
@@ -153,7 +179,7 @@
 				</div>
 			</div>
 			<div class="btnbox">
-				<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled">确定</button>
+				<button type="button" class="btn btn-default " id="submit_addUser">确定</button>
 				<button type="button" class="btn btn-default">取消</button>
 			</div>
 		</form>

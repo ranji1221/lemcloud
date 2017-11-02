@@ -48,7 +48,8 @@
 					<label for="">角色名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax form_input sliderInput">
-							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" name='username' id="edit_displayName"/>
+							<input type="hidden" id="edit_roleId"/>
+							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" id="edit_displayName"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-role-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -111,7 +112,7 @@
 					</div>
 				</div>
 				<div class="btnbox">
-					<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled">确定</button>
+					<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_editRole">确定</button>
 					<button type="button" class="btn btn-default">取消</button>
 				</div>
 			</form>

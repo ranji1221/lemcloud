@@ -77,39 +77,38 @@ $(document).on('ifChecked','#checkall', function(event){
 	$(document).on('ifUnchecked', '#checkall',function(event){
   	$('.tablewrap input').iCheck('uncheck')
 });
-
-$('.role_removeAllBtn').bindDialogs({
-	content : '你确定删除这些角色吗？',
-	name_successBtn : 'deleteAllBtn',
-	name_cancelBtn : 'cancelAllBtn',
-	beforeFun:function(){
-		if($(".tablewrap input:checked").length){
-			return true;
-		}else{
-			return false;
-		}
-	},
-	success:function(){
-		var str="";
-	  	$(".tablewrap input:checked").each(function(i,v){
-	  		if($(this).closest('tr').attr("role_id")){
-		  	str+=$(this).closest('tr').attr("role_id")+","
-	  		}
-	  	})
-	  	str = str.substring(0,str.length-1)
-		$.post("role/deleteAll",{
-			role_ids:str,
-		},function(data){
-			if(data.success == true) {
-				$('.alertArea').showAlert({content:'删除成功'});
-				removeStorage();
-				roleListInit();
+	$('.role_removeAllBtn').bindDialogs({
+		content : '你确定删除这些角色吗？',
+		name_successBtn : 'deleteAllBtn',
+		name_cancelBtn : 'cancelAllBtn',
+		beforeFun:function(){
+			if($(".tablewrap input:checked").length){
+				return true;
 			}else{
-				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+				return false;
 			}
-		},'json');
-	}
-})
+		},
+		success:function(){
+			var str="";
+		  	$(".tablewrap input:checked").each(function(i,v){
+		  		if($(this).closest('tr').attr("role_id")){
+			  	str+=$(this).closest('tr').attr("role_id")+","
+		  		}
+		  	})
+		  	str = str.substring(0,str.length-1)
+			$.post("role/deleteAll",{
+				role_ids:str,
+			},function(data){
+				if(data.success == true) {
+					$('.alertArea').showAlert({content:'删除成功'});
+					removeStorage();
+					roleListInit();
+				}else{
+					$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+				}
+			},'json');
+		}
+	})
 
 $('.removeBtn').bindDialogs({
 	content : '你确定删除这个角色吗？',
@@ -135,7 +134,7 @@ $(document).on("click",".renovate",function(){
 	roleListInit();
 });
 //添加编辑事件
-$(document).on("click", ".role_editRole", function(e) {
+$("table").on("click",".role_editRole", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -152,7 +151,7 @@ $(document).on("click", ".role_editRole", function(e) {
 	editRoleModal(data);
 });
 //添加查看事件
-$(document).on("click", ".viewRole", function(e) {
+$("table").on("click",".viewRole", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -164,7 +163,7 @@ $(document).on("click", ".viewRole", function(e) {
 	viewRole(data);
 });
 //添加查看角色授权事件
-$(document).on("click", ".roleAuth", function(e) {
+$("table").on("click",".roleAuth", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -188,15 +187,16 @@ window.dealDataToModal = function(data){
 		},
 		generateItemFun:function(index,value){
 			var itemHtml = '';
+			console.log(value)
 			if(index == 0 ){ itemHtml += '<option value="0">选择角色</option>';}
 			
-			for(var i=0;i<value.level;i++){
 			var kongge_str = '';
+			for(var i=0;i<value.level;i++){
 				kongge_str += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 			}
 			kongge_str += '|-';
 			
-			itemHtml += '<option  value="'+value.id+'">'+kongge_str+value.roleName+'</option>';
+			itemHtml += '<option  value="'+value.id+'">'+kongge_str+value.displayName+'</option>';
 
 			return itemHtml;
 		},
@@ -243,7 +243,7 @@ function beforeMaxEditModal(){
 		}
 	});
 }
-$(document).on("click","#submit_editRole",function(){
+$("table").on("click","#submit_editRole",function(){
 	$.post("role/edit",
 		{
 			id:$("#edit_roleId").val(),
@@ -256,20 +256,34 @@ $(document).on("click","#submit_editRole",function(){
 			if(data.success){
 				removeStorage();
 				roleListInit();
-				alert("成功啦");
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改成功'
+					});
+				})
 			}
 			else{
-				alert("失败啦")
+				removeStorage();
+				roleListInit();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改失败'
+					});
+				})
 			}
 		}
 	,"json")
 }) 
-//授权js
-//关闭按钮
-	$(".zclose").on("click",function(){
-		//role-authorization
-		$(this).closest(".modal-contentbox").appendTo("#role-authorization")
-	})
 	var is_first_into_page = true;
 	
 	function roleAuthInit(data){
@@ -896,7 +910,7 @@ $(document).on("click","#submit_editRole",function(){
 		</table>
 		<div class="tfoot">
 			<div class="btns">
-				<span class="newPro" url="default/authority/role/add">
+				<span class="newPro" url="role/add">
 			<img src="static/default/image/authority/list/icons4.png" alt="" th:src="@{/default/image/authority/list/icons4.png}"/>
 			新建
 		</span>
