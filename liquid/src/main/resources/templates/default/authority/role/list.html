@@ -77,39 +77,38 @@ $(document).on('ifChecked','#checkall', function(event){
 	$(document).on('ifUnchecked', '#checkall',function(event){
   	$('.tablewrap input').iCheck('uncheck')
 });
-
-$('.role_removeAllBtn').bindDialogs({
-	content : '你确定删除这些角色吗？',
-	name_successBtn : 'deleteAllBtn',
-	name_cancelBtn : 'cancelAllBtn',
-	beforeFun:function(){
-		if($(".tablewrap input:checked").length){
-			return true;
-		}else{
-			return false;
-		}
-	},
-	success:function(){
-		var str="";
-	  	$(".tablewrap input:checked").each(function(i,v){
-	  		if($(this).closest('tr').attr("role_id")){
-		  	str+=$(this).closest('tr').attr("role_id")+","
-	  		}
-	  	})
-	  	str = str.substring(0,str.length-1)
-		$.post("role/deleteAll",{
-			role_ids:str,
-		},function(data){
-			if(data.success == true) {
-				$('.alertArea').showAlert({content:'删除成功'});
-				removeStorage();
-				roleListInit();
+	$('.role_removeAllBtn').bindDialogs({
+		content : '你确定删除这些角色吗？',
+		name_successBtn : 'deleteAllBtn',
+		name_cancelBtn : 'cancelAllBtn',
+		beforeFun:function(){
+			if($(".tablewrap input:checked").length){
+				return true;
 			}else{
-				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+				return false;
 			}
-		},'json');
-	}
-})
+		},
+		success:function(){
+			var str="";
+		  	$(".tablewrap input:checked").each(function(i,v){
+		  		if($(this).closest('tr').attr("role_id")){
+			  	str+=$(this).closest('tr').attr("role_id")+","
+		  		}
+		  	})
+		  	str = str.substring(0,str.length-1)
+			$.post("role/deleteAll",{
+				role_ids:str,
+			},function(data){
+				if(data.success == true) {
+					$('.alertArea').showAlert({content:'删除成功'});
+					removeStorage();
+					roleListInit();
+				}else{
+					$('.alertArea').showAlert({content:'删除失败',type:'danger'});
+				}
+			},'json');
+		}
+	})
 
 $('.removeBtn').bindDialogs({
 	content : '你确定删除这个角色吗？',
@@ -188,6 +187,7 @@ window.dealDataToModal = function(data){
 		},
 		generateItemFun:function(index,value){
 			var itemHtml = '';
+			console.log(value)
 			if(index == 0 ){ itemHtml += '<option value="0">选择角色</option>';}
 			
 			var kongge_str = '';
