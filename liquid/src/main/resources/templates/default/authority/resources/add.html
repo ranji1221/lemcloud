@@ -88,7 +88,14 @@
 				$('.alertArea').showAlert({content:'添加成功'});
 			}
 			else{
-				alert("失败啦")
+
+				$.ajax({
+					url:"resources/list"
+				}).done(function(data){
+					$(".ajax_dom").empty()
+					$(data).appendTo($(".ajax_dom"))
+				})
+				$('.alertArea').showAlert({content:'添加失败'});
 			}
 		}
 	,"json")
