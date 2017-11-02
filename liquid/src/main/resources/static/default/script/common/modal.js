@@ -111,10 +111,20 @@ function viewUser(data) {
 }
 
 function viewSource(data) {
-	console.log(data)
 	$("#view_resourceName").html(data.resourceName);
-	$("#view_resourceType").html(data.resourceType);
-	$("#view_resourceURL").html(data.resourceURL);
+	if(data.resourceType == 1) {
+		$("#view_resourceType").html("菜单");
+	}
+	else if(data.resourceType == 2) {
+		$("#view_resourceType").html("元素");
+	}
+	else if(data.resourceType == 3) {
+		$("#view_resourceType").html("文件");
+	}
+	else if(data.resourceType == 4) {
+		$("#view_resourceType").html("操作");
+	}
+	$('#view_resourcePName').html(data.resourcePName);
 	var operationName = '';
 	$.each(data.operationList, function(i,v){
 		operationName += v.displayName + ",";
@@ -135,6 +145,10 @@ $(document).on("click.close",'.closeAction', function(e) {
 	$(this).closest('.modal-contentbox').remove();
 	var class_name = $(this).closest('.modal-contentbox').attr('narrowClassName')
 	$(this).closest('.modal-contentbox').appendTo(class_name);
+	$(".relateCtl [type='checkbox']").each(function(i,v){
+		$(v).prependTo($(this).closest(".relateCtl"))
+	})
+	$(".icheckbox_flat-blue").detach()
 	$(".relateCtl [type='checkbox']").prop("checked",false)
 	if(!$('.ajax_dom').html()){
 		$('.ajax_dom').hide()

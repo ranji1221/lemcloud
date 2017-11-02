@@ -58,41 +58,8 @@ function resourceListInit(){
 	})
 }
 resourceListInit();
-$('.resource_removeAllBtn').bindDialogs({
-	content : '你确定删除这些资源吗？',
-	name_successBtn : 'deleteAllBtn',
-	name_cancelBtn : 'cancelAllBtn',
-	beforeFun:function(){
-		if($(".tablewrap input:checked").length){
-			return true;
-		}else{
-			return false;
-		}
-	},
-	success:function(){
-		var str="";
-	  	$(".tablewrap input:checked").each(function(i,v){
-	  		if($(this).closest('tr').attr("resource_id")){
-		  	str+=$(this).closest('tr').attr("resource_id")+","
-	  		}
-	  		
-	  	})
-	  	str = str.substring(0,str.length-1)
-		$.post("resources/deleteAll",{
-			resource_ids:str,
-		},function(data){
-			if(data.success == true) {
-				$('.alertArea').showAlert({content:'删除成功'});
-				removeStorage();
-				resourceListInit();
-			}else{
-				$('.alertArea').showAlert({content:'删除失败',type:'danger'});
-			}
-		},'json');
-	}
-})
 $('.removeBtn').bindDialogs({
-	content : '你确定删除这个用户吗？',
+	content : '你确定删除这个资源吗？',
 	success:function(handle){
 		var resourceId = $(handle).closest('tr').attr('resource_id');
 		$.post("resources/delete",{
@@ -139,16 +106,11 @@ $("table").on("click",".viewResource", function(e) {
 });
 //编辑js
 function beforeMaxEditResourceModal(){	
-			if($(".relateCtl .icheckbox_flat-blue").length){
-				$(".relateCtl [type='checkbox']").iCheck("check")
-			}else{
-				$(".relateCtl [type='checkbox']").iCheck({
-					checkboxClass: 'icheckbox_flat-blue',
-					increaseArea: '20%' // optional
-				});
-			}
 			
-			
+			$(".relateCtl [type='checkbox']").iCheck({
+				checkboxClass: 'icheckbox_flat-blue',
+				increaseArea: '20%' // optional
+			});
 			$(".in_input_num .limitlength").html(12-$(".in_input_num input").val().length)
 			$(".in_input_num input").on("keyup",function(){
 				var val = $(this).val().length
@@ -269,9 +231,7 @@ $("table").on("click","#submit_editResource",function(){
 			<thead>
 				<tr>
 					<th style="width:0.8rem     padding-left: 0.45rem; ">
-						<label for="checkall">
-							<input type="checkbox" name="layout" id="checkall"/>
-						</label>
+						
 					</th>
 					<th style="width:12.5%;min-width:94px;">
 						编号
