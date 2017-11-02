@@ -96,8 +96,8 @@ function viewRole(data) {
 	//获取到本地的某条数据 示例代码
 	$("#view_roleName").html(data.displayName);
 	$("#view_roleMaxNum").html(data.roleMaxNum);
-	$("#view_rolePName").html(data.rolePName);
-	$("#view_roleRelyName").html(data.roleRelyName);
+	data.rolePName?$("#view_rolePName").html(data.rolePName):$("#view_rolePName").html("无");
+	data.roleRelyName?$("#view_roleRelyName").html(data.roleRelyName):$("#view_roleRelyName").html("无");
 	$("#view_remarks").html(data.remarks);
 
 }

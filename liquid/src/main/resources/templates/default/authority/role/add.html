@@ -61,17 +61,19 @@ $('.select_roleList').LemonGetList({
 		
 		return itemHtml;
 	},
+	emptyDataFun:function(){
+		return '<option value="-1">暂无</option>';
+	}
 	
 })
-$(document).off("click.submit_add","**")
-$(document).on("click.submit_add","#submit_addRole",function(){
+$("#submit_addRole").on("click.submit_add",function(){
 	$.post("role/save",
 		{
 		displayName:$("#add_displayName").val(),
 		roleMaxNum:$("#add_roleMaxNum").val(),
 		remarks:$("#add_remarks").val(),
-		roleExtendPId:$("#add_roleExtendPId option:selected").val()?$("#add_roleExtendPId option:selected").val():-1,
-		roleRelyId:$("#add_roleRelyId option:selected").val()?$("#add_roleRelyId option:selected").val():-1
+		roleExtendPId:$("#add_roleExtendPId option:selected").val(),
+		roleRelyId:$("#add_roleRelyId option:selected").val()
 		},function(data){
 			if(data.success){
 				removeStorage();
