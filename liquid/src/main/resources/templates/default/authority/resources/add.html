@@ -10,7 +10,7 @@
 		generateItemFun:function(index,value){
 			console.log(value)
 			var itemHtml = '';
-			if(index == 0 ){ itemHtml += '<option value="0" '+'>选择资源</option>';}
+			if(index == 0 ){ itemHtml += '<option value="-1">选择资源</option>';}
 			
 			var kongge_str = '';
 			for(var i=0;i<value.level;i++){
@@ -23,7 +23,7 @@
 			return itemHtml;
 		},
 		emptyDataFun : function(){
-			return '<option value="0" '+'>没有数据</option>';
+			return '<option value="-1">没有数据</option>';
 		}
 	})
 	$("[type='checkbox']").iCheck({

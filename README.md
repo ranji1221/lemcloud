@@ -7,10 +7,11 @@ Lemon Cloud PlatForm
 #### 核心技术
 * Spring Boot1.5.8
 * MyBatis3.2
-* Druid1.1.4
+* Druid1.1.5
 * Shiro 1.2
-* Redis
-* Dubbo
+* Redis3
+* Dubbox
+* Spring Cloud
 ---------------------------------------
 #### 项目管理与版本控制
 * Maven3项目管理

@@ -130,7 +130,12 @@ function viewSource(data) {
 		operationName += v.displayName + ",";
 	})
 	operationName = operationName.substr(0,operationName.length-1);
-	$("#view_operationName").html(operationName);
+	if(operationName.length){
+		$("#view_operationName").html(operationName);
+	}
+	else {
+		$("#view_operationName").html("无");
+	}
 
 }
 /**

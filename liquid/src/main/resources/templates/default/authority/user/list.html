@@ -222,6 +222,8 @@ function userAuth(data) {
 
 //渲染树插件
 function createTreePlug(className,data){
+	//将角色列表初始化到本地存储中
+	getRoleData();
 	var url = 'user/getRole';
 	var request_data = {"id":data.id};
 	
@@ -232,7 +234,6 @@ function createTreePlug(className,data){
 			'themes':{'icons':false,"responsive":false},
 	        'data' : function (obj, callback) {
 	        	var jstree_roleData = jsTree_dealRequestByRoleData(getRoleData());
-	        	console.log(getRoleData())
 		        $.ajax({
 		            type: "POST",
 		            url:url,
@@ -336,7 +337,8 @@ function jsTree_dealRequestByRoleData(data){
     var	role_list = getListByTree(data);
     var role_form = [];
 	for(var i=0;i<role_list.length;i++){
-		role_form.push(createJsTreeItem(role_list[i].id,role_list[i].roleExtendPId,role_list[i].roleName));
+		console.log(role_list[i]);
+		role_form.push(createJsTreeItem(role_list[i].id,role_list[i].roleExtendPId,role_list[i].displayName));
 	}
 	return role_form;
 }
