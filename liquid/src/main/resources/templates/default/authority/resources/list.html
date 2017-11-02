@@ -139,21 +139,21 @@ $("table").on("click",".viewResource", function(e) {
 });
 //编辑js
 function beforeMaxEditResourceModal(){	
-	$(".relateCtl input").iCheck('destroy');
-			$(".relateCtl [type='checkbox']").iCheck({
-				checkboxClass: 'icheckbox_flat-blue',
-				increaseArea: '20%' // optional
-			});
+			if($(".relateCtl .icheckbox_flat-blue").length){
+				$(".relateCtl [type='checkbox']").iCheck("check")
+			}else{
+				$(".relateCtl [type='checkbox']").iCheck({
+					checkboxClass: 'icheckbox_flat-blue',
+					increaseArea: '20%' // optional
+				});
+			}
+			
 			
 			$(".in_input_num .limitlength").html(12-$(".in_input_num input").val().length)
 			$(".in_input_num input").on("keyup",function(){
 				var val = $(this).val().length
 				$(".in_input_num .limitlength").html(12-val)
-			})
-			
-	
-	
-	
+			})	
 }
 
 
