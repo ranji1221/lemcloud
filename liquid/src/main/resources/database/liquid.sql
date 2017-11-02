@@ -135,7 +135,7 @@ CREATE TABLE `lemon_liquid_log_systemlog` (
   `requestUri` varchar(255) collate utf8_bin default NULL COMMENT '请求URI',
   `method` varchar(255) collate utf8_bin default NULL COMMENT '请求方式',
   `params` varchar(255) collate utf8_bin default NULL COMMENT '请求参数',
-  `exception` varchar(255) collate utf8_bin default NULL COMMENT '异常',
+  `exception` text collate utf8_bin default NULL COMMENT '异常',
   `authStatus` int(1) default NULL COMMENT '权限状态 1,代表不需权限  2,无权限  3,享有权限',
   `operateDate` date default NULL COMMENT '开始时间',
   `timeout` varchar(255) collate utf8_bin default NULL COMMENT '耗时',
