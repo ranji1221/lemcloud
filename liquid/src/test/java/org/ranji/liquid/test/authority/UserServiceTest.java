@@ -70,7 +70,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testFindUser(){
-		Map<String,Object> params = new HashMap<String,Object>();
+		/*Map<String,Object> params = new HashMap<String,Object>();
 		params.put("userName", "zhangsan");
 		params.put("enabled", -1);
 		List<User> users = userService.findAll(params);
@@ -79,7 +79,9 @@ public class UserServiceTest {
 		users = userService.findAll();
 		for (User user : users) {
 			System.out.println(user);
-		}
+		}*/
+		
+		User u = userService.findByUserName("jianbo");
 	}
 	//根据用户id查找关联角色测试
 	@Test

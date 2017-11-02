@@ -10,6 +10,7 @@ import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.persist.authority.prototype.IRoleDao;
 import org.ranji.lemon.liquid.service.authority.prototype.IRoleService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -37,9 +38,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implements IRoleService {
 	@Override
+	@Cacheable(value="liquidrole")
 	public Role findByRoleName(String roleName) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("roleName", roleName);
+		params.put("displayName", roleName);
 		List<Role> roles = ((IRoleDao) dao).findAll(params);
 		if (roles.isEmpty()) {
 			return null;

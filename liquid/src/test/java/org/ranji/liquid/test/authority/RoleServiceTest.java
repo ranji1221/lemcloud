@@ -74,5 +74,9 @@ public class RoleServiceTest {
 		 
 	 }
 	
-	
+	@Test
+	 public void testFindRole(){
+		 Role r = roleService.findByRoleName("管理员");
+		 System.out.println(r);
+	 }
 }
