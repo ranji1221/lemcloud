@@ -91,20 +91,15 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
             	}
 	        for (Role r : roles) {
 	            if(r.getRoleExtendPId() == role.getId()){
-	                if(role.getList() == null){
-	                    List<Role> myRoles = new ArrayList<Role>();
-	                    myRoles.add(r);
-	                    role.setList(myRoles);
-	                }else{
-	                    role.getList().add(r);
-	                }
+	            	r.setRolePName(role.getDisplayName());
+	                role.getList().add(r);
 	            }
 	         }
        }
 		return rootTrees;
 	}
 	//递归查询角色树
-	private List<Role> find(int pid){
+	/*private List<Role> find(int pid){
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("roleExtendPId", pid);
 		
@@ -116,6 +111,6 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 			}
 		}
 		return role;
-	}
+	}*/
 	
 }
