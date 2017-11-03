@@ -6,21 +6,21 @@ Lemon Cloud PlatForm
 ---------------------------------------
 #### 核心技术
 * 前端技术：摒弃掉JQuery和Bootstrap，和大牛讨论后的结果
- > React (适合构建大应用，兼容web和原生app应用)<br>
- > VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)<br>
- > AntD  (基于React的UI组件)
+ > (1) React (适合构建大应用，兼容web和原生app应用)<br>
+ > (2) VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)<br>
+ > (3) AntD  (基于React的UI组件)
 * 后台技术：
- >模板引擎：Thymeleaf,代替JSP技术
- >Restful框架：Spring MVC / Jersey<br>
- >微服务基础框架：Spring Boot1.5.8<br>
- >ORM映射框架：MyBatis3.2<br>
- >数据源框架：Druid1.1.5<br>
- >安全认证框架：Shiro 1.2<br>
- >缓存技术：Redis3<br>
- >消息中间件：ActiveMQ<br>
- >工作流引擎：Flowable<br>
- >PRC去中心化的微服务框架：Dubbox / Thrift<br>
- >分布式云平台框架：Spring Cloud
+ > (1) 模板引擎：Thymeleaf,代替JSP技术
+ > (2) Restful框架：Spring MVC / Jersey<br>
+ > (3) 微服务基础框架：Spring Boot1.5.8<br>
+ > (4) ORM映射框架：MyBatis3.2<br>
+ > (5) 数据源框架：Druid1.1.5<br>
+ > (6) 安全认证框架：Shiro 1.2<br>
+ > (7) 缓存技术：Redis3<br>
+ > (8) 消息中间件：ActiveMQ<br>
+ > (9) 工作流引擎：Flowable<br>
+ > (10) PRC去中心化的微服务框架：Dubbox / Thrift<br>
+ > (11) 分布式云平台框架：Spring Cloud
 ---------------------------------------
 #### 项目管理与版本控制
 * Maven3项目管理
@@ -31,7 +31,7 @@ Lemon Cloud PlatForm
 * Redis3： 缓存数据库
 * MySQL5： 存储数据库
 * Tomcat： WEB应用容器
- >Spring Boot框架默认内置改容器，后期可以更换为Jetty或者Undertow，但据说Undertow的性能和内存使用是最好的
+  > Spring Boot框架默认内置改容器，后期可以更换为Jetty或者Undertow，但据说Undertow的性能和内存使用是最好的
 * ZooKeeper：分布式的，开放源码的分布式应用程序协调服务
 * ActiveMQ：消息中间件服务器
 * Docker: 应用容器引擎
