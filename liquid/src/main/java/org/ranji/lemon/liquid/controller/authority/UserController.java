@@ -62,14 +62,13 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/save")
 	//@SystemControllerLog(description="权限管理-添加用户")
-	public String saveUser(User newUser) {
+	public String saveUser(User user) {
 		try {
-			userService.save(newUser);
+			userService.save(user);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-			return "{ \"success\" : false }";
+			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
 		}
 	}
 //	@SystemControllerPermission("user:list")
@@ -86,7 +85,17 @@ public class UserController {
 		return "default/authority/user/adds";
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/adduser")
+	public String add(User user) {
+		try {
+			userService.save(user);
+			return "{ \"success\" : true }";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
+		}
+	}
 //	@SystemControllerPermission("user:edit")
 	@RequestMapping(value = "/edit")
 	//@SystemControllerLog(description="权限管理-更新用户")
@@ -122,18 +131,6 @@ public class UserController {
 			return "{ \"success\" : true }";
 		}catch(Exception e){
 			return "{ \"success\" : false }";
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/adduser")
-	public String add(User obj) {
-		try {
-			userService.save(obj);
-			return "{ \"success\" : true }";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
 		}
 	}
 	
