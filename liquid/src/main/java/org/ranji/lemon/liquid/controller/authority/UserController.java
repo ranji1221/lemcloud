@@ -85,17 +85,6 @@ public class UserController {
 		return "default/authority/user/adds";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/adduser")
-	public String add(User user) {
-		try {
-			userService.save(user);
-			return "{ \"success\" : true }";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
-		}
-	}
 //	@SystemControllerPermission("user:edit")
 	@RequestMapping(value = "/edit")
 	//@SystemControllerLog(description="权限管理-更新用户")

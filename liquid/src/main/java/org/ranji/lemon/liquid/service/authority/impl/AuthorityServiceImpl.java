@@ -172,11 +172,11 @@ public class AuthorityServiceImpl implements IAuthorityService{
 			operation.setDisplayName("查看");
 			operation.setOperationName("view");
 			operation.setOperationURL("/view");
-		}else if("2".equals(s)){
+		}else if("3".equals(s)){
 			operation.setDisplayName("增加");
 			operation.setOperationName("add");
 			operation.setOperationURL("/add");
-		}else if("3".equals(s)){
+		}else if("2".equals(s)){
 			operation.setDisplayName("编辑");
 			operation.setOperationName("edit");
 			operation.setOperationURL("/edit");
