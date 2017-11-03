@@ -6,9 +6,9 @@ Lemon Cloud PlatForm
 ---------------------------------------
 #### 核心技术
 * 前端技术：摒弃掉JQuery和Bootstrap，和大牛讨论后的结果
- >React (适合构建大应用，兼容web和原生app应用)
- >VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)
- >AntD  (基于React的UI组件)
+ > React (适合构建大应用，兼容web和原生app应用)<br>
+ > VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)
+ > AntD  (基于React的UI组件)
 * 后台技术：
  >模板引擎：Thymeleaf,代替JSP技术
  >Restful框架：Spring MVC / Jersey
