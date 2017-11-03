@@ -60,7 +60,7 @@
 	<select id="findPaginated" parameterType="Map" resultType="Resource">
 		SELECT r1.*,rp.resourceName as resourcePName FROM lemon_liquid_auth_resource r1 LEFT JOIN lemon_liquid_auth_resource rp ON r1.resourcePID = rp.id  
 		<include refid="paramsSQL" />
-		limit #{offset}, #{limit}
+		ORDER BY createTime desc limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 查找资源总数 -->

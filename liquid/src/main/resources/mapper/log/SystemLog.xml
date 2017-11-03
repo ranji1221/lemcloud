@@ -27,7 +27,7 @@
 	<select id="findPaginated" resultType="SystemLog" parameterType="Map">
 		select * from lemon_liquid_log_systemLog
 		<include refid="paramsSQL"/>
-		 limit #{offset}, #{limit}
+		ORDER BY createTime desc limit #{offset}, #{limit}
 	</select>
 	
 	<select id="getTotalOfItems" parameterType="Map" resultType="int">

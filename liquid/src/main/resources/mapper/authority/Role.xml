@@ -93,7 +93,7 @@
 		LEFT JOIN lemon_liquid_auth_role pr ON r.roleExtendPId = pr.id
 		LEFT JOIN lemon_liquid_auth_role rr ON r.roleRelyId = rr.id
 		<include refid="paramsSQL" />
-		limit #{offset}, #{limit}
+		ORDER BY createTime desc limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 查找角色总数 -->
