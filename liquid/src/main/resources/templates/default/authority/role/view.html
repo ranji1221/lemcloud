@@ -47,42 +47,29 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-header">
-					<div class="pull-right">
-						<a href="javascript:;" class="enlargeAction">
-							<img src="static/default/image/common/modal3.png" th:src="@{/default/image/common/modal3.png}"/>
-						</a>
-						<a href="javascript:;" class="remove" data-dismiss="modal">
-							<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/modal1.png}"/>
-						</a>
-					</div>
-					<h4 class="modal-title">
-						<span>|</span><b>查看角色</b>
-					</h4>
-				</div>
 				<div class="modal-body">
 					<div class="row modal_body_title">
 						<h3>青柠云后台管理系统</h3>
 					</div>
 					<table class="table ">
 						<tr>
-							<td class="col-lg-2">角色名称</td>
+							<td class="col-lg-2" title="角色名称">角色名称</td>
 							<td id="view_roleName"></td>
 						</tr>
 						<tr>
-							<td>父级角色</td>
+							<td title="父级角色">父级角色</td>
 							<td id="view_rolePName"></td>
 						</tr>
 						<tr>
-							<td>依赖角色</td>
+							<td title="依赖角色">依赖角色</td>
 							<td id="view_roleRelyName"></td>
 						</tr>
 						<tr>
-							<td>最大限制用户数</td>
+							<td title="最大限制用户数">最大限制用户数</td>
 							<td id="view_roleMaxNum"></td>
 						</tr>
 						<tr>
-							<td>备注消息</td>
+							<td title="备注消息">备注消息</td>
 							<td id="view_remarks"></td>
 						</tr>
 					</table>
