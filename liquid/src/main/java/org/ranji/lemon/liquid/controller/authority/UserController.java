@@ -79,7 +79,7 @@ public class UserController {
 		try {
 			User user = userService.find(id);
 			user.setUserPass("123456");
-			userService.save(user);
+			userService.update(user);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			e.printStackTrace();
