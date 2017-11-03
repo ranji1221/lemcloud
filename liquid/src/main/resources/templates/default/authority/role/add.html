@@ -103,6 +103,14 @@ $("#submit_addRole").on("click.submit_add",function(){
 		}
 	,"json")
 }) 
+$(".btnbox").on("click", "#closeAdd", function() {
+		$.ajax({
+			url:"user/list"
+		}).done(function(data) {
+			$(".ajax_dom").empty()
+			$(data).appendTo($(".ajax_dom"))
+		})
+	})
 /*]]>*/
 </script>
 <div class="modal-contentbox">
@@ -139,7 +147,7 @@ $("#submit_addRole").on("click.submit_add",function(){
 				<a href="#">角色管理</a>
 			</li>
 			<li>
-				<a href="#" url="backend/default/authority/role/list">角色列表</a>
+				<a href="#" url="role/list">角色列表</a>
 			</li>
 			<li class="active">添加角色</li>
 			<div class="nav-search" id="nav-search">
@@ -233,7 +241,7 @@ $("#submit_addRole").on("click.submit_add",function(){
 				</div>
 				<div class="btnbox">
 					<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_addRole">确定</button>
-					<button type="button" class="btn btn-default">取消</button>
+					<button type="button" class="btn btn-default" id="closeAdd">取消</button>
 				</div>
 			</form>
 		</div>

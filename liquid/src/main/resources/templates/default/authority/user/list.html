@@ -380,6 +380,40 @@ $('.btnbox').on('click',"#resSubmit",function(){
 		}
 	},'json');
 })
+$('.inputwrappermax').on("click","#reset",function(){
+	$.post("user/reset",
+			{
+				id:$("#edit_userId").val(),
+			},function(data){
+				if(data.success){
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '重置密码成功'
+						});
+					})
+				}
+				else{
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '重置密码失败'
+						});
+					})
+				}
+			}
+		,"json")
+})
 /*]]>*/
 </script>
 

@@ -29,7 +29,7 @@
 		</ol>
 		<!--  页面中的红色提示框-->
 		<div class="alert alert-danger">
-			<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示角色查看操作。单击右方x号，可以关闭此条提示语！
+			<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：重置密码后为初始密码123456，此操作不可逆，请慎用。单击右方x号，可以关闭此条提示语！
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 		<div class="title">
@@ -50,18 +50,6 @@
 						<div class="inputwrappermax">
 							<input type="hidden" id="edit_userId"/>
 							<input type="text" id="edit_userName" class="form-control rolenameinput" placeholder="请输入用户名称"/>
-							<span class="limitlength">15</span>
-							<span class="errormessage errormessage-user-edit-name">
-			    		<!-- 您输入了特殊符号！ -->
-			    		</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group input">
-					<label for="">用户密码：</label>
-					<div class="inputwrapper">
-						<div class="inputwrappermax">
-							<input type="password" id="edit_userPass" class="form-control rolenameinput" placeholder="请输入用户密码"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-user-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -90,6 +78,14 @@
 							<span class="errormessage errormessage-user-edit-email">
 			    		<!-- 您输入了特殊符号！ -->
 			    		</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group input">
+					<label for="">用户密码：</label>
+					<div class="inputwrapper">
+						<div class="inputwrappermax">
+							<button type="button" class="btn btn-default" id="reset">重置密码</button>
 						</div>
 					</div>
 				</div>

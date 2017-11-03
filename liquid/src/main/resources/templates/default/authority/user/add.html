@@ -35,8 +35,15 @@
 	limitChangeLength($(".form_input .role"), parseInt($(".minlimitNum").html()));
 	limitChangeLength($(".form_input .phone"), 11)
 	limitChangeLength($(".form_input .emlia"), 15)
-	
-	$("table").on("click", "#submit_addUser", function() {
+	$(".btnbox").on("click", "#closeAdd", function() {
+		$.ajax({
+			url:"user/list"
+		}).done(function(data) {
+			$(".ajax_dom").empty()
+			$(data).appendTo($(".ajax_dom"))
+		})
+	})
+	$(".btnbox").on("click", "#submit_addUser", function() {
 		$.post("user/save", {
 			userName: $("#add_userName").val(),
 			userPass:$("#add_userPass").val,
@@ -179,7 +186,7 @@
 			</div>
 			<div class="btnbox">
 				<button type="button" class="btn btn-default " id="submit_addUser">确定</button>
-				<button type="button" class="btn btn-default">取消</button>
+				<button type="button" class="btn btn-default" id="closeAdd">取消</button>
 			</div>
 		</form>
 	</div>
