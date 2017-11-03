@@ -108,15 +108,21 @@ public class UserController {
 	}
 	
 //	@SystemControllerPermission("user:auth")
-	@RequestMapping(value = "/auth/{size}")
+	@RequestMapping(value = "/auth")
+	@ResponseBody
 	//@SystemControllerLog(description="权限管理-给用户分配角色")
-	public String authUser(@PathVariable String size) {
-		if("modal".equals(size)){
-			return "authority/user/authmodal";
-		}else if("max".equals(size)){
-			return "backend/authority/user/auth";
+	public String authUser(String roleIds, int userId) {
+		try{
+			String[] str = roleIds.split(",");
+			List<Integer> list = new ArrayList<Integer>();
+			for(String s :str){
+				list.add(Integer.parseInt(s));
+			}
+			authService.authUser(userId, list);
+			return "{ \"success\" : true }";
+		}catch(Exception e){
+			return "{ \"success\" : false }";
 		}
-		return null;
 	}
 	
 	@ResponseBody

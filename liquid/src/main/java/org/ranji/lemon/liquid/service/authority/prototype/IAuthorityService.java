@@ -86,6 +86,13 @@ public interface IAuthorityService {
 	 */
 	public void authRole(int roleId, List<Integer> list);
 	/**
+	 * 用户授权
+	 * @param userId 用户id
+	 * @param list 角色id集
+	 * 
+	 */
+	public void authUser(int userId, List <Integer> array);
+	/**
 	 * 查询所有资源（包含操作信息）
 	 * @param params 分页或模糊查询参数
 	 * @return 资源对象集合json
