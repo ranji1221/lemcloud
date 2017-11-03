@@ -71,6 +71,21 @@ public class UserController {
 			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reset")
+	//@SystemControllerLog(description="权限管理-添加用户")
+	public String resetPwd(int id) {
+		try {
+			User user = userService.find(id);
+			user.setUserPass("123456");
+			userService.save(user);
+			return "{ \"success\" : true }";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
+		}
+	}
 //	@SystemControllerPermission("user:list")
 	@RequestMapping(value = "/list")
 	//@SystemControllerLog(description="权限管理-用户列表")
