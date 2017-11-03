@@ -56,7 +56,7 @@ function roleListInit(){
    				//刷新当前对象
    				_this.getData({
    					'params':JSON.stringify({
-   						'rNameLike' : $('.nav-search #list_search_str').val()
+   						'dNameLike' : $('.nav-search #list_search_str').val()
    					})
    				},true);
    			})
@@ -269,7 +269,6 @@ $(".btnbox").on("click","#submit_editRole",function(){
 				})
 			}
 			else{
-				removeStorage();
 				roleListInit();
 				$(".ajax_dom").empty()
 				$.ajax({
@@ -346,9 +345,28 @@ $(".btnbox").on("click","#submit_editRole",function(){
 		var url = 'role/auth';
 		$.post(url,request_data,function(data){
 			if(data.success == true) {
-				$('.alertArea').showAlert({content:'授权成功'});
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权成功'
+					});
+				})
 			}else{
-				$('.alertArea').showAlert({content:'授权失败',type:'danger'});
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权失败',type:'danger'
+					});
+				})
 			}
 		},'json');
 	})
