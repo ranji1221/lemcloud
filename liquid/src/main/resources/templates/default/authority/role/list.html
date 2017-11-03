@@ -187,7 +187,6 @@ window.dealDataToModal = function(data){
 		},
 		generateItemFun:function(index,value){
 			var itemHtml = '';
-			console.log(value)
 			if(index == 0 ){ itemHtml += '<option value="0">选择角色</option>';}
 			
 			var kongge_str = '';
@@ -244,7 +243,6 @@ function beforeMaxEditModal(){
 	});
 }
 $(".btnbox").on("click","#submit_editRole",function(){
-	console.log("11111111")
 	$.post("role/edit",
 		{
 			id:$("#edit_roleId").val(),
@@ -310,7 +308,6 @@ $(".btnbox").on("click","#submit_editRole",function(){
 				'themes':{'icons':false,"responsive":false},
 		        'data' : function (obj, callback) {
 		        	var resourceAndOperationData = jsTree_getResourceAndOperationData();
-		        	console.log(resourceAndOperationData)
 			        $.ajax({
 			            type: "POST",
 			            url:url,

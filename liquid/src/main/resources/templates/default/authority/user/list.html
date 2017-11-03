@@ -31,8 +31,8 @@ function userListInit(){
 				'<td title='+ email +'>'+
 					email +
 				'</td>'+
-				'<td title='+ createTime +'>'+
-					createTime +
+				'<td title='+ getDateByTimestamp(createTime*1000) +'>'+
+					getDateByTimestamp(createTime*1000) +
 				'</td>'+
 				'<td>'+
 					'<span class="icon-eye-open iconact viewUser"></span>'+
@@ -337,7 +337,6 @@ function jsTree_dealRequestByRoleData(data){
     var	role_list = getListByTree(data);
     var role_form = [];
 	for(var i=0;i<role_list.length;i++){
-		console.log(role_list[i]);
 		role_form.push(createJsTreeItem(role_list[i].id,role_list[i].roleExtendPId,role_list[i].displayName));
 	}
 	return role_form;

@@ -92,7 +92,6 @@ function editUser(data) {
 }
 /* 弹出查看框 */
 function viewRole(data) {
-	console.log(data)
 	//获取到本地的某条数据 示例代码
 	$("#view_roleName").html(data.displayName);
 	$("#view_roleMaxNum").html(data.roleMaxNum);
@@ -104,10 +103,21 @@ function viewRole(data) {
 
 function viewUser(data) {
 	$("#view_userName").html(data.userName);
+	var roleName = '';
+	$.each(data.roleList, function(i,v) {
+		roleName += v.displayName + ',';
+	})
+	roleName = roleName.substr(0,roleName.length-1);
+	
+	if(roleName.length){
+		$("#view_roleName").html(roleName);
+	}
+	else {
+		$("#view_roleName").html("无");
+	}
 	$("#view_roleName").html(data.roleName);
 	$("#view_phone").html(data.phone);
 	$("#view_email").html(data.email);
-
 }
 
 function viewSource(data) {

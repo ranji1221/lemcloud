@@ -159,3 +159,8 @@
 	       }  
 	       return format;  
 	}  
+	//格式化时间戳方法
+	function getDateByTimestamp(timestamp,format){
+		if(!format) format = 'yyyy-MM-dd';
+		return new Date(timestamp).format(format);
+	}
