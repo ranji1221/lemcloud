@@ -95,7 +95,6 @@ public class RoleController {
 				// 参数处理
 				map = om.readValue(params, new TypeReference<Map<String, Object>>() {});
 			}
-			System.out.println(JsonUtil.objectToJson(params));
 			PagerModel<Role> pg = roleService.findPaginated(map);
 			
 			// 序列化查询结果为JSON
