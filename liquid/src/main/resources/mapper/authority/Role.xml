@@ -87,7 +87,7 @@
 	<!-- 查找角色分页查询 -->
 	<select id="findPaginated" parameterType="Map" resultType="Role">
 		SELECT
-			r.*,pr.roleName rolePName,rr.roleName roleRelyName
+			r.*,pr.displayName rolePName,rr.displayName roleRelyName
 		FROM
 			lemon_liquid_auth_role r
 		LEFT JOIN lemon_liquid_auth_role pr ON r.roleExtendPId = pr.id
