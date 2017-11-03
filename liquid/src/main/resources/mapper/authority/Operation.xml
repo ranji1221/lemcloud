@@ -61,7 +61,7 @@
 	<select id="findPaginated" parameterType="Map" resultType="Operation">
 		select * from lemon_liquid_auth_operation 
 		<include refid="paramsSQL" />
-		limit #{offset}, #{limit}
+		 ORDER BY createTime desc limit #{offset}, #{limit} 
 	</select>
 	
 	<!-- 查找总数 -->

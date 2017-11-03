@@ -50,7 +50,7 @@
 	<select id="findPaginated" resultType="User" parameterType="Map">
 		select * from lemon_liquid_auth_user
 		<include refid="paramsSQL"/>
-		 limit #{offset}, #{limit}
+		ORDER BY createTime desc  limit #{offset}, #{limit}
 	</select>
 	
 	<select id="getTotalOfItems" parameterType="Map" resultType="int">
