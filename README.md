@@ -7,19 +7,19 @@ Lemon Cloud PlatForm
 #### 核心技术
 * 前端技术：摒弃掉JQuery和Bootstrap，和大牛讨论后的结果
  > React (适合构建大应用，兼容web和原生app应用)<br>
- > VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)
+ > VUE (适合构建小型应用，也可以看看，但不作为本项目的重点)<br>
  > AntD  (基于React的UI组件)
 * 后台技术：
  >模板引擎：Thymeleaf,代替JSP技术
- >Restful框架：Spring MVC / Jersey
- >微服务基础框架：Spring Boot1.5.8
- >ORM映射框架：MyBatis3.2
- >数据源框架：Druid1.1.5
- >安全认证框架：Shiro 1.2
- >缓存技术：Redis3
- >消息中间件：ActiveMQ
- >工作流引擎：Flowable
- >PRC去中心化的微服务框架：Dubbox / Thrift
+ >Restful框架：Spring MVC / Jersey<br>
+ >微服务基础框架：Spring Boot1.5.8<br>
+ >ORM映射框架：MyBatis3.2<br>
+ >数据源框架：Druid1.1.5<br>
+ >安全认证框架：Shiro 1.2<br>
+ >缓存技术：Redis3<br>
+ >消息中间件：ActiveMQ<br>
+ >工作流引擎：Flowable<br>
+ >PRC去中心化的微服务框架：Dubbox / Thrift<br>
  >分布式云平台框架：Spring Cloud
 ---------------------------------------
 #### 项目管理与版本控制
