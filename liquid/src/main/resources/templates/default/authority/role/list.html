@@ -52,7 +52,7 @@ function roleListInit(){
    		},
    		initFun : function(){
    			_this = this;
-   			$('.nav-search #list_search_btn').on('click',function(){
+   			$('.nav-search').on('click',"#list_search_btn",function(){
    				//刷新当前对象
    				_this.getData({
    					'params':JSON.stringify({
@@ -287,7 +287,7 @@ $(".btnbox").on("click","#submit_editRole",function(){
 	var is_first_into_page = true;
 	
 	function roleAuthInit(data){
-		$("#auth_roleName").val(data.roleName).attr('role_id',data.id);
+		$("#auth_roleName").val(data.displayName).attr('role_id',data.id);
 		createTreePlug('.role-authorization',data);
 		$('.tree input').iCheck({
 		    checkboxClass: 'icheckbox_flat-blue',
@@ -410,7 +410,7 @@ $(".btnbox").on("click","#submit_editRole",function(){
 			var tem_data = {};
 			tem_data.type='operation';
 			tem_data.id = 'o_'+operation[i].id;
-			tem_data.resourceName = operation[i].operationName;
+			tem_data.resourceName = operation[i].displayName;
 			tem_data.resourcePId = 'r_'+operation[i].resourceId;
 			resource.push(tem_data);
 		}
