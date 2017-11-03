@@ -79,6 +79,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	
 	
 	@Override
+	@Cacheable(value="liquidrole")
 	public List<Role> findRoleTree() {
 		//return find(-1); //递归查询方法
 		List<Role> roles= findAll(); //查出所有角色
@@ -100,6 +101,8 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
        }
 		return rootTrees;
 	}
+	
+	
 	//递归查询角色树
 	/*private List<Role> find(int pid){
 		Map<String, Object> map = new HashMap<String,Object>();

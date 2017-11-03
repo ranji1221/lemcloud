@@ -13,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.ranji.lemon.liquid.model.authority.User;
 import org.ranji.lemon.liquid.service.authority.prototype.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -40,6 +41,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SystemRealm extends AuthorizingRealm{
 	
 	@Autowired
+	@Lazy	//-- 为解决shiro和redis框架的冲突而添加
 	private IUserService userService;
 	
 	/**

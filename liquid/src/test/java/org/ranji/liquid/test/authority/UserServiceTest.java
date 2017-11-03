@@ -47,15 +47,15 @@ public class UserServiceTest {
 	
 	
 	//查询所有用户
-		@Test
-		public void testFindAllUser(){
-			Map<String,Object> params = new HashMap<String,Object>();
-			params.put("userName", "zhangsan");
-			List<User> us = userService.findAll(params);
-			for(User u : us){
-				System.out.println(u.getUserName());
-			}
+	@Test
+	public void testFindAllUser(){
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userName", "zhangsan");
+		List<User> us = userService.findAll(params);
+		for(User u : us){
+			System.out.println(u.getUserName());
 		}
+	}
 	
 	@Test
 	public void testAddUser(){
@@ -116,5 +116,10 @@ public class UserServiceTest {
 		for (User user : pm.getData()) {
 			System.out.println(user);
 		}
+	}
+	
+	@Test
+	public void testRedisCacheForUser(){
+		userService.findAll();
 	}
 }

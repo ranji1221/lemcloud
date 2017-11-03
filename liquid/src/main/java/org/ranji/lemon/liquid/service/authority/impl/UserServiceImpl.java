@@ -11,6 +11,7 @@ import org.ranji.lemon.liquid.model.authority.User;
 import org.ranji.lemon.liquid.persist.authority.prototype.IUserDao;
 import org.ranji.lemon.liquid.service.authority.prototype.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends GenericServiceImpl<User, Integer> implements IUserService {
 	
 	@Autowired
-	private RedisTemplate<String,String> redisTemplate;
+	private RedisTemplate<String,Object> redisTemplate;
 	
 	//-- 对用户密码进行加密后，再保存
 	@Override
@@ -52,6 +53,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	
 	//-- 增加redis缓存的逻辑
 	@Override
+	@Cacheable(value="liquiduser")
 	public User findByUserName(String userName) { 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userName", userName);
@@ -102,6 +104,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	public List<Role> findRoleByUserId(int userId) {
 		
 		return ((IUserDao) dao).findRoleByUserId(userId);
+	}
+	
+	@Override
+	@Cacheable(value="liquiduser")
+	public List<User> findAll(){
+		return super.findAll();
 	}
 
 }

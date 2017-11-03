@@ -68,6 +68,7 @@ public class RoleServiceTest {
 		 for(int i= 0;i<150;i++ ){
 			 Role role =new Role();
 			 role.setRoleName("chide");
+			// role.setDisplayName("");
 			 role.setRoleExtendPId(9);
 			 roleService.save(role);
 		 }
