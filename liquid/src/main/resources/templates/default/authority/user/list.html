@@ -355,9 +355,28 @@ $('.btnbox').on('click',"#resSubmit",function(){
 	var url = 'user/auth';
 	$.post(url,request_data,function(data){
 		if(data.success == true) {
-			$('.alertArea').showAlert({content:'授权成功'});
+			removeStorage();
+			$(".ajax_dom").empty()
+			$.ajax({
+				url: "user/list"
+			}).done(function(data) {
+				$('body #bodyModalArea').empty();
+				$(data).appendTo($(".ajax_dom"))
+				$('.alertArea').showAlert({
+					content: '授权成功'
+				});
+			})
 		}else{
-			$('.alertArea').showAlert({content:'授权失败',type:'danger'});
+			$(".ajax_dom").empty()
+			$.ajax({
+				url: "user/list"
+			}).done(function(data) {
+				$('body #bodyModalArea').empty();
+				$(data).appendTo($(".ajax_dom"))
+				$('.alertArea').showAlert({
+					content: '授权失败',type:'danger'
+				});
+			})
 		}
 	},'json');
 })
