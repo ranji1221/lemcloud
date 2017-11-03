@@ -165,7 +165,7 @@ function dealDataToModal(data){
 		}
 	})
 }
-$("table").on("click","#submit_editResource",function(){
+$(".btnbox").on("click","#submit_editResource",function(){
 	var tem_str = '';
 	$("#edit_operation input:checked").each(function(){
 		if(!tem_str) {
@@ -184,11 +184,29 @@ $("table").on("click","#submit_editResource",function(){
 		},function(data){
 			if(data.success){
 				removeStorage();
-				resourceListInit();
-				alert("成功啦");
+				removeStorage();
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "resources/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改成功'
+					});
+				})
 			}
 			else{
-				alert("失败啦")
+				$(".ajax_dom").empty()
+				$.ajax({
+					url: "resources/list"
+				}).done(function(data) {
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '修改成功'
+					});
+				})
 			}
 		}
 	,"json")

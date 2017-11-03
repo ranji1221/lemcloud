@@ -145,7 +145,6 @@ function userAuth(data) {
 	$("#auth_userName").val(data.userName);
 }
 //关闭
-$(document).off("click.close","**")
 $(document).on("click.close",'.closeAction', function(e) {
 	$(this).closest('.modal-contentbox').remove();
 	var class_name = $(this).closest('.modal-contentbox').attr('narrowClassName')
@@ -153,7 +152,7 @@ $(document).on("click.close",'.closeAction', function(e) {
 	$(".relateCtl [type='checkbox']").each(function(i,v){
 		$(v).prependTo($(this).closest(".relateCtl"))
 	})
-	$(".icheckbox_flat-blue").detach()
+	$(".relateCtl .icheckbox_flat-blue").detach()
 	$(".relateCtl [type='checkbox']").prop("checked",false)
 	if(!$('.ajax_dom').html()){
 		$('.ajax_dom').hide()

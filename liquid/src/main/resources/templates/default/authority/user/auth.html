@@ -1,7 +1,7 @@
 <!-- 用户授权 -->
 <!-- Modal -->
 <div class="modal fade modalToBody" id="user-authorization" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" th:fragment="authUser">
-	<div class="maxcontainer editpage modal-contentbox">
+	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#user-authorization">
 		<ol class="breadcrumb">
 			<li>
 				<i class="glyphicon glyphicon-home"></i>
@@ -61,15 +61,15 @@
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
 							<header>
-								<label for="checkallRoleaut">
+								<label for="checkallRoleaut" class="relateCtl">
 								<input  type="checkbox" name="checkallaut" class="checkallRoleaut"/>
 								选中全部
 							</label>
-								<label for='slidedownallRoleaut'>
+								<label for='slidedownallRoleaut' class="relateCtl">
 								<input  type="checkbox" name="slidedownallaut" class="slidedownallRoleaut"/>
 								展开全部
 							</label>
-								<label class="prompt visible-md visible-lg">
+								<label class="prompt visible-md visible-lg relateCtl">
 								温馨小提示：此
 								<input  type="checkbox" name="disabled" checked="checked" disabled="disabled"/>
 								为您的上级权限您无权更改
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 				<div class="btnbox">
-					<button type="button" class="btn btn-default submitbtn-role-edit">确定</button>
+					<button type="button" class="btn btn-default submitbtn-role-edit" id="resSubmit">确定</button>
 					<button type="button" class="btn btn-default">取消</button>
 				</div>
 			</form>

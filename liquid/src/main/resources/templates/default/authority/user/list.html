@@ -165,7 +165,7 @@ $("table").on("click",".userAuth", function(e) {
 	$("#user-authorization").find(".modal-contentbox").appendTo(".ajax_dom").addClass(class_name).attr("id",class_name)
 	userAuth(data);
 });
-$("table").on("click","#submit_editUser",function(){
+$(".btnbox").on("click","#submit_editUser",function(){
 	$.post("user/edit",
 		{
 			id:$("#edit_userId").val(),
@@ -349,7 +349,7 @@ function jsTree_selectedOperation(jstree_roleData,data){
 	}
 	return selectJsTree(jstree_roleData,tem_user_role);
 }
-$('.user_auth_submit').on('click',function(){
+$('.btnbox').on('click',"#resSubmit",function(){
 	var request_data = {};
 	request_data.userId = $("#auth_userName").attr('user_id');
 	request_data.roleIds = jsTree_getSelectedNodes('.user-authorizationtree');

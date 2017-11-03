@@ -134,7 +134,7 @@ $(document).on("click",".renovate",function(){
 	roleListInit();
 });
 //添加编辑事件
-$("table").on("click",".role_editRole", function(e) {
+$(".table").on("click",".role_editRole", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -151,7 +151,7 @@ $("table").on("click",".role_editRole", function(e) {
 	editRoleModal(data);
 });
 //添加查看事件
-$("table").on("click",".viewRole", function(e) {
+$(".table").on("click",".viewRole", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -163,7 +163,7 @@ $("table").on("click",".viewRole", function(e) {
 	viewRole(data);
 });
 //添加查看角色授权事件
-$("table").on("click",".roleAuth", function(e) {
+$(".table").on("click",".roleAuth", function(e) {
 	e.preventDefault();
 	////获取到本地的某条数据
 	var storage_name = $(this).closest('tr').attr('storage_name');
@@ -243,7 +243,8 @@ function beforeMaxEditModal(){
 		}
 	});
 }
-$("table").on("click","#submit_editRole",function(){
+$(".btnbox").on("click","#submit_editRole",function(){
+	console.log("11111111")
 	$.post("role/edit",
 		{
 			id:$("#edit_roleId").val(),
@@ -338,7 +339,7 @@ $("table").on("click","#submit_editRole",function(){
 		});
 	}
 	//提交编辑数据
-	$('#resSubmit').on('click',function(){
+	$('.btnbox').on('click',"#resSubmit",function(){
 		var request_data = {};
 		request_data.roleId = $("#auth_roleName").attr('role_id');
 		request_data.operationIds = jsTree_getSelectedOperationIds('.role-authorization');
