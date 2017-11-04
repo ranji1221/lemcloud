@@ -17,7 +17,7 @@ Lemon Cloud PlatForm
  > (5) 数据源框架：Druid1.1.5<br>
  > (6) 安全认证框架：Shiro 1.2<br>
  > (7) 缓存技术：Redis3<br>
- > (8) 消息中间件：ActiveMQ<br>
+ > (8) 消息中间件：ActiveMQ/RabbitMQ<br>
  > (9) 工作流引擎：Flowable<br>
  > (10) PRC去中心化的微服务框架：Dubbox / Thrift<br>
  > (11) 分布式云平台框架：Spring Cloud
