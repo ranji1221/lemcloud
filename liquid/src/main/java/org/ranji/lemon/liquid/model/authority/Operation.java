@@ -41,6 +41,7 @@ public class Operation extends AbstractModel{
 	private String operationURL; // 操作链接
 	private int resourceId; // 资源ID 
 	private int operationPId; //操作父id
+	private String uri;       //操作uri
 	private boolean state = false;
 	private List<Operation> operationList = new ArrayList<Operation>();
 	
@@ -109,6 +110,15 @@ public class Operation extends AbstractModel{
 		this.operationPId = operationPId;
 	}
 	
+	
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
 	//重写对象比较规则
 	@Override
 	public boolean equals(Object obj) {  

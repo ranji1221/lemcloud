@@ -1,6 +1,8 @@
 package org.ranji.lemon.liquid.security;
 
 
+import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,7 +12,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.User;
+import org.ranji.lemon.liquid.service.authority.prototype.IAuthorityService;
 import org.ranji.lemon.liquid.service.authority.prototype.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -44,6 +48,11 @@ public class SystemRealm extends AuthorizingRealm{
 	@Lazy	//-- 为解决shiro和redis框架的冲突而添加
 	private IUserService userService;
 	
+	@Autowired
+	@Lazy
+	private IAuthorityService authService;
+	
+	
 	/**
 	 * 编写认证代码
 	 */
@@ -72,16 +81,13 @@ public class SystemRealm extends AuthorizingRealm{
 		//-- 并可以赋予用户权限
 		String userName = (String)principals.fromRealm(getName()).iterator().next();
 		SimpleAuthorizationInfo info = null;
-		if(userName != null && !"".equals(userName))
+		if(userName != null && !"".equals(userName)){
 			info = new SimpleAuthorizationInfo();
-		if(userName.equals("zhangsan2")){
-			info.addStringPermission("user:add");
-			info.addStringPermission("user:list");
-			info.addStringPermission("user:bulkadd");
-			info.addStringPermission("user:lookuser");
-			info.addStringPermission("user:edituser");
-			info.addStringPermission("user:authuser");
-			//info.addStringPermission("user:delete");
+			User user  = userService.findByUserName(userName);
+			List <Operation> oprList = authService.findOperationsByUserId(user.getId());
+			for (Operation o:oprList){
+				info.addStringPermission(o.getUri());
+			}
 		}
 		return info;
 		
