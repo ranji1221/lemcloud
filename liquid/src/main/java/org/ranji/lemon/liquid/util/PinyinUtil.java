@@ -1,5 +1,6 @@
 package org.ranji.lemon.liquid.util;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class PinyinUtil {
+	
     /** 
      * 汉字转换位汉语拼音首字母，英文字符不变，特殊字符丢失 支持多音字，生成方式如（长沙市长:cssc,zssz,zssc,cssz） 
      *  
@@ -38,9 +40,6 @@ public class PinyinUtil {
                             }  
                         }  
                     }  
-                    // else {  
-                    // pinyinName.append(nameChar[i]);  
-                    // }  
                 } catch (BadHanyuPinyinOutputFormatCombination e) {  
                     e.printStackTrace();  
                 }  

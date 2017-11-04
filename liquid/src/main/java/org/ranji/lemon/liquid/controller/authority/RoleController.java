@@ -15,6 +15,7 @@ import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.service.authority.prototype.IAuthorityService;
 import org.ranji.lemon.liquid.service.authority.prototype.IRoleService;
+import org.ranji.lemon.liquid.util.PinyinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -120,6 +121,9 @@ public class RoleController {
 	//@SystemControllerLog(description="权限管理-添加角色")
 	public String saveRole(Role newRole) {
 		try {
+			String displayName = newRole.getDisplayName();
+			String roleName = PinyinUtil.converterToSpell(displayName).split(",")[0]; //转为拼音 多音取第一个
+			newRole.setRoleName(roleName);
 			roleService.save(newRole);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
@@ -152,7 +156,10 @@ public class RoleController {
 	public String edit(Role newRole,HttpSession session) {
 		try {
 			Role role = roleService.find(newRole.getId());
-			role.setDisplayName(newRole.getDisplayName());
+			String displayName = newRole.getDisplayName();
+			String roleName = PinyinUtil.converterToSpell(displayName).split(",")[0]; //转为拼音 多音取第一个
+			role.setDisplayName(displayName);
+			role.setRoleName(roleName);
 			role.setRoleExtendPId(newRole.getRoleExtendPId());
 			role.setRoleMaxNum(newRole.getRoleMaxNum());
 			role.setRemarks(newRole.getRemarks());
