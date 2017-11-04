@@ -79,7 +79,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	
 	
 	@Override
-	@Cacheable(value="liquidrole")
+	//@Cacheable(value="liquidrole")
 	public List<Role> findRoleTree() {
 		//return find(-1); //递归查询方法
 		List<Role> roles= findAll(); //查出所有角色
@@ -92,7 +92,12 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
             if(role.getRoleExtendPId() == -1){
                 rootTrees.add(role);
             	}
-	        for (Role r : roles) {
+            for (Role r : roles) {  //查询依赖角色
+	            if(r.getRoleRelyId() == role.getId()){
+	            	r.setRoleRelyName(role.getDisplayName());
+	            }
+	         }
+	        for (Role r : roles) {  //查询父角色
 	            if(r.getRoleExtendPId() == role.getId()){
 	            	r.setRolePName(role.getDisplayName());
 	                role.getList().add(r);
