@@ -14,18 +14,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
-		<spring.boot.aop.version>1.5.8.RELEASE</spring.boot.aop.version>
-		<spring.boot.web.version>1.5.8.RELEASE</spring.boot.web.version>
-		<spring.boot.test.version>1.5.8.RELEASE</spring.boot.test.version>
-		<spring.boot.tomcat.version>1.5.8.RELEASE</spring.boot.tomcat.version>
-		<spring.boot.thymeleaf.version>1.5.8.RELEASE</spring.boot.thymeleaf.version>
-		<spring.boot.redis.version>1.5.8.RELEASE</spring.boot.redis.version>
 		<spring.boot.mybatis.version>1.3.1</spring.boot.mybatis.version>
 		<shiro.version>1.4.0</shiro.version>
 		<spring.boot.mysql.driver.version>5.1.44</spring.boot.mysql.driver.version>
 		<datasource.druid.version>1.1.5</datasource.druid.version>
 		<flowable.version>6.1.2</flowable.version>
-		<spring.boot.maven.plugin.version>1.5.8.RELEASE</spring.boot.maven.plugin.version>
 	</properties>
 	
 	<!-- Lemon云平台依赖仓库配置 -->
@@ -61,30 +54,37 @@
 			<dependency>  
 	            <groupId>org.springframework.boot</groupId>  
 	            <artifactId>spring-boot-starter-test</artifactId>
-	            <version>${spring.boot.test.version}</version>
+	            <version>${spring.boot.version}</version>
 	            <scope>test</scope>  
 			</dependency>  
 			<dependency>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-tomcat</artifactId>
-			    <version>${spring.boot.tomcat.version}</version>
+			    <version>${spring.boot.version}</version>
 			    <scope>provided</scope>
 			</dependency>
 			<dependency>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-thymeleaf</artifactId>
-			    <version>${spring.boot.thymeleaf.version}</version>
+			    <version>${spring.boot.version}</version>
 			</dependency>
 			<dependency>  
 			    <groupId>org.springframework.boot</groupId>  
 			    <artifactId>spring-boot-starter-aop</artifactId>
-			    <version>${spring.boot.aop.version}</version>  
+			    <version>${spring.boot.version}</version>  
 			</dependency>
 			<dependency>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-starter-data-redis</artifactId>
-			    <version>${spring.boot.redis.version}</version>
+			    <version>${spring.boot.version}</version>
 			</dependency>
+			<!-- RabbitMQ消息中间件 -->
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-amqp</artifactId>
+			    <version>${spring.boot.version}</version>
+			</dependency>
+
 
 			<!--2. Spring Boot MyBatis -->
 			<dependency>
@@ -163,7 +163,7 @@
     			<plugin>
     				<groupId>org.springframework.boot</groupId>
 			    	<artifactId>spring-boot-maven-plugin</artifactId>
-			    	<version>${spring.boot.maven.plugin.version}</version>
+			    	<version>${spring.boot.version}</version>
     			</plugin>
     			<!-- 编译插件 -->
 				<plugin>

@@ -100,7 +100,12 @@
 		    <artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		
-
+		<!-- RabbitMQ消息中间件 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
