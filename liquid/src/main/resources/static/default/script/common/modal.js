@@ -18,106 +18,32 @@ function limitChangeLength(elm, limitLength) {
 		$(elm).siblings(".limitlength").html($(elm).attr("maxlength") - length);
 	});
 }
+/**
+ * 刷新页面
+ */	
+$('.tfoot').on("click",".renovate",function(){
+	removeStorage();
+	roleListInit();
+});
 
+/**
+ * 复选框
+ */
+$('.tablewrap input').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue',
+    labelHover : true, 
+  	cursor : false,
+ });
+$(document).on('ifChecked','#checkall', function(event){
+  	$('.tablewrap input').iCheck('check')
+});
+	$(document).on('ifUnchecked', '#checkall',function(event){
+  	$('.tablewrap input').iCheck('uncheck')
+});
 
-//角色编辑框 
-function editRoleModal(data) {
-
-	limitChangeLength($(".sliderInput input[type='text']"),12)
-	var maxNum = data.roleMaxNum;
-	var maxLimitNum = 10;
-	var add = $(".numCtr .add");
-	var sub = $(".numCtr .reduce ");
-	var grey = '#bdc3c7';
-	var blue = '#378ef8';
-	judge(maxNum)
-	//加减按钮
-	var limitNum;
-	if(parseInt(maxNum) == 0) {
-		limitNum = 0;
-	} else if(parseInt(maxNum)) {
-		limitNum = parseInt(maxNum);
-	} else {
-		limitNum = parseInt($("#limitNum").val()) || 0;
-	}
-	function judge(limitNum) {
-		if(maxLimitNum <= limitNum) {
-			$(add).css("background", grey);
-			$(sub).css("background", blue);
-		} else if(limitNum < 1) {
-			$(sub).css("background", grey);
-			$(add).css("background", blue);
-		} else {
-			$(add).css("background", blue);
-			$(sub).css("background", blue);
-		}
-	}
-	
-	$(sub).off("click")
-	$(add).off("click")
-	$(sub).click(function(e) {
-		e.preventDefault();
-		var numVal = parseInt($("#edit_roleMaxNum").val());
-		if(numVal > 0) {
-			numVal--;
-			$("#edit_roleMaxNum").val(numVal);
-		}
-		var inputlimitNum = parseInt($(".numCtr input").val());
-		judge(inputlimitNum);
-	});
-	$(add).click(function(e) {
-		e.preventDefault();
-		var numVal = parseInt($("#edit_roleMaxNum").val());
-		if(numVal < 10) {
-			numVal++;
-			$("#edit_roleMaxNum").val(numVal);
-		}
-		var inputlimitNum = parseInt($(".numCtr input").val());
-		judge(inputlimitNum);
-	});
-	dealDataToModal(data); 
-	limitChangeLength($(".sliderInput input[type='text']"),12)
-}
 function editSource(data) {
 	dealDataToModal(data);
-}
-//用户编辑框
-function editUser(data) {
-	$("#edit_userId").val(data.id);
-	$("#edit_userPass").val(data.userPass);
-	$("#edit_userName").val(data.userName);
-	$("#edit_phone").val(data.phone);
-	$("#edit_email").val(data.email);
-
-}
-/* 弹出查看框 */
-function viewRole(data) {
-	//获取到本地的某条数据 示例代码
-	$("#view_roleName").html(data.displayName);
-	$("#view_roleMaxNum").html(data.roleMaxNum);
-	data.rolePName?$("#view_rolePName").html(data.rolePName):$("#view_rolePName").html("无");
-	data.roleRelyName?$("#view_roleRelyName").html(data.roleRelyName):$("#view_roleRelyName").html("无");
-	$("#view_remarks").html(data.remarks);
-
-}
-
-function viewUser(data) {
-	$("#view_userName").html(data.userName);
-	var roleName = '';
-	$.each(data.roleList, function(i,v) {
-		roleName += v.displayName + ',';
-	})
-	roleName = roleName.substr(0,roleName.length-1);
-	
-	if(roleName.length){
-		$("#view_roleName").html(roleName);
-	}
-	else {
-		$("#view_roleName").html("无");
-	}
-	$("#view_roleName").html(data.roleName);
-	$("#view_phone").html(data.phone);
-	$("#view_email").html(data.email);
 }
 
 function viewSource(data) {
@@ -147,12 +73,6 @@ function viewSource(data) {
 		$("#view_operationName").html("无");
 	}
 
-}
-/**
-* 查看用户授权模态框
-*/
-function userAuth(data) {
-	$("#auth_userName").val(data.userName);
 }
 //关闭
 $(document).on("click.close",'.closeAction', function(e) {
