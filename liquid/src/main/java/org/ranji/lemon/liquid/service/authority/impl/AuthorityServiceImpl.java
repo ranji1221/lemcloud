@@ -37,21 +37,16 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	private IOperationService operationService;
 
 	
-	private List<Role> roles = new ArrayList<Role>();//存储角色
-	private List<Role> recRole	=new ArrayList<Role>();  //存储递归角色
-	private List<Operation> operations= new ArrayList<Operation>(); //存储用户操集合
-	private List<Operation> roleOperation = new ArrayList<Operation>(); //存储角色集合
-	
-	
-	@Override
-	public List<Role> userFindRole() {
-		
-		return null;
-	}
+	private List<Role> roles ;    //存储角色
+	private List<Role> recRole;  //存储递归角色
+	private List<Operation> operations; //存储用户操操作集合
+	private List<Operation> roleOperation ; //存储角色操作集合
 	
 	//查询用户的所有角色及父级角色
 	@Override
-	public  List<Role> findRolesByUserId(int userId){	
+	public  List<Role> findRolesByUserId(int userId){
+		recRole = new ArrayList<Role>() ;
+		roles = new ArrayList<Role>();
 		List<Role> list = userService.findRoleByUserId(userId);
 			for(Role r:list){
 				roles.add(r);
@@ -82,6 +77,8 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	// 查询用户对应操作
 	@Override
 	public List<Operation> findOperationsByUserId(int userId) {
+		roleOperation = new ArrayList<Operation>();
+		operations= new ArrayList<Operation>();
 		List <Role> roleIds = findRolesByUserId(userId);
 		List <Operation> opera = new ArrayList<Operation>();//临时存储操作集合（单一角色）
 		for (Role role:roleIds){
@@ -92,8 +89,9 @@ public class AuthorityServiceImpl implements IAuthorityService{
 		return operations;
 	}
 	// 查询角色对应操作
+	@Override
 	public List<Operation> findOperationsByRoleId(int roleId){
-		
+		roleOperation = new ArrayList<Operation>();
 		roleOperation = roleService.findOperationByRoleId(roleId);
 		for(Operation o :roleOperation){
 			o.setState(true);

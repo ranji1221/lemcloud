@@ -33,8 +33,6 @@ import org.ranji.lemon.liquid.model.authority.User;
  */
 public interface IAuthorityService {
 	
-	public List<Role> userFindRole();
-	
 	/**
 	 * 查询用户的所有角色及父级角色
 	 * @param userId 用户id
@@ -57,7 +55,7 @@ public interface IAuthorityService {
 	public String findAllUserInduleRoles(String params);
 	
 	/**
-	 * 根据用户id查询所有操作
+	 * 根据角色id查询所有操作
 	 * @param roleId 角色id
 	 * @return 操作集合
 	 */
