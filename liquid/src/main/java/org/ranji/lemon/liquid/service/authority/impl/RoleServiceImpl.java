@@ -92,7 +92,12 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
             if(role.getRoleExtendPId() == -1){
                 rootTrees.add(role);
             	}
-	        for (Role r : roles) {
+            for (Role r : roles) {  //查询依赖角色
+	            if(r.getRoleRelyId() == role.getId()){
+	            	r.setRoleRelyName(role.getDisplayName());
+	            }
+	         }
+	        for (Role r : roles) {  //查询父角色
 	            if(r.getRoleExtendPId() == role.getId()){
 	            	r.setRolePName(role.getDisplayName());
 	                role.getList().add(r);
