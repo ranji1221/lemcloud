@@ -53,7 +53,6 @@ public class OperationDaoTest {
 		o.setOperationName("test2");
 		o.setDisplayName("测试");
 		o.setOperationPId(1);
-		o.setOperationURL("/update");
 		o.setResourceId(2);
 		
 		operationDao.save(o);
@@ -65,7 +64,6 @@ public class OperationDaoTest {
 		o.setOperationName("newTest");
 		o.setDisplayName("新测试");
 		o.setOperationPId(5);
-		o.setOperationURL("/users");
 		o.setResourceId(1);
 		o.setId(5);
 		operationDao.update(o);

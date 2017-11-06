@@ -1,11 +1,12 @@
 package org.ranji.lemon.liquid.model.authority;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.ranji.lemon.core.model.AbstractModel;
 import org.ranji.lemon.core.util.JsonUtil;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -30,6 +31,7 @@ import org.ranji.lemon.core.util.JsonUtil;
  * @since JDK1.7
  * @version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL) //为空字段不返回
 public class Resource extends AbstractModel{
 
 	private static final long serialVersionUID = -6121495662185377546L;

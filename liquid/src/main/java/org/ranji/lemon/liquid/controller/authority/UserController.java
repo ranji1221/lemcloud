@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.ranji.lemon.core.annotation.SystemControllerLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.model.authority.User;
@@ -192,6 +192,7 @@ public class UserController {
 	//@SystemControllerPermission("user:list")
 	@ResponseBody
 	//@SystemControllerLog(description="权限管理-用户列表")
+	@RequiresPermissions("user:list")
 	@RequestMapping(value = "/data")
 	public String data(String params,HttpSession session) {
 		return authService.findAllUserInduleRoles(params);

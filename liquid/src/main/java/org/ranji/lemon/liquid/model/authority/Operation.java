@@ -38,10 +38,8 @@ public class Operation extends AbstractModel{
 	private int id;
 	private String operationName; // 操作名 user：list
 	private String displayName; // 操作名 中文
-	private String operationURL; // 操作链接
 	private int resourceId; // 资源ID 
 	private int operationPId; //操作父id
-	private String uri;       //操作uri
 	private boolean state = false;
 	private List<Operation> operationList = new ArrayList<Operation>();
 	
@@ -85,14 +83,6 @@ public class Operation extends AbstractModel{
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-
-	public String getOperationURL() {
-		return operationURL;
-	}
-	
-	public void setOperationURL(String operationURL) {
-		this.operationURL = operationURL;
-	}
 	
 	public int getResourceId() {
 		return resourceId;
@@ -108,15 +98,6 @@ public class Operation extends AbstractModel{
 	
 	public void setOperationPId(int operationPId) {
 		this.operationPId = operationPId;
-	}
-	
-	
-	public String getUri() {
-		return uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
 	}
 
 	//重写对象比较规则
