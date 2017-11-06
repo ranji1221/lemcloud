@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.ranji.lemon.core.pagination.PagerModel;
+import org.ranji.lemon.core.util.JsonUtil;
+import org.ranji.lemon.liquid.dto.OperationDTO;
 import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Resource;
 import org.ranji.lemon.liquid.model.authority.Role;
@@ -18,6 +20,7 @@ import org.ranji.lemon.liquid.service.authority.prototype.IOperationService;
 import org.ranji.lemon.liquid.service.authority.prototype.IResourceService;
 import org.ranji.lemon.liquid.service.authority.prototype.IRoleService;
 import org.ranji.lemon.liquid.service.authority.prototype.IUserService;
+import org.ranji.lemon.liquid.util.PinyinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -127,44 +130,33 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	
 	//保存资源操作集
 	@Override
-	public void saveResourceAndOperation(Resource resource,String []array,String permission){
+	public void saveResourceAndOperation(Resource resource,String params){
 		resourceService.save(resource);
 		int resourceId = resource.getId();
-		saveOperation(array,resourceId,permission);
+		saveOperation(resourceId,params);
 	}
 	//更新资源操作集
 	@Override
-	public void updateResourceAndOperation(Resource resource,String []array,String permission){
+	public void updateResourceAndOperation(Resource resource,String params){
 		resourceService.update(resource);
 		int resourceId = resource.getId();
 		operationService.deleteAllByResourceId(resourceId);
-		saveOperation(array,resourceId,permission);
+		saveOperation(resourceId,params);
 	}
+	
 	//保存操作集合
-	private void saveOperation(String []array, int resourceId,String permission){
-		int id = -1;  //根id
-		for(String  s: array){
-			if("1".equals(s)){
-				Operation o = reveseOperation(s,permission);
-				o.setOperationPId(id);
-				o.setResourceId(resourceId);
-				operationService.save(o);
-				id = o.getId();
-				for(String s1 : array){
-					if(!"1".equals(s1)){
-						Operation o1 = reveseOperation(s1,permission);
-						o1.setOperationPId(id);
-						o1.setResourceId(resourceId);
-						operationService.save(o1);
-					}
-				}
-				break;
-			}else{
-				continue;
-			}
+	private void saveOperation(int resourceId,String params){	
+		List<OperationDTO> operationList=JsonUtil.jsonToList(params, OperationDTO.class);
+		Operation opera =new Operation();
+		opera.setResourceId(resourceId);
+		for(OperationDTO s : operationList){
+			opera.setDisplayName(s.getOperation());
+			opera.setPermission(s.getPermission());
+			opera.setOperationName(PinyinUtil.converterToSpell(opera.getDisplayName()).split(",")[0]);
+			operationService.save(opera);
 		}
 	}
-	//将数字转化为对应的资源对象
+/*	//将数字转化为对应的资源对象
 	private Operation reveseOperation(String s,String permission){
 		Operation operation = new Operation();
 		operation.setPermission(permission);
@@ -182,7 +174,7 @@ public class AuthorityServiceImpl implements IAuthorityService{
 			operation.setOperationName("delete");
 		}
 		return operation;
-	}
+	}*/
 	//查询所有资源（包含操作信息）
 	@Override
 	public String findAllResourceInduleOperation(String params) {

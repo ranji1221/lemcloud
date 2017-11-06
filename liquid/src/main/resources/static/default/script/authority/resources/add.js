@@ -80,9 +80,9 @@ $('#add_resourcePId').LemonGetList({
 			resourceName:$("#add_resourceName").val().trim(),
 			/*permission:$(".add_permission").val().trim(),
 			operation:$(".add_operation").val().trim(),*/
-			resourceType:$("#add_resourceType option:selected").val().trim(),
-			resourcePId:$("#add_resourcePId option:selected").val().trim(),
-			params
+			resourceType:$("#add_resourceType option:selected").val(),
+			resourcePId:$("#add_resourcePId option:selected").val(),
+			params : JSON.stringify(params)
 		},function(data){
 			if(data.success){
 				removeStorage();

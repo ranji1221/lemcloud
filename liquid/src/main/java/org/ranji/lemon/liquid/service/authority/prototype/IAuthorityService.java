@@ -64,20 +64,18 @@ public interface IAuthorityService {
 	/**
 	 * 保存资源操作相关内容
 	 * @param resource 资源对象
-	 * @param array 操作字符集
-	 * @param permission 许可
+	 * @param params 操作字符集
 	 * 
 	 */
-	public void saveResourceAndOperation(Resource resource,String []array,String permission);
+	public void saveResourceAndOperation(Resource resource,String params);
 	
 	/**
 	 * 更新资源操作相关内容
 	 * @param resource 资源对象
-	 * @param array 操作字符集
-	 * @param permission 许可
+	 * @param params 操作字符集
 	 * 
 	 */
-	public void updateResourceAndOperation(Resource resource,String []array,String permission);
+	public void updateResourceAndOperation(Resource resource,String params);
 	/**
 	 * 角色授权
 	 * @param roleId 角色id

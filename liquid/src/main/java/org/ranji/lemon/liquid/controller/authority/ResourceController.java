@@ -7,11 +7,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.ranji.lemon.core.annotation.SystemControllerLog;
-import org.ranji.lemon.core.pagination.PagerModel;
 import org.ranji.lemon.core.util.JsonUtil;
+import org.ranji.lemon.liquid.dto.OperationDTO;
 import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Resource;
 import org.ranji.lemon.liquid.service.authority.prototype.IAuthorityService;
@@ -23,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -74,12 +70,11 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/save")
-	@RequiresPermissions("resource:add")
+	//@RequiresPermissions("resource:add")
 	//@SystemControllerLog(description="权限管理-添加资源")
-	public String saveResources(Resource resource, @RequestParam("operation") String operation,String permission) {
-		String[] array  = operation.split(",");
+	public String saveResources(Resource resource,String params) {
 		try {
-			authService.saveResourceAndOperation(resource, array,permission);
+			authService.saveResourceAndOperation(resource, params);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,14 +86,13 @@ public class ResourceController {
 	@RequestMapping(value = "/edit")
 	@RequiresPermissions("resource:edit")
 	//@SystemControllerLog(description="权限管理-编辑资源")
-	public String editResource(Resource newResource, @RequestParam("operation") String operation,String permission) {
+	public String editResource(Resource newResource,String params) {
 		try {
-			String [] array = operation.split(",");
 			Resource resource = resourceService.find(newResource.getId());
 			resource.setResourceName(newResource.getResourceName());
 			resource.setResourceType(newResource.getResourceType());
 			resource.setResourcePId(newResource.getResourcePId());
-			authService.updateResourceAndOperation(resource, array,permission);
+			authService.updateResourceAndOperation(resource,params);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			// TODO: handle exception
