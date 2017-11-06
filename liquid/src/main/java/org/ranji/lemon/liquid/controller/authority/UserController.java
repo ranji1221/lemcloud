@@ -193,7 +193,7 @@ public class UserController {
 	//@SystemControllerPermission("user:list")
 	@ResponseBody
 	//@SystemControllerLog(description="权限管理-用户列表")
-	@RequiresPermissions("user:list")
+	//@RequiresPermissions("user:list")
 	@RequestMapping(value = "/data")
 	public String data(String params,HttpSession session) {
 		return authService.findAllUserInduleRoles(params);

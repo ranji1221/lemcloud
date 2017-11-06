@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implements IRoleService {
 	@Override
-	@Cacheable(value="liquidrole")
+	//@Cacheable(value="liquidrole")
 	public Role findByRoleName(String roleName) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("displayName", roleName);
@@ -80,7 +80,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	
 	
 	@Override
-	@Cacheable(value="liquidrole")
+	//@Cacheable(value="liquidrole")
 	public List<Role> findRoleTree() {
 		//return find(-1); //递归查询方法
 		List<Role> roles= findAll(); //查出所有角色

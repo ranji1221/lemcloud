@@ -112,7 +112,7 @@ $('.removeBtn').bindDialogs({
 	}
 });
 //刷新页面
-$(document).on("click",".renovate",function(){
+$(".renovate").on("click",function(){
 	removeStorage();
 	roleListInit();
 })
