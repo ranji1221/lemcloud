@@ -4,8 +4,8 @@
 	
 	<!-- 增加操作 -->
 	<insert id="save" parameterType="Operation" keyProperty="id" useGeneratedKeys="true">
-		insert into lemon_liquid_auth_operation (guid, createTime,updateTime,operationName, displayName,resourceId,operationPId) values 
-		(#{guid}, #{createTime},#{updateTime},#{operationName},#{displayName},#{resourceId},#{operationPId})
+		insert into lemon_liquid_auth_operation (guid, createTime,updateTime,operationName, displayName,resourceId,operationPId,permission) values 
+		(#{guid}, #{createTime},#{updateTime},#{operationName},#{displayName},#{resourceId},#{operationPId},#{permission})
 	</insert>
 	
 	<!-- 更新操作 -->

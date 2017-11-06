@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.model.authority.Role;
@@ -78,7 +79,7 @@ public class UserController {
 	public String resetPwd(int id) {
 		try {
 			User user = userService.find(id);
-			user.setUserPass("123456");
+			user.setUserPass(new DefaultPasswordService().encryptPassword("123456"));
 			userService.update(user);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
