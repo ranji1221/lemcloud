@@ -126,7 +126,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/get/resourceAndOperation")
-	@RequiresPermissions("role:auth")
+	@RequiresPermissions("resource:list")
 	public String findResourceAndOperation() {
 		List<Resource> resourceList = resourceService.findAll();
 		List<Operation> operationList = operationService.findAll();

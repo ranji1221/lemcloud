@@ -124,9 +124,8 @@ public class UserController {
 		}
 	}
 	
-	
-	@RequestMapping(value = "/auth")
 	@ResponseBody
+	@RequestMapping(value = "/auth")
 	@RequiresPermissions("user:auth")
 	//@SystemControllerLog(description="权限管理-给用户分配角色")
 	public String authUser(String roleIds, int userId) {
