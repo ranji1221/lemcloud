@@ -22,7 +22,7 @@ function userAuth(data) {
 	 });
 	$('.checkallRoleaut,.slidedownallRoleaut').iCheck('uncheck')
 }
-$(document).on('click',"#resUserSubmit",function(){
+$("#resUserSubmit").on('click',function(){
 	var request_data = {};
 	request_data.userId = $("#auth_userName").attr('user_id');
 	request_data.roleIds = jsTree_getSelectedNodes('.user-authorizationtree');

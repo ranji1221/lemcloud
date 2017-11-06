@@ -122,7 +122,7 @@ window.dealDataToModal = function(data){
 		}
 	})
 }
-$(document).on("click","#submit_editRole",function(){
+$("#submit_editRole").on("click",function(){
 	$.post("role/edit",
 		{
 			id:$("#edit_roleId").val(),

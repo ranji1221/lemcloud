@@ -24,7 +24,7 @@ function roleAuth(data){
 	 });
 	$('.checkallRoleaut,.slidedownallRoleaut').iCheck('uncheck')
 }
-$(document).on('click',"#resRoleSubmit",function(){
+$("#resRoleSubmit").on('click',function(){
 	var request_data = {};
 	request_data.roleId = $("#auth_roleName").attr('role_id');
 	request_data.operationIds = jsTree_getSelectedOperationIds('.role-authorization');

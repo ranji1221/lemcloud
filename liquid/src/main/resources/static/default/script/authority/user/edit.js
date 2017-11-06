@@ -19,7 +19,7 @@ function editUser(data) {
 	$("#edit_phone").val(data.phone);
 	$("#edit_email").val(data.email);
 }
-$(document).on("click","#submit_editUser",function(){
+$("#submit_editUser").on("click",function(){
 	$.post("user/edit",
 		{
 			id:$("#edit_userId").val(),

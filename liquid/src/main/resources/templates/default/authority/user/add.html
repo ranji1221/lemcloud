@@ -45,10 +45,10 @@
 	})
 	$(".btnbox").on("click", "#submit_addUser", function() {
 		$.post("user/save", {
-			userName: $("#add_userName").val(),
-			userPass:$("#add_userPass").val(),
-			phone: $("#add_phone").val(),
-			email: $("#add_email").val()
+			userName: $("#add_userName").val().trim(),
+			userPass:$("#add_userPass").val().trim(),
+			phone: $("#add_phone").val().trim(),
+			email: $("#add_email").val().trim()
 		}, function(data) {
 			if(data.success) {
 				removeStorage();
@@ -160,6 +160,18 @@
 					</div>
 				</div>
 			</div>
+		<!-- 	<div class="form-group input">
+				<label for="">确认密码：</label>
+				<div class="inputwrapper">
+					<div class="inputwrappermax">
+						<input type="password" class="form-control rolenameinput" placeholder="请输入用户密码" id="add_userPass2"/>
+						<span class="limitlength">15</span>
+						<span class="errormessage errormessage-user-edit-name">
+			    		您输入了特殊符号！
+			    		</span>
+					</div>
+				</div>
+			</div> -->
 			<div class="form-group phone">
 				<label for="">联系电话：</label>
 				<div class="inputwrapper">
