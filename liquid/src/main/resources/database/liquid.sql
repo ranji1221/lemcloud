@@ -28,7 +28,7 @@ CREATE TABLE `lemon_liquid_auth_operation` (
   `operationURL` varchar(255) default NULL COMMENT '操作链接',
   `resourceId` int(11) not NULL COMMENT '资源ID',
   `operationPId` int(11) not null default -1 COMMENT '操作父ID',
-  `permission`  varchar(255) COMMENT '许可'
+  `permission`  varchar(255) COMMENT '许可',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
