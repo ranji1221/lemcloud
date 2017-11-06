@@ -65,11 +65,11 @@ $('.select_roleList').LemonGetList({
 $(".addbtnbox").on("click","#submit_addRole",function(){
 	$.post("role/save",
 		{
-		displayName:$("#add_displayName").val(),
-		roleMaxNum:$("#add_roleMaxNum").val(),
-		remarks:$("#add_remarks").val(),
-		roleExtendPId:$("#add_roleExtendPId option:selected").val(),
-		roleRelyId:$("#add_roleRelyId option:selected").val()
+		displayName:$("#add_displayName").val().trim(),
+		roleMaxNum:$("#add_roleMaxNum").val().trim(),
+		remarks:$("#add_remarks").val().trim(),
+		roleExtendPId:$("#add_roleExtendPId option:selected").val().trim(),
+		roleRelyId:$("#add_roleRelyId option:selected").val().trim()
 		},function(data){
 			if(data.success){
 				removeStorage();

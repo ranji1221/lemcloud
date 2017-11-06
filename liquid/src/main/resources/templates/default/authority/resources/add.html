@@ -43,7 +43,7 @@
 		    	<label for="" >资源名称：</label>
 		    	<div class="inputwrapper">
 		    		<div class="inputwrappermax in_input_num">
-				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" name='username' id="add_resourceName"/>
+				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" id="add_resourceName"/>
 				    	<span class="limitlength">15</span>
 				    	<span class="errormessage errormessage-source-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -51,6 +51,18 @@
 		    		</div>
 		    	</div>
 		  	</div>
+		  	<!-- <div class="form-group input">
+		    	<label for="" >资源URL：</label>
+		    	<div class="inputwrapper">
+		    		<div class="inputwrappermax in_input_num">
+				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源URL" maxlength="50" id="add_resourceURL"/>
+				    	<span class="limitlength">50</span>
+				    	<span class="errormessage errormessage-source-edit-name">
+			    		您输入了特殊符号！
+			    		</span>
+		    		</div>
+		    	</div>
+		  	</div> -->
 		  	<div class="form-group select">
 		    	<label for="" >资源类型：</label>
 		    	<div class="inputwrapper">
@@ -84,6 +96,18 @@
 		    		</div>
 		    	</div>
 		  	</div>
+		  	<div class="form-group input">
+		    	<label for="" >权限许可：</label>
+		    	<div class="inputwrapper">
+		    		<div class="inputwrappermax in_input_num">
+				    	<input type="text" class="form-control rolenameinput" placeholder="请输入权限许可" maxlength="20" id="add_permission"/>
+				    	<span class="limitlength">20</span>
+				    	<span class="errormessage errormessage-source-edit-name">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+		    		</div>
+		    	</div>
+		  	</div>
 		  	<div class="form-group phone">
 		    	<label for="" >相关操作：</label>
 		    	<div class="inputwrapper" id="add_operation">
@@ -107,7 +131,7 @@
 		    		</div>
 		    	</div>
 		  	</div>
-		  	<div class="btnbox">
+		  	<div class="btnbox resourcebtnbox">
 				<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_addResource">确定</button>
 				<button type="button" class="btn btn-default">取消</button>
 		  	</div>
