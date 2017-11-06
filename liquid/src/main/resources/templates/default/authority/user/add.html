@@ -46,7 +46,7 @@
 	$(".btnbox").on("click", "#submit_addUser", function() {
 		$.post("user/save", {
 			userName: $("#add_userName").val(),
-			userPass:$("#add_userPass").val,
+			userPass:$("#add_userPass").val(),
 			phone: $("#add_phone").val(),
 			email: $("#add_email").val()
 		}, function(data) {
