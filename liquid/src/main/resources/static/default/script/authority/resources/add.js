@@ -57,21 +57,32 @@ $('#add_resourcePId').LemonGetList({
 	}
 	limitChangeLength($(".form_input .resources_name"),parseInt($(".minlimitNum").html()))
 	$(".resourcebtnbox").on("click.submit_add","#submit_addResource",function(){
-		var tem_str = '';
+	/*	var tem_str = '';
 		$("#add_operation input:checked").each(function(){
 			if(!tem_str) {
 				tem_str += $(this).val();
 			}else{
 				tem_str +=',' + $(this).val();			
 			}
-		})
+		})*/
+		var params = [];	
+		var permissionList=document.getElementsByClassName("add_permission");
+		var operationList=document.getElementsByClassName("add_operations");
+		//var index_i = 0
+		for(var i=0;i<permissionList.length;i++){
+			var operations = {};
+			operations.operation=operationList[i].value;
+			operations.permission=permissionList[i].value;
+			params.push(operations);
+			}
 	 $.post("resources/save",
 		{
 			resourceName:$("#add_resourceName").val().trim(),
-			permission:$("#add_permission").val().trim(),
+			/*permission:$(".add_permission").val().trim(),
+			operation:$(".add_operation").val().trim(),*/
 			resourceType:$("#add_resourceType option:selected").val().trim(),
 			resourcePId:$("#add_resourcePId option:selected").val().trim(),
-			operation:tem_str.trim()
+			params
 		},function(data){
 			if(data.success){
 				removeStorage();
@@ -96,4 +107,28 @@ $('#add_resourcePId').LemonGetList({
 			}
 		}
 	,"json")
+})
+$(function(){
+	function ifcheck(){
+		if($(".operation_permission").length == 1){
+			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
+		}else{
+			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
+			var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
+			$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
+		}
+		}
+	ifcheck()
+	$(".form_content").on("click",".click_span_add_operation",function(){
+		$(this).closest(".operation_permission").clone().insertBefore(".resourcebtnbox")
+		ifcheck()
+	})
+	$(".form_content").on("click",".click_span_remove_operation",function(){
+		if($(".operation_permission").length == 1){
+			
+		}else{
+			$(this).closest(".operation_permission").detach()
+		}
+		ifcheck()
+	})
 })

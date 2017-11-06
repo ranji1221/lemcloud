@@ -96,11 +96,26 @@
 		    		</div>
 		    	</div>
 		  	</div>
-		  	<div class="form-group input">
+		  	<div class="operation_permission">
+		  	<div class="form-group phone input">
+		    	<label for="" >相关操作：</label>
+		    	<div class="inputwrapper" id="add_operation">
+		    		<div class="inputwrappermax">
+				    	<input type="text" class="form-control rolenameinput add_operations" placeholder="请输入相关操作" maxlength="20"/>
+				    	<span class="limitlength">20</span>
+				    	<span class="errormessage errormessage-source-edit-name">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+		    		</div>
+		    		<span class="btn btn-default input_add_span click_span_add_operation">+</span>
+		    		<span class="btn btn-default input_remove_span click_span_remove_operation">-</span>
+		    	</div>
+		  	</div>
+		  	<div class="form-group input add_operation">
 		    	<label for="" >权限许可：</label>
 		    	<div class="inputwrapper">
 		    		<div class="inputwrappermax in_input_num">
-				    	<input type="text" class="form-control rolenameinput" placeholder="请输入权限许可" maxlength="20" id="add_permission"/>
+				    	<input type="text" class="form-control rolenameinput add_permission" placeholder="请输入权限许可" maxlength="20"/>
 				    	<span class="limitlength">20</span>
 				    	<span class="errormessage errormessage-source-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -108,28 +123,6 @@
 		    		</div>
 		    	</div>
 		  	</div>
-		  	<div class="form-group phone">
-		    	<label for="" >相关操作：</label>
-		    	<div class="inputwrapper" id="add_operation">
-		    		<div class="inputwrappermax">
-				    	<div class="col-xs-3 relateCtl">
-							<input name="add_operation" type="checkbox" value="1" checked="checked"/>
-							<label>查看</label>
-						</div>
-						<div class="col-xs-3 relateCtl">
-							<input name="add_operation" type="checkbox" value="2"/>
-							<label>编辑</label>
-						</div>
-						<div class="col-xs-3 relateCtl">
-							<input name="add_operation" type="checkbox" value="3"/>
-							<label>增加</label>
-						</div>
-						<div class="col-xs-3 relateCtl">
-							<input name="add_operation" type="checkbox" value="4"/>
-							<label>删除</label>
-						</div>
-		    		</div>
-		    	</div>
 		  	</div>
 		  	<div class="btnbox resourcebtnbox">
 				<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_addResource">确定</button>
