@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
 import org.ranji.lemon.core.pagination.PagerModel;
 import org.ranji.lemon.core.util.JsonUtil;
@@ -59,14 +60,12 @@ public class ResourceController {
 	@Autowired
 	private IOperationService operationService;
 		
-//	@SystemControllerPermission("resource:list")
 	@RequestMapping(value = "/list")
 	//@SystemControllerLog(description="权限管理-资源列表")
 	public String listResource() {
 		return "default/authority/resources/list";
 	}
 
-//	@SystemControllerPermission("resource:add")
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加资源跳转")
 	public String addResources() {
@@ -75,6 +74,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/save")
+	@RequiresPermissions("resource:add")
 	//@SystemControllerLog(description="权限管理-添加资源")
 	public String saveResources(Resource resource, @RequestParam("operation") String operation,String permission) {
 		String[] array  = operation.split(",");
@@ -82,15 +82,14 @@ public class ResourceController {
 			authService.saveResourceAndOperation(resource, array,permission);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return "{ \"success\" : false }";
 		}
 	}
 	
 	@ResponseBody
-//	@SystemControllerPermission("resource:looksource")
 	@RequestMapping(value = "/edit")
+	@RequiresPermissions("resource:edit")
 	//@SystemControllerLog(description="权限管理-编辑资源")
 	public String editResource(Resource newResource, @RequestParam("operation") String operation,String permission) {
 		try {
@@ -108,10 +107,10 @@ public class ResourceController {
 		}
 	}	
 	
-	//@SystemControllerPermission("resource:list")
 	//@SystemControllerLog(description="权限管理-资源列表")
-	@RequestMapping(value = "/data")
 	@ResponseBody
+	@RequestMapping(value = "/data")
+	@RequiresPermissions("resource:list")
 	public String data(String params,HttpSession session) {
 		return authService.findAllResourceInduleOperation(params);
 	}
@@ -119,6 +118,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/listAll")
+	@RequiresPermissions("resource:list")
 	public List<Resource> findResource() {
 		List<Resource> resourceList = resourceService.findResourceTree();
 		return resourceList;
@@ -126,6 +126,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/get/resourceAndOperation")
+	@RequiresPermissions("role:auth")
 	public String findResourceAndOperation() {
 		List<Resource> resourceList = resourceService.findAll();
 		List<Operation> operationList = operationService.findAll();
@@ -137,6 +138,7 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete")
+	@RequiresPermissions("resource:delete")
 	public String deleteResource(int id) {
 		try {
 			authService.deleteResource(id);
@@ -147,9 +149,10 @@ public class ResourceController {
 		}
 	}
 	
+	//@SystemControllerLog(description="权限管理-删除多个资源")
 	@ResponseBody
 	@RequestMapping(value = "/deleteAll")
-	//@SystemControllerLog(description="权限管理-删除多个资源")
+	@RequiresPermissions("resource:delete")
 	public String deteteAllResource(String resource_ids) {
 		try {
 			String[] array  = resource_ids.split(",");

@@ -53,15 +53,17 @@ public class UserController {
 	@Autowired
 	private IAuthorityService authService;
 	
-	//@RequiresPermissions("user:add")
+	
 	//@SystemControllerPermission("user:add")
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加用户跳转")
 	public String addUser() {
 		return "default/authority/user/add";
 	}
-	@ResponseBody
+	
+	@ResponseBody	
 	@RequestMapping(value = "/save")
+	@RequiresPermissions("user:add")
 	//@SystemControllerLog(description="权限管理-添加用户")
 	public String saveUser(User user) {
 		try {
@@ -75,6 +77,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/reset")
+	@RequiresPermissions("user:reset")
 	//@SystemControllerLog(description="权限管理-添加用户")
 	public String resetPwd(int id) {
 		try {
@@ -87,24 +90,24 @@ public class UserController {
 			return "{ \"success\" : false, \"msg\" : \"操作失败\" }";
 		}
 	}
-//	@SystemControllerPermission("user:list")
-	@RequestMapping(value = "/list")
+	
 	//@SystemControllerLog(description="权限管理-用户列表")
+	@RequestMapping(value = "/list")
 	public String listUser() {
 		return "default/authority/user/list";
 	}
 	
-//	@SystemControllerPermission("user:adds")
 	@RequestMapping(value = "/adds")
 	//@SystemControllerLog(description="权限管理-批量添加用户")
 	public String AddsUser() {
 		return "default/authority/user/adds";
 	}
 	
-//	@SystemControllerPermission("user:edit")
+	
+	@ResponseBody
 	@RequestMapping(value = "/edit")
 	//@SystemControllerLog(description="权限管理-更新用户")
-	@ResponseBody
+	@RequiresPermissions("user:edit")
 	public String editUser(User newUser) {
 		try {
 			User user = userService.find(newUser.getId());
@@ -121,9 +124,10 @@ public class UserController {
 		}
 	}
 	
-//	@SystemControllerPermission("user:auth")
+	
 	@RequestMapping(value = "/auth")
 	@ResponseBody
+	@RequiresPermissions("user:auth")
 	//@SystemControllerLog(description="权限管理-给用户分配角色")
 	public String authUser(String roleIds, int userId) {
 		try{
@@ -149,6 +153,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete")
+	@RequiresPermissions("user:detele")
 	public String deleteUser(int id) {
 		try {
 			userService.delete(id);
@@ -161,6 +166,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteAll")
+	@RequiresPermissions("user:detele")
 	//@SystemControllerLog(description="权限管理-删除多个用户")
 	public String deteteAllUser(String user_ids) {
 		try {
@@ -179,6 +185,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "/get/{id}")
+	@RequiresPermissions("user:view")
 	public String get(@PathVariable int id) {
 		try {
 			ObjectMapper om = new ObjectMapper();
@@ -190,11 +197,10 @@ public class UserController {
 		}
 	}
 	
-	//@SystemControllerPermission("user:list")
 	@ResponseBody
 	//@SystemControllerLog(description="权限管理-用户列表")
-	//@RequiresPermissions("user:list")
 	@RequestMapping(value = "/data")
+	@RequiresPermissions("user:list")
 	public String data(String params,HttpSession session) {
 		return authService.findAllUserInduleRoles(params);
 	}

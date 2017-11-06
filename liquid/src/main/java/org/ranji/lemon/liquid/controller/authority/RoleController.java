@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.ranji.lemon.core.annotation.SystemControllerLog;
 import org.ranji.lemon.core.pagination.PagerModel;
 import org.ranji.lemon.core.util.JsonUtil;
@@ -67,27 +68,25 @@ public class RoleController {
 	@RequestMapping(value = "/listAll")
 	//@SystemControllerLog(description="权限管理-角色全部列表")
 	@ResponseBody
+	@RequiresPermissions("role:list")
 	public List<Role> listAllRole(HttpSession session) {
 		List <Role> roleList = roleService.findRoleTree();
-		//session.setAttribute("roleList", JsonUtils.objectToJson(roleList));
-		//session.setAttribute("roleList", roleList);
 		return roleList;
-		//session.setAttribute("roleList", roleList); //页面
-		//return "backend/authority/role/rolelist";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/getOperation")
 	//@SystemControllerLog(description="权限管理-角色操作列表")
-	@ResponseBody
 	public List<Operation> getOperationByRoleId(int roleId) {
 		
 		return authService.findOperationsByRoleId(roleId);
 	}
 	
-	//@SystemControllerPermission("role:list")
+	
 	//@SystemControllerLog(description="权限管理-角色列表")
-	@RequestMapping(value = "/data")
 	@ResponseBody
+	@RequestMapping(value = "/data")
+	@RequiresPermissions("role:list")
 	public String data(String params) {
 		try {
 			ObjectMapper om = new ObjectMapper();
@@ -109,15 +108,17 @@ public class RoleController {
 		}
 	}
 	
-	//@SystemControllerPermission("role:add")
+	
 	@RequestMapping(value = "/add")
 	//@SystemControllerLog(description="权限管理-添加角色跳转")
 	public String addRole() {
 		return "default/authority/role/add";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/save")
+	@RequiresPermissions("role:add")
 	//@SystemControllerLog(description="权限管理-添加角色")
 	public String saveRole(Role newRole) {
 		try {
@@ -132,16 +133,16 @@ public class RoleController {
 			return "{ \"success\" : false }";
 		}
 	}
-	//@SystemControllerPermission("role:bulkadd")
-	@RequestMapping(value = "/adds")
+	
 	//@SystemControllerLog(description="权限管理-批量添加角色")
+	@RequestMapping(value = "/adds")
 	public String addsRoles() {
 		return "default/authority/role/adds";
 	}
 	
-	//@SystemControllerPermission("role:bulkadd")
-	@RequestMapping(value = "/view/{id}")
 	//@SystemControllerLog(description="权限管理-查看角色")
+	@RequestMapping(value = "/view/{id}")
+	@RequiresPermissions("role:view")
 	public String viewRole(@PathVariable int id, HttpSession session) {
 		
 		Role role = roleService.find(id);
@@ -150,8 +151,10 @@ public class RoleController {
 		
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/edit")
+	@RequiresPermissions("role:edit")
 	//@SystemControllerLog(description="权限管理-修改角色")
 	public String edit(Role newRole,HttpSession session) {
 		try {
@@ -173,9 +176,9 @@ public class RoleController {
 		}
 	}
 	
-	//@SystemControllerPermission("role:bulkadd")
-	@RequestMapping(value = "/auth")
 	@ResponseBody
+	@RequestMapping(value = "/auth")
+	@RequiresPermissions("role:auth")
 	//@SystemControllerLog(description="权限管理-给角色分配资源")
 	public String authRole(int roleId, String operationIds) {
 		try{
@@ -190,8 +193,11 @@ public class RoleController {
 			return "{ \"success\" : false }";
 		}
 	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/delete")
+	@RequiresPermissions("role:delete")
 	//@SystemControllerLog(description="权限管理-删除角色")
 	public String deleteRole(int id) {
 		try {
@@ -203,8 +209,10 @@ public class RoleController {
 		}
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/deleteAll")
+	@RequiresPermissions("role:delete")
 	//@SystemControllerLog(description="权限管理-删除多个角色")
 	public String deleteAllRole(String role_ids) {
 		try {
