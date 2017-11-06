@@ -76,10 +76,10 @@ public class ResourceController {
 	@ResponseBody
 	@RequestMapping(value = "/save")
 	//@SystemControllerLog(description="权限管理-添加资源")
-	public String saveResources(Resource resource, @RequestParam("operation") String operation) {
+	public String saveResources(Resource resource, @RequestParam("operation") String operation,String permission) {
 		String[] array  = operation.split(",");
 		try {
-			authService.saveResourceAndOperation(resource, array);
+			authService.saveResourceAndOperation(resource, array,permission);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -92,14 +92,14 @@ public class ResourceController {
 //	@SystemControllerPermission("resource:looksource")
 	@RequestMapping(value = "/edit")
 	//@SystemControllerLog(description="权限管理-编辑资源")
-	public String editResource(Resource newResource, @RequestParam("operation") String operation) {
+	public String editResource(Resource newResource, @RequestParam("operation") String operation,String permission) {
 		try {
 			String [] array = operation.split(",");
 			Resource resource = resourceService.find(newResource.getId());
 			resource.setResourceName(newResource.getResourceName());
 			resource.setResourceType(newResource.getResourceType());
 			resource.setResourcePId(newResource.getResourcePId());
-			authService.updateResourceAndOperation(resource, array);
+			authService.updateResourceAndOperation(resource, array,permission);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			// TODO: handle exception

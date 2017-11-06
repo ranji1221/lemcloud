@@ -10,6 +10,7 @@ import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.persist.authority.prototype.IRoleDao;
 import org.ranji.lemon.liquid.service.authority.prototype.IRoleService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 /**
@@ -79,7 +80,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	
 	
 	@Override
-	//@Cacheable(value="liquidrole")
+	@Cacheable(value="liquidrole")
 	public List<Role> findRoleTree() {
 		//return find(-1); //递归查询方法
 		List<Role> roles= findAll(); //查出所有角色
@@ -122,5 +123,32 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 		}
 		return role;
 	}*/
-	
+	@Override
+	@CacheEvict(value="liquidrole")
+	public void save(Role role) {
+		((IRoleDao) dao).save(role);
+	}
+	@Override
+	@CacheEvict(value="liquidrole")
+	public void update(Role role) {
+		((IRoleDao) dao).update(role);
+	}
+
+	@Override
+	@CacheEvict(value="liquidrole")
+	public void delete(Integer id) {
+		((IRoleDao) dao).delete(id);
+	}
+
+	@Override
+	@CacheEvict(value="liquidrole")
+	public void deleteAll() {
+		((IRoleDao) dao).deleteAll();
+	}
+	@Override
+	@CacheEvict(value="liquidrole")
+	public void deleteByIDS(List<Integer> ids) {
+		((IRoleDao) dao).deleteByIDS(ids);
+	}
+
 }

@@ -91,6 +91,7 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	// 查询角色对应操作
 	@Override
 	public List<Operation> findOperationsByRoleId(int roleId){
+		recRole = new ArrayList<Role>() ;
 		roleOperation = new ArrayList<Operation>();
 		roleOperation = roleService.findOperationByRoleId(roleId);
 		for(Operation o :roleOperation){
@@ -126,32 +127,32 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	
 	//保存资源操作集
 	@Override
-	public void saveResourceAndOperation(Resource resource,String []array){
+	public void saveResourceAndOperation(Resource resource,String []array,String permission){
 		resourceService.save(resource);
 		int resourceId = resource.getId();
-		saveOperation(array,resourceId);
+		saveOperation(array,resourceId,permission);
 	}
 	//更新资源操作集
 	@Override
-	public void updateResourceAndOperation(Resource resource,String []array){
+	public void updateResourceAndOperation(Resource resource,String []array,String permission){
 		resourceService.update(resource);
 		int resourceId = resource.getId();
 		operationService.deleteAllByResourceId(resourceId);
-		saveOperation(array,resourceId);
+		saveOperation(array,resourceId,permission);
 	}
 	//保存操作集合
-	private void saveOperation(String []array, int resourceId){
+	private void saveOperation(String []array, int resourceId,String permission){
 		int id = -1;  //根id
 		for(String  s: array){
 			if("1".equals(s)){
-				Operation o = reveseOperation(s);
+				Operation o = reveseOperation(s,permission);
 				o.setOperationPId(id);
 				o.setResourceId(resourceId);
 				operationService.save(o);
 				id = o.getId();
 				for(String s1 : array){
 					if(!"1".equals(s1)){
-						Operation o1 = reveseOperation(s1);
+						Operation o1 = reveseOperation(s1,permission);
 						o1.setOperationPId(id);
 						o1.setResourceId(resourceId);
 						operationService.save(o1);
@@ -164,8 +165,9 @@ public class AuthorityServiceImpl implements IAuthorityService{
 		}
 	}
 	//将数字转化为对应的资源对象
-	private Operation reveseOperation(String s){
+	private Operation reveseOperation(String s,String permission){
 		Operation operation = new Operation();
+		operation.setPermission(permission);
 		if("1".equals(s)){
 			operation.setDisplayName("查看");
 			operation.setOperationName("view");

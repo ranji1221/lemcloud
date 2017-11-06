@@ -35,13 +35,7 @@ public class ResourceServiceImpl extends GenericServiceImpl<Resource, Integer> i
             	}
 	        for (Resource r : roles) {
 	            if(r.getResourcePId() == res.getId()){
-	                if(res.getList() == null){
-	                    List<Resource> myRoles = new ArrayList<Resource>();
-	                    myRoles.add(r);
-	                    res.setList(myRoles);
-	                }else{
 	                	res.getList().add(r);
-	                }
 	            }
 	         }
        }
