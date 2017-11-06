@@ -56,7 +56,7 @@ $('#add_resourcePId').LemonGetList({
 		});
 	}
 	limitChangeLength($(".form_input .resources_name"),parseInt($(".minlimitNum").html()))
-	$("#submit_addResource").on("click.submit_add",function(){
+	$(".resourcebtnbox").on("click.submit_add","#submit_addResource",function(){
 		var tem_str = '';
 		$("#add_operation input:checked").each(function(){
 			if(!tem_str) {
@@ -67,10 +67,11 @@ $('#add_resourcePId').LemonGetList({
 		})
 	 $.post("resources/save",
 		{
-			resourceName:$("#add_resourceName").val(),
-			resourceType:$("#add_resourceType option:selected").val(),
-			resourcePId:$("#add_resourcePId option:selected").val(),
-			operation:tem_str
+			resourceName:$("#add_resourceName").val().trim(),
+			permission:$("#add_permission").val().trim(),
+			resourceType:$("#add_resourceType option:selected").val().trim(),
+			resourcePId:$("#add_resourcePId option:selected").val().trim(),
+			operation:tem_str.trim()
 		},function(data){
 			if(data.success){
 				removeStorage();

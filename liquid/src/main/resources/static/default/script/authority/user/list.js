@@ -109,3 +109,8 @@ $('.removeBtn').bindDialogs({
 		},'json');
 	}
 });
+//刷新页面
+$(document).on("click",".renovate",function(){
+	removeStorage();
+	userListInit();
+})

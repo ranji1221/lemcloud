@@ -18,13 +18,6 @@ function limitChangeLength(elm, limitLength) {
 		$(elm).siblings(".limitlength").html($(elm).attr("maxlength") - length);
 	});
 }
-/**
- * 刷新页面
- */	
-$('.tfoot').on("click",".renovate",function(){
-	removeStorage();
-	roleListInit();
-});
 
 /**
  * 复选框
