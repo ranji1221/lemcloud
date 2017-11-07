@@ -57,31 +57,22 @@ $('#add_resourcePId').LemonGetList({
 	}
 	limitChangeLength($(".form_input .resources_name"),parseInt($(".minlimitNum").html()))
 	$(".resourcebtnbox").on("click.submit_add","#submit_addResource",function(){
-	/*	var tem_str = '';
-		$("#add_operation input:checked").each(function(){
-			if(!tem_str) {
-				tem_str += $(this).val();
-			}else{
-				tem_str +=',' + $(this).val();			
-			}
-		})*/
 		var params = [];	
 		var permissionList=document.getElementsByClassName("add_permission");
 		var operationList=document.getElementsByClassName("add_operations");
-		//var index_i = 0
-		for(var i=0;i<permissionList.length;i++){
+		$(".add_operationRName option:selected").each(function(i,v){
 			var operations = {};
 			operations.operation=operationList[i].value;
 			operations.permission=permissionList[i].value;
+			operations.relyName=$(v).val();
 			params.push(operations);
-			}
-	 $.post("resources/save",
+		})
+		//var index_i = 0
+	$.post("resources/save",
 		{
 			resourceName:$("#add_resourceName").val().trim(),
-			/*permission:$(".add_permission").val().trim(),
-			operation:$(".add_operation").val().trim(),*/
-			resourceType:$("#add_resourceType option:selected").val(),
-			resourcePId:$("#add_resourcePId option:selected").val(),
+			resourceType:$("#add_resourceType option:selected").val().trim(),
+			resourcePId:$("#add_resourcePId option:selected").val().trim(),
 			params : JSON.stringify(params)
 		},function(data){
 			if(data.success){
@@ -108,27 +99,144 @@ $('#add_resourcePId').LemonGetList({
 		}
 	,"json")
 })
-$(function(){
-	function ifcheck(){
-		if($(".operation_permission").length == 1){
-			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
-		}else{
-			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
-			var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
-			$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
+//
+////加载依赖操作列表
+//function operationList() {
+//	var operationRNameList=document.getElementsByClassName("add_operations");
+//	$('<option value="-1">选择操作</option>').appendTo(".add_operationRName")
+//	for(var i=0;i<operationRNameList.length;i++){
+//		if(operationRNameList[i].value) {
+//			$('<option value="'+operationRNameList[i].value+'">'+operationRNameList[i].value+'</option>').appendTo(".add_operationRName")
+//		} else {
+//			
+//		}
+//	}
+//}
+///*function removeOperation() {
+//	var operationRNameList=document.getElementsByClassName("add_operations");
+//	$('<option value="-1">选择操作</option>').appendTo(".add_operationRName")
+//	for(var i=0;i<operationRNameList.length-1;i++){
+//		if(operationRNameList[i].value) {
+//			$('<option value="'+operationRNameList[i].value+'">'+operationRNameList[i].value+'</option>').appendTo(".add_operationRName")
+//		} else {
+//			
+//		}
+//	}
+//}*/
+//operationList();
+//$(function(){
+//	function ifcheck(operation){
+//		if($(".operation_permission").length == 1){
+//			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
+//		}else{
+//			var opera_length = $(".operation_permission").length-1
+//			$(".operation_permission:lt("+opera_length+")").find("input,select").prop("disabled","true")
+//			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
+//			var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
+//			if(operation == "add")
+//				$(last_oper).find("select").empty()
+//			$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
+//		}
+//		}
+//	ifcheck()
+//	$(".form_content").on("click",".click_span_add_operation",function(){
+//		if(!($(this).siblings(".inputwrappermax").find("input").val()&&$(this).closest(".phone").siblings(".add_operation").find("input").val())){
+//			
+//		}else{
+////			remoneOperationList();
+//			$(this).closest(".operation_permission").clone().insertBefore(".resourcebtnbox").find("input").val("")
+//			ifcheck("add")
+//			operationList();
+//		}
+//		
+//	})
+//	$(".form_content").on("click",".click_span_remove_operation",function(){
+//		if($(".operation_permission").length == 1){
+//			
+//		}else{
+//			$(this).closest(".operation_permission").prev().find("input,select").prop("disabled",false)
+//			$(this).closest(".operation_permission").detach()
+//		}
+//		
+//		ifcheck("remove")
+//	})
+//})
+var arr = []
+//判断加减号
+function ifcheck(option){
+		var opera_length = $(".operation_permission").length-1
+		$(".operation_permission:lt("+opera_length+")").find("input,select").prop("disabled","true")
+		$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
+		var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
+		$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
+		if(option){
+			if($(".operation_permission").length == 1){
+				$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
+				arr.push(option)
+				$.each(arr,function(i,v){
+					$("<option value="+v+">"+v+"</option>").appendTo($(".operation_permission select"))
+				})
+			}else{
+				arr.push(option)
+				$.each(arr,function(i,v){
+					$("<option value="+v+">"+v+"</option>").appendTo($(last_oper).find("select"))
+				})
+			}
 		}
-		}
-	ifcheck()
+		
+	}
+	ifcheck("选择资源")
+//	添加方法
 	$(".form_content").on("click",".click_span_add_operation",function(){
-		$(this).closest(".operation_permission").clone().insertBefore(".resourcebtnbox")
-		ifcheck()
+		if(!($(this).siblings(".inputwrappermax").find("input").val()&&$(this).closest(".phone").siblings(".add_operation").find("input").val())){
+			
+		}else{
+			var option = $(this).siblings(".inputwrappermax").find("input").val()
+		$('<div class="operation_permission"><div class="form-group phone input">'+
+		    	'<label for="" >相关操作：</label>'+
+		    	'<div class="inputwrapper" id="add_operation">'+
+		    		'<div class="inputwrappermax">'+
+				    	'<input type="text" class="form-control rolenameinput add_operations" placeholder="请输入相关操作" maxlength="20"/>'+
+				    	'<span class="limitlength">20</span>'+
+				    	'<span class="errormessage errormessage-source-edit-name">'+
+			    		'</span>'+
+		    		'</div>'+
+		    		'<span class="btn btn-default input_add_span click_span_add_operation">+</span>'+
+		    		'<span class="btn btn-default input_remove_span click_span_remove_operation">-</span>'+
+		    	'</div>'+
+		  '	</div>'+
+		  	'<div class="form-group input add_operation">'+
+		    	'<label for="" >权限许可：</label>'+
+		    	'<div class="inputwrapper">'+
+		    		'<div class="inputwrappermax in_input_num">'+
+				    	'<input type="text" class="form-control rolenameinput add_permission" placeholder="请输入权限许可" maxlength="20"/>'+
+				    	'<span class="limitlength">20</span>'+
+				    	'<span class="errormessage errormessage-source-edit-name">'+
+			    		'</span>'+
+		    		'</div>'+
+		    	'</div>'+
+		  	'</div>'+
+		  	'<div class="form-group select">'+
+		    	'<label for="" >选择依赖操作：</label>'+
+		    	'<div class="inputwrapper">'+
+		    		'<div class="inputwrappermax">'+
+				    	'<select class="form-control select select-primary select-block mbl add_operationRName" data-toggle="select" name="fath">'+
+						'</select>'+
+				    	'<span class="errormessage errormessage-role-edit-fath">'+
+			    		'</span>'+
+		    		'</div>'+
+		    	'</div>'+
+		  	'</div>'+
+	  	'</div>').insertBefore(".resourcebtnbox")}
+	  	ifcheck(option)
 	})
+//	减方法
 	$(".form_content").on("click",".click_span_remove_operation",function(){
 		if($(".operation_permission").length == 1){
 			
 		}else{
+			$(this).closest(".operation_permission").prev().find("input,select").prop("disabled",false)
 			$(this).closest(".operation_permission").detach()
 		}
 		ifcheck()
 	})
-})

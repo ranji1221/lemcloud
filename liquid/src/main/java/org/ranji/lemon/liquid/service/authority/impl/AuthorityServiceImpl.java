@@ -155,15 +155,16 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	private List<OperationDTO> conversionParams(String params){
 		List<OperationDTO> odList = new ArrayList<OperationDTO>();
 		List<OperationDTO> operationList=JsonUtil.jsonToList(params, OperationDTO.class);
+		System.out.println(params);
 		for (OperationDTO o:operationList){
-			if("".equals(o.getRelyName())||"-1".equals(o.getRelyName())){
+			if("".equals(o.getRelyName())||"选择资源".equals(o.getRelyName())){
 				odList.add(o);
-				for(OperationDTO od:operationList){
-					if(o.getOperation().equals(od.getRelyName())){
-						o.getList().add(od);
-					}else{
-						continue;
-					}
+				}
+			for(OperationDTO od:operationList){
+				if(o.getOperation().equals(od.getRelyName())){
+					o.getList().add(od);
+				}else{
+					continue;
 				}
 			}
 		}
