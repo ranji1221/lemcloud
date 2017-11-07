@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.util.CollectionUtils;
 import org.ranji.lemon.core.pagination.PagerModel;
 import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.dto.OperationDTO;
@@ -133,7 +134,10 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	public void saveResourceAndOperation(Resource resource,String params){
 		resourceService.save(resource);
 		int resourceId = resource.getId();
-		saveOperation(resourceId,params);
+		List<OperationDTO> operationList=conversionParams(params);
+		for(OperationDTO s : operationList){
+			saveOperation(resourceId,-1,s);		
+		}
 	}
 	//更新资源操作集
 	@Override
@@ -141,40 +145,45 @@ public class AuthorityServiceImpl implements IAuthorityService{
 		resourceService.update(resource);
 		int resourceId = resource.getId();
 		operationService.deleteAllByResourceId(resourceId);
-		saveOperation(resourceId,params);
+		List<OperationDTO> operationList=conversionParams(params);
+		for(OperationDTO s : operationList){
+			saveOperation(resourceId,-1,s);		
+		}
 	}
 	
-	//保存操作集合
-	private void saveOperation(int resourceId,String params){	
+	//整理前台params 参数
+	private List<OperationDTO> conversionParams(String params){
+		List<OperationDTO> odList = new ArrayList<OperationDTO>();
 		List<OperationDTO> operationList=JsonUtil.jsonToList(params, OperationDTO.class);
-		Operation opera =new Operation();
-		opera.setResourceId(resourceId);
-		for(OperationDTO s : operationList){
-			opera.setDisplayName(s.getOperation());
-			opera.setPermission(s.getPermission());
-			opera.setOperationName(PinyinUtil.converterToSpell(opera.getDisplayName()).split(",")[0]);
-			operationService.save(opera);
+		for (OperationDTO o:operationList){
+			if("".equals(o.getRelyName())||"-1".equals(o.getRelyName())){
+				odList.add(o);
+				for(OperationDTO od:operationList){
+					if(o.getOperation().equals(od.getRelyName())){
+						o.getList().add(od);
+					}else{
+						continue;
+					}
+				}
+			}
+		}
+		return odList;
+	}
+	private void saveOperation(int resourceId,int rid,OperationDTO od){
+		Operation operation =new Operation();
+		operation.setResourceId(resourceId);
+		operation.setDisplayName(od.getOperation());
+		operation.setPermission(od.getPermission());
+		operation.setOperationName(PinyinUtil.converterToSpell(operation.getDisplayName()).split(",")[0]);
+		operation.setOperationRId(rid);
+		operationService.save(operation);
+		int relyId = operation.getId();
+		if(!CollectionUtils.isEmpty(od.getList())){
+			for(OperationDTO o: od.getList()){
+				saveOperation(resourceId,relyId,o);
+			}
 		}
 	}
-/*	//将数字转化为对应的资源对象
-	private Operation reveseOperation(String s,String permission){
-		Operation operation = new Operation();
-		operation.setPermission(permission);
-		if("1".equals(s)){
-			operation.setDisplayName("查看");
-			operation.setOperationName("view");
-		}else if("3".equals(s)){
-			operation.setDisplayName("增加");
-			operation.setOperationName("add");
-		}else if("2".equals(s)){
-			operation.setDisplayName("编辑");
-			operation.setOperationName("edit");
-		}else if("4".equals(s)){
-			operation.setDisplayName("删除");
-			operation.setOperationName("delete");
-		}
-		return operation;
-	}*/
 	//查询所有资源（包含操作信息）
 	@Override
 	public String findAllResourceInduleOperation(String params) {

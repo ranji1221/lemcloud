@@ -41,7 +41,7 @@ public class Operation extends AbstractModel{
 	private String operationName; // 操作名 user：list
 	private String displayName; // 操作名 中文
 	private int resourceId; // 资源ID 
-	private int operationPId; //操作父id
+	private int operationRId; //操作父id
 	private String permission;  //许可名
 	private boolean state = false;
 	private List<Operation> operationList = new ArrayList<Operation>();
@@ -95,12 +95,12 @@ public class Operation extends AbstractModel{
 		this.resourceId = resourceId;
 	}
 	
-	public int getOperationPId() {
-		return operationPId;
+	public int getOperationRId() {
+		return operationRId;
 	}
 	
-	public void setOperationPId(int operationPId) {
-		this.operationPId = operationPId;
+	public void setOperationRId(int operationRId) {
+		this.operationRId = operationRId;
 	}
 	
 	

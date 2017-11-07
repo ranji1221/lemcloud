@@ -4,8 +4,8 @@
 	
 	<!-- 增加操作 -->
 	<insert id="save" parameterType="Operation" keyProperty="id" useGeneratedKeys="true">
-		insert into lemon_liquid_auth_operation (guid, createTime,updateTime,operationName, displayName,resourceId,operationPId,permission) values 
-		(#{guid}, #{createTime},#{updateTime},#{operationName},#{displayName},#{resourceId},#{operationPId},#{permission})
+		insert into lemon_liquid_auth_operation (guid, createTime,updateTime,operationName, displayName,resourceId,operationRId,permission) values 
+		(#{guid}, #{createTime},#{updateTime},#{operationName},#{displayName},#{resourceId},#{operationRId},#{permission})
 	</insert>
 	
 	<!-- 更新操作 -->
@@ -16,7 +16,7 @@
 			<if test="displayName != null and displayName != ''">displayName = #{displayName},</if>
 			<if test="operationURL != null and operationURL != ''">operationURL = #{operationURL},</if>
 			<if test="resourceId != null and resourceId != ''">resourceId = #{resourceId},</if>
-			<if test="operationPId != null and operationPId != ''">operationPId = #{operationPId},</if>
+			<if test="operationRId != null and operationRId != ''">operationRId = #{operationRId},</if>
 			<if test="updateTime != null ">updateTime = #{updateTime},</if>
 		</set>
 		where id = #{id}
@@ -85,23 +85,17 @@
 			<if test=" displayNameLike != null and displayNameLike != '' ">
 				and displayName like concat(concat('%', #{displayNameLike, jdbcType=VARCHAR}),'%')
 			</if>
-			<if test="operationURL != null and operationURL != ''">
-				and operationURL = #{operationName, jdbcType=VARCHAR}
-			</if>
-			<if test=" operationURLLike != null and operationURLLike != '' ">
-				and operationURL like concat(concat('%', #{operationURLLike, jdbcType=VARCHAR}),'%')
-			</if>
 			<if test=" resourceId != null and resourceId != '' ">
 				and resourceId = #{resourceId, jdbcType=INTEGER}
 			</if>
 			<if test=" resourceIdLike != null and resourceIdLike != '' ">
 				and resourceId like concat(concat('%', #{resourceIdLike, jdbcType=INTEGER}),'%')
 			</if>
-			<if test=" operationPId != null and operationPId != '' ">
-				and operationPId #{operationPId, jdbcType=INTEGER}
+			<if test=" operationRId != null and operationRId != '' ">
+				and operationRId #{operationRId, jdbcType=INTEGER}
 			</if>
-			<if test=" operationPIdLike != null and operationPIdLike != '' ">
-				and operationPId like concat(concat('%', #{operationPIdLike, jdbcType=INTEGER}),'%')
+			<if test=" operationRIdLike != null and operationRIdLike != '' ">
+				and operationRId like concat(concat('%', #{operationRIdLike, jdbcType=INTEGER}),'%')
 			</if>
 		</where>
 	</sql>

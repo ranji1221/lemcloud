@@ -1,11 +1,13 @@
 package org.ranji.liquid.test.authority;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.LiquidApplication;
+import org.ranji.lemon.liquid.dto.OperationDTO;
 import org.ranji.lemon.liquid.model.authority.Operation;
 import org.ranji.lemon.liquid.model.authority.Resource;
 import org.ranji.lemon.liquid.model.authority.Role;
@@ -84,6 +86,18 @@ public class AuthServiceTest {
 	@Test
 	public void testFindResource(){
 		System.out.println( authService.findAllResourceInduleOperation(null));
+	}
+	@Test
+	public void saveOperationTest(){
+		int id = 1; 
+		List<OperationDTO>list =new ArrayList<OperationDTO>();
+		for (int i=0;i<2;i++){
+			OperationDTO od =new OperationDTO();
+			od.setOperation("222");
+			od.setPermission("333");
+			list.add(od);
+		}
+		authService.saveOperation(id, JsonUtil.objectToJson(list));
 	}
 	
 }

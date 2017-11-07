@@ -1,5 +1,8 @@
 package org.ranji.lemon.liquid.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ranji.lemon.core.util.JsonUtil;
 
 public class OperationDTO {
@@ -8,6 +11,23 @@ public class OperationDTO {
 	
 	private String permission;
 	
+	private String relyName ="";
+	
+	private List<OperationDTO> list = new ArrayList<OperationDTO>();
+	
+	
+	public List<OperationDTO> getList() {
+		return list;
+	}
+	public void setList(List<OperationDTO> list) {
+		this.list = list;
+	}
+	public String getRelyName() {
+		return relyName;
+	}
+	public void setRelyName(String rName) {
+		this.relyName = rName;
+	}
 	public String getOperation() {
 		return operation;
 	}

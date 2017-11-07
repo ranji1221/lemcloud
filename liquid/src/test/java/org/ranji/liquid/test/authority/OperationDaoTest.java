@@ -52,7 +52,7 @@ public class OperationDaoTest {
 		Operation o = new Operation();
 		o.setOperationName("test2");
 		o.setDisplayName("测试");
-		o.setOperationPId(1);
+		o.setOperationRId(1);
 		o.setResourceId(2);
 		
 		operationDao.save(o);
@@ -63,7 +63,7 @@ public class OperationDaoTest {
 		Operation o = new Operation();
 		o.setOperationName("newTest");
 		o.setDisplayName("新测试");
-		o.setOperationPId(5);
+		o.setOperationRId(5);
 		o.setResourceId(1);
 		o.setId(5);
 		operationDao.update(o);

@@ -28,7 +28,7 @@ public class OperationServiceImpl extends GenericServiceImpl<Operation, Integer>
 		List<Resource> resourceList = resourceService.findAll();
 		List<Operation> opera = findAll();
 		for(Operation o : opera){
-			if(o.getOperationPId()==-1){
+			if(o.getOperationRId()==-1){
 				operation.add(o);
 				for(Resource r : resourceList){
 					if(r.getId()==o.getResourceId()){
@@ -37,7 +37,7 @@ public class OperationServiceImpl extends GenericServiceImpl<Operation, Integer>
 				}	
 			}
 			for(Operation o1 : opera){
-				if(o1.getOperationPId()==o.getId()){
+				if(o1.getOperationRId()==o.getId()){
 					o.getOperationList().add(o1);
 				}
 			}
