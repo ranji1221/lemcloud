@@ -97,7 +97,7 @@ public class AuthServiceTest {
 			od.setPermission("333");
 			list.add(od);
 		}
-		authService.saveOperation(id, JsonUtil.objectToJson(list));
+		//authService.saveOperation(id, JsonUtil.objectToJson(list));
 	}
 	
 }

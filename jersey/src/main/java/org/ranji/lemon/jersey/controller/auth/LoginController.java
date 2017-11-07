@@ -11,6 +11,7 @@ import org.ranji.lemon.jersey.model.auth.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
@@ -18,6 +19,12 @@ import com.google.code.kaptcha.Constants;
 @Controller 
 public class LoginController {
 	
+	@RequestMapping("/test1")
+	@ResponseBody
+	public String hello(){
+		System.out.println(SecurityUtils.getSubject().getSession().getId());
+		return "hello world";
+	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView loginPage(){
@@ -32,12 +39,14 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView();
 		
 		String kaptchaExpected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-System.out.println(kaptchaExpected);
+//--System.out.println(kaptchaExpected);
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
 		try{
 			subject.login(token);
-			mv.setViewName("redirect:/index.jsp");
+System.out.println(subject.getSession().getId());
+System.out.println(session.getId());
+			mv.setViewName("redirect:/hello");
 		} catch (AuthenticationException e){
 			mv.addObject("message", "login errors");
 			mv.setViewName("redirect:/backend/login");

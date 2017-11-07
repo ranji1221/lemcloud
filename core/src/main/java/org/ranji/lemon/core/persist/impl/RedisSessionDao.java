@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Component
 public class RedisSessionDao extends EnterpriseCacheSessionDAO {
@@ -34,23 +32,18 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
         return sessionId;
     }
     
-    //-- 获取session
     @Override
-    protected Session doReadSession(Serializable sessionId) {
-        logger.debug("获取session:{}", sessionId);
-        // 先从缓存中获取session，如果没有再去数据库中获取
-        Session session = super.doReadSession(sessionId);
-        if (session == null) {
-            session = (Session) redisTemplate.opsForValue().get(prefix + sessionId.toString());
-        }
+    protected Session doReadSession(Serializable sessionId) {  
+    	logger.debug("获取session:{}", sessionId);
+        Session session = (Session) redisTemplate.opsForValue().get(prefix + sessionId.toString());
         return session;
     }
+    
     
     //-- 更新session的最后一次访问时间
     @Override
     protected void doUpdate(Session session) {
-        super.doUpdate(session);
-        logger.debug("获取session:{}", session.getId());
+        logger.debug("更新session:{}", session.getId());
         String key = prefix + session.getId().toString();
         if (!redisTemplate.hasKey(key)) {
             redisTemplate.opsForValue().set(key, session);

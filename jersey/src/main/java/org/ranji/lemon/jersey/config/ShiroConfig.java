@@ -1,21 +1,25 @@
 package org.ranji.lemon.jersey.config;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.ranji.lemon.core.cache.RedisCacheManager;
 import org.ranji.lemon.core.persist.impl.RedisSessionDao;
+import org.ranji.lemon.jersey.security.LemSessionListener;
 import org.ranji.lemon.jersey.security.SystemRealm;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,20 +27,46 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShiroConfig {
 	
-	@Autowired
-    private RedisSessionDao sessionDao;
+	
+	@Bean("redisSessionDao")
+	public RedisSessionDao redisSessionDao(){
+		return new RedisSessionDao();
+	}
 	
 	@Bean("redisCacheManager")
 	public RedisCacheManager redisCacheManager() {
         return new RedisCacheManager();
     }
 	
+	@Bean(name = "sessionIdCookie")
+	public SimpleCookie getSessionIdCookie() {
+		SimpleCookie cookie = new SimpleCookie("lemsid");
+		cookie.setHttpOnly(true);	//-- 安全的考虑
+		cookie.setMaxAge(-1);		//-- 仅存在与浏览器进程，浏览器关闭则失效
+		return cookie;
+	}
+	
 	@Bean("sessionManager")
-    public SessionManager sessionManager(@Qualifier("redisCacheManager") RedisCacheManager redisCacheManager) {
+    public SessionManager sessionManager(@Qualifier("sessionIdCookie") SimpleCookie simpleCookie) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        System.out.println(sessionDao);
-        sessionManager.setGlobalSessionTimeout(1800);
-        sessionManager.setCacheManager(redisCacheManager);
+        //-- 1.设置监听器
+        Collection<SessionListener> listeners = new ArrayList<SessionListener>();
+        listeners.add(new LemSessionListener());
+        sessionManager.setSessionListeners(listeners);
+        
+        //-- 2.设置URL回写为false
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+        
+        //-- 3.设置Cookie
+        sessionManager.setSessionIdCookieEnabled(true);
+        sessionManager.setSessionIdCookie(simpleCookie);
+        
+        //-- 4.默认是30分钟，其实不设置也默认三十分钟
+        //-- 这里给设置仅是为了说明如何设置session的过时时间，单位是毫秒，可以根据需要设置long值
+        sessionManager.setGlobalSessionTimeout(DefaultWebSessionManager.DEFAULT_GLOBAL_SESSION_TIMEOUT);
+        
+        sessionManager.setCacheManager(redisCacheManager());
+        sessionManager.setSessionDAO(redisSessionDao());
         return sessionManager;
     }
 	
@@ -48,19 +78,19 @@ public class ShiroConfig {
 		
 	//-- 配置自定义权限认证授权器
 	@Bean(name="systemRealm")
-	public SystemRealm systemRealm(@Qualifier("credentialsMatcher") CredentialsMatcher credentialsMatcher, @Qualifier("redisCacheManager") RedisCacheManager redisCacheManager){
+	public SystemRealm systemRealm(@Qualifier("credentialsMatcher") CredentialsMatcher credentialsMatcher){
 		SystemRealm systemRealm = new SystemRealm();
 		systemRealm.setCredentialsMatcher(credentialsMatcher);
-		systemRealm.setCacheManager(redisCacheManager);
+		//systemRealm.setCacheManager(redisCacheManager);
 		return systemRealm;
 	}
 	
 	//-- 配置核心安全事务管理器
 	@Bean(name="securityManager")
-	public SecurityManager securitManager(@Qualifier("systemRealm") SystemRealm systemRealm, @Qualifier("sessionManager") SessionManager sessionManager, @Qualifier("redisCacheManager") RedisCacheManager redisCacheManager){
+	public SecurityManager securitManager(@Qualifier("systemRealm") SystemRealm systemRealm, @Qualifier("sessionManager") SessionManager sessionManager){
 		DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 		manager.setSessionManager(sessionManager);
-		manager.setCacheManager(redisCacheManager);
+		//manager.setCacheManager(redisCacheManager);
 		manager.setRealm(systemRealm);
 		return manager;
 	}
@@ -83,6 +113,7 @@ public class ShiroConfig {
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
+	
 	
 	@Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
