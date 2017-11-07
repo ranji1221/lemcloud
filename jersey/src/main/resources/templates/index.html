@@ -8,4 +8,9 @@
 	</head>
 	<span th:text="${key}"></span>
 	<div th:include="footer :: copyright"></div>
+	<form action="login" method="post">
+		user: <input name="username"/>
+		password:<input name="password"/>
+		<input type="submit" value="login"/>
+	</form>
 </html>
