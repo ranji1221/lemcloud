@@ -11,17 +11,18 @@ $("table").on("click",".editResource", function(e) {
 });
 
 function dealDataToModal(data){
-	
+	//console.info(data)
 	$("#edit_resourceId").val(data.id)
 	$("#edit_resourceName").val(data.resourceName)
 	$("#edit_resourceType").val(data.resourceType)
-	
-	$.each(data.operationList, function(i,v){	
-			
-		$("input[displayname = "+v.displayName+"]").prop("checked",true)
+	$.each(data.operationList, function(i,v){
+		addOperation();
+		$(".operation_permission:last").find($(".edit_operations")).val(v.displayName);
+		$(".operation_permission:last").find($(".edit_operationId")).val(v.id);
+		$(".operation_permission:last").find($(".edit_permission")).val(v.permission);
+		$(".operation_permission:last").find($(".edit_operationRName")).val(v.operationRId);
+		
 	})
-	beforeMaxEditResourceModal()
-	//$("#edit_operation").val(operationName)
 	
 	$('.select_resourceList').LemonGetList({
 		requestListUrl:'resources/listAll',
@@ -57,29 +58,16 @@ function dealDataToModal(data){
 	})
 }
 
-//编辑js
-function beforeMaxEditResourceModal(){	
-			
-			$(".relateCtl [type='checkbox']").iCheck({
-				checkboxClass: 'icheckbox_flat-blue',
-				increaseArea: '20%' // optional
-			});
-			$(".in_input_num .limitlength").html(15-$(".in_input_num input").val().length)
-			$(".in_input_num input").on("keyup",function(){
-				var val = $(this).val().length
-				$(".in_input_num .limitlength").html(15-val)
-			})	
-}
-
 $("#submit_editResource").on("click",function(){
-	var tem_str = '';
-	$("#edit_operation input:checked").each(function(){
-		
-		if(!tem_str) {
-			tem_str += $(this).val();
-		}else{
-			tem_str +=',' + $(this).val();
-		}
+	var params = [];	
+	var permissionList=document.getElementsByClassName("edit_permission");
+	var operationList=document.getElementsByClassName("edit_operations");
+	$(".edit_operationRName option:selected").each(function(i,v){
+		var operations = {};
+		operations.operation=operationList[i].value;
+		operations.permission=permissionList[i].value;
+		operations.relyName=$(v).text();
+		params.push(operations);
 	})
 	$.post("resources/edit",
 		{
@@ -87,10 +75,9 @@ $("#submit_editResource").on("click",function(){
 			resourceName:$("#edit_resourceName").val(),
 			resourceType:$("#edit_resourceType option:selected").val(),
 			resourcePId:$("#edit_resourcePId option:selected").val(),
-			operation:tem_str
+			params : JSON.stringify(params)
 		},function(data){
 			if(data.success){
-				removeStorage();
 				removeStorage();
 				$(".ajax_dom").empty()
 				$.ajax({
@@ -118,3 +105,94 @@ $("#submit_editResource").on("click",function(){
 		}
 	,"json")
 }) 
+var arr = []
+//判断加减号
+function ifcheck(option,oid){
+		var opera_length = $(".operation_permission").length-1
+		$(".operation_permission:lt("+opera_length+")").find("input,select").prop("disabled","true")
+		$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
+		var last_oper = $('.operation_permission:last')
+		last_oper.find(".phone .input_add_span,.input_remove_span").show()
+		var operation ={}
+		if(option){
+			if($(".operation_permission").length == 1){
+				$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
+				operation.option=option;
+				operation.id = oid;
+				arr.push(operation);
+				//console.info(arr);
+				$.each(arr,function(i,v){
+					$("<option value="+v.id+">"+v.option+"</option>").appendTo($(".operation_permission select"))
+				})
+			}else{
+				operation.option=option;
+				operation.id = oid;
+				arr.push(operation);
+				$.each(arr,function(i,v){
+					$("<option value="+v.id+">"+v.option+"</option>").appendTo($(last_oper).find("select"))
+				})
+			}
+		}
+		
+	}
+	ifcheck("选择资源",-1)
+	//自动添加
+	function addOperation(){
+		if(!($(".operation_permission:last").find(".edit_operations").val()&&$(".operation_permission:last").find(".edit_permission").val())){
+		
+		}else{
+			var option = $(".operation_permission:last").find(".edit_operations").val()
+			var oid = $(".operation_permission:last").find(".edit_operationId").val()
+		$('<div class="operation_permission"><div class="form-group phone input">'+
+		    	'<label for="" >相关操作：</label>'+
+		    	'<div class="inputwrapper" id="add_operation">'+
+		    		'<div class="inputwrappermax">'+
+				    	'<input type="text" class="form-control rolenameinput edit_operations" placeholder="请输入相关操作" maxlength="20"/>'+
+				    	'<input type = "hidden" class ="edit_operationId"/>'+
+				    	'<span class="limitlength">20</span>'+
+				    	'<span class="errormessage errormessage-source-edit-name">'+
+			    		'</span>'+
+		    		'</div>'+
+		    		'<span class="btn btn-default input_add_span click_span_add_operation">+</span>'+
+		    		'<span class="btn btn-default input_remove_span click_span_remove_operation">-</span>'+
+		    	'</div>'+
+		  '	</div>'+
+		  	'<div class="form-group input add_operation">'+
+		    	'<label for="" >权限许可：</label>'+
+		    	'<div class="inputwrapper">'+
+		    		'<div class="inputwrappermax in_input_num">'+
+				    	'<input type="text" class="form-control rolenameinput edit_permission" placeholder="请输入权限许可" maxlength="20"/>'+
+				    	'<span class="limitlength">20</span>'+
+				    	'<span class="errormessage errormessage-source-edit-name">'+
+			    		'</span>'+
+		    		'</div>'+
+		    	'</div>'+
+		  	'</div>'+
+		  	'<div class="form-group select">'+
+		    	'<label for="" >选择依赖操作：</label>'+
+		    	'<div class="inputwrapper">'+
+		    		'<div class="inputwrappermax">'+
+				    	'<select class="form-control select select-primary select-block mbl edit_operationRName" data-toggle="select" name="fath">'+
+						'</select>'+
+				    	'<span class="errormessage errormessage-role-edit-fath">'+
+			    		'</span>'+
+		    		'</div>'+
+		    	'</div>'+
+		  	'</div>'+
+	  	'</div>').insertBefore(".resourcebtnbox")}
+	  	ifcheck(option,oid)
+	}
+//	添加方法
+	$(".form_content").on("click",".click_span_add_operation",function(){
+		addOperation();
+	})
+//	减方法
+	$(".form_content").on("click",".click_span_remove_operation",function(){
+		if($(".operation_permission").length == 1){
+			
+		}else{
+			$(this).closest(".operation_permission").prev().find("input,select").prop("disabled",false)
+			$(this).closest(".operation_permission").detach()
+		}
+		ifcheck()
+	})

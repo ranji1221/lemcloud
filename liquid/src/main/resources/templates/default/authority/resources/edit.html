@@ -1,154 +1,135 @@
 <script  src="static/default/script/validate/validate.js " th:src="@{/default/script/validate/validate.js}"></script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody editSour_modal" tabindex="-1" role="dialog" th:fragment="editResource">
 	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#editModal">
-				<ol class="breadcrumb">
-			<li>
-				<i class="glyphicon glyphicon-home"></i>
-				<a href="#" data="2" url="home">首页</a>
-			</li>
-			<li>
-				<a href="#">用户管理</a>
-			</li>
-			<li>
-				<a href="#" url="">用户列表</a>
-			</li>
-			<li class="active">编辑用户</li>
-			<div class="nav-search" id="nav-search">
-				<form class="form-search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="搜索你想找到的..."/>
-						<span class="input-group-btn">
+			<ol class="breadcrumb">
+	    <li>
+	    	<i class="glyphicon glyphicon-home"></i>
+	    	<a href="#" data="2" url="home">首页</a>
+	    </li>
+	    <li>
+	    	<a href="#">资源管理</a>
+	    </li>
+	    <li>
+	    	<a href="#">资源列表</a>
+	    </li>
+	    <li class="active">添加资源</li>
+    	<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<div class="input-group">
+			        <input type="text" class="form-control" placeholder="搜索你想找到的..."/>
+			        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button">
 						<img src="static/default/image/common/iconsearch.png" alt="" th:src="@{/default/image/common/iconsearch.png}"/>
 			        </button>
 			        </span>
-					</div>
-					<!-- /input-group -->
-				</form>
-			</div>
-		</ol>
-		<!--  页面中的红色提示框-->
-		<div class="alert alert-danger">
-			<i class="glyphicon glyphicon-hand-right"></i> 温馨提示：此页面展示角色查看操作。单击右方x号，可以关闭此条提示语！
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    </div><!-- /input-group -->
+			</form>
 		</div>
-		<div class="title">
-			<p>编辑资源</p>
-			<div class="btns">
-
-				<a href="javascript:;" class="closeAction" data-dismiss="modal">
-					<img src="static/default/image/common/modal1.png" alt="" th:src="@{/default/image/common/modal1.png}"/>
-				</a>
-			</div>
+	</ol>
+	
+	<div class="title">
+		<p>添加资源</p>
+		<div class="btns"> 
+			<!-- <a href="javascript:;" class="zclose" data-dismiss="modal">
+				<img src="${pageContext.request.contextPath}/img/sys/modal1.png" alt="">
+			</a> -->
 		</div>
-		<div class="form_content">
-			<form class="form-source-editlg newform">
-				<div class="formhead">青柠云后台管理系统</div>
-				<div class="form-group input">
-					<label for="">资源名称：</label>
-					<div class="inputwrapper">
-						<div class="inputwrappermax in_input_num">
-							<input type="hidden" id="edit_resourceId"/>
-							<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="15" id="edit_resourceName"/>
-							<span class="limitlength">15</span>
-							<span class="errormessage errormessage-source-edit-name">
-			    		<!-- 您输入了特殊符号！ -->
-			    		</span>
-						</div>
-					</div>
-				</div>
-				<!-- <div class="form-group input">
-		    	<label for="" >资源URL：</label>
+	</div>
+	<div class="form_content">
+		<form class="form-source-editlg newform">
+			<div class="formhead">青柠云后台管理系统</div>
+		  	<div class="form-group input">
+		    	<label for="" >资源名称：</label>
 		    	<div class="inputwrapper">
 		    		<div class="inputwrappermax in_input_num">
-				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源URL" maxlength="50" id="add_resourceURL"/>
-				    	<span class="limitlength">50</span>
-				    	<span class="errormessage errormessage-source-edit-name">
-			    		您输入了特殊符号！
-			    		</span>
-		    		</div>
-		    	</div>
-		  	</div> -->
-				<div class="form-group select">
-					<label for="">资源类型：</label>
-					<div class="inputwrapper">
-						<div class="inputwrappermax">
-							<select class="form-control select select-primary select-block mbl" data-toggle="select" name="fath" id="edit_resourceType">
-
-								<option value="0" disabled="disabled">请选择资源类型</option>
-								<option value="1">菜单</option>
-								<option value="2">元素</option>
-								<option value="3">文件</option>
-								<option value="4">操作</option>
-
-							</select>
-							<span class="errormessage errormessage-role-edit-fath">
-			    		<!-- 您输入了特殊符号！ -->
-			    		</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group select">
-					<label for="">父级资源：</label>
-					<div class="inputwrapper">
-						<div class="inputwrappermax">
-							<select class="select_resourceList form-control select select-primary select-block mbl" data-toggle="select" id="edit_resourcePId">
-
-								<option value="0" disabled="disabled">选择资源</option>
-								<option value="1"></option>
-								<option value="2"></option>
-								<option value="3"></option>
-								<option value="4"></option>
-
-							</select>
-							<span class="errormessage errormessage-role-edit-fath">
-			    		<!-- 您输入了特殊符号！ -->
-			    		</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group input">
-		    	<label for="" >权限许可：</label>
-		    	<div class="inputwrapper">
-		    		<div class="inputwrappermax in_input_num">
-				    	<input type="text" class="form-control rolenameinput" placeholder="请输入权限许可" maxlength="20" id="edit_permission"/>
-				    	<span class="limitlength">20</span>
+		    			<input type="hidden" id="edit_resourceId"/>
+				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" id="edit_resourceName"/>
+				    	<span class="limitlength">15</span>
 				    	<span class="errormessage errormessage-source-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
 			    		</span>
 		    		</div>
 		    	</div>
 		  	</div>
-				<div class="form-group phone">
-					<label for="">相关操作：</label>
-					<div class="inputwrapper" id="edit_operation">
-						<div class="inputwrappermax">
-							<div class="col-xs-3 relateCtl">
-								<input name="add_operation" displayname="查看" value="1" id="sourcecheck" type="checkbox" checked="checked"/>
-								<label for="sourcecheck">查看</label>
-							</div>
-							<div class="col-xs-3 relateCtl">
-								<input name="add_operation" displayname="编辑" value="2" id="sourceChange" type="checkbox"/>
-								<label for="sourceChange">编辑</label>
-							</div>
-							<div class="col-xs-3 relateCtl">
-								<input name="add_operation" displayname="增加" value="3" id="sourceAdd" type="checkbox"/>
-								<label for="sourceAdd">增加</label>
-							</div>
-							<div class="col-xs-3 relateCtl">
-								<input name="add_operation" displayname="删除" value="4" id="sourceDel" type="checkbox"/>
-								<label for="sourceDel">删除</label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="btnbox">
-					<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_editResource">确定</button>
-					<button type="button" class="btn btn-default closeAction">取消</button>
-				</div>
-			</form>
-		</div>
+		  	<div class="form-group select">
+		    	<label for="" >资源类型：</label>
+		    	<div class="inputwrapper">
+		    		<div class="inputwrappermax">
+				    	<select class="form-control select select-primary select-block mbl" data-toggle="select" name="fath" id="edit_resourceType">
 
+							<option value="0" disabled="disabled">请选择资源类型</option>
+							<option value="1">菜单</option>
+							<option value="2">元素</option>
+							<option value="3">文件</option>
+							<option value="4">操作</option>
+
+						</select>
+				    	<span class="errormessage errormessage-role-edit-fath">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+		    		</div>
+		    	</div>
+		  	</div>
+		  	 <div class="form-group select">
+		    	<label for="" >父级资源：</label>
+		    	<div class="inputwrapper">
+		    		<div class="inputwrappermax">
+				    	<select class="form-control select select-primary select-block mbl select_resourceList" data-toggle="select" name="fath" id="edit_resourcePId">
+
+							<option value="0" disabled="disabled">选择资源</option>
+						</select>
+				    	<span class="errormessage errormessage-role-edit-fath">
+			    		<!-- 您输入了特殊符号！ -->
+			    		</span>
+		    		</div>
+		    	</div>
+		  	</div>
+		  	<div class="operation_permission">
+			  	<div class="form-group phone input">
+			    	<label for="" >相关操作：</label>
+			    	<div class="inputwrapper" id="add_operation">
+			    		<div class="inputwrappermax">
+					    	<input type="text" class="form-control rolenameinput edit_operations" placeholder="请输入相关操作" maxlength="20"/>
+					    	<input type = "hidden" class ="edit_operationId"/>
+					    	<span class="limitlength">20</span>
+					    	<span class="errormessage errormessage-source-edit-name">
+				    		<!-- 您输入了特殊符号！ -->
+				    		</span>
+			    		</div>
+			    		<span class="btn btn-default input_add_span click_span_add_operation">+</span>
+			    		<span class="btn btn-default input_remove_span click_span_remove_operation">-</span>
+			    	</div>
+			  	</div>
+			  	<div class="form-group input add_operation">
+			    	<label for="" >权限许可：</label>
+			    	<div class="inputwrapper">
+			    		<div class="inputwrappermax in_input_num">
+					    	<input type="text" class="form-control rolenameinput edit_permission" placeholder="请输入权限许可" maxlength="20"/>
+					    	<span class="limitlength">20</span>
+					    	<span class="errormessage errormessage-source-edit-name">
+				    		<!-- 您输入了特殊符号！ -->
+				    		</span>
+			    		</div>
+			    	</div>
+			  	</div>
+			  	<div class="form-group select">
+			    	<label for="" >选择依赖操作：</label>
+			    	<div class="inputwrapper">
+			    		<div class="inputwrappermax">
+					    	<select class="form-control select select-primary select-block mbl edit_operationRName" data-toggle="select" name="fath">
+							</select>
+					    	<span class="errormessage errormessage-role-edit-fath">
+				    		<!-- 您输入了特殊符号！ -->
+				    		</span>
+			    		</div>
+			    	</div>
+			  	</div>
+		  	</div>
+		  	<div class="btnbox resourcebtnbox">
+				<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_editResource">确定</button>
+				<button type="button" class="btn btn-default">取消</button>
+		  	</div>
+		</form>
 	</div>
-
+</div>
 </div>

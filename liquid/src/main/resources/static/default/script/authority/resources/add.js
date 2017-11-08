@@ -99,76 +99,15 @@ $('#add_resourcePId').LemonGetList({
 		}
 	,"json")
 })
-//
-////加载依赖操作列表
-//function operationList() {
-//	var operationRNameList=document.getElementsByClassName("add_operations");
-//	$('<option value="-1">选择操作</option>').appendTo(".add_operationRName")
-//	for(var i=0;i<operationRNameList.length;i++){
-//		if(operationRNameList[i].value) {
-//			$('<option value="'+operationRNameList[i].value+'">'+operationRNameList[i].value+'</option>').appendTo(".add_operationRName")
-//		} else {
-//			
-//		}
-//	}
-//}
-///*function removeOperation() {
-//	var operationRNameList=document.getElementsByClassName("add_operations");
-//	$('<option value="-1">选择操作</option>').appendTo(".add_operationRName")
-//	for(var i=0;i<operationRNameList.length-1;i++){
-//		if(operationRNameList[i].value) {
-//			$('<option value="'+operationRNameList[i].value+'">'+operationRNameList[i].value+'</option>').appendTo(".add_operationRName")
-//		} else {
-//			
-//		}
-//	}
-//}*/
-//operationList();
-//$(function(){
-//	function ifcheck(operation){
-//		if($(".operation_permission").length == 1){
-//			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
-//		}else{
-//			var opera_length = $(".operation_permission").length-1
-//			$(".operation_permission:lt("+opera_length+")").find("input,select").prop("disabled","true")
-//			$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
-//			var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
-//			if(operation == "add")
-//				$(last_oper).find("select").empty()
-//			$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
-//		}
-//		}
-//	ifcheck()
-//	$(".form_content").on("click",".click_span_add_operation",function(){
-//		if(!($(this).siblings(".inputwrappermax").find("input").val()&&$(this).closest(".phone").siblings(".add_operation").find("input").val())){
-//			
-//		}else{
-////			remoneOperationList();
-//			$(this).closest(".operation_permission").clone().insertBefore(".resourcebtnbox").find("input").val("")
-//			ifcheck("add")
-//			operationList();
-//		}
-//		
-//	})
-//	$(".form_content").on("click",".click_span_remove_operation",function(){
-//		if($(".operation_permission").length == 1){
-//			
-//		}else{
-//			$(this).closest(".operation_permission").prev().find("input,select").prop("disabled",false)
-//			$(this).closest(".operation_permission").detach()
-//		}
-//		
-//		ifcheck("remove")
-//	})
-//})
+
 var arr = []
 //判断加减号
 function ifcheck(option){
 		var opera_length = $(".operation_permission").length-1
 		$(".operation_permission:lt("+opera_length+")").find("input,select").prop("disabled","true")
 		$(".operation_permission").find(".phone .input_add_span,.input_remove_span").hide()
-		var last_oper = $(".operation_permission").get()[$(".operation_permission").length-1]
-		$(last_oper).find(".phone .input_add_span,.input_remove_span").show()
+		var last_oper = $('.operation_permission:last')
+		last_oper.find(".phone .input_add_span,.input_remove_span").show()
 		if(option){
 			if($(".operation_permission").length == 1){
 				$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
@@ -227,8 +166,8 @@ function ifcheck(option){
 		    		'</div>'+
 		    	'</div>'+
 		  	'</div>'+
-	  	'</div>').insertBefore(".resourcebtnbox")}
-	  	ifcheck(option)
+	  	'</div>').insertBefore(".resourcebtnbox")
+	  	ifcheck(option)}
 	})
 //	减方法
 	$(".form_content").on("click",".click_span_remove_operation",function(){

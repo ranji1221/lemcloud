@@ -10,10 +10,13 @@ function resourceListInit(){
 	   				thisType = '菜单';
 	   				break;
 	   			case 2:
+	   				thisType = '元素';
+	   				break;
+	   			case 3:
 	   				thisType = '文件';
 	   				break;
 	   			default:
-	   				thisType = '未知';
+	   				thisType = '操作';
 	   				break;
 	   		}
 	   		if(!value.resourcePName) value.resourcePName = '无';
