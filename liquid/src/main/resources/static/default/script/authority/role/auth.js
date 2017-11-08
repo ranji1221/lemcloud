@@ -13,7 +13,6 @@ $(".table").on("click",".roleAuth", function(e) {
 	roleAuth(data);
 });
 function roleAuth(data){
-	console.log(data)
 	$("#auth_roleName").val(data.displayName).attr('role_id',data.id);
 	createTreePlug('.role-authorization',data);
 	$('.tree input').iCheck({

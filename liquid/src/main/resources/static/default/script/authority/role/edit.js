@@ -19,7 +19,6 @@ $(".table").on("click",".role_editRole", function(e) {
 });
 
 function editRoleModal(data) {
-	console.log(data)
 	limitChangeLength($(".sliderInput input[type='text']"),12)
 	var maxNum = data.roleMaxNum;
 	var maxLimitNum = 10;

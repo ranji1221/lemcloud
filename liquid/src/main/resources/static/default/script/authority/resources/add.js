@@ -4,7 +4,6 @@ $('#add_resourcePId').LemonGetList({
 			return getListByTree(data);
 		},
 		generateItemFun:function(index,value){
-			console.log(value)
 			var itemHtml = '';
 			if(index == 0 ){ itemHtml += '<option value="-1">选择资源</option>';}
 			
@@ -101,6 +100,7 @@ $('#add_resourcePId').LemonGetList({
 })
 
 var arr = []
+var arrpush = []
 //判断加减号
 function ifcheck(option){
 		var opera_length = $(".operation_permission").length-1
@@ -111,18 +111,18 @@ function ifcheck(option){
 		if(option){
 			if($(".operation_permission").length == 1){
 				$(".operation_permission").find(".phone .input_add_span,.input_remove_span").show()
+				
+			}
 				arr.push(option)
-				$.each(arr,function(i,v){
-					$("<option value="+v+">"+v+"</option>").appendTo($(".operation_permission select"))
-				})
-			}else{
-				arr.push(option)
-				$.each(arr,function(i,v){
+				for(var i = 0;i<arr.length;i++){
+					  if(arrpush.indexOf(arr[i]) == -1){ 
+						  arrpush.push(arr[i]);
+					    }
+				}
+				$.each(arrpush,function(i,v){
 					$("<option value="+v+">"+v+"</option>").appendTo($(last_oper).find("select"))
 				})
 			}
-		}
-		
 	}
 	ifcheck("选择资源")
 //	添加方法

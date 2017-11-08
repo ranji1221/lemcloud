@@ -69,7 +69,6 @@ function createTreePlug(className,data){
 			'themes':{'icons':false,"responsive":false},
 	        'data' : function (obj, callback) {
 	        	var jstree_roleData = jsTree_dealRequestByRoleData(getRoleData());
-	        	console.log('jstree_roleData',jstree_roleData);
 		        $.ajax({
 		            type: "POST",
 		            url:url,
