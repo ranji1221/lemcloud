@@ -55,6 +55,7 @@
 	<select id="findAll" resultType="Operation" parameterType="Map">
 		select * from lemon_liquid_auth_operation
 		<include refid="paramsSQL"/>
+		order by id asc
 	</select>
 	
 	<!-- 分页查找 -->

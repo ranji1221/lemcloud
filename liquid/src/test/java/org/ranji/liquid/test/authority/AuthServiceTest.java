@@ -75,7 +75,7 @@ public class AuthServiceTest {
 	}
 	@Test
 	public void testFindOperationsByRoleId(){
-		List<Operation> operation = authService.findOperationsByRoleId(1);
+		List<Operation> operation = authService.findOperationsByRoleId(6);
 		System.out.println(JsonUtil.objectToJson(operation));
 	}
 	@Test

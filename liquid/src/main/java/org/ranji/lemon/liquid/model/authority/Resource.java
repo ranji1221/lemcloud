@@ -38,7 +38,7 @@ public class Resource extends AbstractModel{
 	
 	private int id;
 	private String resourceName; // 资源名称
-	private int resourceType;  // 资源类型 [1 菜单][2 文件]
+	private int resourceType;  // 资源类型 [1 菜单][2元素] [3文件][4操作]
 	private String resourceURL; // 资源URL
 	private int resourcePId; // 资源父ID
 	private String resourcePName; //资源父名称

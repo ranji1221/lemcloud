@@ -25,7 +25,6 @@ CREATE TABLE `lemon_liquid_auth_operation` (
   `updateTime` datetime default NULL COMMENT '更新时间',
   `operationName` varchar(255) default NULL COMMENT '操作名',
   `displayName` varchar(255) default NULL COMMENT '操作中文名',
-  `operationURL` varchar(255) default NULL COMMENT '操作链接',
   `resourceId` int(11) not NULL COMMENT '资源ID',
   `operationRId` int(11) not null default -1 COMMENT '操作依赖ID',
   `permission`  varchar(255) COMMENT '许可',

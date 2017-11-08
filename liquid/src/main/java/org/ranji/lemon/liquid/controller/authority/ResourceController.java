@@ -92,7 +92,7 @@ public class ResourceController {
 			resource.setResourceName(newResource.getResourceName());
 			resource.setResourceType(newResource.getResourceType());
 			resource.setResourcePId(newResource.getResourcePId());
-			authService.updateResourceAndOperation(resource,params );
+			authService.updateResourceAndOperation(resource,params);
 			return "{ \"success\" : true }";
 		} catch (Exception e) {
 			e.printStackTrace();
