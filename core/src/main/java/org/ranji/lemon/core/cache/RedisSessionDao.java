@@ -1,4 +1,4 @@
-package org.ranji.lemon.core.persist.impl;
+package org.ranji.lemon.core.cache;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
