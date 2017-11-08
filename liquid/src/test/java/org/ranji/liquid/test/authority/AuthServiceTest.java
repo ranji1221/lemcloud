@@ -88,16 +88,19 @@ public class AuthServiceTest {
 		System.out.println( authService.findAllResourceInduleOperation(null));
 	}
 	@Test
-	public void saveOperationTest(){
-		int id = 1; 
-		List<OperationDTO>list =new ArrayList<OperationDTO>();
-		for (int i=0;i<2;i++){
-			OperationDTO od =new OperationDTO();
-			od.setOperation("222");
-			od.setPermission("333");
-			list.add(od);
-		}
-		//authService.saveOperation(id, JsonUtil.objectToJson(list));
-	}
+    public void saveOperationTest() {
+        Resource res = new Resource();
+        res.setResourceName("操作列表");
+        res.setResourceType(2);
+        List<OperationDTO> list = new ArrayList<OperationDTO>();
+        for (int i = 0; i < 2; i++) {
+            OperationDTO od = new OperationDTO();
+            od.setOperation("222");
+            od.setPermission("333");
+            list.add(od);
+        }
+        authService.saveResourceAndOperation(res, JsonUtil.objectToJson(list));
+    }
+
 	
 }
