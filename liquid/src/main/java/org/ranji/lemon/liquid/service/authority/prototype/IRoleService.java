@@ -81,6 +81,11 @@ public interface IRoleService extends IGenericService<Role, Integer>{
 	 * @return 角色
 	 */
 	 public List<Role> findRoleTree();
-	
-	
+	 /**
+	 * 查询角色包含角色目前数量
+	 * @author fengjie
+	 * @return 角色对象集合
+	 */
+	public List<Role> findAllCount();
+
 }

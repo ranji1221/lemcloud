@@ -83,7 +83,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	//@Cacheable(value="liquidrole")
 	public List<Role> findRoleTree() {
 		//return find(-1); //递归查询方法
-		List<Role> roles= findAll(); //查出所有角色
+		List<Role> roles= findAllCount(); //查出所有角色
 		return listToTree(roles);	//转化为树形结构
 	}
 	//将集合转化为树形结构
@@ -149,6 +149,11 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	@CacheEvict(value="liquidrole")
 	public void deleteByIDS(List<Integer> ids) {
 		((IRoleDao) dao).deleteByIDS(ids);
+	}
+
+	@Override
+	public List<Role> findAllCount() {
+		return ((IRoleDao) dao).findAllCount();
 	}
 
 }
