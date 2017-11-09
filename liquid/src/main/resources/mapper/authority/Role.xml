@@ -52,6 +52,13 @@
 		<include refid="paramsSQL"/>
 	</select>
 	
+	<!-- 查询全部角色与角色拥有的用户数量-->
+	<select id="findAllCount" resultType="Role" parameterType="Map">
+		select r.*,count(r.id) userCount from lemon_liquid_auth_role r left join lemon_liquid_auth_user_role ur on r.id = ur.roleId
+		<include refid="paramsSQL"/>
+		 GROUP BY r.id
+	</select>
+	
 	<!-- 根据角色id查询角色和操作的对应关系 -->
 	<select id="findRoleAndOperationsRelationByRoleId" parameterType="int" resultType="Integer">
 		select operationId from lemon_liquid_auth_role_operation where roleId = #{roleId}

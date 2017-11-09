@@ -57,6 +57,7 @@ $("#resUserSubmit").on('click',function(){
 //渲染树插件
 var is_first_into_page = true;
 function createTreePlug(className,data){
+	console.log(data)
 	//将角色列表初始化到本地存储中
 	getRoleData();
 	var url = 'user/getRole';

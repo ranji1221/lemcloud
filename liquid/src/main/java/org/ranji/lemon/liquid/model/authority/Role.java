@@ -7,6 +7,8 @@ import java.util.List;
 import org.ranji.lemon.core.model.AbstractModel;
 import org.ranji.lemon.core.util.JsonUtil;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -30,6 +32,7 @@ import org.ranji.lemon.core.util.JsonUtil;
  * @since JDK1.7
  * @version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL) //为空字段不返回
 public class Role extends AbstractModel{
 
 	private static final long serialVersionUID = -2561045793807899015L;
@@ -42,7 +45,17 @@ public class Role extends AbstractModel{
 	private String roleRelyName; //依赖角色名（数据显示用）
 	private int roleMaxNum; // 最大限制用户数
 	private String remarks;  //备注
+	private int userCount;      //角色拥有用户数（统计数据）
 	private List<Role> list = new ArrayList<Role>();
+	
+	
+	public int getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
+	}
 	private List<Operation> operationList = new ArrayList<Operation>();
 	
 	public List<Operation> getOperationList() {

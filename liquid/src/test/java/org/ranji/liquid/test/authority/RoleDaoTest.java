@@ -1,6 +1,7 @@
 package org.ranji.liquid.test.authority;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ranji.lemon.core.pagination.PagerModel;
 import org.ranji.lemon.core.system.SystemContext;
+import org.ranji.lemon.core.util.JsonUtil;
 import org.ranji.lemon.liquid.LiquidApplication;
 import org.ranji.lemon.liquid.model.authority.Role;
 import org.ranji.lemon.liquid.persist.authority.prototype.IRoleDao;
@@ -59,6 +61,13 @@ public class RoleDaoTest {
 		PagerModel<Role> roles = roleDao.findPaginated(params);
 		for(Role r: roles.getData()){
 			System.out.println(r.getRoleName()+"======="+r.getRolePName());
+		}
+	}
+	@Test
+	public void testFindAllCount(){
+		List<Role> roleList = roleDao.findAllCount();
+		for(Role r:roleList){
+			System.out.println(JsonUtil.objectToJson(r));
 		}
 	}
 	

@@ -65,5 +65,12 @@ public interface IRoleDao extends IGenericDao<Role, Integer>{
 	 * @return 操作对象集合
 	 */
 	public List<Operation> findOperationByRoleId(int roleId);
+	
+	/**
+	 * 查询角色包含角色目前数量
+	 * @author fengjie
+	 * @return 角色对象集合
+	 */
+	public List<Role> findAllCount();
 
 }

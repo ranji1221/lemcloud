@@ -68,4 +68,9 @@ public class RoleDaoImpl extends GenericDaoImpl<Role, Integer> implements IRoleD
 		return sqlSessionTemplate.selectList(typeNameSpace + ".findOperationByRoleId", roleId);
 	}
 
+	@Override
+	public List<Role> findAllCount() {
+		return sqlSessionTemplate.selectList(typeNameSpace + ".findAllCount");
+	}
+
 }
