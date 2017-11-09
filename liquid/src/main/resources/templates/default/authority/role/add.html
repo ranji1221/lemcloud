@@ -1,6 +1,8 @@
 ﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
 ﻿<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script src="static/default/script/authority/role/add.js" th:src="@{/default/script/authority/role/add.js}"></script>
+<!-- 前端校验功能 -->
+<script th:src="@{/common/bootstrapvalidator/js/validate.js}"></script>
 <div class="modal-contentbox">
 	<ol class="breadcrumb breadcrumb_margin">
 		<li>
@@ -58,8 +60,8 @@
 			<div class="btns">
 			</div>
 		</div>
-		<div class="form_content">
-			<form class="form-role-editlg newform">
+		<div class="form_content addrole">
+			<form class="form-role-editlg newform  form-role-add">
 				<div class="formhead">青柠云后台管理系统</div>
 				<div class="form-group input">
 					<label for="">角色名称：</label>

@@ -1,6 +1,6 @@
-<script  src="static/default/script/validate/validate.js " th:src="@{/default/script/validate/validate.js}"></script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg editRole_modal  modalToBody" tabindex="-1" role="dialog" th:fragment="editRole">
-
+<!-- 前端校验功能 -->
+<script th:src="@{/common/bootstrapvalidator/js/validate.js}"></script>
 	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#editModal">
 		<ol class="breadcrumb">
 			<li>
@@ -48,8 +48,8 @@
 					<label for="">角色名称：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax form_input sliderInput">
-							<input type="hidden" id="edit_roleId"/>
-							<input type="text" class="form-control rolenameinput" placeholder="请输入角色名称" id="edit_displayName"/>
+							<!-- <input type="hidden" id="edit_roleId"/> -->
+							<input type="text" class="form-control rolenameinput" name="username" placeholder="请输入角色名称" id="edit_displayName"/>
 							<span class="limitlength">15</span>
 							<span class="errormessage errormessage-role-edit-name">
 			    		<!-- 您输入了特殊符号！ -->
@@ -89,7 +89,7 @@
 								-
 							</a>
 							<div class="input">
-								<input type="text" id="edit_roleMaxNum" readonly="readonly" value='0' name="max_num"/>
+								<input type="text" id="edit_roleMaxNum" readonly="readonly" value='0' />
 							</div>
 							<a class="add">
 								+
@@ -104,7 +104,7 @@
 					<label for="">备注：</label>
 					<div class="inputwrapper">
 						<div class="inputwrappermax">
-							<textarea name="beizhu" id="edit_remarks" placeholder="请输入备注"></textarea>
+							<textarea  id="edit_remarks" placeholder="请输入备注"></textarea>
 							<span class="errormessage errormessage-role-edit-num">
 			    		<!-- 您输入了特殊符号！ -->
 			    		</span>
@@ -119,4 +119,5 @@
 		</div>
 
 	</div>
+
 </div>

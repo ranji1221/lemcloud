@@ -1,4 +1,3 @@
-<script  src="static/default/script/validate/validate.js " th:src="@{/default/script/validate/validate.js}"></script>
 <div id="editModal" class="modalCon modal fade bs-example-modal-lg modalToBody editSour_modal" tabindex="-1" role="dialog" th:fragment="editResource">
 	<div class="maxcontainer editpage modal-contentbox" narrowClassName="#editModal">
 			<ol class="breadcrumb">
@@ -43,7 +42,7 @@
 		    	<div class="inputwrapper">
 		    		<div class="inputwrappermax in_input_num">
 		    			<input type="hidden" id="edit_resourceId"/>
-				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" id="edit_resourceName"/>
+				    	<input type="text" class="form-control rolenameinput" placeholder="请输入资源名称" maxlength="12" name="sourcename" id="edit_resourceName"/>
 				    	<span class="limitlength">15</span>
 				    	<span class="errormessage errormessage-source-edit-name">
 			    		<!-- 您输入了特殊符号！ -->

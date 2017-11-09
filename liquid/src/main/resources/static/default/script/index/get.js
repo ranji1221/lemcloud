@@ -42,8 +42,6 @@
 						"@{/common/icheck/custom.min.js}",
 						"@{/template_blue/style/role/view.css}",
 						"@{/template_blue/style/role/editnew.css}",
-						"@{/common/bootstrapvalidator/js/bootstrapValidator.js}",
-						"@{/common/bootstrapvalidator/css/bootstrapValidator.css}",
 				
 						]
 		$.each(arr,function(i,v){

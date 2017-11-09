@@ -6,6 +6,7 @@
 <script src="static/default/script/authority/role/view.js" th:src="@{/default/script/authority/role/view.js}"></script>
 <script src="static/default/script/authority/role/edit.js" th:src="@{/default/script/authority/role/edit.js}"></script>
 <script src="static/default/script/authority/role/auth.js" th:src="@{/default/script/authority/role/auth.js}"></script>
+
 <div class="rolelist roleslist">
 	<ol class="breadcrumb">
 		<li>
@@ -529,3 +530,5 @@
 <div th:replace="/default/authority/role/view :: viewRole"></div>
 <div th:replace="/default/authority/role/edit :: editRole"></div>
 <div th:replace="/default/authority/role/auth :: authRole"></div>
+<!-- 前端校验功能 -->
+<script th:src="@{/common/bootstrapvalidator/js/validate.js}"></script>
