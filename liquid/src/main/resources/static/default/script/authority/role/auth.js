@@ -160,3 +160,24 @@ function jsTree_selectedOperation(resourceAndOperationData,selectedOperationData
 	}
 	return resourceAndOperationData;
 }
+//全部选中操作
+$('.maxcontainer .checkallRoleaut').on('ifChecked', function(event){
+  	// $(".role-authorization-jstree").jstree(true).select_all()
+  	$(".maxcontainer .role-authorization").jstree(true).check_all ()
+  	console.log($('.role-authorization').jstree().select_node())
+});
+$('.maxcontainer .checkallRoleaut').on('ifUnchecked', function(event){
+  	$(".maxcontainer .role-authorization").jstree(true).uncheck_all ()
+  	$('.maxcontainer .role-authorization .jstree-disabled').each(function(){
+		$(".maxcontainer .role-authorization").jstree(true).check_node($(this))
+	})
+  	// $(".maxcontainer .role-authorization-jstree").jstree(true).check_node('.jstree-disabled')
+  	// $(".role-authorization-jstree").jstree(true).deselect_all()
+});
+//展开全部操作
+$('.maxcontainer .slidedownallaut').on('ifChecked', function(event){
+  	$(".maxcontainer .role-authorization").jstree(true).open_all()
+});
+$('.maxcontainer .slidedownallaut').on('ifUnchecked', function(event){
+  	$(".maxcontainer .role-authorization").jstree(true).close_all()
+});
