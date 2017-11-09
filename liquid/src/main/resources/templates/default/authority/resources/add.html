@@ -1,6 +1,8 @@
 ﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
 <script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script src="static/default/script/authority/resources/add.js" th:src="@{/default/script/authority/resources/add.js}"></script>
+<!-- 前端校验功能 -->
+<script th:src="@{/common/bootstrapvalidator/js/validate.js}"></script>
 <div class="maxcontainer editpage modal-contentbox" >
 	<ol class="breadcrumb">
 	    <li>
@@ -137,7 +139,7 @@
 			  	</div>
 		  	</div>
 		  	<div class="btnbox resourcebtnbox">
-				<button type="button" class="btn btn-default submitbtn-role-edit" id="submit_addResource">确定</button>
+				<button type="button" class="btn btn-default submitbtn-role-edit" disabled="disabled" id="submit_addResource">确定</button>
 				<button type="button" class="btn btn-default">取消</button>
 		  	</div>
 		</form>

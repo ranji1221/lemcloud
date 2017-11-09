@@ -1,6 +1,8 @@
 ﻿<script src="static/default/script/common/common.js" th:src="@{/default/script/common/common.js}"></script>
 ﻿<script src="static/default/script/common/LemonGetList.js" th:src="@{/default/script/common/LemonGetList.js}"></script>
 <script scr="static/default/script/authority/user/add.js" th:src="@{/default/script/authority/user/add.js}"></script>
+<!-- 前端校验功能 -->
+<script th:src="@{/common/bootstrapvalidator/js/validate.js}"></script>
 <ol class="breadcrumb breadcrumb_margin">
 	<li>
 		<i class="glyphicon glyphicon-home"></i>
@@ -120,7 +122,7 @@
 				</div>
 			</div>
 			<div class="btnbox userbtnbox">
-				<button type="button" class="btn btn-default " id="submit_addUser">确定</button>
+				<button type="button" class="btn btn-default submitbtn-user-add"  disabled="disabled" id="submit_addUser">确定</button>
 				<button type="button" class="btn btn-default" id="closeAdd">取消</button>
 			</div>
 		</form>
