@@ -86,7 +86,10 @@ public class SystemRealm extends AuthorizingRealm{
 			User user  = userService.findByUserName(userName);
 			List <Operation> oprList = authService.findOperationsByUserId(user.getId());
 			for (Operation o:oprList){
-				info.addStringPermission(o.getPermission());
+				String []permission = o.getPermission().split(",");
+				for(String s:permission){
+					info.addStringPermission(s);
+				}
 			}
 		}
 		return info;
