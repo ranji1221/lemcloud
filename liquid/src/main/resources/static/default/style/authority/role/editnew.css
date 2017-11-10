@@ -1,4 +1,50 @@
-
+/*资源里面的字合并*/
+	form.newform .form-group >label.form_label_pullright {
+		padding-left:1rem;
+	}
+	form.newform .form-group >label.form_label_pullright:before{
+		left:0.7rem;
+		display: none;
+	}
+	form.newform .form-group >label.form_label_pullright div >span{
+		display: inline-block;
+		width:1em;
+	}
+	div.form_label_merge_2{
+		height:200%;
+		background:rgb(251,251,251);
+		position:absolute;
+		left:0;
+		top:0;
+		text-align: center;
+		width:0.55rem;
+		z-index: 666;
+		border-right:1px dashed rgb(221, 221, 221);
+	}
+	div.form_label_merge_3{
+		height:300%;
+		background:rgb(251,251,251);
+		position:absolute;
+		padding-top: 0.38rem;
+    	line-height: 0.5rem;
+		left:0;
+		top:0;
+		text-align: center;
+		width:0.6rem;
+		z-index: 666;
+		border-right:1px dashed rgb(221, 221, 221);
+	}
+	div.form_label_merge_4{
+		height:400%;
+		background:rgb(251,251,251);
+		position:absolute;
+		left:0;
+		top:0;
+		text-align: center;
+		width:0.55rem;
+		z-index: 666;
+		border-right:1px dashed rgb(221, 221, 221);
+	}
 .editpage {
     position: absolute;
     top: 0;
