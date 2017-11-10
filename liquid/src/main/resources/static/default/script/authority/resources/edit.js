@@ -27,7 +27,12 @@ function dealDataToModal(data){
 	$('.select_resourceList').LemonGetList({
 		requestListUrl:'resources/listAll',
 		beforeFun:function(data){
-			return getListByTree(data);
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有访问资源列表权限")
+				$("#powerModal").modal('show');
+			} else {
+				return getListByTree(data);
+			}
 		},
 		generateItemFun:function(index,value){
 			var itemHtml = '';
@@ -77,33 +82,37 @@ $("#submit_editResource").on("click",function(){
 			resourcePId:$("#edit_resourcePId option:selected").val(),
 			params : JSON.stringify(params)
 		},function(data){
-			if(data.success){
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "resources/list"
-				}).done(function(data) {
-					$('body #bodyModalArea').empty();
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '修改成功'
-					});
-				})
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有添加角色权限")
+				$("#powerModal").modal('show');
+			} else {
+				if(data.success){
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "resources/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '修改成功'
+						});
+					})
+				}
+				else{
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "resources/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '修改成功'
+						});
+					})
+				}
 			}
-			else{
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "resources/list"
-				}).done(function(data) {
-					$('body #bodyModalArea').empty();
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '修改成功'
-					});
-				})
-			}
-		}
-	,"json")
+		},"json")
 }) 
 var arr = []
 //判断加减号

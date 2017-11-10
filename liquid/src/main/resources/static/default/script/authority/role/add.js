@@ -41,7 +41,12 @@ var add = $(".numCtr .add");
 $('.select_roleList').LemonGetList({
 	requestListUrl:'role/listAll',
 	beforeFun:function(data){
-		return getListByTree(data);
+		if(data.access == "unauthorized") {
+			$("#authText").text("您没有访问父级角色和依赖角色权限")
+			$("#powerModal").modal('show');
+		} else {
+			return getListByTree(data);
+		}
 	},
 	generateItemFun:function(index,value){
 		var itemHtml = '';
@@ -71,37 +76,43 @@ $(".addbtnbox").on("click","#submit_addRole",function(){
 		roleExtendPId:$("#add_roleExtendPId option:selected").val().trim(),
 		roleRelyId:$("#add_roleRelyId option:selected").val().trim()
 		},function(data){
-			if(data.success){
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url:"role/list"
-				}).done(function(data){
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '添加成功'
-					});
-				})
-			
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有添加角色权限")
+				$("#powerModal").modal('show');
+			} else {
+				if(data.success){
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url:"role/list"
+					}).done(function(data){
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '添加成功'
+						});
+					})
+				
+				}
+				else{
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url:"role/list"
+					}).done(function(data){
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '添加失败'
+						});
+					})
+				}
 			}
-			else{
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url:"role/list"
-				}).done(function(data){
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '添加失败'
-					});
-				})
-			}
+		
 		}
 	,"json")
 }) 
 $(".btnbox").on("click", "#closeAdd", function() {
 		$.ajax({
-			url:"user/list"
+			url:"role/list"
 		}).done(function(data) {
 			$(".ajax_dom").empty()
 			$(data).appendTo($(".ajax_dom"))

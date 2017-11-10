@@ -35,8 +35,13 @@
 		$.ajax({
 			url:"user/list"
 		}).done(function(data) {
-			$(".ajax_dom").empty()
-			$(data).appendTo($(".ajax_dom"))
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有访问用户列表权限")
+				$("#powerModal").modal('show');
+			} else {
+				$(".ajax_dom").empty()
+				$(data).appendTo($(".ajax_dom"))
+			}
 		})
 	})
 	$(".userbtnbox").on("click", "#submit_addUser", function() {
@@ -46,29 +51,34 @@
 			phone: $("#add_phone").val().trim(),
 			email: $("#add_email").val().trim()
 		}, function(data) {
-			if(data.success) {
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "user/list"
-				}).done(function(data) {
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '添加成功'
-					});
-				})
-
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有添加用户权限")
+				$("#powerModal").modal('show');
 			} else {
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "user/list"
-				}).done(function(data) {
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '添加失败'
-					});
-				})
-			}
-		}, "json")
+				if(data.success) {
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '添加成功'
+						});
+					})
+					
+				} else {
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '添加失败'
+						});
+					})
+				}
+			}, "json")
+		}
 	})

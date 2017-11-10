@@ -74,29 +74,35 @@ $('#add_resourcePId').LemonGetList({
 			resourcePId:$("#add_resourcePId option:selected").val().trim(),
 			params : JSON.stringify(params)
 		},function(data){
-			if(data.success){
-				removeStorage();
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有添加资源权限")
+				$("#powerModal").modal('show');
+			} else {
 				
-				$.ajax({
-					url:"resources/list"
-				}).done(function(data){
-					$(".ajax_dom").empty()
-					$(data).appendTo($(".ajax_dom"))
-				})
-				$('.alertArea').showAlert({content:'添加成功'});
+				if(data.success){
+					removeStorage();
+					
+					$.ajax({
+						url:"resources/list"
+					}).done(function(data){
+						$(".ajax_dom").empty()
+						$(data).appendTo($(".ajax_dom"))
+					})
+					$('.alertArea').showAlert({content:'添加成功'});
+				}
+				else{
+					
+					$.ajax({
+						url:"resources/list"
+					}).done(function(data){
+						$(".ajax_dom").empty()
+						$(data).appendTo($(".ajax_dom"))
+					})
+					$('.alertArea').showAlert({content:'添加失败'});
+				}
 			}
-			else{
-
-				$.ajax({
-					url:"resources/list"
-				}).done(function(data){
-					$(".ajax_dom").empty()
-					$(data).appendTo($(".ajax_dom"))
-				})
-				$('.alertArea').showAlert({content:'添加失败'});
-			}
+			,"json")
 		}
-	,"json")
 })
 
 var arr = []

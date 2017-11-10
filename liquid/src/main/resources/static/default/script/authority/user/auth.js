@@ -28,29 +28,35 @@ $("#resUserSubmit").on('click',function(){
 	request_data.roleIds = jsTree_getSelectedNodes('.user-authorizationtree');
 	var url = 'user/auth';
 	$.post(url,request_data,function(data){
-		if(data.success == true) {
-			$.ajax({
-				url: "user/list"
-			}).done(function(data) {
-				removeStorage();
-				$(".ajax_dom").empty()
-				$('body #bodyModalArea').empty();
-				$(data).appendTo($(".ajax_dom"))
-				$('.alertArea').showAlert({
-					content: '授权成功'
-				});
-			})
-		}else{
-			$.ajax({
-				url: "user/list"
-			}).done(function(data) {
-				$(".ajax_dom").empty()
-				$('body #bodyModalArea').empty();
-				$(data).appendTo($(".ajax_dom"))
-				$('.alertArea').showAlert({
-					content: '授权失败',type:'danger'
-				});
-			})
+		if(data.access == "unauthorized") {
+			$("#authText").text("您没有用户授权权限")
+			$("#powerModal").modal('show');
+		} else {
+			
+			if(data.success == true) {
+				$.ajax({
+					url: "user/list"
+				}).done(function(data) {
+					removeStorage();
+					$(".ajax_dom").empty()
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权成功'
+					});
+				})
+			}else{
+				$.ajax({
+					url: "user/list"
+				}).done(function(data) {
+					$(".ajax_dom").empty()
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权失败',type:'danger'
+					});
+				})
+			}
 		}
 	},'json');
 })

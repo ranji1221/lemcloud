@@ -85,7 +85,12 @@ window.dealDataToModal = function(data){
 	$('.select_roleList').LemonGetList({
 		requestListUrl:'role/listAll',
 		beforeFun:function(data){
-			return getListByTree(data)
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有编辑角色权限")
+				$("#powerModal").modal('show');
+			} else {
+				return getListByTree(data)
+			}
 		},
 		generateItemFun:function(index,value){
 			var itemHtml = '';

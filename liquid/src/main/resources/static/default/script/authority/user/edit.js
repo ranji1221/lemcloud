@@ -28,34 +28,39 @@ $("#submit_editUser").on("click",function(){
 			phone:$("#edit_phone").val(),
 			email:$("#edit_email").val()
 		},function(data){
-			if(data.success){
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "user/list"
-				}).done(function(data) {
-					$('body #bodyModalArea').empty();
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '修改成功'
-					});
-				})
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有编辑用户权限")
+				$("#powerModal").modal('show');
+			} else {
+				if(data.success){
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '修改成功'
+						});
+					})
+				}
+				else{
+					removeStorage();
+					$(".ajax_dom").empty()
+					$.ajax({
+						url: "user/list"
+					}).done(function(data) {
+						$('body #bodyModalArea').empty();
+						$(data).appendTo($(".ajax_dom"))
+						$('.alertArea').showAlert({
+							content: '修改失败'
+						});
+					})
+				}
 			}
-			else{
-				removeStorage();
-				$(".ajax_dom").empty()
-				$.ajax({
-					url: "user/list"
-				}).done(function(data) {
-					$('body #bodyModalArea').empty();
-					$(data).appendTo($(".ajax_dom"))
-					$('.alertArea').showAlert({
-						content: '修改失败'
-					});
-				})
-			}
-		}
-	,"json")
+			
+			},"json")
 }) 
 /**
  * 重置密码

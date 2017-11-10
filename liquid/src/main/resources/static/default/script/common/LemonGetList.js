@@ -81,22 +81,27 @@ $(function(){
 		
 		//处理来自服务器端的数据
 		function dealData(data,request_data){
-			var dataList = TableObj.beforeFun(data);
-			if(!dataList){
-				console.log('beforeFun : return data 为空');
-				return ;
+			if(data.access == "unauthorized") {
+				$("#authText").text("您没有访问列表权限")
+				$("#powerModal").modal('show');
+			} else {
+				var dataList = TableObj.beforeFun(data);
+				if(!dataList){
+					console.log('beforeFun : return data 为空');
+					return ;
+				}
+				if(plug_first && TableObj.className_Page){ 
+					//如果页面是第一次加载,进入本流程
+					createPage(data.total);
+				}
+				if(dataList.length > 0){
+					initHtml(dataList);
+					TableObj.afterFun();
+				}else{
+					_this.html(TableObj.emptyDataFun());
+				}
+				plug_first = false;
 			}
-			if(plug_first && TableObj.className_Page){ 
-				//如果页面是第一次加载,进入本流程
-				createPage(data.total);
-			}
-			if(dataList.length > 0){
-				initHtml(dataList);
-				TableObj.afterFun();
-			}else{
-				_this.html(TableObj.emptyDataFun());
-			}
-			plug_first = false;
 		}
 		function initHtml(data){
 			var html = '';

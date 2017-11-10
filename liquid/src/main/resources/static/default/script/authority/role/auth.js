@@ -29,29 +29,34 @@ $("#resRoleSubmit").on('click',function(){
 	request_data.operationIds = jsTree_getSelectedOperationIds('.role-authorization');
 	var url = 'role/auth';
 	$.post(url,request_data,function(data){
-		if(data.success == true) {
-			$.ajax({
-				url: "role/list"
-			}).done(function(data) {
-				removeStorage();
-				$(".ajax_dom").empty()
-				$('body #bodyModalArea').empty();
-				$(data).appendTo($(".ajax_dom"))
-				$('.alertArea').showAlert({
-					content: '授权成功'
-				});
-			})
-		}else{
-			$.ajax({
-				url: "role/list"
-			}).done(function(data) {
-				$(".ajax_dom").empty()
-				$('body #bodyModalArea').empty();
-				$(data).appendTo($(".ajax_dom"))
-				$('.alertArea').showAlert({
-					content: '授权失败',type:'danger'
-				});
-			})
+		if(data.access == "unauthorized") {
+			$("#authText").text("您没有角色授权权限")
+			$("#powerModal").modal('show');
+		} else {
+			if(data.success == true) {
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					removeStorage();
+					$(".ajax_dom").empty()
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权成功'
+					});
+				})
+			}else{
+				$.ajax({
+					url: "role/list"
+				}).done(function(data) {
+					$(".ajax_dom").empty()
+					$('body #bodyModalArea').empty();
+					$(data).appendTo($(".ajax_dom"))
+					$('.alertArea').showAlert({
+						content: '授权失败',type:'danger'
+					});
+				})
+			}
 		}
 	},'json');
 })
@@ -94,6 +99,62 @@ function createTreePlug(className,data){
 		},
 		"check_callback" : true,
 	});
+	$(className).on("changed.jstree", function (e, data) {
+		allResource = jsTree_DealRequest(getResourceAndOperationData());
+		if(! (data.action == 'select_node' || data.action == 'deselect_node')) return false;
+		var is_find = false;
+		for(var i=0;i<allResource.length;i++){
+			//找到选中的节点
+			if(data.node.id == allResource[i].id){
+				//如果是选中节点,判断是否有依赖节点
+				if(data.action == 'select_node'){
+					//找到它的依赖操作
+					var operationRelyId = allResource[i].operationRId;
+					if(operationRelyId > 0){
+						operationRelyId = 'o_'+ operationRelyId;
+						var operationRelyName = '';
+						for(var a=0;a<allResource.length;a++){
+							if(operationRelyId == allResource[a].id) {
+								operationRelyName = allResource[a].resourceName;
+							}
+						}
+						for(var j=0;j<data.selected.length;j++){
+							if(operationRelyId == data.selected[j]) {
+								is_find = true;
+								break;
+							}
+						}
+						if(!is_find){
+							//如果没有找到,执行这个操作
+							alert('本操作的依赖操作没有选择 ,请先选择依赖操作:'+operationRelyName);
+							$(className).jstree(true).uncheck_node ([data.node.id]);
+							return false;
+						} 
+					}
+					break;
+				}else if(data.action == 'deselect_node'){
+					//找到谁关联着他,如果他作为依赖角色,那么他的子角色将取消选中
+					// 1 获取到他的id
+					thisOperationNode = allResource[i]
+					thisOperationId = allResource[i].id;
+					// 2 获取依赖他的ids    jsTree_getRelyOperation(){}
+					var arr_tem = jsTree_getRelyOperation(thisOperationNode,allResource)
+					// 3 判断他的依赖角色是否没有被选中  如果选择上,那么提示用户,需要先将依赖他的角色取消点击
+					for(var k=0;k<data.selected.length;k++){
+						for(var j=0;j<arr_tem.length;j++){
+							if(data.selected[k] == arr_tem[j].id){
+								alert(arr_tem[j].resourceName+' 依赖于本角色,请先将其删除')
+								$(className).jstree(true).check_node ([thisOperationId]);
+								return false;
+							}
+						}
+					}
+				}
+
+			}
+		}
+	  
+	}); 
 }
 //与树插件有关的操作
 //获取资源和操作的树结构
@@ -137,6 +198,7 @@ function jsTree_DealRequest(data){
 		tem_data.id = 'o_'+operation[i].id;
 		tem_data.resourceName = operation[i].displayName;
 		tem_data.resourcePId = 'r_'+operation[i].resourceId;
+		tem_data.operationRId = operation[i].operationRId
 		resource.push(tem_data);
 	}
 	return resource;
@@ -159,6 +221,21 @@ function jsTree_selectedOperation(resourceAndOperationData,selectedOperationData
 		}
 	}
 	return resourceAndOperationData;
+}
+//获取到 某操作的 所有依赖者
+function jsTree_getRelyOperation(node,list){
+	var arr_temp = [];
+	for(var i = 0; i < list.length;i++){
+		if(list[i].operationRId == jsTree_getOperationId(node.id)){
+			arr_temp.push(list[i]);
+			arr_temp.concat(jsTree_getRelyOperation(list[i],list));
+		}
+	}
+	return arr_temp;
+}
+//根据节点id获取到当前实际id
+function jsTree_getOperationId(id){
+	return id.substr(2)
 }
 //全部选中操作
 $('.maxcontainer .checkallRoleaut').on('ifChecked', function(event){
