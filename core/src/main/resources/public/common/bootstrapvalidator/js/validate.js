@@ -110,13 +110,19 @@ $(function(){
             phone: {//input对应的name值
                 container: '.errormessage-user-edit-phone',//显示错误提示的容器选择器
                 validators: {
-                    notEmpty: {
-                        message: '电话号码必须填写！'
-                    },
-                    digits: {
-				        message: '电话号码必须为数字！'
-                    }
-                }
+	                 notEmpty: {
+                         message: '手机号码不能为空!'
+                     },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码!'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码!'
+                     },
+                },
             },
             email: {//input对应的name值
                 container: '.errormessage-user-edit-email',//显示错误提示的容器选择器
