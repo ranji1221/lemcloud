@@ -158,7 +158,7 @@ $(function(){
         submitButtons: 'button.submitbtn-user-aut',//设置提交按钮选择器
     });
 	// 用户添加
-	$('.adduser .form-user-add').bootstrapValidator({
+	$('.form-user-add').bootstrapValidator({
         message: '验证未通过！',
         feedbackIcons: {
             valid: 'icon-ok-sign',
@@ -176,31 +176,49 @@ $(function(){
                     regexp: {
 				        regexp:/^[^'"#$%&\^*》>,."<《？，。！@#￥%……’”：/；]+$/,
 				        message: '您输入了特殊符号！'
-                    }
-                }
+                    },
+                    
+                },
+            },
+            password:{
+            	container:'.errormessage-user-add-pass',
+            	validators:{
+            		notEmpty:{
+            			message:'密码必须填写！'
+            		},
+            		regexp: {
+				        regexp:/^[^'"#$%&\^*》>,."<《？，。！@#￥%……’”：/；]+$/,
+				        message: '您输入了特殊符号！'
+                    },
+            		stringLength: {
+                        min: 6,
+                        max: 11,
+                        message: '密码长度6~11位!'
+                    },
+            	},
             },
             phone: {//input对应的name值
                 container: '.errormessage-user-add-phone',//显示错误提示的容器选择器
                 validators: {
-                    notEmpty: {
-                        message: '电话号码必须填写！'
-                    },
-                    digits: {
-				        message: '电话号码必须为数字！'
-                    }
-	                // notEmpty: {
-                 //        message: '手机号码不能为空!'
-                 //    },
-                 //    stringLength: {
-                 //        min: 11,
-                 //        max: 11,
-                 //        message: '请输入11位手机号码!'
-                 //    },
-                 //    regexp: {
-                 //        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
-                 //        message: '请输入正确的手机号码!'
-                 //    }
-                }
+//                    notEmpty: {
+//                        message: '电话号码必须填写！'
+//                    },
+//                    digits: {
+//				        message: '电话号码必须为数字！'
+//                    }
+	                 notEmpty: {
+                         message: '手机号码不能为空!'
+                     },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码!'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码!'
+                     },
+                },
             },
             email: {//input对应的name值
                 container: '.errormessage-user-add-email',//显示错误提示的容器选择器
