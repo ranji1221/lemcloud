@@ -343,7 +343,7 @@ form.newform .tree header{
 }
 form.newform .tree header .icheckbox_flat-blue{
 	/*border:1px solid rgb(191,191,191);*/
-	margin-top:-3px;
+	margin-top:-0.03rem;
 	background-color:white;
 	border-radius: 6px;
 	transform: scale(0.75);
@@ -364,7 +364,8 @@ form.newform .tree .treezl{
 	top:0.54rem;
 	left:0;
 	right:0;
-	bottom:0.54rem;
+	/*bottom:0.54rem;*/
+	bottom:0.1rem;
 	overflow:auto; 
 }
 form.newform .tree .inputwrapper .inputwrappermax >label.prompt{
@@ -373,6 +374,12 @@ form.newform .tree .inputwrapper .inputwrappermax >label.prompt{
 	line-height: 0.52rem;
 	padding-left:0.3rem;
 	font-size:0.14rem;
+}
+form.newform .tree .inputwrapper .inputwrappermax >label.prompt .icheckbox_flat-blue{
+	margin-top: -0.03rem;
+    background-color: white;
+    border-radius: 6px;
+    transform: scale(0.75);
 }
 form.newform .form-control-feedback{
 	right:-0.55rem;
@@ -450,4 +457,28 @@ form.newform .btnbox button:last-child{
 }*/
 form.newform button.success{
 	background-color: rgba(55, 142, 248, 1);
+}
+/*补充用户授权树样式*/
+/*未选中*/
+.treeuser .jstree-default .jstree-anchor{
+	border:1px solid rgb(160,160,160);
+	border-radius:0.04rem;
+	border-right-width:4px;
+	line-height: 26px;
+    height: 26px;
+    padding-right: 7px;
+    margin: 1px
+}
+/*选中*/
+.treeuser .jstree-default.jstree-checkbox-no-clicked .jstree-clicked{
+	border-color:rgb(92, 247, 158);
+}
+/*禁用*/
+.treeuser .jstree-default .jstree-disabled.jstree-clicked{
+	/*border-color:rgb(92, 247, 158);*/
+
+}
+/*悬停*/
+.treeuser s.jstree-hovered{
+
 }
