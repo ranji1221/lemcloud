@@ -138,7 +138,10 @@ function ifcheck(option){
 		}else{
 			var option = $(this).siblings(".inputwrappermax").find("input").val()
 		$('<div class="operation_permission"><div class="form-group phone input">'+
-		    	'<label for="" >相关操作：</label>'+
+				'<label for="" class="form_label_pullright">'+
+		    		'<div class="form_label_merge_3"><span>操作</span></div>'+
+		    		'相关操作：'+
+		    	'</label>'+
 		    	'<div class="inputwrapper" id="add_operation">'+
 		    		'<div class="inputwrappermax">'+
 				    	'<input type="text" class="form-control rolenameinput add_operations" placeholder="请输入相关操作" maxlength="20"/>'+
@@ -151,7 +154,7 @@ function ifcheck(option){
 		    	'</div>'+
 		  '	</div>'+
 		  	'<div class="form-group input add_operation">'+
-		    	'<label for="" >权限许可：</label>'+
+		    	'<label for=""  class="form_label_pullright">权限许可：</label>'+
 		    	'<div class="inputwrapper">'+
 		    		'<div class="inputwrappermax in_input_num">'+
 				    	'<input type="text" class="form-control rolenameinput add_permission" placeholder="请输入权限许可" maxlength="20"/>'+
@@ -162,7 +165,7 @@ function ifcheck(option){
 		    	'</div>'+
 		  	'</div>'+
 		  	'<div class="form-group select">'+
-		    	'<label for="" >选择依赖操作：</label>'+
+		    	'<label for=""  class="form_label_pullright">选择依赖操作：</label>'+
 		    	'<div class="inputwrapper">'+
 		    		'<div class="inputwrappermax">'+
 				    	'<select class="form-control select select-primary select-block mbl add_operationRName" data-toggle="select" name="fath">'+

@@ -153,7 +153,10 @@ function ifcheck(option,oid){
 			var option = $(".operation_permission:last").find(".edit_operations").val()
 			var oid = $(".operation_permission:last").find(".edit_operationId").val()
 		$('<div class="operation_permission"><div class="form-group phone input">'+
-		    	'<label for="" >相关操作：</label>'+
+				'<label for="" class="form_label_pullright">'+
+		    		'<div class="form_label_merge_3"><span>操作</span></div>'+
+		    		'相关操作：'+
+		    	'</label>'+
 		    	'<div class="inputwrapper" id="add_operation">'+
 		    		'<div class="inputwrappermax">'+
 				    	'<input type="text" class="form-control rolenameinput edit_operations" placeholder="请输入相关操作" maxlength="20"/>'+
@@ -167,7 +170,7 @@ function ifcheck(option,oid){
 		    	'</div>'+
 		  '	</div>'+
 		  	'<div class="form-group input add_operation">'+
-		    	'<label for="" >权限许可：</label>'+
+		    	'<label for=""  class="form_label_pullright">权限许可：</label>'+
 		    	'<div class="inputwrapper">'+
 		    		'<div class="inputwrappermax in_input_num">'+
 				    	'<input type="text" class="form-control rolenameinput edit_permission" placeholder="请输入权限许可" maxlength="20"/>'+
@@ -178,7 +181,7 @@ function ifcheck(option,oid){
 		    	'</div>'+
 		  	'</div>'+
 		  	'<div class="form-group select">'+
-		    	'<label for="" >选择依赖操作：</label>'+
+		    	'<label for=""  class="form_label_pullright">选择依赖操作：</label>'+
 		    	'<div class="inputwrapper">'+
 		    		'<div class="inputwrappermax">'+
 				    	'<select class="form-control select select-primary select-block mbl edit_operationRName" data-toggle="select" name="fath">'+

@@ -82,6 +82,7 @@ body{
 	background-color: #e4effc;
 	box-shadow: 0px 0.06rem 0.1rem 0px rgba(156, 155, 155, 0.59);
 	border: solid 1px #f4f4f4;
+	line-height:0.2rem;
 }
 
 .navbar .container-fluid .navbar-header .navbar_header_logo_home span {
