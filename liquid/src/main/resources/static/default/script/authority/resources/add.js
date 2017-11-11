@@ -101,8 +101,7 @@ $('#add_resourcePId').LemonGetList({
 					$('.alertArea').showAlert({content:'添加失败'});
 				}
 			}
-			,"json")
-		}
+		},"json")
 })
 
 var arr = []
