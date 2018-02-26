@@ -11,6 +11,7 @@ import org.ranji.lemon.jersey.persist.auth.prototype.IUserDao;
 import org.ranji.lemon.jersey.service.auth.prototype.IRoleService;
 import org.ranji.lemon.jersey.service.auth.prototype.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -79,6 +80,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 		User user = null;
 		if(users!=null && users.size()>0) user = users.get(0);
 		return user;
+	}
+	
+	@Override
+	@Cacheable(value="jerseyuser:")
+	public List<User> findAll(){
+		return super.findAll();
 	}
 
 }

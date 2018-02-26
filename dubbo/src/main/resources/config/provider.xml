@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 服务应用名称 -->
+    <dubbo:application name="provider"/>
+    <!-- 使用zookeeper做为注册中心 -->
+    <dubbo:registry  protocol="zookeeper" address="zookeeper://172.31.19.224:2181"/>
+    <!-- ref中的值要跟服务实现类中的@Server的值一致 -->
+    <dubbo:service interface="springboot.dao.DubboService" ref="DubboService"></dubbo:service>
+</beans>

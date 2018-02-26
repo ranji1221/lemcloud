@@ -19,6 +19,7 @@
 		<spring.boot.mysql.driver.version>5.1.44</spring.boot.mysql.driver.version>
 		<datasource.druid.version>1.1.5</datasource.druid.version>
 		<flowable.version>6.1.2</flowable.version>
+		<docker.image.prefix>lemon</docker.image.prefix>
 	</properties>
 	
 	<!-- Lemon云平台依赖仓库配置 -->
@@ -140,6 +141,12 @@
 			    <artifactId>shiro-ehcache</artifactId>  
 			    <version>${shiro.version}</version>  
 			</dependency>  
+			<dependency>
+			    <groupId>org.apache.shiro</groupId>
+			    <artifactId>shiro-cas</artifactId>
+			    <version>${shiro.version}</version>
+			</dependency>
+			
 			
 			<!--7. flowable框架 (工作流框架) -->
 			<dependency>
@@ -176,6 +183,23 @@
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
+				<!-- DOCKER插件 -->
+				<plugin>
+				    <groupId>com.spotify</groupId>
+				    <artifactId>docker-maven-plugin</artifactId>
+				    <version>1.0.0</version>
+				    <configuration>
+				    	<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+				    	<dockerDirectory>src/main/docker</dockerDirectory>
+				    	<resources>
+				    		<resource>
+				    			<targetPath>/</targetPath>
+				    			<directory>${project.build.directory}</directory>
+				    			<include>${project.build.finalName}.jar</include>
+				    		</resource>
+				    	</resources>
+				    </configuration>
+				</plugin>
     		</plugins>
     	</pluginManagement>
     </build> 
@@ -184,5 +208,6 @@
     	<module>core</module>
 		<module>jersey</module>
 		<module>liquid</module>
+		<module>dubbo</module>
     </modules>
 </project>

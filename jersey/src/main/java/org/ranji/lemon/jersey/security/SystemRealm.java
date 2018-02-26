@@ -11,10 +11,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.ranji.lemon.jersey.model.auth.User;
 import org.ranji.lemon.jersey.service.auth.prototype.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 public class SystemRealm extends AuthorizingRealm {
 	
 	@Autowired
+	@Lazy		//-- 解决redis缓存和shiro冲突的问题
 	private IUserService userService;
 	
 	@Override
